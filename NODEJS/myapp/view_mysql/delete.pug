@@ -1,0 +1,19 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+  body
+    hi
+      a(href='/topic') DELETE Server Side Javascript(MySQL)
+      ul
+        each topic in topics
+          li
+            a(href='/topic/'+ topic.id)= topic.title
+    article
+    form(action='/topic/'+encodeURIComponent(topic.id)+'/delete' method='post')
+    // 항상 UPDATE,DELETE는 post방식으로 해야 중복 Click이 안됨
+      p [#{topic.title}] Delete??
+      p
+        input(type='submit' value='삭제')
+      p
+        a(href='/topic/'+encodeURIComponent(topic.id)) NO
