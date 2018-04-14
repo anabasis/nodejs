@@ -26,33 +26,38 @@
 
 ## Git :: 주요 명령어
 
-1.Git 작업환경 시작하기 (see also: git help tutorial)
-◦ clone 새로운 디렉터리에 Repository를 복제한다.
-◦ init 새로운 빈 Repository를 생성하고, 기존 존재하던 것들을 초기화한다.
+### 1. Git 작업환경 시작하기 (see also: git help tutorial)
 
-2.현재 변경작업 (see also: git help everyday)
-◦ add 인덱스에 파일 내용을 추가 Add file contents to the index
-◦ mv 파일 이동 또는 파일 명 변경 또는 심볼릭 링크의 이름변경 (Move or rename a file, a directory, or a symlink)
-◦ reset 지정된 상태로현재 HEAD 리셋 (Reset current HEAD to the specified state)
-◦ rm 작업 트리(Working tree)에서 인덱스 파일을 제거(Remove files from the working tree and from the index)
+- clone 새로운 디렉터리에 Repository를 복제한다.
+- init 새로운 빈 Repository를 생성하고, 기존 존재하던 것들을 초기화한다.
 
-3.작업이력과 현재 상태를 검사 (see also: git help revisions)
-◦ bisect 이진 검색으로 버그 변경을? 찾는다.( Find by binary search the change that introduced a bug)
-◦ grep Print lines matching a pattern
-◦ log Commit 로그를 보이게한다. (Show commit logs)
-◦ show 다양한 종류의 객체를 보이게 한다.(Show various types of objects)
-◦ status 작업트리(Working tree)를 보이게한다.(Show the working tree status)
+### 2. 현재 변경작업 (see also: git help everyday)
 
-4.성장, 표시, 당신의 최근 변경 이력
-◦ branch 브런치를 생성하거나 목록을 만든다. (List, create, or delete branches)
-◦ checkout ??Switch branches or restore working tree files
-◦ commit 저장소(Repository)에 변경사항을 기록한다.(Record changes to the repository)
-◦ diff 두 개 이상의 변경사항 (Commit과 작업트리의 Commit등)을 표시 변경? (Show changes between commits, commit and working tree, etc)
-◦ merge 두 개 이상의 개발 과정을 병합 (Join two or more development histories together)
-◦ rebase Forward-port 지역 저장소의 Commit을 업데이트 된 상위 HEAD에 전달. (Forward-port local commits to the updated upstream head)
-◦ tag 다양한 태그 객체를 생성, 삭제 또는 확인한다. (Create, list, delete or verify a tag object signed with GPG)
+- add 인덱스에 파일 내용을 추가 Add file contents to the index
+- mv 파일 이동 또는 파일 명 변경 또는 심볼릭 링크의 이름변경 (Move or rename a file, a directory, or a symlink)
+- reset 지정된 상태로현재 HEAD 리셋 (Reset current HEAD to the specified state)
+- rm 작업 트리(Working tree)에서 인덱스 파일을 제거(Remove files from the working tree and from the index)
 
-5.협업 관련 (see also: git help workflows)
-◦ fetch 다른 저장소에서 개체를 다운로드하고 바로 병합하지는 않는 상태(Download objects and refs from another repository)
-◦ pull 원격 저장소(Repository)에서 로컬저장소로 가져와 로컬지점과 통합한다.)Fetch from and integrate with another repository or a local branch)
-◦ push 관련 객체를 가지고 원격저장소에 업데이트 위해 보낸다. 바로업데이트는 되지않는다.(Update remote refs along with associated objects)
+### 3. 작업이력과 현재 상태를 검사 (see also: git help revisions)
+
+- bisect 이진 검색으로 버그 변경을? 찾는다.( Find by binary search the change that introduced a bug)
+- grep Print lines matching a pattern
+- log Commit 로그를 보이게한다. (Show commit logs)
+- show 다양한 종류의 객체를 보이게 한다.(Show various types of objects)
+- status 작업트리(Working tree)를 보이게한다.(Show the working tree status)
+
+### 4. 성장, 표시, 당신의 최근 변경 이력
+
+- branch 브런치를 생성하거나 목록을 만든다. (List, create, or delete branches)
+- checkout ??Switch branches or restore working tree files
+- commit 저장소(Repository)에 변경사항을 기록한다.(Record changes to the repository)
+- diff 두 개 이상의 변경사항 (Commit과 작업트리의 Commit등)을 표시 변경? (Show changes between commits, commit and working tree, etc)
+- merge 두 개 이상의 개발 과정을 병합 (Join two or more development histories together)
+- rebase Forward-port 지역 저장소의 Commit을 업데이트 된 상위 HEAD에 전달. (Forward-port local commits to the updated upstream head)
+- tag 다양한 태그 객체를 생성, 삭제 또는 확인한다. (Create, list, delete or verify a tag object signed with GPG)
+
+### 5. 협업 관련 (see also: git help workflows)
+
+- fetch 다른 저장소에서 개체를 다운로드하고 바로 병합하지는 않는 상태(Download objects and refs from another repository)
+- pull 원격 저장소(Repository)에서 로컬저장소로 가져와 로컬지점과 통합한다.)Fetch from and integrate with another repository or a local branch)
+- push 관련 객체를 가지고 원격저장소에 업데이트 위해 보낸다. 바로업데이트는 되지않는다.(Update remote refs along with associated objects)
