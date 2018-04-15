@@ -8,7 +8,9 @@ atom-typescript
 
 ## 설치
 
+```bash
 npm install ionic cordova -save
+```
 
 ionic 모바일 프레임워크
 cordova smart폰 장치 제어 라이브러리
@@ -16,9 +18,11 @@ cordova smart폰 장치 제어 라이브러리
 ```bash
 npm install -g @angular/cli
 
+# 프로젝트 생성
 ng new my-angular
 cd my-angular
 
+# 서버기동
 ng serve
 ```
 
