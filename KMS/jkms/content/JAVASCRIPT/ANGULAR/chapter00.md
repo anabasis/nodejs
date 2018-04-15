@@ -32,10 +32,11 @@ package.json
 Component
 .html .css .ts
 
-ng generate component about
-
 컴포넌트 생성
+ng generate component about
 ng g c about
+
+|
 
 ```js
 [index.html]
