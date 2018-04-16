@@ -1,5 +1,7 @@
 # ANGULAR
 
+교육 : <https://www.youtube.com/watch?v=BpLYqHJHAdU&list=PLlSZlNj22M7SC6zsFLaMplXe2RrO-R9S5>, <http://coded.kr/>
+
 ## ATOM Angular
 
 atom-typescript

@@ -1,7 +1,6 @@
 # VUE
 
 <https://blog.storyg.co/vue-js-posts/todos-tutorial>
-<https://emaren84.github.io/posts/hanami-vuejs-moneybook-frontend-1/>
 
 ```txt
 src

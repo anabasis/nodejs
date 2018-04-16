@@ -4,11 +4,11 @@
 
 ### Objectives
 
-• Describe the features and capabilities of Splunk Enterprise Security (ES)
-• Explain how ES helps security practitioners detect, prevent, and respond to threats
-• Describe correlation searches and notable events
-• Describe user roles in ES
-• Log on to ES
+- Describe the features and capabilities of Splunk Enterprise Security (ES)
+- Explain how ES helps security practitioners detect, prevent, and respond to threats
+- Describe correlation searches and notable events
+- Describe user roles in ES
+- Log on to ES
 
 ### Course Overview
 

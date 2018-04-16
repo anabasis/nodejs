@@ -26,6 +26,14 @@
 - Configure ES lookups
 - Configure the ES threat intelligence framework
 
+- ES 최종사용자 기능의 기본 사항 이해
+- ES 설치에 대한 배포 요구 사항 검토
+- 초기 ES 구성 수행
+- ES에서 데이터 수집 및 저장 관리
+- 상관 관계 검색 생성
+- ES 조회 구성
+- ES 위협 인텔리전스 프레임 워크 구성
+
 ## Course Outline
 
 1. Introduction to ES
@@ -40,3 +48,18 @@
 10. Creating Correlation Searches
 11. Lookups and Identity Management
 12. Threat Intelligence Framework
+
+## Course Outline(KR)
+
+1. ES 소개
+2. 보안 모니터링 및 사건 조사
+3. 분석 도구 및 데이터 소스
+4. ES 배포
+5. 설치
+6. 초기 설정
+7. ES 데이터 검증
+8. Custom 추가기능
+9. Correlation Searches 조정
+10. Correlation Searches 생성하기
+11. Lookups 및 Identity 관리
+12. 위협 인텔리전스 프레임워크
