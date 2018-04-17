@@ -2,21 +2,16 @@
 
 Module 5: Forwarder Configuration
 
-Splunk 7.0 Cluster Administration 114
-
  
 Module Objectives
 - Use indexer discovery to configure forwarders in a clustered environment
 - Describe optional indexer discovery settings
-–
+  - 
 Polling rate
-–
+  - 
 Weighted load balancing
 - Optimize indexing loads with volume-based load balancing
 
-Splunk 7.0 Cluster Administration 115
-
- 
 Best Practices for Configuring Forwarders
 -  Forwarders are not required to be configured for clustering
 -  Enable load balancing and indexer acknowledgement in outputs.conf
@@ -26,21 +21,17 @@ autoLB is set to true by default. outputs.conf   - The receiving peer (origin) t
 useACK is enabled   - Acknowledges when indexing data is written to a bucket and sent to
 replicating peers   - Any node or network failure causes a bucket to roll and triggers a fixup
 
-Splunk 7.0 Cluster Administration 116
-
  
 Forwarder Management Challenges
 -  In a non-clustered environment, Splunk administrators must track target server changes and update the forwarder outputs.conf settings manually
   - A static list of indexers has to be deployed to each forwarder
-–
+  - 
 Target indexer changes require restarting the forwarders
 IDX1 IDX2 IDX3 New [tcpout:indexers] server = IDX1:9997,IDX2:9997,IDX3:9997 useACK = true
 9997 9997 ????
 Forwarder
 
 9997
-Splunk 7.0 Cluster Administration 117
-
  
 Using Indexer Discovery
 -  Designed for dynamic environments where capacity is added and removed on demand
@@ -63,7 +54,6 @@ Forwarders send data to the peers in the list
 4
 A peer can be added or removed without affecting the forwarder configurations
 Forwarder with Indexer Discovery 
-Splunk 7.0 Cluster Administration 118
 
  
 Configuring Indexer Discovery   - Master Node
@@ -78,8 +68,6 @@ key used to communicate
 ê For master better node security, and the use peer a different nodes
 value than the one used between the
 
-Splunk 7.0 Cluster Administration 119
-
  
 Configuring Indexer Discovery   - Forwarders
 Each forwarder's outputs.conf
@@ -93,14 +81,12 @@ intervals to receive the most recent list of peers
 must also assign a site association
 -  site = site0 configures the forwarder to transmit data to all peer nodes at all sites
 
-Splunk 7.0 Cluster Administration 120
-
  
 Indexer Discovery Option   - Polling Rate
 - The master determines a polling interval dynamically based on the number of connected forwarders and the polling_rate
-–
+  - 
 poll_interval (seconds) = #_of_forwarders / polling_rate + 30
-–
+  - 
 polling_rate is a fixed factor that the master uses to calculate the polling interval
 ê Set a factor between 1 and 10 (the default is 10)
 # of forwarders polling_rate polling_int_sec polling_interval
@@ -108,28 +94,23 @@ Master Node server.conf 100 1 100/1+30=130 2 min. 10 sec.
 [indexer_discovery] 100 1,000 10 100/10+30= 40 40 sec. 10 1000/10+30=130 2 min. 10 sec.
 pass4SymmKey = <string> polling_rate = <1-10>
 
-Splunk 7.0 Cluster Administration 121
-
- 
 Balancing Indexing Loads
 - Evenly distributed index data greatly improves the search performance
 - The default load balancing on the forwarder is based on time
-–
+  - 
 Time-based forwarding alone cannot distribute data evenly across peers
 - Other options:
-–
+  - 
 Weighted load balancing
-–
+  - 
 Volume based data forwarding
-–
+  - 
 Event breaker (discussed in Splunk Enterprise Data Administration course)
-
-Splunk 7.0 Cluster Administration 122
 
  
 Using Weighted Load Balancing
 - With indexer discovery, the master can adjust the autoLB server list based on the peers' relative storage capacities
-–
+  - 
 More frequently selects peers with higher advertised capacity
 selection_ratio = peer_capacity / cluster_wide_capacity
 - Peers with more storage capacity, typically new peers, can become preferred search peers because a larger percentage of recent data will be indexed on these peers
@@ -137,8 +118,6 @@ Enable it on the master's server.conf Specify the advertised capacity peer nodes
 [indexer_discovery]
 [clustering] indexerWeightByDiskCapacity = true
 advertised_disk_capacity = <10~100%>
-
-Splunk 7.0 Cluster Administration 123
 
  
 Using Volume-based Data Forwarding
@@ -154,8 +133,6 @@ props.conf
 -  autoLBVolume and autoLBFrequency settings work in conjunction
   - Whichever threshold is met first, switch to the next peer node
 
-Splunk 7.0 Cluster Administration 124
-
  
 Forwarder Site Failover
 -  You can configure site-awareness for forwarders in a multisite cluster
@@ -170,8 +147,6 @@ site = site1 multisite = true available_sites = site1,site2, site3
 Each forwarder's server.conf forwarder_site_failover = site1:site2,site2:site3 ... [indexer_discovery] pass4SymmKey = whatever
 Master node's server.conf
 
-Splunk 7.0 Cluster Administration 125
-
  
 Indexer Discovery Log Channels
 -  Search the master node's indexer discovery log channel for any errors:
@@ -183,26 +158,22 @@ HttpPubSubConnection, TcpOutputProc)
   - index=_internal host=uf component=Metrics group=tcpout_connections
 | timechart span=1h sum(kb) by destIp
 
-Splunk 7.0 Cluster Administration 126
-
  
 Lab Exercise 5   - Configure a Forwarder
 - Time: 30 - 35 minutes
 - Tasks:
-–
+  - 
 On the master node, enable the indexer discovery option with forwarder site failover
-–
+  - 
 Configure the deployment server
-–
+  - 
 Enable the deployment client setting on the forwarder
-–
+  - 
 Update the instance server role in Monitoring Console
-–
+  - 
 Verify the forwarder app deployment
-–
+  - 
 Test the forwarder site failover scenario
-
-Splunk 7.0 Cluster Administration 127
 
  
 Lab Exercise 5   - Configure a Forwarder (cont.)
@@ -221,8 +192,6 @@ SSH you@10.0.x.2
 8189 8289 8389 8489
 Jump Server (10.0.x.3)
 
-Splunk 7.0 Cluster Administration 128
-
  
 Lab Exercise 5   - Configure a Forwarder (cont.)
 Your Browser
@@ -233,5 +202,3 @@ Search Heads http://{Public_DNS}/sh1 http://{Public_DNS}/sh2
 Jump Server
 Public_IP = Same as your jump server splunk_server = Splunk server name
 cmaster dserver fwdr
-
-Splunk 7.0 Cluster Administration 129

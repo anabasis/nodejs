@@ -3,16 +3,12 @@
 
 Module 6: Search Head Cluster
 
-Splunk 7.0 Cluster Administration 130
-
  
 Module Objectives
 - Describe search head cluster architecture
 - Configure a search head cluster
 - Identify the captain and monitor cluster status with CLI
 - Describe optional configuration settings
-
-Splunk 7.0 Cluster Administration 131
 
  
 Search Head Challenges
@@ -21,28 +17,23 @@ Search Head Challenges
 - Increasing concurrent users and searches
 - Managing large numbers of scheduled searches and alerts
 
-Splunk 7.0 Cluster Administration 132
-
- 
 Addressing Search Scaling
 - As the number of simultaneous searches increases, you have several actions to mitigate performance issues
 - Best practices:
-–
+  - 
 Increase the number of search peers (indexers)
-–
+  - 
 Optimize scheduled searches to run on non-overlapping time slots
-–
+  - 
 Isolate scheduled searches, real-time searches, and ad-hoc searches
-–
+  - 
 Limit the time range of end-user searches
-–
+  - 
 Add more search heads
-–
+  - 
 Configure user roles to limit the number of concurrent real-time searches
-–
+  - 
 Implement search head clustering
-
-Splunk 7.0 Cluster Administration 133
 
  
 Benefits of Search Head Clusters
@@ -58,8 +49,6 @@ Load Balancer
 Search Head Cluster
 Deployer
 
-Splunk 7.0 Cluster Administration 134
-
  
 Search Head Cluster Terminology
 -  Raft distributed consensus
@@ -73,8 +62,6 @@ the captain dynamically   - Replicates configuration changes to
 all cluster members   - Captain schedules and manages searches
 Deployer
 
-Splunk 7.0 Cluster Administration 135
-
 Load Balancer
 Captain
 Member Member
@@ -83,22 +70,20 @@ Raft Distributed Consensus
  
 How Does SH Cluster Scale Search Capacity?
 - Load-based scheduling heuristic
-–
+  - 
 Captain is the only job scheduler
 ê Captain establishes authority and is also a member ê The normal scheduler on all members is suppressed ê Captain schedules and delegates jobs to its members
-–
+  - 
 Captain maintains global knowledge of all search jobs ê Members regularly report their job loads to the captain ê Ad-hoc and real-time search results (artifacts) are not replicated ê Saved and scheduled search artifacts are replicated per search head
 cluster replication factor
-–
+  - 
 Captain directs which member to contact to access search results
-
-Splunk 7.0 Cluster Administration 136
 
  
 Report Scheduler
 -  Without SHC, a search head can defer and skip search jobs if:
   - Search head restarts (could cause a gap in summary index)
-–
+  - 
 Search head encounters resource constraints (max. concurrent search limit) ê A user performing prolific ad-hoc searches can overwhelm other searches ê Infrequent long-running searches can starve out frequent short-running
 searches ê A deferred job is implicitly retried (repeated for the duration of its window)
 -  With SHC, the captain mitigates starvation and recovers missed jobs
@@ -106,28 +91,24 @@ searches ê A deferred job is implicitly retried (repeated for the duration of i
 history introspection, and schedule window
 http://docs.splunk.com/Documentation/Splunk/latest/Report/Configurethepriorityofscheduledreports
 
-Splunk 7.0 Cluster Administration 137
-
  
 How Does Cluster Provide Always-On Services?
 - Auto SH captain failover
-–
+  - 
 Elect new captain via Raft
-–
+  - 
 Artifacts Running jobs Persists its records in
 Alerts Load stats var/run/splunk/_raft/<server>/log
-–
+  - 
 Members register their list of artifacts,
 New Captain running jobs, alerts, and search load statistics to a new captain
-–
+  - 
 New captain enables its scheduler
-–
+  - 
 New captain executes fix-ups if needed
 - Uses DNS names when initializing
 Old Captain
 members
-
-Splunk 7.0 Cluster Administration 138
 
 Fix-up
 Scheduler
@@ -135,18 +116,16 @@ Members
  
 Search Head Cluster Key Considerations
 - Always use new Splunk instances
-–
+  - 
 Must have at least three members
-–
+  - 
 You cannot upgrade from an existing SH or a member of SH Pool
 ê Migrate the configurations after the SH Cluster is up
 - Same hardware requirements as the dedicated search head
-–
+  - 
 Use identical specifications for all members (bare metal or VM) ê Works on all operating systems supported for Splunk Enterprise ê Same version of Splunk Enterprise
 - Synchronize the system clock on all members including the indexing layer
 - Search head cluster can search 6.x or 7.0 search peers
-
-Splunk 7.0 Cluster Administration 139
 
  
 Sharing Splunk Server Roles
@@ -154,10 +133,8 @@ BEST PRACTICE:
 -  Disable local indexing and forward everything, including all internal indexes, to the peer nodes (discussed later)
 - A search head cluster member should not have any other server roles WARNING:
 - A member cannot be a search peer to another search head
-–
+  - 
 Exception: when it is configured to be a monitored instance of Monitoring Console running on other instance
-
-Splunk 7.0 Cluster Administration 140
 
  
 Search Head Cluster Ports
@@ -181,38 +158,31 @@ pass4SymmKey
 for Indexer Cluster
 Management (splunkd port) Replication (index replication port) Replication (search artifact replication port) Search request/results (distributed search)
 
-Splunk 7.0 Cluster Administration 141
-
 8089
  
 Deploy a Search Head Cluster
 1. Install Splunk Enterprise and set admin password
   - Recommend LDAP/SAML 2. Bring up and initialize all SH cluster members:
-splunk init shcluster-config -mgmt_uri https://SH2:8089 -replication_port 9200 –secret shcluster 3. Assign one of the members as the captain and set a member list:
-splunk bootstrap shcluster-captain –servers_list https://SH2:8089,https://SH3:8089,https://SH4:8089 4. Check search head cluster status: splunk show shcluster-status splunk list shcluster-members
+splunk init shcluster-config -mgmt_uri https://SH2:8089 -replication_port 9200   - secret shcluster 3. Assign one of the members as the captain and set a member list:
+splunk bootstrap shcluster-captain   - servers_list https://SH2:8089,https://SH3:8089,https://SH4:8089 4. Check search head cluster status: splunk show shcluster-status splunk list shcluster-members
 Note
 Search head cluster configuration is in SPLUNK_HOME/etc/system/local/server.conf.
-
-Splunk 7.0 Cluster Administration 142
 
  
 Connecting a SHC to Non-Clustered Indexers
 - You have two ways to search non-clustered indexers
-–
+  - 
 Individually add the search peers from each member, or
-–
+  - 
 Enable search peer replication
 ê Add the search peers to one SHC member and let the SHC replicate the
 peer configurations to all cluster members ê All members gain access to the same set of search peers
-–
+  - 
 [raft_statemachine] disabled = false replicate_search_peers = true
 server.conf of each SHC member
 Once enabled, you can add new peers with CLI, Web, or REST API
 splunk add search-server https://<peer>:8089 -remoteUsername <user> -remotePassword <pw>
 
-Splunk 7.0 Cluster Administration 143
-
- 
 Connecting a SHC to Indexer Clusters
 -  SHC members do not have site awareness
   - No site-by-site artifact replications   - Using site0 can provide a seamless search experience
@@ -222,9 +192,6 @@ splunk edit cluster-config -mode searchhead -master_uri https://10.0.1.3:8089 -s
   - Connecting to a multisite indexer cluster:
 splunk edit cluster-config -mode searchhead -master_uri https://10.0.1.3:8089 -site site2 -secret idxcluster
 
-Splunk 7.0 Cluster Administration 144
-
- 
 Search Head Cluster Member server.conf
 [general] License master password
 pass4SymmKey = $1$ttbJh5nUk5AM serverName = sh2 Indexer cluster site association
@@ -238,8 +205,6 @@ Search head cluster artifact replication port
 mgmt_uri = https://sh2:8089 Search head cluster password
 pass4SymmKey = $2$ptbLhYvCipA/Eg== Generated search head cluster ID
 id = 571B9C60-66EA-4B9F-8562-27B62E93E31F
-
-Splunk 7.0 Cluster Administration 145
 
  
 Checking SH Cluster Status
@@ -258,8 +223,6 @@ mgmt_uri : https://10.0.1.2:8389 mgmt_uri_alias : https://10.0.1.2:8389
 status : Up > splunk clean raft
   - When SHC can't elect a captain, run on all members before bootstrap   - When SHC has an active captain but a member can't join, run on the failing members
 
-Splunk 7.0 Cluster Administration 146
-
  
 Splunk Web Settings Menu Changes
 -  When search heads become members of a search head cluster, the Settings menu in Splunk Web changes
@@ -269,9 +232,6 @@ UI on all SHC members
 ê Able to perform rolling restart and
 captaincy transfer
 
-Splunk 7.0 Cluster Administration 147
-
- 
 Configuration and Artifact Replication
 -  Captain orchestrates both configuration and artifact replication
 -  Knowledge object configurations (replicated to all members):
@@ -281,53 +241,45 @@ Configuration and Artifact Replication
 proxied (discussed later)   - Captain enforces artifact fix-ups according to its replication policy
 http://docs.splunk.com/Documentation/Splunk/latest/DistSearch/HowconfrepoworksinSHC
 
-Splunk 7.0 Cluster Administration 148
-
  
 Roles and User Account Replication
 - Use any of the available authentication methods
-–
+  - 
 Splunk native authentication
 ê Automatically replicates the underlying .conf files and
 SPLUNK_HOME/etc/passwd
-–
+  - 
 SAML authentication
 ê Only replicates authentication.conf ê Must use the deployer to push the certificates
-–
+  - 
 Scripted authentication
 ê Must use the deployer to push both the script and
 authentication.conf
 - User configurations are automatically synchronized across all members
 
-Splunk 7.0 Cluster Administration 149
-
  
 Ad-hoc Search Management
 - Ad-hoc search results are not replicated
-–
+  - 
 Artifact proxying is used to access the ad-hoc search results from any member
-–
+  - 
 If the search is accessed from a different member, artifact proxying calls the owner member to get the results
 - To reduce captain's work load, disable running scheduled searches on the captain with captain_is_adhoc_searchhead = true (on all members)
 - To configure a member to run only ad-hoc searches, set adhoc_searchhead = true
 
-Splunk 7.0 Cluster Administration 150
-
  
 Alerts
 - When results of search meet alerting criteria:
-–
+  - 
 The alerts are checked and fired locally on the member that ran the search job
-–
+  - 
 The local alert information is reported to the captain
 - Captain merges and maintains global view of alerts
-–
+  - 
 Centralizes suppression information
 ê Remember, captain is the only scheduler and it delegates jobs
-–
+  - 
 Merged alerts and suppression information are sent to all members
-
-Splunk 7.0 Cluster Administration 151
 
  
 Handling Summarization
@@ -343,24 +295,19 @@ members, forward your summary indexes to the indexing layer BEST PRACTICE:
 [tcpout:default-autolb-group] server=idx1:9997,idx2:9997,idx3:9997, idx4:9997 autoLB = true useACK = true
 outputs.conf
 
-Splunk 7.0 Cluster Administration 152
-
- 
 Artifact Reaping
 - Reaping (deletion of search results) happens when artifact TTL expires
 - Original member reaps its search artifacts and notifies captain
 - Captain orchestrates reaping of the replicas
 - If the original member is out of commission, captain waits beyond TTL and replicas are reaped thereafter
 
-Splunk 7.0 Cluster Administration 153
-
  
 Restarting a Search Head Cluster
 -  To restart SH cluster, splunk rolling-restart shcluster-members
-–
-Members restart in phases so the cluster can continue to operate –
+  - 
+Members restart in phases so the cluster can continue to operate   - 
 The transfer, captain thus is preventing the final member captaincy to restart from changing and automatically during the invokes restart captaincy
-process –
+process   - 
 Deployer automatically initiates a rolling restart, when necessary
 Rolling restart Success : 1
 Message : Rolling Restart of all the search head cluster members has been kicked off. It might take some time for completion. After restart the information will be logged at audit log, Meanwhile you can check the progress of this transaction...
@@ -368,8 +315,6 @@ Message : Rolling Restart of all the search head cluster members has been kicked
 shcluster-members -status 1
 Message : Rolling Restart Peer Status :
 Peer | Status | Start Time | End Time | GUID 1. sh3 | RESTARTING | Wed Jul 15 00:40:47 2015 | N/A | 6BA626AA-CDFD-4599-9BC5-6C4FB87DF70C 2. sh4 | NOT STARTED | N/A | N/A | FEC2B0AD-0244-4A36-8CBD-2D2A7A3D325D
-
-Splunk 7.0 Cluster Administration 154
 
  
 Search Head Cluster Log Channels
@@ -383,32 +328,28 @@ Search Head Cluster Log Channels
   - sourcetype=splunkd_access uri_path="/services/search/jobs*"
 ê status!=20* indicates an issue ê method=GET isProxyRequest=true indicates a proxied request   - sourcetype=splunkd_access uri_path="/services/shcluster/captain/artifacts*"
 
-Splunk 7.0 Cluster Administration 155
-
  
 Useful SHC Debugging Searches
 -  Election history:
-–
+  - 
 index=_internal component=SHCRaftConsensus by _time host
 host IN (sh2, "All sh3, hail sh4) leader" sourcetype=splunkd
 | stats values(message)
 -  Job scheduling status:
-–
+  - 
 index=_internal status=* count by | status_host eval host status_host=status."-".host IN limit=0 (sh2, usenull=f
 sh3, sh4) sourcetype=scheduler
 | timechart span=5m
 -  Skipping jobs:
-–
+  - 
 index=_internal status=continued ".host | timechart host OR status=skipped span=5m IN (sh2, count sh3, by sh4) | eval status_host sourcetype=scheduler
 status_host=status."-
 limit=0 usenull=f
 -  Artifact proxy:
-–
+  - 
 index=_internal uri_path="/services/search/jobs*" by method host file
 host IN (sh2, sh3, isProxyRequest=true sh4) sourcetype=splunkd_access
 | stats count
-
-Splunk 7.0 Cluster Administration 156
 
  
 Further Reading: Search Head Cluster
@@ -419,20 +360,16 @@ http://docs.splunk.com/Documentation/Splunk/latest/DistSearch/Migratefromsearchh
 - Splunk Answers on search head clustering
 http://answers.splunk.com/topics/shc.html
 
-Splunk 7.0 Cluster Administration 157
-
  
 Lab Exercise 6   - Deploy a Search Head Cluster
 - Time: 35 - 40 minutes
 - Tasks:
-–
+  - 
 Add two more search heads to site2
-–
+  - 
 Enable a search head cluster with site2 search heads
-–
+  - 
 Verify that your search head cluster is functioning
-
-Splunk 7.0 Cluster Administration 158
 
  
 Lab Exercise 6   - Deploy a Search Head Cluster (cont.)
@@ -451,8 +388,6 @@ SSH you@10.0.x.2
 1 1 8189 8289 8389 8489
 Jump Server (10.0.x.3)
 
-Splunk 7.0 Cluster Administration 159
-
  
 Lab Exercise 6   - Deploy a Search Head Cluster (cont.)
 Your Browser
@@ -464,6 +399,3 @@ http://{Public_DNS}/sh3 http://{Public_DNS}/sh4
 Jump Server
 Public_IP = Same as your jump server splunk_server = Splunk server name
 cmaster dserver fwdr
-
-Splunk 7.0 Cluster Administration 160
-
