@@ -433,7 +433,6 @@ You will learn about distributing apps in indexer clusters in Module 4
   - No need to bring down the entire cluster at once   - Upgrade the tiers in the same prescribed order
 ê Put the master into maintenance mode while upgrading the peer nodes ê To take down peer nodes, use the splunk stop command ê We will discuss maintenance mode command later http://docs.splunk.com/Documentation/Splunk/latest/Indexer/Upgradeacluster
 
- 
 ### Lab Exercise 2   - Enable Single-site Cluster
 
 - Time: 35 - 40 minutes Tasks:

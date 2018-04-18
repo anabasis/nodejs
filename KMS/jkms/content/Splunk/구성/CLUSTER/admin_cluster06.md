@@ -1,4 +1,4 @@
-#  Splunk Cluster Administration 7.0
+# Splunk Cluster Administration 7.0
 
 ## Module 6: Search Head Cluster
 
