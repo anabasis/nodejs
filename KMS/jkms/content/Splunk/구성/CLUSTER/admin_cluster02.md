@@ -158,7 +158,6 @@ The minimum burden on surviving nodes
 
 ### Ports for Indexer Clustering
 
-
 9997
 Master Node
 Forwarder with autoLB
@@ -178,25 +177,21 @@ Replication (replication port)
 cluster, all nodes -- including the search head -- must use the same Data (receiving port)
 pass4SymmKey.
 
- 
-Configuring Splunk Master Node
+### Configuring Splunk Master Node
+
 Enter the single command
 - Splunk defaults to: > splunk edit cluster-config -mode master -replication_factor 2
-  - 
-replication_factor = 3
-  - 
-search_factor = 2 -search_factor 2 -secret mycluster
+  - replication_factor = 3
+  - search_factor = 2 -search_factor 2 -secret mycluster
 - The secret parameter is encrypted and saved as
 Results in: SPLUNK_HOME/etc/system/local/server.conf
 [clustering] mode = master replication_factor = 2 pass4SymmKey = Hashed_Secret
 pass4SymmKey
-  - 
-Starting in 6.6, a non-default security key is required
-  - 
-mycluster is set as the password for this cluster example
+  - Starting in 6.6, a non-default security key is required
+  - mycluster is set as the password for this cluster example
 
- 
-Configuring the Peer Nodes
+### Configuring the Peer Nodes
+
 > splunk enable listen 9997 > splunk edit cluster-config -mode slave
 - Ports required on each peer:
   - Receiving port to listen to forwarders -master_uri https://10.0.1.3:8089 -secret mycluster -replication_port 9100
@@ -211,7 +206,8 @@ mode = slave master_uri = https://10.0.1.3:8089 pass4SymmKey = Hashed_Secret
 [replication_port://9100]
   - 9100 = index replication port
 
-Configuring the Search Head
+### Configuring the Search Head
+
 > splunk edit cluster-config
 - To configure as a cluster search head: -mode searchhead -master_uri https://10.0.1.3:8089
   - 
@@ -223,8 +219,8 @@ splunk help [list|add|edit|remove] [clustering] mode = searchhead
 cluster-master
 master_uri = https://10.0.1.3:8089 pass4SymmKey = Hashed_Secret1
 
- 
-Adding SH to an Additional Indexer Cluster
+### Adding SH to an Additional Indexer Cluster
+
 > splunk add cluster-master
 - SHs can belong to multiple clusters -master_uri https://20.0.2.6:8089 -secret yourCluster
 - To allow SH to search additional clusters:
@@ -237,7 +233,8 @@ SPLUNK_HOME/etc/system/local/server.conf
 Master Dashboard   - Single-site Cluster
 Master node: Settings > Indexer clustering
 
-Index Replication Health
+### Index Replication Health
+
 Cluster status is When current operational RF is When current operational SF is Complete Met as specified Met as specified Valid One or greater
 - With replication factor = 3 and search factor = 2:
   - A complete cluster has 3 copies of each bucket, 2 of which are searchable   - A valid cluster has at least one searchable copy of all buckets
@@ -245,8 +242,8 @@ Cluster status is When current operational RF is When current operational SF is 
   - A complete cluster has 2 searchable buckets, each having its copy of
 rawdata   - A valid cluster has at least one searchable copy of all buckets
 
- 
-Factors in Action   - Normal
+### Factors in Action   - Normal
+
 Complete
 4 peer nodes, replication factor = 3, search factor = 2 & Valid
 P Primary (Origin) B Searchable backup R
@@ -301,7 +298,8 @@ Data replication
 3B
 5P
  
-Factors in Action   - Second Peer Loss
+### Factors in Action   - Second Peer Loss
+
 Valid but
 4 peer nodes, replication factor = 3, search factor = 2 Not complete
 P B R
@@ -333,7 +331,8 @@ Primary (Origin) Searchable backup Rawdata-only
 5R
 Data replication
  
-Factors in Action   - Peer Restored
+### Factors in Action   - Peer Restored
+
 Complete
 4 peer nodes, replication factor = 3, search factor = 2 & Valid
 P Primary (Origin) B Searchable backup R
@@ -367,8 +366,8 @@ Data replication
 Excess Buckets
 Lists excess buckets
 
- 
-Notable Indexer Cluster Log Channels
+### Notable Indexer Cluster Log Channels
+
 - Cluster peers communicate via the /service/cluster endpoints
   - Peer to master communication: /services/cluster/master   - Master to peer communication: /services/cluster/slave
 - splunkd_access.log   - Indexer cluster communication logs
@@ -379,66 +378,55 @@ index=_internal sourcetype=splunkd_access (uri="/services/cluster/slave/buckets*
 - metrics.log
   - component=Metrics group=clusterout_connections
 
- 
-Master Node Failover
+### Master Node Failover
+
 - If the master node is lost, the cluster continues to operate
-  - 
-New data arriving at peer nodes is indexed, but might not replicate
-  - 
-The search heads continue to send the queries to last known list of peer nodes and peer nodes will respond if they can
-  - 
-After the master node comes back online, buckets are re-balanced
+  - New data arriving at peer nodes is indexed, but might not replicate
+  - The search heads continue to send the queries to last known list of peer nodes and peer nodes will respond if they can
+  - After the master node comes back online, buckets are re-balanced
 - A stand-by master node can be configured
   - http://docs.splunk.com/Documentation/Splunk/latest/Indexer/Handlemasternodefailure
 - You can employ DNS-based failover, a load balancer, or some other technique to switch the same master_uri to the stand-by master
-  - 
-Hot-standby is NOT recommended
+  - Hot-standby is NOT recommended
 
- 
-Master Node Failover (cont.)
+### Master Node Failover (cont.)
+
 - A standby master only needs the primary master's static state information
-  - 
-SPLUNK_HOME/etc/system/local/server.conf
-  - 
-SPLUNK_HOME/etc/master-apps
+  - SPLUNK_HOME/etc/system/local/server.conf
+  - SPLUNK_HOME/etc/master-apps
 - When the standby master node starts, its services are blocked until it can fulfill the replication factor
-  - 
-To have the standby master unblock immediately, run: splunk set indexing-ready
+  - To have the standby master unblock immediately, run: splunk set indexing-ready
+
 Note
 Extra provisioning is required if the Monitoring Console is also enabled on the Master Node.
 
- 
-Restarting Indexer Cluster
+### Restarting Indexer Cluster
+
 - Ordinarily you do not restart the entire cluster
-  - 
-Search heads can be restarted at any time
+  - Search heads can be restarted at any time
 - If you do need to restart the entire cluster:
-1.
-Restart the master node with splunk restart
-2.
-Wait and check the master node dashboard for cluster status
-3.
-Run splunk rolling-restart cluster-peers ê Performs a phased restart of all the peer nodes ê Restarts 10% of the peers at a time in random order (configurable) ê To cause all peers to restart immediately, run from the master:
+
+1. Restart the master node with splunk restart
+2. Wait and check the master node dashboard for cluster status
+3. Run splunk rolling-restart cluster-peers ê Performs a phased restart of all the peer nodes ê Restarts 10% of the peers at a time in random order (configurable) ê To cause all peers to restart immediately, run from the master:
+
 > splunk edit cluster-config -percent_peers_to_restart 100 > splunk rolling-restart cluster-peers
 
- 
-Migrating Non-clustered Indexers to a Cluster
-- You can add a non-clustered indexer to a cluster as a peer node at any time
-splunk edit cluster-config -mode slave ...
+### Migrating Non-clustered Indexers to a Cluster
+
+- You can add a non-clustered indexer to a cluster as a peer node at any time splunk edit cluster-config -mode slave ...
 - Apps must be re-distributed via master-apps
   - 
 Note
 You cannot convert a peer node to a non-clustered indexer.
 You will learn about distributing apps in indexer clusters in Module 4
 - Only new data coming into this peer is replicated
-  - 
-New data follows the cluster's replication factor
+  - New data follows the cluster's replication factor
 - Existing buckets are not replicated
-  - 
-Contact Splunk Professional Services if you must replicate legacy buckets
+  - Contact Splunk Professional Services if you must replicate legacy buckets
 
- 
-Upgrading and Applying Maintenance Releases
+### Upgrading and Applying Maintenance Releases
+
 - To upgrade a single-site indexer cluster, you must take down the entire cluster at once and upgrade all node tiers in order:
   - Master node > search heads > peer nodes   - Within each tier, upgrade all nodes as a single operation
 - Maintenance updates can be applied in a rolling, online upgrade
@@ -446,25 +434,19 @@ Upgrading and Applying Maintenance Releases
 ê Put the master into maintenance mode while upgrading the peer nodes ê To take down peer nodes, use the splunk stop command ê We will discuss maintenance mode command later http://docs.splunk.com/Documentation/Splunk/latest/Indexer/Upgradeacluster
 
  
-Lab Exercise 2   - Enable Single-site Cluster
-Time: 35 - 40 minutes Tasks:
-  - 
-Switch all cluster members to license slaves
-  - 
-Configure the master node for a single-site indexer cluster
-  - 
-Configure three indexers to form the replication peers
-  - 
-Configure a search head to join the cluster
-  - 
-Monitor the cluster status with Splunk Web
-  - 
-Test a peer node failover scenario
-  - 
-Investigate the peer outage with Splunk internal logs
+### Lab Exercise 2   - Enable Single-site Cluster
 
- 
-Lab Exercise 2   - Enable Single-site Cluster (cont.)
+- Time: 35 - 40 minutes Tasks:
+  - Switch all cluster members to license slaves
+  - Configure the master node for a single-site indexer cluster
+  - Configure three indexers to form the replication peers
+  - Configure a search head to join the cluster
+  - Monitor the cluster status with Splunk Web
+  - Test a peer node failover scenario
+  - Investigate the peer outage with Splunk internal logs
+
+### Lab Exercise 2   - Enable Single-site Cluster (cont.)
+
 Your Computer
 x = Your student ID 8?89 = splunkd-port
 Indexer Cluster (10.0.x.1)

@@ -1,77 +1,60 @@
 #  Splunk Cluster Administration 7.0
 
-Module 8: KV Store Management in Splunk Clusters
+## Module 8: KV Store Management in Splunk Clusters
 
- 
-Module Objectives
+### Module Objectives
+
 - Enable a KV store collection under a search head cluster
 - Manage KV store collections in a search head cluster
 - Monitor and troubleshoot KV store issues in Splunk clusters
-
  
-Overview of Splunk Lookups
+### Overview of Splunk Lookups
+
 - A lookup is a Splunk data enrichment knowledge object
-  - 
-Used ONLY during search time
-  - 
-The lookup stanzas are defined in transforms.conf and props.conf
+  - Used ONLY during search time
+  - The lookup stanzas are defined in transforms.conf and props.conf
 - File-based lookup is used for data sets that are small and/or change infrequently
-  - 
-Uses CSV files stored in the lookups directory
+  - Uses CSV files stored in the lookups directory
 - KV store lookup is designed for large key-value collections that frequently change
-  - 
-Tracking workflow state changes (an incident-review system)
-  - 
-Keeping a list of environment assets assigned to users and their metadata
-  - 
-Controlling a job queue or application state as the user interacts with the app
-  - 
-Requires collections.conf to define fields
-ê Can optionally specify data type enforcement and field accelerations
+  - Tracking workflow state changes (an incident-review system)
+  - Keeping a list of environment assets assigned to users and their metadata
+  - Controlling a job queue or application state as the user interacts with the app
+  - Requires collections.conf to define fields
+    - Can optionally specify data type enforcement and field accelerations
 
- 
-CSV Lookup Challenges in Distributed Environment
-- In a distributed environment, each SH1 SH2 SH3
-search head manages and replicates its own CSV lookup files
-  - 
-Updates to lookup files propagate to app/lookups/csv app/lookups/csv app/lookups/csv
-search peers independently
+### CSV Lookup Challenges in Distributed Environment
+
+- In a distributed environment, each SH1 SH2 SH3 search head manages and replicates its own CSV lookup files
+  - Updates to lookup files propagate to app/lookups/csv app/lookups/csv app/lookups/csv search peers independently
 - Searches can fail if a knowledge bundle is not replicated to search peers in time
-  - 
-By default, a bundle larger than 2GB is not replicated to the search peers
+  - By default, a bundle larger than 2GB is not replicated to the search peers
 - In Splunk clusters, the timely replication of lookup files is more critical
-  - 
-Why? ☞ Slides 163 and 169 Indexer 1 Indexer 2 ... Indexer n-1 Indexer n
-  - 
-By default, SHC conf replication rejects a bundle size larger than 2GB 
+  - Why? ☞ Slides 163 and 169 Indexer 1 Indexer 2 ... Indexer n-1 Indexer n
+  - By default, SHC conf replication rejects a bundle size larger than 2GB 
 
- 
-Benefits of KV Store Lookup
+### Benefits of KV Store Lookup
+
 - Quick per-record updates
-  - 
-Performs Create-Read-Update-Delete (CRUD) operations on individual records using the Splunk REST API and SPL commands
+  - Performs Create-Read-Update-Delete (CRUD) operations on individual records using the Splunk REST API and SPL commands
 - Standardized interface for app developers
-  - 
-REST API and data type validation
+  - REST API and data type validation
 - Faster replication on SHC and search peers
-  - 
-Perform automatic lookups and distributed search-based lookups on the index tier
-ê Replication must first be enabled per collection
-  - 
-Facilitate backup and restore of KV store data
+  - Perform automatic lookups and distributed search-based lookups on the index tier
+    - Replication must first be enabled per collection
+  - Facilitate backup and restore of KV store data
 
- 
-Enabling KV Store Collections
+### Enabling KV Store Collections
+
 - Before users can use a KV store, an admin must create a collection
 - A collection is defined in collections.conf
-  - 
-Must be placed in an app's default or local directory
-ê Other attempts are ignored   - 
-Specify the name of the collection (stanza) and optional attributes
-ê Matching lookup field, output fields, etc.   - 
-Enforcing data types is optional
-ê If enforced, any input that does not match the type is silently dropped   - 
-We will discuss more options later
+  - Must be placed in an app's default or local directory
+    - Other attempts are ignored
+    - Specify the name of the collection (stanza) and optional attributes
+    - Matching lookup field, output fields, etc.
+    - Enforcing data types is optional
+    - If enforced, any input that does not match the type is silently dropped
+    - We will discuss more options later
+
 collections.conf Example: [collection_name]
 [mykv] enforceTypes = [true|false]
 enforceTypes = true field.<name1> = [number|string|bool|time]
@@ -79,11 +62,10 @@ field.x = number field.<name2> = [number|string|bool|time]
 field.y = string accelerated_fields.<xl-name> = <json>
 accelerated_fields.xl2 = {"x": 1, "y": 1}
 
- 
-Populating KV Store Lookups
+### Populating KV Store Lookups
+
 - Create a KV store collection stanza in collections.conf
-  - 
-Identify and include the options to enable
+  - Identify and include the options to enable
 - Add lookup definition for KV store
   - 
 Note
@@ -96,9 +78,9 @@ Search: ... | fields id, location, type | outputlookup <lookup_name>
   - 
 Or, use REST APIs
 curl -k -u <user>:<pw> https://<url:mport>/servicesNS/<user>/<app>/storage/collections/data/<lookup_name> -H 'Content-Type: application/json' -d '{"id": 001, "location": "CA", "type": "basic"}'
-
  
-How KV Store Works in SH Cluster
+### How KV Store Works in SH Cluster
+
 SH1 SH2 SH3
 - In cluster
 a SHC, the KV store forms its own
@@ -134,7 +116,8 @@ is used of mgmt_uri for KV store
 in
 
  
-KV Store Collection Replication   - Write
+### KV Store Collection Replication   - Write
+
 SH1 SH2 SH3
 - Writing majority to journaling
 a collection uses write
@@ -163,7 +146,8 @@ j{ok}
 Primary
 Captain success
 
-KV Store Collection Replication   - Read
+### KV Store Collection Replication   - Read
+
 SH1 SH2 SH3
 - Read collection request is routed to the nearest member
 READ
@@ -176,8 +160,8 @@ Secondary ✔ Secondary
 ✘
 Primary ✔ {x=1} {x=1}
 
- 
-KV Store CLI Commands
+### KV Store CLI Commands
+
 - The similar conditions that cause SHC members to end up in an inconsistent replication state can cause the KV store collections to be out of sync
   - Frequent status changes to the SHC member instances   - Changing the GUID or hostname of a member   - Depending on the condition of SHC, KV store cluster can also be in the
 state where it is impossible to sync   - One workaround is to bootstrap SHC from scratch
@@ -215,14 +199,15 @@ optimeDateSec : 1492105328 status : Generated Up
 for Cho Jun Seung (jscho@time-gate.com) (C) Splunk replicationStatus Inc, not for distribution
 : Non-captain KV store member
  
-Monitoring KV Store Status with MC
+### Monitoring KV Store Status with MC
+
 - MC provides more details on KV store status
-  - 
-In the MC General Setup page, add the KV store server role to the instance   - 
+  - In the MC General Setup page, add the KV store server role to the instance   - 
 Go to MC > Search > KV Store: Deployment
 
  
-Backing Up and Restoring KV Store
+### Backing Up and Restoring KV Store
+
 - To back up KV store data in a SHC:
 1. Confirm the KV store status with CLI or MC 2. Stop a SHC member that is in ready state and has the KV store data 3. Use your organization's backup tool to copy the kvstore folder and all
 the collections.conf files ê The location of the kvstore folder is specified in server.conf under
@@ -230,9 +215,8 @@ the collections.conf files ê The location of the kvstore folder is specified in
 - To restore when the majority SHC members are stale:
 1. Stop all SHC members 2. Restore collections.conf and the kvstore folder to each member 3. Start each SHC member
 
+### Fixing Stale KV Store Members
 
- 
-Fixing Stale KV Store Members
 - When KV store members fail on the write operations, they might become stale
   - Run splunk show kvstore-status to determine the stale members
 - If majority members are stale, then the SHC requires a new bootstrap
@@ -246,11 +230,10 @@ cp   - r <kv-backup> <sh>/<dbPath> splunk start splunk bootstrap shcluster-capta
 splunk add shcluster-member -current_member_uri <captain>
 splunk show shcluster-status splunk resync kvstore
 
- 
-Fixing Stale KV Store Members (cont.)
+### Fixing Stale KV Store Members (cont.)
+
 - If only a few members are stale, then resync it from one of the members
-  - 
-Stale member:
+  - Stale member:
 splunk show kvstore-status splunk stop splunk clean kvstore -local splunk start
   - SHC captain:
 splunk resync kvstore [-source <KVstore_source_GUID>]
@@ -258,10 +241,10 @@ Note
 Specify optional -source, if you want to use a member other than the captain.
 
  
-SHC KV Store Bundle Replication to Indexers
+### SHC KV Store Bundle Replication to Indexers
+
 - To enable an automatic lookup with KV store data, you must enable replication in collections.conf
-  - 
-Each automatic lookup configuration is limited to a specific host, source, or source type
+  - Each automatic lookup configuration is limited to a specific host, source, or source type
 collections.conf on all members
 WRITE [mykv] enforceTypes = true field.x = number
 Captain
@@ -272,8 +255,9 @@ Secondary replication_dump_maximum_file_size = <KB>
 1
 2 5
 3 4 4
- 
-Notable KV Store Log Channels
+
+### Notable KV Store Log Channels
+
 - KV kvstore.log
 store activities are logged in metrics.log, splunkd.log, and
 - Metrics.log activities
@@ -292,8 +276,8 @@ component=*kvstore*
 - kvstore.log index
 contains the introspection data feeding the _introspection
 
- 
-Monitoring KV Store with Monitoring Console
+### Monitoring KV Store with Monitoring Console
+
 - index=_introspection Monitoring Console
 derives the historical KV store performance views in
 - Start with the deployment-wide view and drill down to an instance level   - Median Page Faults per Operation shows the read activity involving disk I/O   - 
@@ -310,7 +294,8 @@ of KV Store Captain shows the time between the first and
 shows the
 
  
-KV Store Operations Log Size
+### KV Store Operations Log Size
+
 - A larger operations log can give a KV store cluster a greater tolerance for lag and even make the set more resilient
 - The KV store allocates the full log size the first time Splunk is started, regardless of its utilization
   - 
@@ -324,33 +309,25 @@ A large | outputlookup operation can generate a lot of records
   - 
 outputlookup append=true vs outputlookup append=false
 
- 
-Further Reading: KV Store
-- About KV Store
-  - 
-docs.splunk.com/Documentation/Splunk/latest/Admin/AboutKVstore
-- Tutorial: Use KV Store with a simple app
-  - 
-dev.splunk.com/view/SP-CAAAEZT
-- KV Store backup and restore
-  - 
-docs.splunk.com/Documentation/Splunk/latest/Admin/BackupKVstore
+### Further Reading: KV Store
 
- 
-Lab Exercise 8   - Add a KV Store Collection
+- About KV Store
+  - docs.splunk.com/Documentation/Splunk/latest/Admin/AboutKVstore
+- Tutorial: Use KV Store with a simple app
+  - dev.splunk.com/view/SP-CAAAEZT
+- KV Store backup and restore
+  - docs.splunk.com/Documentation/Splunk/latest/Admin/BackupKVstore
+
+### Lab Exercise 8   - Add a KV Store Collection
+
 - Time: 25 - 30 minutes
 - Tasks:
-  - 
-Identify the current SHC captain and KV store captain
-  - 
-Verify the state of the KV store service from Monitoring Console
-  - 
-Enable the KV store collection replication
+  - Identify the current SHC captain and KV store captain
+  - Verify the state of the KV store service from Monitoring Console
+  - Enable the KV store collection replication
 
- 
 Course Wrap-up
 
- 
 What’s Next?
 Power User Certification
 Advanced Dashboards and Visualizations
@@ -410,11 +387,3 @@ Troubleshooting Splunk
 YouTube: The Splunk How-To Channel
 - In addition to our roster of training courses, check out the Splunk Education How-To channel: http://www.youtube.com/c/SplunkHowTo
 - This site provides useful, short videos on a variety of Splunk topics
-
- 
-Thank You
-- Complete the Class Evaluation to be in this month's drawing for a $100 Splunk Store voucher
-1. Look for the invitation email, What did you think of your Splunk Education
-class, in your inbox
-2.
-Click the link or go to the specified URL in the email
