@@ -1,3 +1,5 @@
+# AWS
+
 가용영역(AZ:Availability Zone)
 리전(Region) : 최소 2개 이상의 가용역역
 
@@ -20,7 +22,7 @@
 ELB(Elastic LoadBalance), VPC
 
 서버
-온프라미스 
+온프라미스
 AMI, Amazon EC2 인스턴스
 
 AWS markplace
@@ -42,4 +44,3 @@ PageViewCount
 Auto-Scaling
 
 - 대부분의 서비스에서 사용가능
-

@@ -4,11 +4,19 @@ Managing Indexers and Clusters of Indexers
 Overview of indexer clusters and index replication
 --------------------------------------------------
 
+<<<<<<< HEAD
 ### About indexer clusters and index replication
 
 Indexer clusters are groups of Splunk Enterprise indexers configured to replicate each others' data, so that the system keeps multiple copies of all data. This process is known as index replication. By maintaining multiple, identical copies of Splunk Enterprise data, clusters prevent data loss while promoting data availability for searching.
 
 Indexer clusters feature automatic failover from one indexer to the next. This means that, if one or more indexers fail, incoming data continues to get indexed and indexed data continues to be searchable.
+=======
+Indexer clusters are groups of Splunk Enterprise indexers configured to replicate each others' data, so that the system keeps multiple copies of all data. This process is known as index replication. By maintaining multiple, identical copies of Splunk Enterprise data, clusters prevent data loss while promoting data availability for searching.
+
+Indexer clusters feature automatic failover from one indexer to the next. This means that, if one or more indexers fail, incoming data continues to get indexed and indexed data continues to be searchable.
+
+The key benefits of index replication are:
+>>>>>>> 1057cf63ee1f450d851d874e32ef4090bda338e2
 
 The key benefits of index replication are:
 
@@ -85,6 +93,7 @@ Clusters are easy to set up and use, but you need to have a good grounding in th
 
 Clustered indexers have several different requirements from non-clustered indexers. It is important that you be aware of these issues before you migrate your indexers. For details, see "Key differences between clustered and non-clustered Splunk Enterprise deployments of indexers". After you read that material, go to "Migrate non-clustered indexers to a clustered environment" for details on the actual migration process.
 
+<<<<<<< HEAD
 ### Multisite indexer clusters
 
 Indexer clusters have built-in site-awareness, meaning that you can explicitly configure a multisite indexer cluster on a site-by-site basis. This simplifies and extends the ability to implement a cluster that spans multiple physical sites, such as data centers.
@@ -113,9 +122,43 @@ The architecture of single-site and multisite clusters is similar. These are the
 -	Each node belongs to an assigned site.
 -	Replication of bucket copies occurs in a site-aware manner.
 -	Search heads distribute their searches across local peers only, whenever possible.
+=======
+## Multisite indexer clusters2
+
+Indexer clusters have built-in site-awareness, meaning that you can explicitly configure a multisite indexer cluster on a site-by-site basis. This simplifies and extends the ability to implement a cluster that spans multiple physical sites, such as data centers.
+
+### Use cases
+
+Multisite clusters offer two key benefits over single-site clusters:
+
+- Improved disaster recovery. By storing copies of your data at multiple locations, you maintain access to the data if a disaster strikes at one location. Multisite clusters provide site failover capability. If a site goes down, indexing and searching can continue on the remaining sites, without interruption or loss of data.
+- Search affinity. If you configure each site so that it has both a search head and a full set of searchable data, the search head on each site will limit its searches to local peer nodes. This eliminates any need, under normal conditions, for search heads to access data on other sites, greatly reducing network traffic between sites.
+
+### Multisite configuration
+
+You configure multisite clusters somewhat differently from basic, single-site clusters. These are the key differences for multisite clusters: 
+
+- You assign a site to each node.
+- You can specify the replication and search factors on a site-by-site basis. That is, you can specify the number of copies and searchable copies that you want to maintain on each site, along with the number that you want to maintain on the cluster overall.
+
+There are a few other configuration differences as well. See "Multisite deployment overview".
+
+### Multisite architecture
+
+The architecture of single-site and multisite clusters is similar. These are the main differences for multisite clusters:
+
+- Each node belongs to an assigned site.
+- Replication of bucket copies occurs in a site-aware manner.
+- Search heads distribute their searches across local peers only, whenever possible.
+
+For more information on multisite cluster architecture, read "Multisite indexer cluster architecture".
+
+### For more information
+>>>>>>> 1057cf63ee1f450d851d874e32ef4090bda338e2
 
 For more information on multisite cluster architecture, read "[Multisite indexer cluster architecture](http://docs.splunk.com/Documentation/Splunk/7.0.3/Indexer/Multisitearchitecture)".
 
+<<<<<<< HEAD
 #### For more information
 
 These chapters and topics describe multisite clusters in detail:
@@ -129,9 +172,15 @@ Other topics in this manual differentiate multisite and single-site clusters as 
 ### The basics of indexer cluster architecture
 
 This topic introduces indexer cluster architecture. It describes the nodes of a single-site cluster and how they work together. It also covers some essential concepts and describes briefly how clusters handle indexing and searching.
+=======
+- "[Deploy and configure a multisite indexer cluster](http://docs.splunk.com/Documentation/Splunk/7.0.3/Indexer/Multisitedeploymentoverview)". This chapter contains topics that describe multisite configuration, including search affinity configuration and multisite replication and search factors.
+- "[Manage a multisite indexer cluster](http://docs.splunk.com/Documentation/Splunk/7.0.3/Indexer/Moveapeertoanewsite)". This chapter covers issues such as handling master site failure and converting a multisite cluster to single-site.
+- "[Migrate an indexer cluster from single-site to multisite](http://docs.splunk.com/Documentation/Splunk/7.0.3/Indexer/Migratetomultisite)". This topic describes how to convert a single-site cluster to multisite.
+>>>>>>> 1057cf63ee1f450d851d874e32ef4090bda338e2
 
 Multisite cluster architecture is similar to single-site cluster architecture. There are, however, a few areas of significant difference. For information on multisite cluster architecture and how it differs from single-site cluster architecture, read the topic "[Multisite indexer cluster architecture](http://docs.splunk.com/Documentation/Splunk/7.0.3/Indexer/Multisitearchitecture)".
 
+<<<<<<< HEAD
 For a deeper dive into cluster architecture, read the chapter "[How indexer clusters work](http://docs.splunk.com/Documentation/Splunk/7.0.3/Indexer/Basicconcepts)".
 
 #### Cluster nodes
@@ -151,31 +200,67 @@ Here is a diagram of a simple single-site cluster, with a few peers and some for
 Basic cluster 60.png
 
 Some of what is happening in this diagram might not make sense yet; read on.
+=======
+## The basics of indexer cluster architecture
 
-Master node
+This topic introduces indexer cluster architecture. It describes the nodes of a single-site cluster and how they work together. It also covers some essential concepts and describes briefly how clusters handle indexing and searching.
+
+Multisite cluster architecture is similar to single-site cluster architecture. There are, however, a few areas of significant difference. For information on multisite cluster architecture and how it differs from single-site cluster architecture, read the topic "[Multisite indexer cluster architecture](http://docs.splunk.com/Documentation/Splunk/7.0.3/Indexer/Multisitearchitecture)".
+
+For a deeper dive into cluster architecture, read the chapter "[How indexer clusters work](http://docs.splunk.com/Documentation/Splunk/7.0.3/Indexer/Basicconcepts)".
+
+### Cluster nodes
+
+A cluster includes three types of nodes: 
+
+- A single master node to manage the cluster.
+- Multiple peer nodes to index and replicate data and to search the data.
+- One or more search heads to coordinate searches across all the peer nodes.
+
+In addition, a cluster deployment usually employs forwarders to ingest and forward data to the peers. 
+
+Master nodes, peer nodes, and search heads are all specialized Splunk Enterprise instances. All nodes must reside on separate instances and separate machines. For example, the master node cannot reside on the same instance or machine as a peer node or a search head. 
+
+Here is a diagram of a simple single-site cluster, with a few peers and some forwarders sending data to them: 
+
+![Basic cluster 60.png](./images/Basic_cluster_60.png)
+
+Some of what is happening in this diagram might not make sense yet; read on. 
+>>>>>>> 1057cf63ee1f450d851d874e32ef4090bda338e2
+
+#### Master node
 
 The master node manages the cluster. It coordinates the replicating activities of the peer nodes and tells the search head where to find data. It also helps manage the configuration of peer nodes and orchestrates remedial activities if a peer goes offline.
 
 Unlike the peer nodes, the master does not index external data. A cluster has exactly one master node.
 
-Peer node
+#### Peer node
 
 Peer nodes perform the indexing function for the cluster. They receive and index incoming data. They also send replicated data to other peer nodes in the cluster and receive replicated data from other peers. A peer node can index its own external data while simultaneously receiving and sending replicated data. Like all indexers, peers also search across their indexed data in response to search requests from the search head.
 
 The number of peer nodes you deploy is dependent on two factors: the cluster replication factor and the indexing load. For example, if you have a replication factor of 3 (which means you intend to store three copies of your data), you need at least three peers. If you have more indexing load than three indexers can handle, you can add more peers to increase capacity.
 
-Search head
+#### Search head
 
 The search head manages searches across the set of peer nodes. It distributes search queries to the peers and consolidates the results. You initiate all searches from the search head. A cluster must have at least one search head.
 
+<<<<<<< HEAD
 Forwarder
 
 Forwarders function the same as in any Splunk Enterprise deployment. They consume data from external sources and then forward that data to indexers, which, in clusters, are the peer nodes. You are not required to use forwarders to get data into a cluster, but, for most purposes, you will want to. This is because only with forwarders can you enable indexer acknowledgment, which ensures that incoming data gets reliably indexed. In addition, to deal with potential peer node failures, it is advisable to use load-balancing forwarders. That way, if one peer goes down, the forwarder can switch its forwarding to other peers in the load-balanced group. For more information on forwarders in a clustered environment, read "Use forwarders to get data into the indexer cluster" in this manual.
 
 #### Important concepts
+=======
+#### Forwarder
+
+Forwarders function the same as in any Splunk Enterprise deployment. They consume data from external sources and then forward that data to indexers, which, in clusters, are the peer nodes. You are not required to use forwarders to get data into a cluster, but, for most purposes, you will want to. This is because only with forwarders can you enable indexer acknowledgment, which ensures that incoming data gets reliably indexed. In addition, to deal with potential peer node failures, it is advisable to use load-balancing forwarders. That way, if one peer goes down, the forwarder can switch its forwarding to other peers in the load-balanced group. For more information on forwarders in a clustered environment, read "[Use forwarders to get data into the indexer cluster](http://docs.splunk.com/Documentation/Splunk/7.0.3/Indexer/useforwarders)" in this manual.
+
+### Important concepts
+>>>>>>> 1057cf63ee1f450d851d874e32ef4090bda338e2
 
 To understand how a cluster functions, you need to be familiar with a few concepts:
 
+<<<<<<< HEAD
 • Replication factor. This determines the number of copies of data the cluster maintains and therefore, the cluster's fundamental level of failure tolerance.
 
 • Search factor. This determines the number of searchable copies of data the cluster maintains, and therefore how quickly the cluster can recover its searching capability after a peer node goes down.
@@ -185,11 +270,21 @@ To understand how a cluster functions, you need to be familiar with a few concep
 This section provides a brief introduction to these concepts.
 
 Replication factor
+=======
+- Replication factor. This determines the number of copies of data the cluster maintains and therefore, the cluster's fundamental level of failure tolerance.
+- Search factor. This determines the number of searchable copies of data the cluster maintains, and therefore how quickly the cluster can recover its searching capability after a peer node goes down.
+- Buckets. Buckets are the basic units of index storage. A cluster maintains replication factor number of copies of each bucket. 
+
+This section provides a brief introduction to these concepts.
+
+#### Replication factor
+>>>>>>> 1057cf63ee1f450d851d874e32ef4090bda338e2
 
 As part of configuring the master, you specify the number of copies of data that you want the cluster to maintain. The number of copies is called the cluster's replication factor. The replication factor is a key concept in index replication, because it determines the cluster's failure tolerance: a cluster can tolerate a failure of (replication factor - 1) peer nodes. For example, if you want to ensure that your system can handle the failure of two peer nodes, you must configure a replication factor of 3, which means that the cluster stores three identical copies of your data on separate nodes. If two peers go down, the data is still available on a third peer. The default value for the replication factor is 3.
 
 Here is a high-level representation of a cluster with three peers and a replication factor of 3:
 
+<<<<<<< HEAD
 Replication factor 3 60.png
 
 In this diagram, one peer is receiving data from a forwarder, which it processes and then streams to two other peers. The cluster will contain three complete copies of the peer's data. This diagram represents a very simplified version of peer replication, where all data is coming into the system through a single peer. In most three-peer clusters, all three peers would be receiving external data from a forwarder, as well as replicated data from other peers.
@@ -197,8 +292,17 @@ In this diagram, one peer is receiving data from a forwarder, which it processes
 For a detailed discussion of the replication factor and the trade-offs involved in adjusting its value, see the topic "Replication factor".
 
 Important: Multisite clusters use a significantly different version of the replication factor. See "Multisite replication and search factors".
+=======
+![Replication_factor_3_60.png](./images/Replication_factor_3_60.png)
 
-Search factor
+In this diagram, one peer is receiving data from a forwarder, which it processes and then streams to two other peers. The cluster will contain three complete copies of the peer's data. This diagram represents a very simplified version of peer replication, where all data is coming into the system through a single peer. In most three-peer clusters, all three peers would be receiving external data from a forwarder, as well as replicated data from other peers.
+
+For a detailed discussion of the replication factor and the trade-offs involved in adjusting its value, see the topic "[Replication factor](http://docs.splunk.com/Documentation/Splunk/7.0.3/Indexer/Thereplicationfactor)". 
+
+Important: Multisite clusters use a significantly different version of the replication factor. See "[Multisite replication and search factors](http://docs.splunk.com/Documentation/Splunk/7.0.3/Indexer/Multisitearchitecture#Multisite_replication_and_search_factors)".
+>>>>>>> 1057cf63ee1f450d851d874e32ef4090bda338e2
+
+#### Search factor
 
 When you configure the master, you also designate a search factor. The search factor determines the number of immediately searchable copies of data the cluster maintains.
 
@@ -210,23 +314,43 @@ For a detailed discussion of the search factor and the trade-offs involved in ad
 
 Important: Multisite clusters use a significantly different version of the search factor. See "Multisite replication and search factors".
 
-Buckets
+#### Buckets
 
+<<<<<<< HEAD
 Splunk Enterprise stores indexed data in buckets, which are directories containing files of data. An index typically consists of many buckets.
+=======
+Splunk Enterprise stores indexed data in buckets, which are directories containing files of data. An index typically consists of many buckets. 
+
+A complete cluster maintains replication factor number of copies of each bucket, with each copy residing on a separate peer node. The bucket copies are either searchable or non-searchable. A complete cluster also has search factor number of searchable copies of each bucket. 
+
+Buckets contain two types of files: a rawdata file, which contains the data along with some metadata, and - for searchable copies of buckets - index files into the data.
+
+The cluster replicates data on a bucket-by-bucket basis. The original bucket and its copies on other peer nodes have identical sets of rawdata. Searchable copies also contain the index files.
+>>>>>>> 1057cf63ee1f450d851d874e32ef4090bda338e2
 
 A complete cluster maintains replication factor number of copies of each bucket, with each copy residing on a separate peer node. The bucket copies are either searchable or non-searchable. A complete cluster also has search factor number of searchable copies of each bucket.
 
+<<<<<<< HEAD
 Buckets contain two types of files: a rawdata file, which contains the data along with some metadata, and - for searchable copies of buckets - index files into the data.
 
 The cluster replicates data on a bucket-by-bucket basis. The original bucket and its copies on other peer nodes have identical sets of rawdata. Searchable copies also contain the index files.
 
 Each time a peer creates a new bucket, it communicates with the master to get a list of peers to stream the bucket's data to. If you have a cluster in which the number of peer nodes exceeds the replication factor, a peer might stream data to a different set of peers each time it creates a new bucket. Eventually, the copies of the peer's original buckets are likely to be spread across a large number of peers, even if the replication factor is only 3.
+=======
+You need a good grasp of buckets to understand cluster architecture. For an overview of buckets in general, read "[How the indexer stores indexes](http://docs.splunk.com/Documentation/Splunk/7.0.3/Indexer/HowSplunkstoresindexes)". Then read the topic "[Buckets and indexer clusters](http://docs.splunk.com/Documentation/Splunk/7.0.3/Indexer/Bucketsandclusters)". It provides detailed information on bucket concepts of particular importance for a clustered deployment. 
+
+### How indexing works
+>>>>>>> 1057cf63ee1f450d851d874e32ef4090bda338e2
 
 You need a good grasp of buckets to understand cluster architecture. For an overview of buckets in general, read "How the indexer stores indexes". Then read the topic "Buckets and indexer clusters". It provides detailed information on bucket concepts of particular importance for a clustered deployment.
 
 #### How indexing works
 
+<<<<<<< HEAD
 Clustered indexing functions like non-clustered indexing, except that the cluster stores multiple copies of the data. Each peer node receives, processes, and indexes external data - the same as any non-clustered indexer. The key difference is that the peer node also streams, or "replicates", copies of the processed data to other peers in the cluster, which then store those copies in their own buckets. Some of the peers receiving the processed data might also index it. The replication factor determines the number of peers that receive the copies of data. The search factor determines the number of peers that index the data.
+=======
+![Indexing_cluster_60.png](./images/Indexing_cluster_60.png)
+>>>>>>> 1057cf63ee1f450d851d874e32ef4090bda338e2
 
 A peer node can be indexing external data while simultaneously storing, and potentially indexing, copies of replicated data sent to it from other peers. For example, if you have a three-peer cluster configured with a replication factor of 3, each peer can be ingesting and indexing external data while also storing copies of replicated data streamed to it by the other peers. If the cluster's search factor is 2, one of the peers receiving a copy of streamed data will also index it. (In addition, the peer that originally ingests the data always indexes its own copy.) This diagram shows the movement of data into peers, both from forwarders and from other peers:
 
@@ -234,6 +358,7 @@ Indexing cluster 60.png
 
 You can set up your cluster so that all the peer nodes ingest external data. This is the most common scenario. You do this simply by configuring inputs on each peer node. However, you can also set up the cluster so that only a subset of the peer nodes ingest data. No matter how you disperse your inputs across the cluster, all the peer nodes can, and likely will, also store replicated data. The master determines, on a bucket-by-bucket basis, which peer nodes will get replicated data. You cannot configure this, except in the case of multisite clustering, where you can specify the number of copies of data that each site's set of peers receives.
 
+<<<<<<< HEAD
 In addition to replicating indexes of external data, the peers also replicate their internal indexes, such as \_audit, \_internal, etc.
 
 The master manages the peer-to-peer interactions. Most importantly, it tells each peer what peers to stream its data to. Once the master has communicated this, the peers then exchange data with each other, without the master's involvement, unless a peer node goes down. The master also keeps track of which peers have searchable data and ensures that there are always search factor number of copies of searchable data available. When a peer goes down, the master coordinates remedial activities.
@@ -241,6 +366,13 @@ The master manages the peer-to-peer interactions. Most importantly, it tells eac
 For detailed information, read the topic "How clustered indexing works".
 
 For information on how indexing works in a multisite cluster, read "Multisite indexing".
+=======
+For detailed information, read the topic "[How clustered indexing works](http://docs.splunk.com/Documentation/Splunk/7.0.3/Indexer/Howclusteredindexingworks)". 
+
+For information on how indexing works in a multisite cluster, read "[Multisite indexing](http://docs.splunk.com/Documentation/Splunk/7.0.3/Indexer/Multisitearchitecture#Multisite_indexing)".
+
+### How search works
+>>>>>>> 1057cf63ee1f450d851d874e32ef4090bda338e2
 
 #### How search works
 
@@ -248,7 +380,11 @@ In an indexer cluster, a search head coordinates all searches. The process is si
 
 To ensure that exactly one copy of each bucket participates in a search, one searchable copy of each bucket in the cluster is designated as primary. Searches occur only across the set of primary copies.
 
+<<<<<<< HEAD
 The set of primary copies can change over time, for example, in response to a peer node going down. If some of the bucket copies on the downed node were primary, other searchable copies of those buckets will be made primary to replace them. If there are no other searchable copies (because the cluster has a search factor of 1), non-searchable copies will first have to be made searchable before they can be designated as primary.
+=======
+The master rebalances primaries across the set of peers whenever a peer joins or rejoins the cluster, in an attempt to improve distribution of the search load. See "[Rebalance the indexer cluster primary buckets](http://docs.splunk.com/Documentation/Splunk/7.0.3/Indexer/Rebalancethecluster)".
+>>>>>>> 1057cf63ee1f450d851d874e32ef4090bda338e2
 
 The master rebalances primaries across the set of peers whenever a peer joins or rejoins the cluster, in an attempt to improve distribution of the search load. See "Rebalance the indexer cluster primary buckets".
 
@@ -256,17 +392,25 @@ The master keeps track of all bucket copies on all peer nodes, and the peer node
 
 Periodically, the search head gets a list of active search peers from the master. To handle searches, it then communicates directly with those peers, as it would for any distributed search, sending search requests and knowledge bundles to the peers and consolidating search results returned from the peers.
 
+<<<<<<< HEAD
 For example, assume a cluster of three peers is maintaining 20 buckets that need to be searched to fulfill a particular search request coming from the search head. Primary copies of those 20 buckets could be spread across all three peers, with 10 primaries on the first peer, six on the second, and four on the third. Each peer gets the search request and then determines for itself whether its particular copy of a bucket is primary and therefore needs to participate in the search.
+=======
+For detailed information, read the topic "[How search works in an indexer cluster](http://docs.splunk.com/Documentation/Splunk/7.0.3/Indexer/Howclusteredsearchworks)".
+>>>>>>> 1057cf63ee1f450d851d874e32ef4090bda338e2
 
 For detailed information, read the topic "How search works in an indexer cluster".
 
+<<<<<<< HEAD
 Important: There are key differences in how searching works in a multisite cluster. For example, each site in the cluster typically has a complete set of primary buckets, so that a search head can perform its searches entirely on data local to its site. For more information, read "Multisite searching".
 
 #### How clusters deal with peer node failure
+=======
+### How clusters deal with peer node failure
+>>>>>>> 1057cf63ee1f450d851d874e32ef4090bda338e2
 
 If a peer node goes down, the master coordinates attempts to reproduce the peer's buckets on other peers. For example, if a downed node was storing 20 copies of buckets, of which 10 were searchable (including three primary bucket copies), the master will direct efforts to create copies of those 20 buckets on other nodes. It will likewise attempt to replace the 10 searchable copies with searchable copies of the same buckets on other nodes. And it will replace the primary copies by changing the status of corresponding searchable copies on other peers from non-primary to primary.
 
-Replication factor and node failure
+#### Replication factor and node failure
 
 If there are less peer nodes remaining than the number specified by the replication factor, the cluster will not be able to replace the 20 missing copies. For example, if you have a three-node cluster with a replication factor of 3, the cluster cannot replace the missing copies when a node goes down, because there is no other node where replacement copies can go.
 
@@ -274,7 +418,7 @@ Except in extreme cases, however, the cluster should be able to replace the miss
 
 The only case in which the cluster cannot maintain a full set of primary copies is if a replication factor number of nodes goes down. For example, if you have a cluster of five peer nodes, with a replication factor of 3, the cluster will still be able to maintain a full set of primary copies if one or two peers go down but not if a third peer goes down.
 
-Search factor and node failure
+#### Search factor and node failure
 
 The search factor determines whether full search capability can quickly resume after a node goes down. To ensure rapid recovery from one downed node, the search factor must be set to at least 2. That allows the master to immediately replace primaries on the downed node with existing searchable copies on other nodes.
 
@@ -282,6 +426,7 @@ If instead the search factor is set to 1, that means the cluster is maintaining 
 
 If, on the other hand, the search factor is at least 2, the cluster can immediately assign primary status to searchable copies on the remaining nodes. The activity to replace the searchable copies from the downed node will still occur, but in the meantime searches can continue uninterrupted across all the cluster's data.
 
+<<<<<<< HEAD
 For detailed information on peer failure, read the topic "What happens when a peer node goes down".
 
 For information on how a multisite cluster handles peer node failure, read "How multisite indexer clusters deal with peer node failure".
@@ -295,10 +440,30 @@ For detailed information on master failure, read the topic "What happens when a 
 Multisite indexer cluster architecture
 
 This topic describes the architecture of multisite indexer clusters. It focuses primarily on how multisite clusters differ from single-site clusters. For an overview of cluster architecture, focusing on single-site clusters, read The basics of indexer cluster architecture.
+=======
+For detailed information on peer failure, read the topic "[What happens when a peer node goes down](http://docs.splunk.com/Documentation/Splunk/7.0.3/Indexer/Whathappenswhenaslavenodegoesdown)".
+
+For information on how a multisite cluster handles peer node failure, read "[How multisite indexer clusters deal with peer node failure](http://docs.splunk.com/Documentation/Splunk/7.0.3/Indexer/Multisitearchitecture#How_multisite_clusters_deal_with_peer_node_failure)".
+
+### How clusters deal with master node failure
+
+If a master node goes down, peer nodes can continue to index and replicate data, and the search head can continue to search across the data, for some period of time. Problems eventually will arise, however, particularly if one of the peers goes down. There is no way to recover from peer loss without the master, and the search head will then be searching across an incomplete set of data. Generally speaking, the cluster continues as best it can without the master, but the system is in an inconsistent state and results cannot be guaranteed. 
+
+For detailed information on master failure, read the topic "[What happens when a master node goes down](http://docs.splunk.com/Documentation/Splunk/7.0.3/Indexer/Whathappenswhenamasternodegoesdown)".
+
+## Multisite indexer cluster architecture
+
+This topic describes the architecture of multisite indexer clusters. It focuses primarily on how multisite clusters differ from single-site clusters. For an overview of cluster architecture, focusing on single-site clusters, read The basics of indexer cluster architecture. 
+>>>>>>> 1057cf63ee1f450d851d874e32ef4090bda338e2
 
 How multisite and single-site architecture differ
 
 Multisite clusters differ from single-site clusters in these key respects:
+<<<<<<< HEAD
+=======
+
+• Each node (master/peer/search head) has an assigned site.
+>>>>>>> 1057cf63ee1f450d851d874e32ef4090bda338e2
 
 • Each node (master/peer/search head) has an assigned site.
 
