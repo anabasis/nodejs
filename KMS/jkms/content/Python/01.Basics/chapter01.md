@@ -3,7 +3,7 @@
 ## CHAPTER01
 
 참조 : 점프투파이썬 <https://wikidocs.net/26>
-참조 : 예제로 배우는 파이썬 프로그래밍 
+참조 : 예제로 배우는 파이썬 프로그래밍
 <http://pythonstudy.xyz/Python/Basics>
 
 ### 기본특징
