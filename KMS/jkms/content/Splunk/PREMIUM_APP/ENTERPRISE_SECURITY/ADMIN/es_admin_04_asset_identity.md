@@ -1,0 +1,869 @@
+자산 및 ID
+Splunk Enterprise Security에 자산 및 ID 데이터 추가
+Splunk Enterprise Security는 자산 및 ID 시스템을 사용해 자산 및 ID 정보를 이벤트와 연결하여 데이터를 보강하고 데이터
+에 컨텍스트를 제공합니다. 이 시스템은 외부 데이터 원본에서 정보를 가져와서 룩업을 채우고, Enterprise Security는 이 룩
+업을 검색 시간에 이벤트와 연결합니다.
+자산 및 ID 데이터를 Splunk Enterprise Security에 추가하여 자산 및 ID 상관을 이용하십시오.
+1. Splunk Enterprise Security에서 자산 및 ID 데이터를 수집하고 추출합니다.
+2. (선택 사항) Splunk Enterprise Security의 ID 설정 페이지에서 ID 형식을 정의합니다.
+3. Splunk Enterprise Security에서 자산 또는 ID 리스트를 룩업 형식으로 지정합니다.
+4. Splunk Enterprise Security에서 새 자산 또는 ID 리스트를 설정합니다.
+5. 자산 또는 ID 데이터가 Splunk Enterprise Security에 추가되었는지 확인합니다.
+6. Splunk Enterprise Security에서 자산 및 ID 상관을 설정합니다.
+참고 항목은 아래와 같습니다.
+Splunk Enterprise Security가 자산 및 ID 데이터를 상관, 처리, 병합하는 방법
+병합된 자산 및 ID 데이터를 저장하는 룩업
+Splunk Enterprise Security에서 자산 및 ID 데이터 수집 및 추출
+자산 및 ID 데이터를 Splunk Enterprise Security에 추가하기 위해 수집 및 추출할 수 있습니다. Splunk Cloud 배포에서는
+Splunk 프로페셔널 서비스와 협력하여 자산 및 ID 컬렉션 솔루션을 설계 및 구현하십시오. 자산 및 ID 데이터를 추가하는 예
+는 자산 및 ID 데이터를 Splunk Enterprise Security에 추가하는 방법의 예를 참조하십시오.
+1. 환경에서 자산 및 ID 데이터가 저장되어 있는 위치를 확인합니다.
+2. 자산 및 ID 데이터를 자동으로 수집 및 업데이트하여 수동 업데이트에 필요한 경비와 유지관리 작업을 줄이고 데이터
+무결성을 개선합니다.
+Splunk DB Connect 또는 기타 Splunk 플랫폼 추가 기능을 사용하여 외부 데이터베이스 또는 리포지토
+리에 연결합니다.
+스크립트 기반 입력을 사용하여 리스트를 가져오고 형식을 지정합니다.
+Splunk 플랫폼의 인덱싱된 이벤트를 검색과 함께 사용하여 데이터를 수집 및 정렬하고 리스트로 내보냅
+니다.
+권장되는 자산 및 ID 수집 방법
+기술
+자산 또는 ID 데이
+터
+수집 방법
+Active Directory 두 가지 모두 SA-ldapsearch와 사용자 지정 검색
+LDAP 두 가지 모두 SA-ldapsearch와 사용자 지정 검색
+CMDB 자산 DB Connect와 사용자 지정 검색
+ServiceNow 두 가지 모두 ServiceNow용 Splunk 추가 기능
+Asset Discovery 자산 Asset Discovery 앱
+Bit9 자산 Bit9용 Splunk 추가 기능과 사용자 지정 검색
+Cisco ISE 두 가지 모두 Cisco ISE용 Splunk 추가 기능과 사용자 지정 검색
+Microsoft SCOM 자산 Microsoft SCOM용 Splunk 추가 기능과 사용자 지정 검색
+Okta ID Okta용 Splunk 추가 기능과 사용자 지정 검색
+Sophos 자산 Sophos용 Splunk 추가 기능과 사용자 지정 검색
+Symantec Endpoint
+Protection
+자산 Symantec Endpoint Protection용 Splunk 추가 기능과 사용자 지
+정 검색
+Splunk 플랫폼 자산 Splunk 플랫폼에서 인덱싱된 이벤트로부터 자산 데이터를 추가합
+니다.
+
+다음 단계
+(선택 사항) Splunk Enterprise Security에서 ID 형식 정의
+Splunk Enterprise Security에서 자산 또는 ID 리스트를 룩업 형식으로 지정
+Splunk Enterprise Security에서 ID 형식 정의
+ID 룩업 설정 페이지의 환경에서 사용자를 식별하는 ID 형식을 정의하십시오. ID 룩업 설정 페이지에서 변경 사항을 적용하
+면 identityLookup.conf 파일이 수정됩니다.
+전제 조건
+Splunk Enterprise Security에서 자산 및 ID 데이터 수집 및 추출
+절차
+1. Splunk ES 메뉴 모음에서 설정 > 데이터 보강 > ID 룩업 설정을 선택합니다.
+2. (선택 사항) 환경에서 이메일 주소로 사용자가 식별되지 않는 경우 이메일 체크박스를 선택 해제합니다.
+3. (선택 사항) 이메일 주소의 사용자 이름이 환경에서 사용자를 식별하지 않는 경우 짧은 이메일 체크박스를 선택 해제
+합니다.
+4. (선택 사항) 사용자를 식별하는 데 사용할 사용자 지정 규칙을 정의하려면 규칙 체크박스를 선택합니다. 새 규칙 추
+가를 클릭하여 사용자 지정 규칙을 추가합니다.
+예를 들어 first(3)last(3) 규칙을 사용하여 이름과 성의 첫 세 글자로 사용자를 식별할 수 있습니다.
+5. (선택 사항) ID의 대소문자가 일치해야 한다고 요구하려면 대소문자 구분 체크박스를 선택합니다. 대소문자를 구별하
+여 일치하는 ID를 검색하면 일치하는 결과가 더 적게 생성됩니다.
+6. 저장을 클릭합니다.
+다음 단계
+Splunk Enterprise Security에서 자산 또는 ID 리스트를 룩업 형식으로 지정합니다.
+Splunk Enterprise Security에서 자산 또는 ID 리스트를 룩업 형식으로
+지정
+수집된 자산 또는 ID 데이터를 Splunk Enterprise Security에서 처리할 수 있게 룩업 파일 형식으로 지정할 수 있습니다.
+전제 조건
+Splunk Enterprise Security에서 사용할 자산 및 ID 데이터 수집 및 추출
+(선택 사항) Splunk Enterprise Security에서 ID 형식 정의
+절차
+1. Unix 줄 마감과 .csv 파일 확장자가 있는 일반 텍스트, CSV 형식 파일을 만듭니다.
+2. CSV 파일에 올바른 헤더를 사용합니다. Splunk Enterprise Security에서 기대하는 헤더는 자산 룩업 헤더 또는 ID 룩
+업 헤더를 참조하십시오.
+3. CSV 행을 자산 또는 ID 필드로 채웁니다. 자산 룩업 필드 또는 ID 룩업 필드를 참조하십시오.
+자산 리스트의 예는 데모 자산 룩업을 참조하십시오.
+설정 > 데이터 보강 > 리스트 및 룩업으로 이동하여 Splunk Web에서 리스트를 찾습니다.
+파일 시스템에서 리스트를 찾습니다. demo_assets.csv 파일은 SA-IdentityManagement/package/lookups에 있습니다.
+사용자 지정 검색을 사용하여 룩업을 생성하는 경우, 검색 결과에 의해 생성되는 룩업에 헤더와 일치하는 필드가 있는지 확
+인하십시오.
+다음 단계
+Splunk Enterprise Security에서 새 자산 또는 ID 리스트 설정
+자산 룩업 헤더
+ip,mac,nt_host,dns,owner,priority,lat,long,city,country,bunit,category,pci_domain,is_expected,should_timesync,should_update,requires_av
+자산 룩업 필드
+자산 룩업의 다음 필드를 채웁니다.
+
+티홈 지원은 제한적이며, 서로 다른 네트워크에 IP 주소가 같은 여러 호스트가 있으면 병합 프로세스에서 충돌이 발생할 수
+있습니다.
+필드
+데
+이
+터
+유
+형
+설명 예제 값
+ip
+파
+이
+프
+로
+구
+분
+된
+숫
+자
+단일 IP 주소나 IP 범위의 파이프로
+구분된 리스트입니다. 자산의 ip,
+mac, nt_host 또는 dns 필드에 항
+목이 있어야 합니다. 자산별로 2개 이
+상의 필드에 파이프 구분을 사용하지
+마십시오.
+2.0.0.0/8|1.2.3.4|192.168.15.9-
+192.169.15.27|5.6.7.8|10.11.12.13
+mac
+파
+이
+프
+로
+구
+분
+된
+문
+자
+열
+MAC 주소의 파이프로 구분된 리스
+트입니다. 자산의 ip, mac, nt_host
+또는 dns 필드에 항목이 있어야 합
+니다. 자산별로 2개 이상의 필드에 파
+이프 구분을 사용하지 마십시오.
+00:25:bc:42:f4:60|00:50:ef:84:f1:21|00:50:ef:84:f1:20
+nt_host
+파
+이
+프
+로
+구
+분
+된
+문
+자
+열
+Windows 컴퓨터 이름의 파이프로
+구분된 리스트입니다. 자산의 ip,
+mac, nt_host 또는 dns 필드에 항
+목이 있어야 합니다. 자산별로 2개 이
+상의 필드에 파이프 구분을 사용하지
+마십시오.
+ACME-0005|SSPROCKETS-0102|COSWCOGS-
+013
+dns
+파
+이
+프
+로
+구
+분
+된
+문
+자
+열
+DNS 이름의 파이프로 구분된 리스
+트입니다. 자산의 ip, mac, nt_host
+또는 dns 필드에 항목이 있어야 합
+니다. 자산별로 2개 이상의 필드에 파
+이프 구분을 사용하지 마십시오.
+acme-0005.corp1.acmetech.org|SSPROCKETS-
+0102.spsp.com|COSWCOGS-013.cwcogs.com
+owner
+문
+자
+열
+장치와 연관된 사용자 또는 부서 f.prefect@acmetech.org, DevOps, Bill
+priority
+문
+자
+열
+권장. 인시던트 검토에서 주요 이벤
+트의 긴급도 필드를 계산하기 위해
+장치에 배정된 우선 순위입니다. 우
+선 순위가 "알 수 없음"인 경우 배정
+되는 긴급도가 기본적으로 낮아집니
+다. 자세한 내용은 Splunk
+Enterprise Security에서 긴급도가
+주요 이벤트에 배정되는 방법을 참조
+하십시오.
+알 수 없음, 낮음, 중간, 높음 또는 중요.
+lat
+문
+자 자산의 위도 41.040855
+31
+
+열
+long
+문
+자
+열
+자산의 경도 28.986183
+city
+문
+자
+열
+자산이 위치한 도시 Chicago
+국가
+문
+자
+열
+자산이 위치한 국가 USA
+bunit
+문
+자
+열
+권장. 자산의 사업 부문. Splunk
+Enterprise Security에서 대시보드
+기준 필터링에 사용됩니다.
+EMEA, NorCal
+category
+파
+이
+프
+로
+구
+분
+된
+문
+자
+열
+권장. 자산의 논리적 분류를 파이프
+로 구분한 리스트입니다. 자산 및 ID
+상관 및 분류에 사용됩니다. 범주를
+참조하십시오.
+server|web_farm|cloud
+pci_domain
+파
+이
+프
+로
+구
+분
+된
+문
+자
+열
+PCI 도메인의 파이프로 구분된 리스
+트입니다. 설치 및 설정 매뉴얼에서
+Splunk App for PCI Compliance의
+자산 설정을 참조하십시오.
+cardholder, trust|dmz, untrust
+비워 둘 경우 untrust기 기본값으로 지정됩니다.
+is_expected
+부
+울
+이 자산의 이벤트를 항상 기대해야
+하는지 나타냅니다. True로 설정할
+경우, 이 자산이 이벤트 보고를 중지
+하면 Expected Host Not Reporting
+상관(correlation) 검색이 adaptive
+response 작업을 수행합니다.
+"true" 또는 "false"를 나타내는 공백
+should_timesync
+부
+울
+이 자산에서 시간 동기화 이벤트를
+모니터링해야 하는지 여부를 나타냅
+니다. True로 설정할 경우, 이 자산이
+지난 24시간의 시간 동기화 이벤트
+를 보고하지 않으면 Should
+Timesync Host Not Syncing 상관
+(correlation) 검색이 adaptive
+response 작업을 수행합니다.
+"true" 또는 "false"를 나타내는 공백
+should_update
+부
+울
+이 자산에서 시스템 업데이트 이벤트
+를 모니터링해야 하는지 여부를 나타
+냅니다.
+"true" 또는 "false"를 나타내는 공백
+requires_av
+부울
+이 자산에 바이러스 백신 소프트웨어
+가 설치되어 있어야 하는지 여부를
+나타냅니다.
+"true" 또는 "false"를 나타내는 공백
+ID 룩업 헤더
+identity,prefix,nick,first,last,suffix,email,phone,phone2,managedBy,priority,bunit,category,watchlist,startDate,endDate,work_city,work_country,ID 룩업 필드
+
+필드
+데
+이
+터
+유
+형
+설명 예
+ID
+파
+이
+프
+로
+구
+분
+된
+문
+자
+열
+필수 사항. ID를 나타내는
+사용자 이름 문자열을 파이
+프로 구분한 리스트입니다.
+병합 프로세스가 완료된 후
+이 필드에 ID 룩업 구성 설정
+에 따라 생성된 값이 포함됩
+니다.
+a.vanhelsing|abraham.vanhelsing|a.vanhelsing@acmetech.org
+prefix
+문
+자
+열
+ID의 접두사. Ms., Mr.
+nick
+문
+자열
+ID의 닉네임. Van Helsing
+first
+문
+자
+열
+ID의 이름. Abraham
+last
+문
+자
+열
+ID의 성. Van Helsing
+suffix
+문
+자
+열
+ID의 접미사. M.D., Ph.D
+email
+문자
+열
+ID의 이메일 주소. a.vanhelsing@acmetech.org
+phone
+문
+자
+열
+ID의 전화 번호. 123-456-7890
+phone2
+문
+자
+열
+ID의 보조 전화 번호. 012-345-6789
+managedBy
+문
+자
+열
+ID 관리자를 나타내는 사용
+자 이름.
+phb@acmetech.org
+priority
+문
+자
+열
+권장. 인시던트 검토에서 주
+요 이벤트의 긴급도 필드를
+계산하기 위해 ID에 배정된
+우선 순위입니다. 우선 순위
+가 "알 수 없음"인 경우 배정
+되는 긴급도가 기본적으로
+낮아집니다. 자세한 내용은
+Splunk Enterprise
+Security에서 긴급도가 주요
+이벤트에 배정되는 방법을
+참조하십시오.
+알 수 없음, 낮음, 중간, 높음 또는 중요.
+bunit
+문
+자
+열
+권장. ID의 그룹 또는 부서
+분류 Splunk Enterprise
+Security에서 대시보드 기준
+필터링에 사용됩니다.
+Field Reps, ITS, Products, HR
+
+category
+파
+이
+프
+로
+구
+분
+된
+문
+자
+열
+권장. ID의 논리적 분류를
+파이프로 구분한 리스트입
+니다. 자산 및 ID 상관 및 분
+류에 사용됩니다. 범주를 참
+조하십시오.
+Privileged|Officer|CISO
+watchlist
+부
+울
+작업 모니터링에 사용되는
+ID를 표시합니다.
+허용 값: "true" 또는 비워 둠. 이 매뉴얼에서 사용자 작업 모니터링을
+참조하십시오.
+startDate
+문
+자
+열
+ID의 시작 또는 채용 날짜 형식: %m/%d/%Y %H:%M, %m/%d/%y %H:%M, %s
+endDate
+문
+자
+열
+ID의 종료 또는 만료 날짜 형식: %m/%d/%Y %H:%M, %m/%d/%y %H:%M, %s
+work_city
+문
+자
+열
+ID의 주 작업장 도시
+work_country
+문
+자
+열
+ID의 주 작업장 국가
+work_lat
+문
+자
+열
+DD와 나침반 방향 형식으로
+나타낸 주 작업장 도시의 위
+도
+37.78N
+work_long
+문
+자
+열
+DD와 나침반 방향 형식으로
+나타낸 주 작업장 도시의 경
+도
+122.41W
+Splunk Enterprise Security에서 새 자산 또는 ID 리스트 설정
+Splunk Enterprise Security에서 새 자산 또는 ID 룩업을 설정합니다. 이 다단계 프로세스에서는 Splunk Enterprise
+Security에 룩업을 추가하고 병합 프로세스에 사용할 룩업을 정의합니다.
+전제 조건 Splunk Enterprise Security에서 자산 또는 ID 리스트를 룩업으로 지정하십시오.
+절차
+1. 새 룩업 테이블 파일 추가
+2. Splunk Enterprise Security와 공유하도록 룩업 테이블 파일에 대한 권한 설정
+3. 새 룩업 정의 추가
+4. Splunk Enterprise Security와 공유하도록 룩업 정의에 대한 권한 설정
+5. 룩업 원본에 대한 입력 스탠자 추가
+6. (선택 사항) 병합 적용
+새 룩업 테이블 파일 추가
+1. Splunk 메뉴 모음에서 설정 > 룩업 > 룩업 테이블 파일을 선택합니다.
+2. 새로 만들기를 클릭합니다.
+3. SA-IdentityManagement의 대상 앱을 선택합니다.
+4. 업로드할 룩업 파일을 선택합니다.
+5. 룩업 테이블 파일의 검색 헤드에 있어야 하는 대상 파일 이름을 입력합니다. 이름에 파일 이름 확장자가 포함되어야
+합니다.
+예: network_assets_from_CMDB.csv
+6. 저장을 클릭하여 룩업 테이블 파일을 저장하고 룩업 테이블 파일 리스트로 돌아갑니다.
+Splunk Enterprise Security와 공유하도록 룩업 테이블 파일에 대한 권한 설정
+1. 룩업 테이블 파일에서 새 룩업 테이블 파일을 찾고 권한을 선택합니다.
+2. 개체 표시 위치를모든 앱으로 설정합니다.
+
+3. 읽기 권한을 모든 사용자로 설정합니다.
+4. 쓰기 권한을 admin 또는 기타 역할로 설정합니다.
+5. 저장을 클릭합니다.
+새 룩업 정의 추가
+1. Splunk 메뉴 모음에서 설정 > 룩업 > 룩업 정의를 선택합니다.
+2. 새로 만들기를 클릭합니다.
+3. SA-IdentityManagement의 대상 앱을 선택합니다.
+4. 룩업 원본의 이름을 입력합니다. 이 이름은 나중에 ID 관리 대시보드의 입력 스탠자 정의에서 정의하는 이름과 일치해
+야 합니다.
+예: network_assets_from_CMDB.
+5. 유형으로 파일 기반을 선택합니다.
+6. 만든 룩업 테이블 파일을 선택합니다.
+예를 들어 network_assets_from_CMDB.csv를 선택합니다.
+7. 저장을 클릭합니다.
+Splunk Enterprise Security와 공유하도록 룩업 정의에 대한 권한 설정
+1. 룩업 정의에서 새 룩업 정의를 찾고 권한을 선택합니다.
+2. 개체 표시 위치를모든 앱으로 설정합니다.
+3. 읽기 권한을 모든 사용자로 설정합니다.
+4. 쓰기 권한을 admin 또는 기타 역할로 설정합니다.
+5. 저장을 클릭합니다.
+룩업 원본에 대한 입력 스탠자 추가
+1. Splunk Enterprise Security로 돌아갑니다.
+2. Splunk ES 메뉴 모음에서 설정 > 데이터 보강 > ID 관리를 선택합니다.
+3. 새로 만들기를 클릭합니다.
+4. 룩업의 이름을 입력합니다.
+예: network_assets_from_CMDB.
+5. 새 자산 또는 ID 리스트를 설명하는 범주를 입력합니다.
+예: CMDB_network_assets.
+6. 리스트의 내용에 대한 설명을 입력합니다.
+예: CMDB의 네트워크 자산.
+7. 자산 또는 ID를 입력하여 리스트 유형을 정의합니다.
+8. 룩업 정의 이름을 참조하는 원본을 입력합니다.
+예: lookup://network_assets_from_CMDB.
+9. 저장을 클릭합니다.
+10. 5분간 기다립니다. Splunk Enterprise Security가 5분마다 자산 및 ID 리스트를 저장된 검색과 병합합니다. 이 프로세
+스에 대한 설명은 Splunk Enterprise Security가 자산 및 ID 데이터를 처리하고 병합하는 방법을 참조하십시오.
+병합 적용
+주 저장된 검색을 직접 실행하여 예약된 검색이 실행될 때까지 5분 동안 기다리지 않고 즉시 병합을 적용할 수도 있습니다.
+1. 검색 페이지를 엽니다.
+2. 주 저장된 검색을 실행합니다.
+| from savedsearch:"Identity - Asset String Matches - Lookup Gen"
+| from savedsearch:"Identity - Asset CIDR Matches - Lookup Gen"
+| from savedsearch:"Identity - Identity Matches - Lookup Gen"
+다음 단계
+자산 또는 ID 데이터가 Splunk Enterprise Security에 추가되었는지 확인
+자산 또는 ID 데이터가 Splunk Enterprise Security에 추가되었는지 확인
+대시보드를 검색하고 확인하여 자산 또는 ID 데이터가 Splunk Enterprise Security에 추가되었는지 확인합니다.
+전제 조건
+Splunk Enterprise Security에서 새 자산 또는 ID 리스트 설정
+
+절차
+자산 룩업 데이터를 확인합니다.
+1. 특정 자산 레코드가 자산 룩업에 있는지 확인합니다.
+1. ip, mac, nt_host 또는 dns 필드에 데이터가 있는 자산 레코드를 자산 리스트에서 선택합니다.
+2. 선택한 레코드를 Splunk Web에서 검색합니다.
+| makeresults | eval src="1.2.3.4" | `get_asset(src)`
+다음 방법 중 하나를 사용하여 인스턴스의 사용 가능한 자산을 모두 봅니다. 행 수를 자산 데이터 원본와 비교하여 자산 레
+코드 수가 예상한 수와 일치하는지 확인하거나, 특정 레코드를 임의로 조사합니다.
+자산 센터 대시보드를 봅니다. Splunk Enterprise Security 사용에서 자산 센터 대시보드를 참조하십시오.
+자산 매크로를 사용합니다.
+| `assets`
+데이터 모델을 검색합니다.
+|`datamodel("Identity_Management", "All_Assets")` |`drop_dm_object_name("All_Assets")`
+ID 룩업 데이터를 확인합니다.
+1. 특정 ID 레코드가 ID 룩업에 있는지 확인합니다.
+1. identity 필드에 데이터가 있는 ID 레코드를 선택합니다.
+2. 선택한 레코드를 Splunk Web에서 검색합니다.
+| makeresults | eval user="VanHelsing" | `get_identity4events(user)`
+다음 방법 중 하나를 사용하여 인스턴스의 사용 가능한 ID를 모두 봅니다. 행 수를 ID 데이터 원본와 비교하여 ID 레코드
+수가 예상한 수와 일치하는지 확인하거나, 특정 레코드를 임의로 조사합니다.
+ID 센터 대시보드를 봅니다. Splunk Enterprise Security 사용에서 ID 센터 대시보드를 참조하십시오.
+ID 매크로를 사용합니다.
+| `identities`
+데이터 모델을 검색합니다.
+|`datamodel("Identity_Management", "All_Identities")` |`drop_dm_object_name("All_Identities")`
+다음 단계
+Splunk Enterprise Security에서 자산 및 ID 상관 설정
+Splunk Enterprise Security에서 자산 및 ID 상관 설정
+자산 및 ID 데이터를 Splunk Enterprise Security에 추가한 후 Splunk Enterprise Security에서 자산 및 ID 상관을 설정하
+십시오.
+전제 조건
+자산 또는 ID 데이터가 Splunk Enterprise Security에 추가되었는지 확인
+절차
+1. 자산 및 ID 상관을 활성화할지, 비활성화할지, 아니면 선택된 source type에 대해서만 상관이 수행되도록 제한할지 선
+택합니다. 확실히 모를 경우 자산 및 ID 상관이 활성화된 상태로 유지하십시오. 상관을 통해 검색 시간에 이벤트가 보
+강되는 방법에 대한 자세한 내용은 자산 및 ID 상관 작동 방식을 참조하십시오.
+2. Splunk ES 메뉴 모음에서 설정 > 데이터 보강 > ID 상관을 선택합니다.
+3. 기본적으로 상관 활성화가 선택됩니다. 이 설정을 상관 비활성화(권장되지 않음) 또는 sourcetype에 따라 선택적
+으로 활성화로 변경할 수 있습니다.
+4. sourcetype에 따라 선택적으로 활성화를 선택하는 경우, source type을 입력하고 자산 및/또는 ID에 해당하는 체크
+박스를 선택합니다.
+5. 저장을 클릭합니다.
+자산 및 ID 상관을 완전히 비활성화하면 자산 및 ID 룩업에서 얻은 자산 및 ID 데이터로 이벤트를 보강할 수 없습니다. 그러
+면 상관(correlation) 검색, 대시보드 및 기타 기능이 정상적으로 작동하지 않을 수 있습니다. 자산 및 ID 상관을 비활성화하
+기 전에 Splunk 프로페셔널 서비스 또는 Splunk 서포트와 상의하십시오.
+자산 및 ID 상관 작동 방식
+
+조직이 보안 침입을 효과적으로 감지하려면 로그 데이터의 이벤트를 침입의 원인이 되거나 침입에 영향을 받은 특정 자산 및
+ID와 상관할 수 있어야 합니다. 자산 및 ID 상관이 활성화된 경우, Splunk Enterprise Security는 인덱싱된 이벤트를 자산 및
+ID 리스트의 자산 및 ID 데이터와 비교하여 데이터 보강과 컨텍스트를 제공합니다. 비교 프로세스에서는 자동 룩업을 사용합
+니다. 자동 룩업에 대한 내용은 Splunk 플랫폼 매뉴얼에서 확인할 수 있습니다.
+Splunk Enterprise의 경우 Splunk Enterprise 지식 관리자 매뉴얼에서 룩업 자동화를 참조하십시오.
+Splunk Cloud의 경우 Splunk Cloud 지식 관리자 매뉴얼에서 룩업 자동화를 참조하십시오.
+자산 및 ID 상관은 검색 시간에 이벤트를 자산 및 ID 데이터로 보강합니다.
+자산 상관에서는 src, dest 또는 dvc 필드에 데이터가 있는 이벤트를 병합된 자산 리스트와 비교하여 일치하는 IP 주소,
+MAC 주소, DNS 이름 또는 Windows NetBIOS 이름을 찾습니다. host 또는 orig_host 필드에 대해서는 더 이상 자산
+상관이 자동으로 수행되지 않습니다.
+ID 상관에서는 user 또는 src_user 필드에 데이터가 있는 이벤트를 병합된 ID 리스트와 비교하여 일치하는 사용자 또는
+세션을 찾습니다.
+Enterprise Security는 일치하는 출력 필드를 이벤트에 추가합니다. 예를 들어 자산 src 필드에 대해 상관을 수행하면
+src_is_expected 및 src_should_timesync 같은 추가 필드가 생성됩니다.
+자산 및 ID 상관을 사용하면 여러 이벤트가 동일한 자산 또는 ID와 연관될 수 있는지 결정할 수 있습니다. 이벤트에 추가된
+ID 및 자산 필드에 대해 작업을 수행하여 특정 자산 또는 ID를 범위로 하는 추가 검색 또는 대시보드를 열 수도 있습니다. 예
+를 들어 src 필드에 대해 Asset Investigator 대시보드를 열 수 있습니다.
+Splunk Enterprise Security가 자산 및 ID 데이터를 처리 및 병합하는 방
+법
+Splunk Enterprise Security는 사용자가 추가하는 자산 및 ID 데이터를 룩업으로 사용하여 결합 룩업 파일을 생성합니다.
+Splunk Enterprise Security는 생성된 룩업 파일을 사용해 자산 및 ID 데이터를 자동 룩업을 사용하여 이벤트와 상관합니다.
+아래 절차에서는 이 프로세스를 개괄적으로 설명합니다.
+1. 자산 및 ID 데이터를 추가 기능과 사용자 지정 검색을 사용하여 데이터 원본에서 수집하거나 CSV 파일을 사용하여 수
+동으로 수집할 수 있습니다. 자산 및 ID 데이터 수집 및 추출을 참조하십시오.
+2. ID 룩업 구성 설정에서 설정을 구성합니다. ID 설정 페이지에서 ID 형식 정의를 참조하십시오.
+3. Splunk Enterprise Security ID 관리자 모듈식 입력은 transforms.conf 스탠자 identity_lookup_expanded의 설정을 업
+데이트합니다.
+4. 데이터 형식을 검색을 사용하여 룩업으로 지정하거나 CSV 파일을 사용하여 수동으로 지정합니다. 자산 또는 ID 리스
+트를 룩업 형식으로 지정을 참조하십시오.
+5. 리스트를 룩업 테이블, 정의 및 입력으로 설정합니다. 새 자산 또는 ID 리스트 설정을 참조하십시오.
+6. Splunk Enterprise Security ID 관리자 모듈식 입력은 다음 두 가지 사항을 감지합니다.
+identity_manager://<input_name>에서 변경된 콘텐츠
+입력의 스탠자에 적용된 변경 사항
+7. Splunk Enterprise Security ID 관리자 모듈식 입력은 inputs.conf에서 현재 활성화되어 있는 스탠자에 따라 입력 원
+본을 식별하는 데 사용되는 매크로를 업데이트합니다. 예를 들어 `generate_identities` 매크로는 ID 룩업 설정 페이지
+에서 지정된 규칙에 따라 동적으로 업데이트됩니다.
+8. Splunk Enterprise Security ID 관리자 모듈식 입력은 자산 및 ID 리스트를 병합해야 하는 변경 사항이 확인되는 경우
+룩업을 생성하는 저장된 검색을 처리합니다.
+9. 룩업을 생성하는 저장된 검색은 설정되고 활성화된 자산 및 ID 리스트를 모두 병합합니다.
+주 저장된 검색은 ID 관리자 입력에 의해 참조된 룩업 테이블을 연결하고, 새 필드를 생성하고, 연결된 자산 및
+ID 리스트를 대상 룩업 테이블 파일에 출력합니다.
+보조 저장된 검색은 자산 범주, ID 범주 및 자산 PCI 도메인(Splunk App for PCI Compliance 내)에 대한 룩업
+테이블을 생성합니다.
+10. 사용자는 데이터가 예상한 대로 표시되는지 확인합니다. 자산 또는 ID 데이터가 Splunk Enterprise Security에 추가
+되었는지 확인을 참조하십시오.
+ID 및 자산 룩업 병합 시 입력의 유효성이 확인되거나 중복이 제거되지 않습니다. ID 관리자 모듈식 입력에서 발생하는 오류
+는 identity_manager.log에 기록됩니다. 이 로그에는 데이터 오류가 표시되지 않습니다.
+Splunk Enterprise Security에서 병합된 자산 및 ID 데이터를 저장하는
+룩업
+자산 및 ID 병합 프로세스가 완료된 후 룩업 4개에 자산 및 ID 데이터가 저장됩니다.
+함수 테이블 이름 저장된 검색 룩업 이름
+문자열 기반 자
+assets_by_str.csv
+Identity - Asset
+String Matches -
+LOOKUP-zu-asset_lookup_by_strdest
+LOOKUP-zu-asset_lookup_by_str-
+
+
+산 상관 assets_by_str.csv String Matches -
+Lookup Gen
+dvc
+LOOKUP-zu-asset_lookup_by_strsrc
+CIDR 서브넷
+기반 자산 상관 assets_by_cidr.csv
+Identity - Asset
+CIDR Matches -
+Lookup Gen
+LOOKUP-zv-asset_lookup_by_cidrdest
+LOOKUP-zv-asset_lookup_by_cidrdvc
+LOOKUP-zv-asset_lookup_by_cidrsrc
+문자열 기반 ID
+상관 identities_expanded.csv
+Identity - Identity
+Matches - Lookup
+Gen
+LOOKUP-zyidentity_
+lookup_expanded-src_user
+LOOKUP-zyidentity_
+lookup_expanded-user
+기본 필드 상관 identity_lookup_default_fields.csv
+asset_lookup_default_fields.csv
+LOOKUP-zzasset_
+identity_lookup_default_fieldsdest
+LOOKUP-zzasset_
+identity_lookup_default_fieldsdvc
+LOOKUP-zzasset_
+identity_lookup_default_fieldssrc
+LOOKUP-zzasset_
+identity_lookup_default_fieldssrc_
+user
+LOOKUP-zzasset_
+identity_lookup_default_fieldsuser
+자산 및 ID 병합 프로세스에 대한 자세한 내용은 Splunk Enterprise Security가 자산 및 ID 데이터를 처리하고 병합하는 방
+법을 참조하십시오.
+Splunk Enterprise Security에서 처리한 후의 자산 및 ID 필드
+다음 테이블에서는 Splunk Enterprise Security가 소스 룩업 파일의 처리를 완료한 후에 자산 및 ID 룩업에 있는 필드에 대
+해 설명합니다. 이 필드들은 병합된 자산 및 ID 데이터를 저장하는 룩업에 존재하는 필드입니다. Splunk Enterprise
+Security에서 병합된 자산 및 ID 데이터를 저장하는 룩업을 참조하십시오.
+병합 프로세스에 대한 자세한 내용은 Splunk Enterprise Security가 자산 및 ID 데이터를 처리하고 병합하는 방법을 참조하
+십시오.
+처리 후의 자산 필드
+저장된 검색이 병합 프로세스를 수행한 후의 자산 룩업 자산 필드
+필드 ETL에서 수행하는 작업
+bunit 변경되지 않음
+city 변경되지 않음
+국가 변경되지 않음
+dns 파이프로 구분된 값을 수락하고 다중값 필드로 변환합니다.
+lat 변경되지 않음
+long 변경되지 않음
+mac 파이프로 구분된 값을 수락하고 다중값 필드로 변환합니다.
+nt_host 파이프로 구분된 값을 수락하고 다중값 필드로 변환합니다.
+owner 변경되지 않음
+priority 변경되지 않음
+
+asset_id dns, ip, mac 및 nt_host 필드의 값으로부터 생성됩니다.
+asset_tag
+category, pci_domain, is_expected, should_timesync, should_update, requires_av 및 bunit 필
+드의 값으로부터 생성됩니다.
+category
+값에 "cardholder"가 포함된 경우 "pci"를 추가합니다. 파이프로 구분된 값을 수락하고 다중값 필드
+로 변환합니다.
+ip
+필요에 따라 필드의 유효성을 검사하고 CIDR 서브넷으로 분할합니다. 파이프로 구분된 값을 수락하
+고 다중값 필드로 변환합니다.
+pci_domain
+특정 필드 값에 따라 "trust" 또는 "untrust"를 추가합니다. 파이프로 구분된 값을 수락하고 다중값 필
+드로 변환합니다.
+is_expected 부울로 정규화됩니다.
+should_timesync 부울로 정규화됩니다.
+should_update 부울로 정규화됩니다.
+requires_av 부울로 정규화됩니다.
+key 원래 필드 변환 후 ip, mac, nt_host 및 dns 필드에 의해 생성됩니다.
+처리 후의 ID 필드
+저장된 검색이 병합 프로세스를 수행한 후의 ID 룩업 ID 필드
+필드 ETL에서 수행하는 작업
+bunit 변경되지 않음
+email 변경되지 않음
+endDate 변경되지 않음
+first 변경되지 않음
+last 변경되지 않음
+managedBy 변경되지 않음
+nick 변경되지 않음
+phone 변경되지 않음
+phone2 변경되지 않음
+prefix 변경되지 않음
+priority 변경되지 않음
+startDate 변경되지 않음
+suffix 변경되지 않음
+work_city 변경되지 않음
+work_country 변경되지 않음
+work_lat 변경되지 않음
+work_long 변경되지 않음
+watchlist 부울로 정규화됩니다.
+category
+값에 "cardholder"가 포함된 경우 "pci"를 추가합니다. 파이프로 구분된 값을 수락하고 다중값 필드로 변
+환합니다.
+ID
+ID 룩업 설정에서 지정된 입력 행의 값과 규칙에 따라 생성됩니다. 파이프로 구분된 값을 수락하고 다중
+값 필드로 변환합니다.
+identity_id identity, first, last 및 email 값으로부터 생성됩니다.
+
+identity_tag bunit, category 및 watchlist 값으로부터 생성됩니다.
+Splunk Enterprise Security에서 자산 및 ID 병합 프로세스 테스트
+자산 및 ID 병합 프로세스를 테스트하여 병합 프로세스에서 생성되는 데이터가 예상과 일치하고 정확한지 확인할 수 있습니
+다. 데이터를 병합된 룩업에 출력하지 않고 병합 프로세스를 수행하는 저장된 검색을 실행하여 실제로 병합을 수행하지 않고
+도 병합 후에 데이터가 어떻게 변경될 것인지 확인할 수 있습니다. 이 단계는 필수 단계는 아니지만 병합이 예상대로 작동하
+는지 확인하기 위해 수행할 수 있습니다.
+병합을 수행하고 데이터를 룩업에 출력하지 않고 병합 프로세스를 테스트하십시오.
+1. Splunk ES 메뉴 모음에서 설정 > 콘텐츠 관리를 선택합니다.
+2. 주 저장된 검색 3개 중 첫 번째인 Identity - Asset CIDR Matches - Lookup Gen을 찾습니다.
+3. 검색 이름을 클릭하여 엽니다.
+4. 검색 필드에서 검색을 복사합니다.
+5. 검색 페이지를 엽니다.
+6. 검색을 붙여넣고 `output_*` 매크로를 제거합니다. 예를 들어 | `asset_sources` | `make_assets_cidr` |
+`output_assets("SA-IdentityManagement", "assets_by_cidr.csv")`를 | `asset_sources` | `make_assets_cidr`로 변경
+합니다.
+7. 검색을 실행합니다.
+8. 나머지 두 검색인 Identity - Asset String Matches - Lookup Gen과 Identity - Identity Matches - Lookup
+Gen에 대해 2-7단계를 반복합니다.
+Splunk Enterprise Security에서 자산 및 ID 병합 프로세스 사용자 지정
+자산 및 ID 병합 프로세스를 수행하는 저장된 검색을 수정하여 추가 필드 변환 또는 데이터 정리(sanitization)를 수행할 수
+있습니다. 병합 프로세스에서 변경할 작업을 검색의 `output_*` 매크로 앞에 추가합니다.
+저장된 검색에 대한 특정 수정 사항은 지원되지 않으며, 병합 프로세스 또는 자산 및 ID 상관을 망가트릴 수 있습니다.
+출력에(서) 필드를 추가하거나 삭제하지 않습니다.
+출력 위치를 다른 룩업 테이블이나 KV 스토어 컬렉션으로 변경하지 않습니다.
+outputlookup 명령어를 사용하여 `output_*` 매크로를 대체하지 않습니다.
+Splunk Enterprise Security에서 자산 및 ID 룩업 수정
+Splunk Enterprise Security에서 자산 및 ID 룩업을 변경하여 새 자산 또는 ID를 추가하거나 룩업 테이블의 기존 값을 변경
+할 수 있습니다. 기존 룩업을 활성화하거나 비활성화할 수 있습니다.
+자산 및 ID 룩업 편집
+ID 관리 대시보드에서 자산 또는 ID 룩업을 편집할 수 있습니다.
+1. Enterprise Security에서 설정 > 데이터 보강 > ID 관리를 선택합니다.
+2. 편집할 자산 또는 ID 리스트의 이름을 찾고 원본을 선택합니다. 리스트가 대화형 편집기에서 열립니다.
+3. 스크롤 막대를 사용하여 테이블의 컬럼과 행을 봅니다. 셀을 두 번 클릭하여 콘텐츠를 추가, 변경 또는 제거합니다.
+4. 마치면 저장을 클릭합니다.
+자산 또는 ID 리스트에 적용한 변경 사항은 다음으로 예약된 병합 후에 검색 결과에 반영됩니다. Splunk Enterprise
+Security가 자산 및 ID 데이터를 처리 및 병합하는 방법을 참조하십시오.
+자산 및 ID 룩업 비활성화 또는 활성화
+자산 또는 ID 룩업 입력을 비활성화하거나 활성화하십시오. 해당 리스트의 콘텐츠가 병합 프로세스에 포함되지 않게 하려면
+해당 입력을 비활성화하십시오. 비활성화된 입력이 다음으로 예약된 자산 또는 ID 데이터 병합 시에 병합될 수 있게 하려면
+리스트를 활성화하십시오. 입력을 비활성화해도 Splunk Enterprise Security의 관련 룩업에서 데이터가 삭제되지 않습니
+다.
+1. Enterprise Security에서 설정 > 데이터 보강 > ID 관리를 선택합니다.
+2. 비활성화할 자산 또는 ID 룩업을 찾습니다.
+3. 비활성화 또는 활성화를 클릭합니다.
+버전 5.0.0부터 자산 및 ID 룩업 입력이 설치 후 기본적으로 비활성화됩니다. 로컬 설정은 업그레이드 후 유지됩니다.
+데모 자산 및 ID 룩업 비활성화
+데모 자산 및 ID 룩업을 비활성화하여 데모 데이터가 Splunk Enterprise Security에서 자산 및 ID 상관에 사용되는 주 자산
+
+및 ID 룩업에 추가되지 않게 할 수 있습니다. 데모 데이터 룩업을 비활성화한 후에는 저장된 검색이 주 자산 및 ID 룩업을 업
+데이트하고 비활성화된 룩업의 데이터를 주 룩업에서 제거합니다.
+1. Enterprise Security에서 설정 > 데이터 보강 > ID 관리를 선택합니다.
+2. demo_assets 및 demo_identities 룩업을 찾습니다.
+3. 각 룩업에 대해 비활성화를 클릭합니다.
+복제에(서) 자산 또는 ID 룩업 번들 포함 또는 제거
+4.7.0 버전부터는 자산 및 ID 원본 룩업 파일이 인덱서 클러스터의 번들 복제에서 기본적으로 제외됩니다. 자산 및 ID 상관을
+지원하기 위해 병합된 룩업 파일은 번들 복제에 계속 포함됩니다. 번들 복제에 계속 포함되는 룩업 파일은 Splunk
+Enterprise Security에서 병합된 자산 및 ID 데이터를 저장하는 룩업을 참조하십시오.
+번들 복제에 자산 및 ID 룩업 파일을 포함으로 기본값을 변경하면 시스템 성능이 저하될 수 있습니다.
+1. Enterprise Security에서 설정 > 데이터 보강 > ID 관리를 선택합니다.
+2. 번들 복제에(서) 포함시키거나 제외할 룩업을 클릭합니다.
+3. 차단 리스트 체크박스를 선택하거나 선택 해제합니다. 선택하면 룩업 파일이 번들 복제에서 제외됩니다.
+"ID 생성 자동 업데이트 활성화" 설정을 "true"로 설정한 경우에만 이렇게 변경할 수 있습니다. Splunk Enterprise Security
+의 일반 설정 구성을 참조하십시오.
+Splunk Enterprise Security에서 자산 및 ID 데이터를 추가하는 방법의
+예
+아래의 방법 예에서는 자산 및 ID 데이터를 Splunk Enterprise Security에 추가하는 일반적인 방법을 몇 가지 다룹니다.
+Splunk 프로페셔널 서비스와 함께 환경에 가장 적합한 솔루션을 찾으실 수 있습니다.
+Active Directory의 자산 및 ID 데이터 추가
+다음 예에서는 Active Directory의 자산 및 ID 데이터를 추가하는 방법에 대해 설명합니다.
+Splunk Support for Active Directory 앱 설치
+Splunk Support for Active Directory 앱을 사용하여 자산 및 ID 데이터를 수집할 수 있습니다. 앱 설치 및 설정에 대한 내용
+은 Splunk Supporting Add-on for Active Directory 설치를 참조하십시오.
+Active Directory의 자산 및 ID 데이터 수집
+SA-ldapsearch에서 Active Directory의 자산 및 ID 데이터를 검색하여 수집할 수 있습니다.
+1. 다음 절차에 따라 새 자산 또는 ID 리스트를 설정하십시오. Splunk Enterprise Security에서 새 자산 또는 ID 리스트
+설정을 참조하십시오.
+2. 만든 룩업 파일을 저장된 검색을 설정하는 작업을 마칠 때까지 비활성화하여 자산 또는 ID 데이터가 불완전하거나 부
+정확한 데이터와 병합되지 않도록 합니다. 자산 및 ID 룩업 비활성화 또는 활성화를 참조하십시오.
+3. ldapsearch 명령어어를 사용하여 SA-IdentityManagement에 저장된 검색을 만들어 룩업 파일을 채웁니다. 이 검색의
+정확한 구문은 AD 설정에 따라 다릅니다. Active Directory의 ID 데이터 수집을 위한 검색 예와 Active Directory의 자
+산 데이터 수집을 위한 검색 예의 두 가지 예를 참조하십시오.
+4. 병합 프로세스를 테스트합니다. Splunk Enterprise Security에서 자산 및 ID 병합 프로세스 테스트를 참조하십시오.
+Active Directory의 ID 데이터 수집을 위한 검색 예
+이 검색 예에서는 suffix, endDate, category, watchlist 및 priority에 고정 값을 배정합니다. 이 예를 실제로 작동하는 검색을
+구성하고 테스트하기 위한 가이드로 사용한 다음, 고정 값을 AD 환경의 정보로 바꿉니다. my_identity_lookup 룩업을 환경에
+적절한 이름으로 바꿉니다.
+|ldapsearch domain=<domain_name> search="(&(objectclass=user)(!(objectClass=computer)))"
+|makemv userAccountControl
+|search userAccountControl="NORMAL_ACCOUNT"
+|eval suffix=""
+|eval priority="medium"
+|eval category="normal"
+|eval watchlist="false"
+|eval endDate=""
+|table
+sAMAccountName,personalTitle,displayName,givenName,sn,suffix,mail,telephoneNumber,mobile,manager,priority,department,category,watchlist,whenCreated,|rename sAMAccountName as identity, personalTitle as prefix, displayName as nick, givenName as first, sn as last,
+
+mail as email, telephoneNumber as phone, mobile as phone2, manager as managedBy, department as bunit, whenCreated as
+startDate
+|outputlookup my_identity_lookup
+Active Directory의 자산 데이터 수집을 위한 검색 예
+이 검색 예에서는 여러 필드에 고정 값을 배정합니다. 이 예를 실제로 작동하는 검색을 구성하고 테스트하기 위한 가이드로
+사용한 다음, 고정 값을 AD 환경의 정보로 바꿉니다. my_asset_lookup 룩업을 환경에 적절한 이름으로 바꿉니다.
+|ldapsearch domain=<domain name> search="(&(objectClass=computer))"
+|eval city=""
+|eval country=""
+|eval priority="medium"
+|eval category="normal"
+|eval dns=dNSHostName
+|eval owner=managedBy
+|rex field=sAMAccountName mode=sed "s/\$//g"
+|eval nt_host=sAMAccountName
+|makemv delim="," dn
+|rex field=dn "(OU|CN)\=(?<org>.+)"
+|table
+ip,mac,nt_host,dns,owner,priority,lat,long,city,country,bunit,category,pci_domain,is_expected,should_timesync,should_update,requires_av
+| outputlookup create_empty=false createinapp=true my_asset_lookup
+Splunk 플랫폼에서 인덱싱된 이벤트로부터 자산 데이터 추가
+다음은 기존 자산 데이터와 현재 연결되어 있지 않은 인덱싱된 이벤트에 나타나는 호스트를 식별하고 해당 호스트를 자산 룩
+업에 추가하는 방법을 보여주는 예입니다.
+이 예를 사용하여 Splunk 플랫폼과 통신하는 호스트를 기존 자산 정보 집합과 비교하고 일치되지 않은 호스트의 테이블을
+검토하십시오. 그런 다음 테이블을 자산 리스트 형식으로 내보낼 수 있습니다.
+| `host_eventcount`
+| search host_is_expected=false NOT host_asset_id=*
+| fields - firstTime,recentTime,lastTime,_time, host_owner_*,host_asset_tag,host_asset_id
+| sort -totalCount,dayDiff
+| table
+host,ip,mac,nt_host,dns,owner,priority,lat,long,city,country,bunit,category,pci_domain,is_expected,should_timesync,should_update,requires_av
+수동으로 새 자산 또는 ID 데이터 추가
+자산 또는 ID 룩업을 편집하여 새 자산 또는 ID 데이터를 Splunk Enterprise Security에 수동으로 추가할 수 있습니다. 예를
+들어 내부 서브넷과, 허용 리스트에 포함할 IP 주소, 그리고 기타 정적 자산 및 식별 데이터를 추가할 수 있습니다.
+1. Splunk ES 메뉴 모음에서 설정 > 콘텐츠 관리를 선택합니다.
+2. 자산 데이터를 추가하려면 자산 룩업을 클릭하여 편집합니다. ID 데이터를 추가하려면 ID 리스트를 클릭하여 편집합
+니다.
+3. 스크롤 막대를 사용하여 테이블의 컬럼과 행을 봅니다. 셀을 두 번 클릭하여 콘텐츠를 추가, 변경 또는 제거합니다.
+4. 변경 사항을 저장합니다.
