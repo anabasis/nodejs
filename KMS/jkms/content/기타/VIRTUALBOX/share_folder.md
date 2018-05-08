@@ -25,6 +25,9 @@ mount -t vboxsf SPLUNK_APPS /opt/splunk_dev/etc/apps
 (./splunk enable boot-start -user 사용자계정)
 vi /etc/init.d/splunk
 mount -t vboxsf SPLUNK_APPS /opt/splunk_dev/etc/apps
+
+# 기동시 자동 mount 제거
+./splunk disable boot-start
 ```
 
 ```bash
