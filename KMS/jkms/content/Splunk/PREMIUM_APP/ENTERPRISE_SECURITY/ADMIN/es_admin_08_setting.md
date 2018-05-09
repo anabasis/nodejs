@@ -1,71 +1,99 @@
 # 설정 및 문제 해결
 
-Splunk Enterprise Security의 일반 설정 구성
-Splunk Enterprise 관리자는 Splunk Enterprise Security 설치본의 설정을 변경할 수 있습니다. 임계값, 매크로 정의, 검색
-필터 및 기타 흔히 변경되는 값을 일반 설정 페이지에서 변경하십시오.
+## Splunk Enterprise Security의 일반 설정 구성
+
+Splunk Enterprise 관리자는 Splunk Enterprise Security 설치본의 설정을 변경할 수 있습니다. 임계값, 매크로 정의, 검색필터 및 기타 흔히 변경되는 값을 일반 설정 페이지에서 변경하십시오.
+
 Enterprise Security 메뉴 모음에서 설정 > 일반 > 일반 설정을 선택합니다.
-설정 설명
-자산 원본 자산 상관에 사용되는 자산 정보가 포함된 룩업 테이블을 열거하는 검색 매크로입니다.
-자동 일시 중지 드릴다운 검색을 일시 중지하기 전의 시간(초)을 입력합니다.
-기본 관심 대상 검색 '관심 대상 이벤트' 상관(correlation) 검색용 관심 대상 이벤트를 정의합니다.
-도메인 분석 웹 도메인에 대한 WHOIS 추적을 활성화하거나 비활성화합니다.
-URL 추출 정규식의 도메인 URL에서 도메인(url_domain)을 추출하는 데 사용하는 정규식입니다.
-ID 생성 자동 업데이트 활성
-화
-true인 경우 ID 관리자가 asset_sources, identity_sources, generate_identities 매크로
-를 자동으로 업데이트할 수 있습니다. 기본값은 true입니다.
-일반 오류 검색 오류 발생을 나타내는 이벤트를 정의하는 검색 필터입니다.
-가장 빠른 HTTP 범주 분석
-sparkline
-HTTP 사용자 범주 분석 대시보드에 표시되는 sparkline의 시작 시간을 설정합니다.
-HTTP 범주 분석 sparkline
-기간
-HTTP 사용자 범주 분석 대시보드에 표시되는 sparkline의 시간 범위를 설정합니다.
-가장 빠른 HTTP 사용자 에
-이전트 분석 sparkline
-HTTP 사용자 에이전트 분석 대시보드에 표시되는 sparkline의 시작 시간을 설정합니다.
-HTTP 사용자 에이전트 분
-석 sparkline 기간
-HTTP 사용자 에이전트 분석 대시보드에 표시되는 sparkline의 시간 범위를 설정합니다.
-IRT 디스크 동기화 지연 Enterprise Security가 디스크 플러시가 완료될 때까지 기다리는 초 수를 설정합니다. 인
-덱싱된 실시간 검색과 관련이 있습니다.
-ID 생성 ID 정보를 정규화하는 데 사용되는 변환을 정의합니다. Splunk Enterprise Security가 자
-산 및 ID 데이터를 처리 및 병합하는 방법을 참조하십시오.
-ID 생성 제한 시간 ID 관리자가 identity_manager.log에 느린 검색 완료 경고를 표시하기 전에 기다리는 초
-수입니다.
-ID 소스 ID 정보가 포함된 소스 룩업 테이블을 열거합니다.
-인시던트 검토 분석 용량
-애널리스트에게 배정되는 주요 이벤트의 추정 최대 용량입니다. 분석 워크로드의 상대적
-인 측정치입니다.
-인덱싱된 실시간 인덱싱된 실시간 모드를 검색에 대해 활성화하거나 비활성화합니다.
-대용량 이메일 임계값 '대용량'으로 간주되는 크기(바이트)를 초과하는 이메일입니다.
-라이선싱 이벤트 수 필터 "일별 이벤트" 요약에서 제외된 인덱스 리스트를 정의합니다.
-일괄 저장(kvstore) 최대 문
-서 수 KV 스토어에 일괄로 한 번에 저장할 수 있는 최대 문서 수입니다.
-새로운 도메인 분석
-sparkline 기간
-새로운 도메인 분석 대시보드에 표시되는 sparkline의 시간 범위를 설정합니다.
-주요 모듈화 경고 파이프라
-인 주요 이벤트 adaptive response 작업의 SPL입니다.
-이메일 경고 작업 재정의
-인시던트 검토 대시보드의 adaptive response 작업에서 사용자가 이메일을 통해 주요 이
-벤트를 보낼 수 있도록 이메일 경고 작업 설정을 재정의합니다.
-위험 모듈화 경고 파이프라
-위험 한정자 adaptive response 작업의 SPL입니다.
+
+|설정|설명|
+|:--:|:--|
+|Asset Sources|A search macro that enumerates the lookup tables that contain asset information used for asset correlation.|
+|Auto Pause|Type the time in seconds before a drilldown search will pause.|
+|Default Watchlist Search|Define the watchlisted events for the 'Watchlisted Events' correlation search|
+|Domain Analysis|Enable or disable WHOIS tracking for Web domains.|
+|Domain From URL Extraction Regex|A regular expression used to extract domain (url_domain) from a URL.|
+|Enable Identity Generation Autoupdate|If true, permit the Identity Manager to auto-update asset_sources, identity_sources, and generate_identities macros. True by default.|
+|Generic Error Search|A search filter for defining events that indicate an error has occurred.|
+|HTTP Category Analysis Sparkline Earliest|Set the start time for sparklines displayed on the HTTP User Category Analysis dashboard.|
+|HTTP Category Analysis Sparkline Span|Set the time span for sparklines displayed on the HTTP User Category Analysis dashboard.|
+|HTTP User Agent Analysis Sparkline Earliest|Set the start time for sparklines displayed on the HTTP User Agent Analysis dashboard.|
+|HTTP User Agent Analysis Sparkline Span|Set the time span for sparklines displayed on the HTTP User Agent Analysis dashboard.|
+|IRT Disk Sync Delay|Set the number of seconds for Enterprise Security to wait for a disk flush to finish. Relevant to indexed real time searches.|
+|Identity Generation|Defines the transformations used to normalize identity information. See How Splunk Enterprise Security processes and merges asset and identity data|
+|Identity Generation Timeout|Number of seconds the Identity Manager waits before warning of slow search completion in identity_manager.log.|
+|Identity Sources|Enumerates the source lookup tables that contain identity information.|
+|Incident Review Analyst Capacity|Estimated maximum capacity of notable events assigned to an analyst. Relative measure of analyst workload.|
+|Indexed Realtime|Enable or disable indexed real-time mode for searches.|
+|Large Email Threshold|An email that exceeds this size in bytes is considered large.|
+|Licensing Event Count Filter|Define the list of indexes to exclude from the "Events Per Day" summarization.|
+|Maximum Documents Per Batch Save (kvstore)|The maximum number of documents that can be saved in a single batch to a KV Store collection.|
+|New Domain Analysis Sparkline Span|Set the time span for sparklines displayed in the New Domain Analysis dashboard.|
+|Notable Modalert Pipeline|SPL for the notable event adaptive response action.|
+|Override Email Alert Action|Override the email alert action settings to allow users to send notable events via email through adaptive response actions on the Incident Review dashboard.|
+|Risk Modalert Pipeline|SPL for the risk modifier adaptive response action.|
+|Search Disk Quota (admin)|Set the maximum amount of disk space in MB that an admin user can use to store search job results.|
+|Search Jobs Quota (admin)|Set the maximum number of concurrent searches allowed for admin users.|
+|Search Jobs Quota (power)|Set the maximum number of concurrent searches for power users.|
+|Short Lived Account Length|An account creation and deletion record that exceeds this threshold is anomalous.|
+|TSTATS Allow Old Summaries|Enable or disable searching of data model accelerations containing fields that do not match the current data model configuration.|
+|TSTATS Local|Determine whether or not the TSTATS macro will be distributed.|
+|TSTATS Summaries Only|Determine whether or not the TSTATS or summariesonly macro will only search accelerated events.|
+|Use Other|Enable or disable the term OTHER on charts that exceed default series limits.|
+|Website Watchlist Search|A list of watchlisted websites used by the "Watchlisted Events" correlation search.|
+
+|설정|설명|
+|:--:|:--|
+|자산 원본|자산 상관에 사용되는 자산 정보가 포함된 룩업 테이블을 열거하는 검색 매크로입니다.|
+|자동 일시 중지|드릴다운 검색을 일시 중지하기 전의 시간(초)을 입력합니다.|
+|기본 관심 대상 검색|'관심 대상 이벤트' 상관(correlation) 검색용 관심 대상 이벤트를 정의합니다.|
+|도메인 분석|웹 도메인에 대한 WHOIS 추적을 활성화하거나 비활성화합니다.|
+|URL 추출 정규식의 도메인|URL에서 도메인(url_domain)을 추출하는 데 사용하는 정규식입니다.|
+|ID 생성 자동 업데이트 활성화|true인 경우 ID 관리자가 asset_sources, identity_sources, generate_identities 매크로를 자동으로 업데이트할 수 있습니다. 기본값은 true입니다.|
+|일반 오류 검색|오류 발생을 나타내는 이벤트를 정의하는 검색 필터입니다.|
+|가장 빠른 HTTP 범주 분석 sparkline|HTTP 사용자 범주 분석 대시보드에 표시되는 sparkline의 시작 시간을 설정합니다.|
+|HTTP 범주 분석 sparkline 기간|HTTP 사용자 범주 분석 대시보드에 표시되는 sparkline의 시간 범위를 설정합니다.|
+|가장 빠른 HTTP 사용자 에이전트 분석 sparkline|HTTP 사용자 에이전트 분석 대시보드에 표시되는 sparkline의 시작 시간을 설정합니다.|
+|HTTP 사용자 에이전트 분석 sparkline 기간|HTTP 사용자 에이전트 분석 대시보드에 표시되는 sparkline의 시간 범위를 설정합니다.|
+|IRT 디스크 동기화 지연|Enterprise Security가 디스크 플러시가 완료될 때까지 기다리는 초 수를 설정합니다. 인덱싱된 실시간 검색과 관련이 있습니다.|
+|ID 생성|ID 정보를 정규화하는 데 사용되는 변환을 정의합니다. Splunk Enterprise Security가 자산 및 ID 데이터를 처리 및 병합하는 방법을 참조하십시오.|
+|ID 생성 제한 시간|ID 관리자가 identity_manager.log에 느린 검색 완료 경고를 표시하기 전에 기다리는 초수입니다.|
+|ID 소스|ID 정보가 포함된 소스 룩업 테이블을 열거합니다.|
+|인시던트 검토 분석 용량|애널리스트에게 배정되는 주요 이벤트의 추정 최대 용량입니다. 분석 워크로드의 상대적인 측정치입니다.|
+|인덱싱된 실시간|인덱싱된 실시간 모드를 검색에 대해 활성화하거나 비활성화합니다.|
+|대용량 이메일 임계값|'대용량'으로 간주되는 크기(바이트)를 초과하는 이메일입니다.|
+|라이선싱 이벤트 수 필터|"일별 이벤트" 요약에서 제외된 인덱스 리스트를 정의합니다.|
+|일괄 저장(kvstore) 최대 문서 수|KV 스토어에 일괄로 한 번에 저장할 수 있는 최대 문서 수입니다.|
+|새로운 도메인 분석 sparkline 기간|새로운 도메인 분석 대시보드에 표시되는 sparkline의 시간 범위를 설정합니다.|
+|주요 모듈화 경고 파이프라인|주요 이벤트 adaptive response 작업의 SPL입니다.|
+|이메일 경고 작업 재정의|인시던트 검토 대시보드의 adaptive response 작업에서 사용자가 이메일을 통해 주요 이벤트를 보낼 수 있도록 이메일 경고 작업 설정을 재정의합니다.|
+|위험 모듈화 경고 파이프라인|위험 한정자 adaptive response 작업의 SPL입니다.|
+|검색 디스크 배정량(관리자)|관리자가 검색 작업 결과를 저장하는 데 사용할 수 있는 최대 디스크 공간을 MB 단위로 설정합니다.|
+|검색 작업 배정량(관리자)|관리자 사용자에게 허용되는 최대 동시 검색 수를 설정합니다.|
+|검색 작업 배정량(고급)|파워 사용자의 최대 동시 검색 수를 설정합니다.|
+|단기 계정 길이|이 임계값을 초과하는 계정 만들기 및 삭제 레코드는 예외입니다.|
+|TSTATS가 오래된 요약 허용|현재 데이터 모델 설정과 일치하지 않는 필드가 포함된 데이터 모델 가속 검색을 활성화하거나 비활성화합니다.|
+|TSTATS 로컬|TSTATS 매크로의 분산 여부를 결정합니다.|
+|TSTATS 요약 전용|TSTATS 또는 요약 전용 매크로가 가속된 이벤트만 검색할 것인지 결정합니다.|
+|기타 사용|기본 계열 제한을 초과하는 차트에서 OTHER 조건을 활성화하거나 비활성화합니다.|
+|웹사이트 관심 대상 검색|"관심 대상 이벤트" 상관(correlation) 검색에서 사용하는 관심 대상 웹사이트의 리스트입니다.|
 
 참고 항목은 아래와 같습니다.
+
 Splunk Enterprise Security에서 입력 자격 증명 관리
 Splunk Enterprise Security에서 권한 관리
 Splunk Enterprise Security의 메뉴 모음 사용자 지정
 Splunk Enterprise Security에서 패널별 필터링 설정
-Splunk Enterprise Security에서 자격 증명 관리
-스크립트 기반 또는 모듈식 입력의 자격 증명을 저장하려면 자격 증명 관리 페이지를 사용합니다. 자격 증명을 참조하는 입
-력 설정에서는 자격 증명 관리에 저장된 자격 증명을 사용합니다. 사용자 이름 및 암호와 같은 자격 증명 또는 타사 시스템을
-사용한 인증에 사용되는 인증서를 저장할 수 있습니다. 서버간 통신을 암호화하는 데 사용되는 인증서를 관리하기 위해 이
-페이지를 사용하지 마십시오.
-역할에 자격 증명 및 인증서를 추가하고 수정하고 볼 수 있는 적절한 기능이 있어야 합니다. 설치 및 업그레이드 매뉴얼에서
-사용자 및 역할 설정을 참조하십시오.
-새 입력 자격 증명 추가
+
+## Splunk Enterprise Security에서 자격 증명 관리
+
+스크립트 기반 또는 모듈식 입력의 자격 증명을 저장하려면 자격 증명 관리 페이지를 사용합니다. 자격 증명을 참조하는 입력 설정에서는 자격 증명 관리에 저장된 자격 증명을 사용합니다. 사용자 이름 및 암호와 같은 자격 증명 또는 타사 시스템을
+사용한 인증에 사용되는 인증서를 저장할 수 있습니다. 서버간 통신을 암호화하는 데 사용되는 인증서를 관리하기 위해 이페이지를 사용하지 마십시오.
+
+역할에 자격 증명 및 인증서를 추가하고 수정하고 볼 수 있는 적절한 기능이 있어야 합니다. 설치 및 업그레이드 매뉴얼에서 사용자 및 역할 설정을 참조하십시오.
+
+### 새 입력 자격 증명 추가
+
 1. Enterprise Security 메뉴 모음에서 설정 > 일반 > 자격 증명 관리를 선택합니다.
 2. 새 자격 증명을 클릭하여 새 사용자 자격 증명을 추가합니다.
 3. 사용자 이름을 입력합니다.
@@ -73,68 +101,85 @@ Splunk Enterprise Security에서 자격 증명 관리
 5. 자격 증명에 대한 암호를 입력하고 암호 확인에 다시 입력합니다.
 6. 자격 증명의 앱을 선택합니다.
 7. 저장을 클릭합니다.
-기존 입력 자격 증명 편집
+
+### 기존 입력 자격 증명 편집
+
 기존 입력 자격 증명의 암호를 편집할 수 있습니다.
+
 1. Enterprise Security 메뉴 모음에서 설정 > 일반 > 자격 증명 관리를 선택합니다.
 2. 자격 증명의 작업 컬럼에서 편집을 클릭합니다.
 3. 자격 증명에 대한 새 암호를 입력하고 암호 확인에 다시 입력합니다.
 4. 저장을 클릭합니다.
-새 인증서 추가
+
+### 새 인증서 추가
+
 검색 헤드 클러스터(SHC)에 자격 증명 관리를 사용하여 새 인증서를 추가할 수 없습니다. SHC에서 Splunk Enterprise
 Security에 새 인증서를 추가하려면 주 배포 노드의 $SPLUNK_HOME/etc/apps/<app_name>/auth에 인증서를 추가하고 인증서를
 SHC 구성원에게 배포합니다.
-1. Enterprise Security 메뉴 모음에서 설정 > 일반 > 자격 증명 관리를 선택합니다.
 
+1. Enterprise Security 메뉴 모음에서 설정 > 일반 > 자격 증명 관리를 선택합니다.
 2. 새 인증서를 클릭하여 새 인증서를 추가합니다.
-3. 인증서의 파일 이름을 입력합니다. 이 이름은 인증서가 $SPLUNK_HOME/etc/apps/<app_name>/auth 디렉터리에 저장되는
-파일 이름입니다.
-4. 인증서의 인증서 텍스트를 추가합니다. 인증서를 Splunk Enterprise Security에 추가하려면 기존 인증서 파일의 콘
-텐츠를 여기에 붙여넣습니다.
+3. 인증서의 파일 이름을 입력합니다. 이 이름은 인증서가 $SPLUNK_HOME/etc/apps/<app_name>/auth 디렉터리에 저장되는 파일 이름입니다.
+4. 인증서의 인증서 텍스트를 추가합니다. 인증서를 Splunk Enterprise Security에 추가하려면 기존 인증서 파일의 콘텐츠를 여기에 붙여넣습니다.
 5. 인증서를 저장할 앱을 선택합니다.
 6. 저장을 클릭합니다.
-기존 인증서 편집
-자격 증명 관리에서 기존 인증서의 인증서 텍스트를 편집할 수 있습니다. 검색 헤드 클러스터에서 인증서를 편집할 수 없습
-니다.
+
+### 기존 인증서 편집
+
+자격 증명 관리에서 기존 인증서의 인증서 텍스트를 편집할 수 있습니다. 검색 헤드 클러스터에서 인증서를 편집할 수 없습니다.
+
 1. Enterprise Security 메뉴 모음에서 설정 > 일반 > 자격 증명 관리를 선택합니다.
 2. 인증서의 작업 컬럼에서 편집을 클릭합니다.
 3. 인증서의 새 인증서 텍스트를 입력합니다.
 4. 저장을 클릭합니다.
-기존 입력 자격 증명 또는 인증서 삭제
+
+### 기존 입력 자격 증명 또는 인증서 삭제
+
 검색 헤드 클러스터에서 인증서를 삭제할 수 없습니다.
+
 1. Enterprise Security 메뉴 모음에서 설정 > 일반 > 자격 증명 관리를 선택합니다.
 2. 자격 증명 또는 인증서의 작업 컬럼에서 삭제를 클릭합니다.
 3. 확인을 클릭하여 확인합니다.
-Splunk Enterprise Security에서 권한 관리
+
+## Splunk Enterprise Security에서 권한 관리
+
 권한 페이지를 사용하여 Enterprise Security 기능을 관리자가 아닌 역할에 배정합니다.
+
 1. Enterprise Security 메뉴 모음에서 설정 > 일반 > 권한을 선택합니다.
 2. 역할과 해당 역할의 권한에 해당하는 체크박스를 선택합니다.
 3. 저장을 클릭합니다.
+
 ES 기능에 대한 자세한 내용은 설치 및 업그레이드 매뉴얼에서 사용자 및 역할 설정을 참조하십시오.
-Splunk Enterprise Security의 메뉴 모음 사용자 지정
-탐색 편집 뷰를 사용하여 Splunk Enterprise Security의 메뉴 모음을 사용자 지정합니다. 새 대시보드, 보고서, 뷰, 필터링된
-대시보드 링크 또는 웹 링크를 메뉴 모음에 추가할 수 있습니다. 메뉴 모음 탐색을 변경하려면 Enterprise Security 관리자
-권한이 있어야 합니다.
-뷰를 여러 뷰를 그룹으로 묶는 컬렉션의 일부로 메뉴 모음에 추가하거나, 메뉴 모음의 개별 항목으로 추가할 수 있습니다. 예
-를 들어 인시던트 검토는 메뉴 모음의 개별 대시보드고, 감사(audit)는 감사(audit) 대시보드의 컬렉션입니다.
+
+## Splunk Enterprise Security의 메뉴 모음 사용자 지정
+
+탐색 편집 뷰를 사용하여 Splunk Enterprise Security의 메뉴 모음을 사용자 지정합니다. 새 대시보드, 보고서, 뷰, 필터링된 대시보드 링크 또는 웹 링크를 메뉴 모음에 추가할 수 있습니다. 메뉴 모음 탐색을 변경하려면 Enterprise Security 관리자 권한이 있어야 합니다.
+
+뷰를 여러 뷰를 그룹으로 묶는 컬렉션의 일부로 메뉴 모음에 추가하거나, 메뉴 모음의 개별 항목으로 추가할 수 있습니다. 예를 들어 인시던트 검토는 메뉴 모음의 개별 대시보드고, 감사(audit)는 감사(audit) 대시보드의 컬렉션입니다.
+
 Splunk Enterprise Security는 이전 버전에서 탐색 메뉴에 적용된 사용자 지정을 계속 유지합니다.
-업데이트된 뷰 확인
-사용자가 설치한 앱 버전에서 새로 만들거나 업데이트하거나 지원이 중단된 뷰와 컬렉션은 관련 변경 사항을 나타내는 작은
-아이콘으로 강조 표시됩니다.
-새 Splunk Enterprise Security 버전이나 Enterprise Security에서 사용하는 뷰와 컬렉션을 제공하는 앱의 새로운 버전을
-설치한 후에는 탐색 편집 뷰를 방문하여 해당 뷰 또는 컬렉션이 업데이트되었는지 확인하십시오.
+
+### 업데이트된 뷰 확인
+
+사용자가 설치한 앱 버전에서 새로 만들거나 업데이트하거나 지원이 중단된 뷰와 컬렉션은 관련 변경 사항을 나타내는 작은 아이콘으로 강조 표시됩니다.
+새 Splunk Enterprise Security 버전이나 Enterprise Security에서 사용하는 뷰와 컬렉션을 제공하는 앱의 새로운 버전을 설치한 후에는 탐색 편집 뷰를 방문하여 해당 뷰 또는 컬렉션이 업데이트되었는지 확인하십시오.
+
 1. Enterprise Security 메뉴 모음에서 설정 > 일반 > 탐색을 선택합니다.
 2. 업데이트된 콘텐츠가 있는 경우 탐색 편집기 상단에 "콘텐츠 업데이트 사용 가능" 메시지가 표시됩니다.
-3. 편집기 창의 뷰에 아이콘이 있는지 찾아보고 추가되거나 업데이트되거나 지원이 중단된 콘텐츠를 찾습니다. 새 뷰 추
-가 및 새 컬렉션 추가 메뉴에도 동일한 아이콘이 표시됩니다.
-Splunk Enterprise Security의 기본 뷰 설정
+3. 편집기 창의 뷰에 아이콘이 있는지 찾아보고 추가되거나 업데이트되거나 지원이 중단된 콘텐츠를 찾습니다. 새 뷰 추가 및 새 컬렉션 추가 메뉴에도 동일한 아이콘이 표시됩니다.
+
+### Splunk Enterprise Security의 기본 뷰 설정
+
 사용자가 Splunk Enterprise Security를 열 때 특정 뷰 또는 링크를 표시하려면 기본 뷰를 설정하십시오.
+
 1. Enterprise Security 메뉴 모음에서 설정 > 일반 > 탐색을 선택합니다.
 2. 기본 뷰로 사용할 뷰나 링크를 찾습니다.
 3. 뷰 위로 마우스를 움직이면 나타나는 체크 표시 아이콘을 클릭하여 이 항목을 기본 뷰로 설정합니다.
-
 4. 저장을 클릭하여 변경 사항을 저장합니다.
 5. 확인을 클릭하여 페이지를 새로 고치고 변경 사항을 확인합니다.
-기본 메뉴 모음 탐색 편집
+
+### 기본 메뉴 모음 탐색 편집
+
 1. Enterprise Security 메뉴 모음에서 설정 > 일반 > 탐색을 선택합니다.
 2. 뷰나 뷰 컬렉션이 메뉴에 표시되는 위치를 변경하려면 뷰나 뷰 컬렉션을 클릭하고 끌어서 옮깁니다.
 3. 뷰 또는 컬렉션을 메뉴에서 제거하려면 뷰 또는 컬렉션 옆의 X를 클릭합니다.
@@ -142,8 +187,11 @@ Splunk Enterprise Security의 기본 뷰 설정
 5. 구분선을 추가하고 컬렉션의 항목을 시각적으로 분리하려면 아이콘을 클릭합니다.
 6. 저장을 클릭하여 변경 사항을 저장합니다.
 7. 확인을 클릭하여 페이지를 새로 고치고 변경 사항을 확인합니다.
-메뉴 모음에 단일 뷰 추가
+
+### 메뉴 모음에 단일 뷰 추가
+
 새 뷰를 컬렉션에 추가하지 않고 메뉴 모음에 추가할 수 있습니다.
+
 1. Enterprise Security 메뉴 모음에서 설정 > 일반 > 탐색을 선택합니다.
 2. 새 뷰 추가를 클릭합니다.
 3. 뷰 옵션 설정을 기본값인 뷰로 놔둡니다.
@@ -152,15 +200,22 @@ Splunk Enterprise Security의 기본 뷰 설정
 6. 저장을 클릭합니다. 대시보드가 탐색 편집기에 표시됩니다.
 7. 메뉴에 항목을 추가하는 작업을 마치면 저장을 클릭하여 변경 사항을 저장합니다.
 8. 확인을 클릭하여 페이지를 새로 고치고 변경 사항을 확인합니다.
-메뉴 모음에 컬렉션 추가
+
+### 메뉴 모음에 컬렉션 추가
+
 컬렉션을 사용하여 메뉴 모음의 여러 뷰 또는 링크를 함께 정리합니다.
+
 1. Enterprise Security 메뉴 모음에서 설정 > 일반 > 탐색을 선택합니다.
 2. 새 컬렉션 추가를 클릭합니다.
 3. 이름을 입력합니다. 예: 감사(audit)
 4. 저장을 클릭합니다. 컬렉션이 탐색 편집기에 표시됩니다.
+
 뷰 또는 링크를 메뉴 탐색에 표시하려면 컬렉션에 먼저 추가해야 합니다.
-기존 컬렉션에 뷰 추가
+
+### 기존 컬렉션에 뷰 추가
+
 뷰를 기존 컬렉션에 추가합니다.
+
 1. Enterprise Security 메뉴 모음에서 설정 > 일반 > 탐색을 선택합니다.
 2. 뷰를 추가할 컬렉션을 찾습니다.
 3. 아이콘을 클릭합니다.
@@ -170,323 +225,198 @@ Splunk Enterprise Security의 기본 뷰 설정
 7. 저장을 클릭합니다. 뷰가 탐색 편집기에 표시됩니다.
 8. 메뉴에 항목을 추가하는 작업을 마치면 저장을 클릭하여 변경 사항을 저장합니다.
 9. 확인을 클릭하여 페이지를 새로 고치고 변경 사항을 확인합니다.
-메뉴 모음에 링크 추가
+
+### 메뉴 모음에 링크 추가
+
 Splunk Enterprise Security의 메뉴 모음에 링크를 추가할 수 있습니다. 예를 들어 링크를 인스던트 검토의 구체적으로 필터
 링된 뷰나 외부 티케팅 시스템에 추가할 수 있습니다.
-메뉴에 외부 시스템 또는 웹페이지 링크 만들기
-1. Enterprise Security 메뉴 모음에서 설정 > 일반 > 탐색을 선택합니다.
-2. 새 뷰 추가를 클릭하여 뷰를 메뉴에 추가하거나, 기존 컬렉션을 찾고 아이콘을 클릭하여 링크를 기존 뷰 컬렉션에
-추가합니다.
-3. 뷰 옵션에서 링크를 선택합니다.
 
+#### 메뉴에 외부 시스템 또는 웹페이지 링크 만들기
+
+1. Enterprise Security 메뉴 모음에서 설정 > 일반 > 탐색을 선택합니다.
+2. 새 뷰 추가를 클릭하여 뷰를 메뉴에 추가하거나, 기존 컬렉션을 찾고 아이콘을 클릭하여 링크를 기존 뷰 컬렉션에 추가합니다.
+3. 뷰 옵션에서 링크를 선택합니다.
 4. Splunk Enterprise Security 메뉴에 표시할 이름을 입력합니다 . 예: Splunk 응답 페이지
-5. 링크를 입력합니다. 예: https://answers.splunk.com/
+5. 링크를 입력합니다. 예: <https://answers.splunk.com/>
 6. 저장을 클릭합니다.
 7. 메뉴에 항목을 추가하는 작업을 마치면 저장을 클릭하여 변경 사항을 저장합니다.
 8. 확인을 클릭하여 페이지를 새로 고치고 변경 사항을 확인합니다.
-인시던트 검토의 필터링된 뷰에 링크 추가
+
+#### 인시던트 검토의 필터링된 뷰에 링크 추가
+
 메뉴 모음에 많이 추가되는 링크 중 하나는 인시던트 검토의 필터링된 뷰입니다.
-1. 인시던트 검토를 원하는 필터로 필터링하십시오. 대시보드를 필터링하면 필터와 일치하는 쿼리 문자열 매개변수로
-URL이 업데이트됩니다.
-2. 웹 브라우저 주소 표시줄에서 URL의 /app/SplunkEnterpriseSecuritySuite/로 시작되는 부분을 복사하여 일반 텍스트
-파일에 참고용으로 붙여넣습니다.
-예를 들어 중요한 주요 이벤트만 표시되도록 대시보드를 필터링한 경우 URL에서 복사하는 부분은
-/app/SplunkEnterpriseSecuritySuite/incident_review?form.selected_urgency=critical과 유사합니다.
+
+1. 인시던트 검토를 원하는 필터로 필터링하십시오. 대시보드를 필터링하면 필터와 일치하는 쿼리 문자열 매개변수로 URL이 업데이트됩니다.
+2. 웹 브라우저 주소 표시줄에서 URL의 /app/SplunkEnterpriseSecuritySuite/로 시작되는 부분을 복사하여 일반 텍스트 파일에 참고용으로 붙여넣습니다.
+    예를 들어 중요한 주요 이벤트만 표시되도록 대시보드를 필터링한 경우 URL에서 복사하는 부분은
+    /app/SplunkEnterpriseSecuritySuite/incident_review?form.selected_urgency=critical과 유사합니다.
 3. Enterprise Security 메뉴 모음에서 설정 > 일반 > 탐색을 선택합니다.
-4. 새 뷰 추가를 클릭하여 뷰를 메뉴에 추가하거나, 기존 컬렉션을 찾고 뷰 추가 아이콘을 클릭하여 링크를 기존 뷰 컬렉
-션에 추가합니다.
+4. 새 뷰 추가를 클릭하여 뷰를 메뉴에 추가하거나, 기존 컬렉션을 찾고 뷰 추가 아이콘을 클릭하여 링크를 기존 뷰 컬렉션에 추가합니다.
 5. 뷰 옵션에서 링크를 선택합니다.
 6. Splunk Enterprise Security 메뉴에 표시할 이름을 입력합니다 . 예: IR - 중요
-7. 링크 필드에 URL의 일부분을 붙여넣습니다. 예: /app/SplunkEnterpriseSecuritySuite/incident_review?
-form.selected_urgency=critical
+7. 링크 필드에 URL의 일부분을 붙여넣습니다. 
+    예: /app/SplunkEnterpriseSecuritySuite/incident_review?form.selected_urgency=critical
 8. 저장을 클릭합니다.
 9. 메뉴에 항목을 추가하는 작업을 마치면 저장을 클릭하여 변경 사항을 저장합니다.
 10. 확인을 클릭하여 페이지를 새로 고치고 변경 사항을 확인합니다.
-매개변수가 여러 개인 링크를 추가하는 경우 매개변수를 &amp;로 분리하는 &를 인코딩하여 쿼리 문자열 매개변수를 수정해
-야 합니다. 예를 들어 배정되지 않은 새 주요 이벤트를 /app/SplunkEnterpriseSecuritySuite/incident_review?
-form.status_form=1&amp;form.owner_form=unassigned로 표시하는 인시던트 검토의 필터링된 뷰에 대한 링크를 입력하십시오.
-다음 테이블에 있는 매개변수를 사용하여 URL을 수동으로 구성할 수도 있습니다. 특정 매개변수에 대해 모든 결과를 표시하
-려면 별표를 사용하십시오. 모든 매개변수가 필요하지는 않습니다.
-매개변수 설명 가능한 값
-form.selected_urgency
-주요 이벤트
-를 이 매개변
-수를 통해 지
-정되는 긴급
-도와 함께 표
-시합니다.
-critical, high, medium, low, informational
-form.status_form
-주요 이벤트
-를 이 매개변
-수를 통해 지
-정되는 상태
-와 함께 표시
-합니다. 정수
-는 각 상태
-값에 해당합
-니다.
-0은 배정되지 않음, 1은 새 이벤트, 2는 진행 중, 3은 보류 중, 4는 해결됨, 5는
-종료됨에 해당합니다.
-form.owner_form
-이 매개변수
-를 통해 지정
-되는 사용자
-가 소유한 주
-요 이벤트를
-표시합니다.
-usernames
-이 매개변수
-를 통해 지정
-된 상관
-(correlation)
-검색에서 만
-드는 주요 이
-벤트를 표시
-합니다. 상관
-(correlation)
 
-form.source
-검색 이름의
-공백을
-HTML로 인
-코딩하고 주
-요 이벤트에
-표시되는 이
-름을 콘텐츠
-관리에 표시
-되는 이름 대
-신 사용하십
-시오.
-Endpoint - Host With Multiple Infections - Rule
-form.rule_name
-이 매개변수
-를 통해 지정
-된 상관
-(correlation)
-검색에서 만
-드는 주요 이
-벤트를 표시
-합니다. 상관
-(correlation)
-검색 이름의
-공백을
-HTML로 인
-코딩합니다.
-콘텐츠 관리
-에 표시되는
-이름을 사용
-합니다.
-Host With Multiple Infections
-form.tag
-이 매개변수
-를 통해 지정
-된 태그가 있
-는 주요 이벤
-트를 표시합
-니다.
-malware, 사용지 지정 태그 값
-form.srch
-이 매개변수
-에 지정된
-SPL과 일치
-하는 주요 이
-벤트를 표시
-합니다. 키
-값 쌍의 = 같
-은 특수 문자
-를 HTML로
-인코딩하십
-시오.
-dest=127.0.0.1
-form.security_domain_form
-이 매개변수
-를 통해 지정
-된 보안 도메
-인의 주요 이
-벤트를 표시
-합니다.
-access, endpoint, network, threat, identity, audit
-earliest= 및 latest=
-이 매개변수
-를 통해 지정
-된 시간 범위
-의 주요 이벤
-트를 표시합
-니다. 상대
-시간 범위를
-지정하십시
-오. @ 같은
-특수 문자를
-HTML로 인
-코딩하십시
-오.
--24h@h, now
+매개변수가 여러 개인 링크를 추가하는 경우 매개변수를 &amp;로 분리하는 &를 인코딩하여 쿼리 문자열 매개변수를 수정해야 합니다. 예를 들어 배정되지 않은 새 주요 이벤트를 /app/SplunkEnterpriseSecuritySuite/incident_review?form.status_form=1&amp;form.owner_form=unassigned로 표시하는 인시던트 검토의 필터링된 뷰에 대한 링크를 입력하십시오.
 
-form.new_urgency_count_form
-이 매개변수
-를 통해 지정
-된 긴급도가
-없는 주요 이
-벤트를 표시
-합니다.
-critical, high, medium, low, informational
-form.selected_urgency
-이 매개변수
-를 통해 긴급
-도가 지정된
-주요 이벤트
-를 표시합니
-다. 여러 긴
-급도 설정을
-선택하려면
-이 매개변수
-의 여러 인스
-턴스를 사용
-합니다.
-critical, high, medium, low, informational
-event_id
-지정된
-event_id와
-일치하는 주
-요 이벤트를
-표시합니다.
-3C84A9D8-87F6-4066-8659-
-C7DD680F98E6@@notable@@80e0f89da83cad6665dd1de7447cedb4
-form.association_type
-form.association_id
-함께 사용되
-면 짧은 ID
-또는 조사와
-연결된 주요
-이벤트를 표
-시합니다.
-short_id, investigation
-EYIYNW, 5a4be2b8cdc9736b2352c7c3
+다음 테이블에 있는 매개변수를 사용하여 URL을 수동으로 구성할 수도 있습니다. 특정 매개변수에 대해 모든 결과를 표시하려면 별표를 사용하십시오. 모든 매개변수가 필요하지는 않습니다.
 
-기본 탐색 복원
+<table>
+<tr><td>매개변수</td><td>설명</td><td>가능한 값</td><td>예</td></tr>
+<tr><td>form.selected_urgency</td><td>Display notable events with the urgency specified by this parameter.</td><td>critical, high, medium, low, informational</td><td>form.selected_urgency=critical</td></tr>
+<tr><td>form.status_form</td><td>Display notable events with the status specified by this parameter. An integer corresponds to each status value.</td><td>0 for unassigned, 1 for new, 2 for in progress, 3 for pending, 4 for resolved, 5 for closed</td><td>form.status_form=0</td></tr>
+<tr><td>form.owner_form</td><td>Display notable events owned by the user specified by this parameter.</td><td>usernames</td><td>form.owner_form=admin</td></tr>
+<tr><td>form.source</td><td>Display notable events created by the correlation search specified by this parameter. HTML-encode spaces in the correlation search name and use the name that appears in the notable event rather than the name that appears on Content Management.</td><td>Endpoint - Host With Multiple Infections - Rule</td><td>form.source=Endpoint%20-%20Host%20With%20Multiple%20Infections%20-%20Rule</td></tr>
+<tr><td>form.rule_name</td><td>Display notable events created by the correlation search specified by this parameter. HTML-encode spaces in the correlation search name. Use the name that appears on Content Management.</td><td>Host With Multiple Infections</td><td>form.rule_name=Host%20With%20Multiple%20Infections</td></tr>
+<tr><td>form.tag</td><td>Displays notable events with the tag specified by this paramter.</td><td>malware, any custom tag value</td><td>form.tag=malware</td></tr>
+<tr><td>form.srch</td><td>Displays notable events that match the SPL specified in this parameter. HTML-encode special characters such as = for key-value pairs.</td><td>dest=127.0.0.1</td><td>form.srch=dest%3D127.0.0.1</td></tr>
+<tr><td>form.security_domain_form</td><td>Displays notable events in the security domain specified by this parameter.</td><td>access, endpoint, network, threat, identity, audit</td><td>form.security_domain_form=endpoint</td></tr>
+<tr><td>earliest= and latest=</td><td>Displays notable events in the time range specified by these parameters. Specify a relative time range. HTML-encode special characters such as @.</td><td>-24h@h, now</td><td>earliest=-24h%40h&latest=now</td></tr>
+<tr><td>form.new_urgency_count_form</td><td>Displays notable events that do not have the urgency specified by this parameter.</td><td>critical, high, medium, low, informational</td><td>form.new_urgency_count_form=informational</td></tr>
+<tr><td>form.selected_urgency</td><td>Displays notable events that have the urgency specified by this parameter. Use multiple instances of this parameter to select multiple urgency settings.</td><td>critical, high, medium, low, informational</td><td>form.selected_urgency=critical&form.selected_urgency=high</td></tr>
+<tr><td>event_id</td><td>Displays the notable event that matches the specified event_id.</td><td>3C84A9D8-87F6-4066-8659-C7DD680F98E6@@notable@@80e0f89da83cad6665dd1de7447cedb4</td><td>event_id=3C84A9D8-87F6-4066-8659-C7DD680F98E6@@notable@@80e0f89da83cad6665dd1de7447cedb4</td></tr>
+<tr><td>form.association_type
+form.association_id</td><td>Used together, displays the notable events associated with a short ID or an investigation.</td><td>short_id, investigation EYIYNW, 5a4be2b8cdc9736b2352c7c3</td><td>form.association_type=short_id&form.association_id=EYIYNW</td></tr>
+</table>
+
+<table>
+<tr><td>매개변수</td><td>설명</td><td>가능한 값</td></tr>
+<tr><td>form.selected_urgency</td><td>주요 이벤트를 이 매개변수를 통해 지정되는 긴급도와 함께 표시합니다.</td><td>critical, high, medium, low, informational</td></tr>
+<tr><td>form.status_form</td><td>주요 이벤트를 이 매개변수를 통해 지정되는 상태와 함께 표시합니다. 정수는 각 상태값에 해당합니다.</td><td>0은 배정되지 않음, 1은 새 이벤트, 2는 진행 중, 3은 보류 중, 4는 해결됨, 5는 종료됨에 해당합니다.</td></tr>
+<tr><td>form.owner_form</td><td>이 매개변수를 통해 지정되는 사용자가 소유한 주요 이벤트를 표시합니다.</td><td>usernames</td></tr>
+<tr><td>form.source</td><td>이 매개변수를 통해 지정된 상관(correlation)검색에서 만드는 주요 이벤트를 표시합니다. 상관(correlation)검색 이름의
+공백을 HTML로 인코딩하고 주요 이벤트에 표시되는 이름을 콘텐츠 관리에 표시되는 이름 대신 사용하십시오.</td><td>Endpoint - Host With Multiple Infections - Rule</td></tr>
+<tr><td>form.rule_name</td><td>이 매개변수를 통해 지정된 상관(correlation) 검색에서 만드는 주요 이벤트를 표시합니다. 상관(correlation)검색 이름의 공백을 HTML로 인코딩합니다. 콘텐츠 관리에 표시되는 이름을 사용합니다.</td><td>Host With Multiple Infections</td></tr>
+<tr><td>form.tag</td><td>이 매개변수를 통해 지정된 태그가 있는 주요 이벤트를 표시합니다.</td><td>malware, 사용지 지정 태그 값</td></tr>
+<tr><td>form.srch</td><td>이 매개변수에 지정된 SPL과 일치하는 주요 이벤트를 표시합니다. 키값 쌍의 = 같은 특수 문자를 HTML로 인코딩하십시오.</td><td>dest=127.0.0.1</td></tr>
+<tr><td>form.security_domain_form</td><td>이 매개변수를 통해 지정된 보안 도메인의 주요 이벤트를 표시합니다.</td><td>access, endpoint, network, threat, identity, audit</td></tr>
+<tr><td>earliest= 및 latest=</td><td>이 매개변수를 통해 지정된 시간 범위의 주요 이벤트를 표시합니다. 상대 시간 범위를 지정하십시오. @ 같은 특수 문자를 HTML로 인코딩하십시오.</td><td>-24h@h, now</td></tr>
+<tr><td>form.new_urgency_count_form</td><td>이 매개변수를 통해 지정된 긴급도가 없는 주요 이벤트를 표시합니다.</td><td>critical, high, medium, low, informational</td></tr>
+<tr><td>form.selected_urgency</td><td>이 매개변수를 통해 긴급도가 지정된 주요 이벤트를 표시합니다. 여러 긴급도 설정을 선택하려면 이 매개변수의 여러 인스
+턴스를 사용합니다.</td><td>critical, high, medium, low, informational</td></tr>
+<tr><td>event_id</td><td>지정된 event_id와 일치하는 주요 이벤트를 표시합니다.</td><td>3C84A9D8-87F6-4066-8659-
+C7DD680F98E6@@notable@@80e0f89da83cad6665dd1de7447cedb4</td></tr>
+<tr><td>form.association_type
+form.association_id</td><td>함께 사용되면 짧은 ID또는 조사와 연결된 주요 이벤트를 표시합니다.</td><td>short_id, investigation
+EYIYNW, 5a4be2b8cdc9736b2352c7c3</td></tr>
+</table>
+
+### 기본 탐색 복원
+
 Splunk Enterprise Security 메뉴 모음의 기본 탐색을 복원하는 방법:
+
 1. Enterprise Security 메뉴 모음에서 설정 > 일반 > 탐색을 선택합니다.
 2. 오른쪽 상단 모서리에서 기본 설정 복원을 클릭합니다.
 3. 확인을 클릭하여 확인합니다.
 4. 페이지 하단으로 스크롤하고 저장을 클릭합니다.
-Splunk Enterprise Security에서 패널별 필터링 설정
-Splunk Enterprise Security의 일부 대시보드에는 필터링을 통해 항목을 대시보드 뷰에서 제거할 수 있는 패널별 필터 옵션
-이 있어 조사할 필요가 있는 이벤트를 더 쉽게 찾을 수 있습니다.
-이벤트가 위협이라고 확인될 경우 패널별 필터 편집기를 사용하여 항목을 알려진 위협 차단 리스트에 추가하십시오.
-이벤트가 위협이 아니라고 확인될 경우 허용 리스트에 추가하여 대시보드 뷰에서 제거할 수 있습니다.
+
+## Splunk Enterprise Security에서 패널별 필터링 설정
+
+Splunk Enterprise Security의 일부 대시보드에는 필터링을 통해 항목을 대시보드 뷰에서 제거할 수 있는 패널별 필터 옵션이 있어 조사할 필요가 있는 이벤트를 더 쉽게 찾을 수 있습니다.
+
+- 이벤트가 위협이라고 확인될 경우 패널별 필터 편집기를 사용하여 항목을 알려진 위협 차단 리스트에 추가하십시오.
+- 이벤트가 위협이 아니라고 확인될 경우 허용 리스트에 추가하여 대시보드 뷰에서 제거할 수 있습니다.
+
 참고: 패널별 필터 단추는 사용자에게 권한이 있는 경우에만 표시됩니다. 이 권한을 설정하는 방법은 설치 및 설정 매뉴얼에
 서 사용자 및 역할 설정을 참조하십시오.
-허용 리스트 이벤트
+
+### 허용 리스트 이벤트
+
 이벤트가 위협이 아니라고 확인된 후에는 이벤트를 허용 리스트에 추가하여 대시보드 뷰에서 숨길 수 있습니다. 요약 통계는
 허용 리스트에 추가된 항목을 계속 계산하지만, 대시보드에 항목이 표시되지 않습니다.
-허용 리스트에 이벤트 추가
+
+#### 허용 리스트에 이벤트 추가
+
 패널별 필터를 사용하여 대시보드에 있는 이벤트를 허용 리스트에 추가하거나 필터링합니다.
 예를 들어 트래픽 크기 분석 대시보드에서 트래픽 이벤트를 허용 리스트에 추가하는 방법은 다음과 같습니다.
-1. 체크박스를 사용하여 필터링할 항목을 선택합니다.
-2. 오른쪽 상단 모서리에 있는 패널별 필터를 클릭하여 이 대시보드에서 필터링할 수 있는 이벤트에 대한 옵션을 표시합
-니다.
 
-3. 라디오 단추를 선택하여 이 대시보드에서 이벤트를 필터링합니다. 예를 들어 트래픽 크기 분석 대시보드에서는 이벤
-트를 필터링하여 더 이상 표시되지 않게 하거나 강조 표시하여 중요한 이벤트로 분류할 수 있습니다.
+1. 체크박스를 사용하여 필터링할 항목을 선택합니다.
+2. 오른쪽 상단 모서리에 있는 패널별 필터를 클릭하여 이 대시보드에서 필터링할 수 있는 이벤트에 대한 옵션을 표시합니다.
+3. 라디오 단추를 선택하여 이 대시보드에서 이벤트를 필터링합니다. 예를 들어 트래픽 크기 분석 대시보드에서는 이벤트를 필터링하여 더 이상 표시되지 않게 하거나 강조 표시하여 중요한 이벤트로 분류할 수 있습니다.
 4. 완료되면 저장을 클릭합니다.
+
 참고: 필터링된 이벤트는 이 대시보드 계산에서 제거되지 않고 뷰에서만 제거됩니다.
-이 예에서, 항목을 허용 리스트에 추가한 후에는 항목이 (위협이 아닌) 좋은 것으로 간주되고 트래픽 크기 분석 대시보드에
-더 이상 표시되지 않습니다.
-허용 리스트에서 항목 제거
+이 예에서, 항목을 허용 리스트에 추가한 후에는 항목이 (위협이 아닌) 좋은 것으로 간주되고 트래픽 크기 분석 대시보드에 더 이상 표시되지 않습니다.
+
+#### 허용 리스트에서 항목 제거
+
 1. 패널별 필터를 클릭한 다음 룩업 파일 보기/편집을 클릭하여 현재 필터링되고 있는 항목의 리스트를 확인합니다.
 2. 테이블에서 셀을 마우스 오른쪽 단추로 클릭하여 컨텍스트 메뉴를 표시합니다.
 3. 행 제거를 선택하여 허용 리스트에 있는 항목이 포함된 행을 제거합니다.
 4. 저장을 클릭합니다.
-차단 리스트에 이벤트 추가
-이벤트를 차단 리스트에 추가할 수도 있습니다. 항목을 차단 리스트에 추가하면 악성이라고 알려진 이벤트나 악성이라고 알
-려진 명령어 및 관리 서버와 통신한다고 의심되는 이벤트를 식별했음을 의미합니다. 이 이벤트나 문자열이 데이터에 나타날
+
+### 차단 리스트에 이벤트 추가
+
+이벤트를 차단 리스트에 추가할 수도 있습니다. 항목을 차단 리스트에 추가하면 악성이라고 알려진 이벤트나 악성이라고 알려진 명령어 및 관리 서버와 통신한다고 의심되는 이벤트를 식별했음을 의미합니다. 이 이벤트나 문자열이 데이터에 나타날
 때는 항상 시스템, 시스템과 연결된 사용자, 웹 활동을 조사하여 위협의 성격과 확산 가능성을 이해해야 합니다.
-이벤트 또는 문자열을 차단 리스트에 추가하는 방법은 허용 리스트와 비슷합니다. 대시보드에서 필터링된 이벤트만 차단 리
-스트에 추가할 수 있습니다.
+
+이벤트 또는 문자열을 차단 리스트에 추가하는 방법은 허용 리스트와 비슷합니다. 대시보드에서 필터링된 이벤트만 차단 리스트에 추가할 수 있습니다.
+
 예를 들어 트래픽 크기 분석 대시보드에 있는 트래픽 이벤트를 차단 리스트에 추가하려면 다음 작업을 수행하십시오.
+
 1. 고급 필터 페이지에서 룩업 파일 보기/편집을 클릭하여 현재 필터링되고 있는 항목의 리스트를 확인합니다.
-2. 차단 리스트에 추가할 항목을 찾습니다. 필터 컬럼에서 whitelist라는 단어를 두 번 클릭하여 셀을 편집합니다.
-"whitelist"를 삭제하고 "blacklist"를 입력합니다.
+2. 차단 리스트에 추가할 항목을 찾습니다. 필터 컬럼에서 whitelist라는 단어를 두 번 클릭하여 셀을 편집합니다. "whitelist"를 삭제하고 "blacklist"를 입력합니다.
 3. 저장을 클릭합니다.
-패널별 필터 리스트 편집
-현재 패널별 필터 리스트를 대시보드별로 보려면 설정 > 데이터 보강 > 리스트 및 룩업으로 이동합니다. 대시보드 필터임
-을 나타내는 설명이 있는 리스트에 해당 대시보드의 현재 패널별 필터가 표시됩니다. 대시보드의 허용 리스트에 추가된 이벤
+
+### 패널별 필터 리스트 편집
+
+현재 패널별 필터 리스트를 대시보드별로 보려면 설정 > 데이터 보강 > 리스트 및 룩업으로 이동합니다. 대시보드 필터임을 나타내는 설명이 있는 리스트에 해당 대시보드의 현재 패널별 필터가 표시됩니다. 대시보드의 허용 리스트에 추가된 이벤
 트가 여기에 나열됩니다.
+
 예를 들어 위협 활동 필터 리스트에는 위협 활동 대시보드의 필터가 표시됩니다.
 패널별 필터 리스트를 편집합니다.
+
 1. 관련 대시보드의 필터 리스트를 엽니다. 필터 이름(예: ppf_threat_activity)이 왼쪽 상단 모서리에 표시됩니다.
 2. 필드를 편집하려면 셀을 선택하고 입력을 시작합니다.
-3. 필터에(서) 행 또는 컬럼을 삽입하거나 제거하려면 옵션 편집 필드를 마우스 오른쪽 단추로 클릭합니다. 행을 제거하면
-해당 항목이 대시보드 패널 뷰에 다시 추가되고 허용 리스트에서 제거됩니다.
-4. 항목을 차단 리스트에 추가하려면 편집기를 사용하여 새 행을 테이블에 추가하고 "filter" 컬럼에 "blacklist"를 사용합
-니다.
+3. 필터에(서) 행 또는 컬럼을 삽입하거나 제거하려면 옵션 편집 필드를 마우스 오른쪽 단추로 클릭합니다. 행을 제거하면 해당 항목이 대시보드 패널 뷰에 다시 추가되고 허용 리스트에서 제거됩니다.
+4. 항목을 차단 리스트에 추가하려면 편집기를 사용하여 새 행을 테이블에 추가하고 "filter" 컬럼에 "blacklist"를 사용합니다.
 5. 마치면 저장을 클릭합니다.
-패널별 필터 감사 (audit)
+
+#### 패널별 필터 감사 (audit)
+
 패널별 필터에 적용한 변경 사항은 패널별 필터링 감사(audit) 로그에 기록됩니다. 룩업 편집기와 패널별 필터 모듈이 패널별
 필터를 수정합니다. 패널별 필터 감사(audit) 대시보드를 사용하여 패널별 필터를 감사(audit)하십시오.
-Splunk Enterprise Security에서 Splunk Web 메시지 만들기
-Splunk Web에서 Splunk 메시지 만들기 경고 작업을 사용하여 검색의 결과를 기반으로 메시지를 만듭니다. 관리자만 이
-경고 작업을 사용하여 메시지를 만들 수 있습니다.
-이 경고 작업을 사용하여 만드는 메시지는 이미 messages.conf에 존재해야 합니다. 메시지 만들기에 대한 자세한 내용은
-Splunk Enterprise 관리자 매뉴얼의 Splunk Web 메시지 사용자 지정을 참조하십시오.
-1. 검색 또는 상관(correlation) 검색에서 Splunk Web 메시지를 만들 수 있습니다.
-옵션 절차
-새 경고 만들기
-검색 및 보고 앱의 검색 페이지에서 다른 이름으로 저장 > 경고를 선택합니다. 경고 세부
-정보를 입력 및 선택하고 필요에 따라 트리거 및 조절을 설정합니다.
 
-상관(correlation)
-검색 만들기 또는
-편집
-ES 메뉴 모음에서 설정 > 콘텐츠 관리를 선택합니다. 새 콘텐츠 만들기 > 상관
-(correlation) 검색을 선택합니다. 필요에 따라 상관(correlation) 검색 설정을 입력 및 선택
-합니다.
-상관(correlation)
-검색 편집
-ES 메뉴 모음에서 설정 > 콘텐츠 관리를 선택합니다. 상관(correlation) 검색을 선택합니
-다.
+## Splunk Enterprise Security에서 Splunk Web 메시지 만들기
+
+Splunk Web에서 Splunk 메시지 만들기 경고 작업을 사용하여 검색의 결과를 기반으로 메시지를 만듭니다. 관리자만 이경고 작업을 사용하여 메시지를 만들 수 있습니다.
+
+이 경고 작업을 사용하여 만드는 메시지는 이미 messages.conf에 존재해야 합니다. 메시지 만들기에 대한 자세한 내용은 Splunk Enterprise 관리자 매뉴얼의 Splunk Web 메시지 사용자 지정을 참조하십시오.
+
+1. 검색 또는 상관(correlation) 검색에서 Splunk Web 메시지를 만들 수 있습니다.
+    |옵션|절차|
+    |:--:|:--|
+    |새 경고 만들기|검색 및 보고 앱의 검색 페이지에서 다른 이름으로 저장 > 경고를 선택합니다. 경고 세부정보를 입력 및 선택하고 필요에 따라 트리거 및 조절을 설정합니다.|
+    |상관(correlation) 검색 만들기 또는 편집|ES 메뉴 모음에서 설정 > 콘텐츠 관리를 선택합니다. 새 콘텐츠 만들기 > 상관(correlation) 검색을 선택합니다. 필요에 따라 상관(correlation) 검색 설정을 입력 및 선택합니다.|
+    |상관(correlation)검색 편집|ES 메뉴 모음에서 설정 > 콘텐츠 관리를 선택합니다. 상관(correlation) 검색을 선택합니다.|
 2. 작업 추가를 클릭하고 Splunk 메시지 작성을 선택합니다.
 3. 이름을 선택합니다. 이 이름은 기존 메시지의 messages.conf에 있는 스탠자에 해당합니다.
-예: DISK_MON:INSUFFICIENT_DISK_SPACE_ERROR.
+    예: DISK_MON:INSUFFICIENT_DISK_SPACE_ERROR.
 4. (선택 사항) 메시지를 나타내는 메시지 ID를 입력합니다.
-예: insufficient_diskspace.
-5. (선택 사항) 메시지에서 필드 대체를 사용하는 경우 사용할 필드를 입력합니다. 인수 대체에 사용되는 필드는 검색 결
-과에 반환되어야 메시지에 포함됩니다. 필드를 메시지에서 대체되어야 하는 순서대로 입력합니다.
-예를 들어, Host %s has free disk space %d, below the minimum 5GB. 메시지의 경우 src,FreeMBytes 필드를 입력합니
-다.
+    예: insufficient_diskspace.
+5. (선택 사항) 메시지에서 필드 대체를 사용하는 경우 사용할 필드를 입력합니다. 인수 대체에 사용되는 필드는 검색 결과에 반환되어야 메시지에 포함됩니다. 필드를 메시지에서 대체되어야 하는 순서대로 입력합니다.
+    예를 들어, Host %s has free disk space %d, below the minimum 5GB. 메시지의 경우 src,FreeMBytes 필드를 입력합니다.
 6. (선택 사항) 최근 메시지만 유지에 대해 예를 선택하고 검색에 의해 생성된 최근 메시지만을 유지합니다.
-예를 들어, 3일 동안 디스크 공간이 적으면 3일 동안 매일 메시지를 받는 대신 이 설정에 대해 예를 선택하여 하나의 메
-시지만 표시합니다.
+    예를 들어, 3일 동안 디스크 공간이 적으면 3일 동안 매일 메시지를 받는 대신 이 설정에 대해 예를 선택하여 하나의 메시지만 표시합니다.
 7. 저장을 클릭합니다.
-Splunk Enterprise Security에서 스크립트 오류 문제 해결
-Splunk Enterprise Security에서 모듈식 입력의 스크립트 오류 문제를 해결합니다. 스크립트가 비정상적으로 종료되었거나
-스크립트의 상태를 알 수 없다는 메시지가 표시되면 오류가 발생한 스크립트와 스탠자를 조사하십시오.
-Audit - Script Errors 검색은 설정 확인 스크립트를 대체하고 Splunk 배포의 스크립트 결과 발생하는 0이 아닌 종료 코드에
-대해 경고하기 위해 Splunk 메시지를 만듭니다.
-가능한 근본 원인 확인 해결 방법
-스크립트가 성공적으로 실행되지
-않았습니다.
-스크립트의 로그 파일을 검토합니다. 스크립트를
-수동으로 실행하여 성공적으로 실행되는지 확인
-하고 결과로 발생하는 종료 코드를 검토합니다.
-스크립트가 0이 아닌 종료 코드
-로 종료된 이유를 설명합니다.
-스크립트가 성공적으로 실행되고
-0이 아닌 종료 코드가 발생했습니
-다.
-스크립트를 수동으로 실행하여 성공적으로 실행
-되는지 확인하고 결과로 발생하는 종료 코드를 검
-토합니다.
-검색에 대한 제거에 스크립트를
-포함하여 이 스크립트에 대한 메
-시지를 표시하지 않도록 합니다.
-스크립트의 상태를 알 수 없습니
-다. 스크립트의 중지 시간이 있지
-만 종료 상태나 시작 시간이 없습
-니다.
-모듈식 입력 설정이 올바른지 확인합니다. 모듈식 입력 설정을 수정합니다.
-특정 스크립트에 대한 메시지가 표시되지 않도록 하기
+
+## Splunk Enterprise Security에서 스크립트 오류 문제 해결
+
+Splunk Enterprise Security에서 모듈식 입력의 스크립트 오류 문제를 해결합니다. 스크립트가 비정상적으로 종료되었거나 스크립트의 상태를 알 수 없다는 메시지가 표시되면 오류가 발생한 스크립트와 스탠자를 조사하십시오.
+
+Audit - Script Errors 검색은 설정 확인 스크립트를 대체하고 Splunk 배포의 스크립트 결과 발생하는 0이 아닌 종료 코드에 대해 경고하기 위해 Splunk 메시지를 만듭니다.
+
+|가능한 근본 원인|확인|해결 방법|
+|:--:|:--|:--|
+|스크립트가 성공적으로 실행되지않았습니다.|스크립트의 로그 파일을 검토합니다. 스크립트를 수동으로 실행하여 성공적으로 실행되는지 확인하고 결과로 발생하는 종료 코드를 검토합니다.|스크립트가 0이 아닌 종료 코드로 종료된 이유를 설명합니다.|
+|스크립트가 성공적으로 실행되고 0이 아닌 종료 코드가 발생했습니다.|스크립트를 수동으로 실행하여 성공적으로 실행되는지 확인하고 결과로 발생하는 종료 코드를 검토합니다.|검색에 대한 제거에 스크립트를 포함하여 이 스크립트에 대한 메시지를 표시하지 않도록 합니다.|
+|스크립트의 상태를 알 수 없습니다. 스크립트의 중지 시간이 있지만 종료 상태나 시작 시간이 없습니다.|모듈식 입력 설정이 올바른지 확인합니다.|모듈식 입력 설정을 수정합니다.|
+
+### 특정 스크립트에 대한 메시지가 표시되지 않도록 하기
+
 필요한 경우 `script_error_message_ignore` 매크로에서 일치 구문을 수정하여 특정 스크립트에 대한 메시지를 표시하지 않
 을 수 있습니다.
 [configuration_check://confcheck_script_errors] 스탠자에 로컬로 정의된 스크립트 제거 정규식이 있으면 매크로에 복제할
