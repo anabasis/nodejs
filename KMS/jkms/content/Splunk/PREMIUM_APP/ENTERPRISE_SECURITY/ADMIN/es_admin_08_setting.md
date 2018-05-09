@@ -254,7 +254,7 @@ Splunk Enterprise Security의 메뉴 모음에 링크를 추가할 수 있습니
 4. 새 뷰 추가를 클릭하여 뷰를 메뉴에 추가하거나, 기존 컬렉션을 찾고 뷰 추가 아이콘을 클릭하여 링크를 기존 뷰 컬렉션에 추가합니다.
 5. 뷰 옵션에서 링크를 선택합니다.
 6. Splunk Enterprise Security 메뉴에 표시할 이름을 입력합니다 . 예: IR - 중요
-7. 링크 필드에 URL의 일부분을 붙여넣습니다. 
+7. 링크 필드에 URL의 일부분을 붙여넣습니다.
     예: /app/SplunkEnterpriseSecuritySuite/incident_review?form.selected_urgency=critical
 8. 저장을 클릭합니다.
 9. 메뉴에 항목을 추가하는 작업을 마치면 저장을 클릭하여 변경 사항을 저장합니다.
@@ -417,135 +417,127 @@ Audit - Script Errors 검색은 설정 확인 스크립트를 대체하고 Splun
 
 ### 특정 스크립트에 대한 메시지가 표시되지 않도록 하기
 
-필요한 경우 `script_error_message_ignore` 매크로에서 일치 구문을 수정하여 특정 스크립트에 대한 메시지를 표시하지 않
-을 수 있습니다.
-[configuration_check://confcheck_script_errors] 스탠자에 로컬로 정의된 스크립트 제거 정규식이 있으면 매크로에 복제할
-수 있습니다. 예를 들어, 제거 스탠자에는 다음과 같은 정규식이 포함됩니다.
+필요한 경우 `script_error_message_ignore` 매크로에서 일치 구문을 수정하여 특정 스크립트에 대한 메시지를 표시하지 않을 수 있습니다.
+[configuration_check://confcheck_script_errors] 스탠자에 로컬로 정의된 스크립트 제거 정규식이 있으면 매크로에 복제할 수 있습니다. 예를 들어, 제거 스탠자에는 다음과 같은 정규식이 포함됩니다.
+
 suppress = ((streamfwd|splunk-
 (wmi\.path|MonitorNoHandle\.exe|winevtlog\.exe|netmon\.exe|perfmon\.exe|regmon\.exe|winprintmon\.exe|admon\.exe)).*exited
 with code 1)
+
 매크로는 다음과 같은 정의를 사용하여 이 제거를 복제합니다.
+
 match(script, "(streamfwd|splunk-
 (wmi\.path|MonitorNoHandle\.exe|winevtlog\.exe|netmon\.exe|perfmon\.exe|regmon\.exe|winprintmon\.exe|admon\.exe|powershell\.exe))")
 AND exit_status=1
-특정 스크립트를 표시하지 않는 대신 특정 스크립트에 대한 메시지의 빈도를 줄이려면 경고를 조절합니다. script 필드 등 필
-요한 값을 기반으로 Audit - Script Errors 검색에 대한 경고 조절을 설정합니다.
-Splunk Enterprise의 경우 경고 매뉴얼에서 경고 조절을 참조하십시오.
 
-Splunk Cloud의 경우 경고 매뉴얼에서 경고 조절을 참조하십시오.
-관리자 역할에 의해 검색된 기본 인덱스에 대한 메시지 문제 해결
+특정 스크립트를 표시하지 않는 대신 특정 스크립트에 대한 메시지의 빈도를 줄이려면 경고를 조절합니다. script 필드 등 필요한 값을 기반으로 Audit - Script Errors 검색에 대한 경고 조절을 설정합니다.
+
+- Splunk Enterprise의 경우 경고 매뉴얼에서 경고 조절을 참조하십시오.
+- Splunk Cloud의 경우 경고 매뉴얼에서 경고 조절을 참조하십시오.
+
+## 관리자 역할에 의해 검색된 기본 인덱스에 대한 메시지 문제 해결
+
 Splunk 플랫폼에서 관리자 역할에 의해 검색된 기본 인덱스에 대한 Splunk 메시지의 문제를 해결합니다.
-기본 관리자 검색에 요약 인덱스 포함
-관리자 역할에서 기본적으로 요약 인덱스를 검색하는 경우 성능이 저하될 수 있습니다. 관리자 역할에 의해 검색되는 인덱스
-를 제한하거나 검색을 비활성화하여 이 설정에 대한 메시지를 표시하지 않을 수 있습니다.
-관리자 역할에 의해 검색되는 인덱스 제한
-관리자 역할에서 요약 인덱스를 검색하지 못하도록 합니다. 인덱스 이름이 _summary(예: endpoint_summary)로 끝나므로 요약
-인덱스 이름을 식별할 수 있습니다.
+
+### 기본 관리자 검색에 요약 인덱스 포함
+
+관리자 역할에서 기본적으로 요약 인덱스를 검색하는 경우 성능이 저하될 수 있습니다. 관리자 역할에 의해 검색되는 인덱스를 제한하거나 검색을 비활성화하여 이 설정에 대한 메시지를 표시하지 않을 수 있습니다.
+
+#### 관리자 역할에 의해 검색되는 인덱스 제한
+
+관리자 역할에서 요약 인덱스를 검색하지 못하도록 합니다. 인덱스 이름이 _summary(예: endpoint_summary)로 끝나므로 요약 인덱스 이름을 식별할 수 있습니다.
+
 1. 설정 > 액세스 제어를 선택합니다.
 2. 역할을 클릭합니다.
 3. 관리자를 클릭합니다.
 4. 인덱스에서 선택된 인덱스에서 제거할 요약 인덱스를 클릭합니다.
 5. 저장을 클릭합니다.
-메시지를 표시하지 않도록 검색 비활성화
+
+#### 메시지를 표시하지 않도록 검색 비활성화
+
 관리자 역할에 의해 검색된 인덱스를 제한하지 않지만 메시지를 표시하지 않으려면 검색을 비활성화하십시오.
+
 1. 설정 > 검색, 보고서 및 경고를 선택합니다.
 2. 감사(Audit) - 기본 관리자 검색 인덱스 검색을 찾습니다.
 3. 편집 > 비활성화를 선택합니다.
 4. 비활성화를 클릭합니다.
-기본 관리자 검색에는 내부 인덱스가 아닌 모든 인덱스가 포함됩니다
-관리자 역할에서 기본적으로 내부 인덱스가 아닌 모든 인덱스를 검색하는 경우 성능이 저하될 수 있습니다. 관리자 역할에
-의해 검색되는 인덱스를 제한하거나 검색을 비활성화하여 이 설정에 대한 메시지를 표시하지 않을 수 있습니다.
-관리자 역할에 의해 검색되는 인덱스 제한
+
+### 기본 관리자 검색에는 내부 인덱스가 아닌 모든 인덱스가 포함됩니다
+
+관리자 역할에서 기본적으로 내부 인덱스가 아닌 모든 인덱스를 검색하는 경우 성능이 저하될 수 있습니다. 관리자 역할에 의해 검색되는 인덱스를 제한하거나 검색을 비활성화하여 이 설정에 대한 메시지를 표시하지 않을 수 있습니다.
+
+#### 관리자 역할에 의해 검색되는 인덱스 제한2
+
 관리자 역할에서 내부 인덱스가 아닌 모든 인덱스를 검색하지 못하도록 합니다.
+
 1. 설정 > 액세스 제어를 선택합니다.
 2. 역할을 클릭합니다.
 3. 관리자를 클릭합니다.
 4. 인덱스에서 선택된 인덱스에서 제거할 내부 인덱스가 아닌 모든 인덱스를 클릭합니다.
 5. 저장을 클릭합니다.
-메시지를 표시하지 않도록 검색 비활성화
+
+#### 메시지를 표시하지 않도록 검색 비활성화2
+
 관리자 역할에 의해 검색된 인덱스를 제한하지 않지만 메시지를 표시하지 않으려면 검색을 비활성화하십시오.
+
 1. 설정 > 검색, 보고서 및 경고를 선택합니다.
 2. 감사(Audit) - 기본 관리자 검색 내부 인덱스가 아닌 모든 검색을 찾습니다.
 3. 편집 > 비활성화를 선택합니다.
 4. 비활성화를 클릭합니다.
-Splunk Enterprise Security에서 인텔리전스 다운로드 실패 문제 해결
-위협 리스트가 다운로드되지 않았다는 메시지가 표시되는 경우 여러 가지 가능한 근본 원인이 있습니다.
-가능한 근본 원인 확인 해결 방법
-IP 주소 또는 URL에서 더 이상 위협
-또는 인텔리전스 소스를 사용할 수
-없습니다.
-URL을 방문하거나 위협 소스를 수동으로
-curl하려고 시도합니다.
-인텔리전스 소스를 더 이상 다운로
-드할 수 없는 경우 비활성화합니다.
 
-방화벽 또는 프록시 설정으로 인해
-인텔리전스 소스에 액세스할 수 없
-습니다.
-다른 컴퓨터에서 URL를 방문하거나 수동으
-로 인텔리전스 소스를 curl할 수 있는지 테스
-트합니다.
-인텔리전스 소스에 액세스할 수 있
-도록 방화벽 또는 프록시 설정을 수
-정합니다.
-Splunk Enterprise Security에서 대시보드 문제 해결
-Enterprise Security의 각 대시보드는 여러 데이터 모델의 데이터를 참조합니다. 관련 데이터가 없으면 대시보드가 계속 비
-어 있습니다. 표시되어야 하는 데이터가 있거나 기대한 것보다 더 오래된 데이터가 표시되는 경우, 다음 문제 해결 절차를 따
-르십시오.
-1. 데이터 모델을 검색합니다. 대시보드 뷰의 왼쪽 하단 모서리에 있는 검색에서 열기를 클릭하여 데이터 모델을 직접 검
-색합니다. 새 검색 대시보드에는 특정 뷰를 채우는 데 사용된 검색 명령어와 개체도 표시됩니다.
+## Splunk Enterprise Security에서 인텔리전스 다운로드 실패 문제 해결
+
+위협 리스트가 다운로드되지 않았다는 메시지가 표시되는 경우 여러 가지 가능한 근본 원인이 있습니다.
+
+|가능한 근본 원인|확인|해결 방법|
+|:--|:--|:--|
+|IP 주소 또는 URL에서 더 이상 위협 또는 인텔리전스 소스를 사용할 수 없습니다.|URL을 방문하거나 위협 소스를 수동으로 curl하려고 시도합니다.|인텔리전스 소스를 더 이상 다운로
+드할 수 없는 경우 비활성화합니다.|
+|방화벽 또는 프록시 설정으로 인해 인텔리전스 소스에 액세스할 수 없습니다.|다른 컴퓨터에서 URL를 방문하거나 수동으로 인텔리전스 소스를 curl할 수 있는지 테스트합니다.|인텔리전스 소스에 액세스할 수 있도록 방화벽 또는 프록시 설정을 수 정합니다.|
+
+### Splunk Enterprise Security에서 대시보드 문제 해결
+
+Enterprise Security의 각 대시보드는 여러 데이터 모델의 데이터를 참조합니다. 관련 데이터가 없으면 대시보드가 계속 비어 있습니다. 표시되어야 하는 데이터가 있거나 기대한 것보다 더 오래된 데이터가 표시되는 경우, 다음 문제 해결 절차를 따르십시오.
+
+1. 데이터 모델을 검색합니다. 대시보드 뷰의 왼쪽 하단 모서리에 있는 검색에서 열기를 클릭하여 데이터 모델을 직접 검색합니다. 새 검색 대시보드에는 특정 뷰를 채우는 데 사용된 검색 명령어와 개체도 표시됩니다.
 2. 검색 결과가 없는 경우, 대시보드에 필요한 데이터 중에 데이터 모델에서 사용 가능한 데이터가 있는지 확인합니다.
-1. 대시보드에서 사용되는 데이터 모델 데이터 집합을 확인하려면 이 매뉴얼에서 대시보드 요구사항 표를 참조하
-십시오.
-2. 데이터 모델 및 데이터 모델 데이터 집합을 사용하여 데이터 모델에서 이벤트를 검색합니다.
-작업 검색 예상되는 결과
-데이터가 Common
-Information Model로
-정규화되는지 확인
-| datamodel data_model_name
-root_object_name search | table _time,
-sourcetype, root_object_name.*
-예:
-| datamodel Network_Traffic All_Traffic
-search | dedup sourcetype | table _time,
-sourcetype, All_Traffic.*
-sourcetype과 해당 sourcetype으
-로 채워지는 데이터 모델 개체 및
-필드의 리스트 반환
+    1. 대시보드에서 사용되는 데이터 모델 데이터 집합을 확인하려면 이 매뉴얼에서 대시보드 요구사항 표를 참조하십시오.
+    2. 데이터 모델 및 데이터 모델 데이터 집합을 사용하여 데이터 모델에서 이벤트를 검색합니다.
+    <table>
+    <tr><td>작업</td><td>검색</td><td>예상되는 결과</td></tr>
+    <tr><td>데이터가 Common Information Model로정규화되는지 확인</td><td>
+    | datamodel data_model_name root_object_name search | table _time, sourcetype, root_object_name.*
+    예:
+    | datamodel Network_Traffic All_Traffic search | dedup sourcetype | table _time, sourcetype, All_Traffic.*
+    </td><td>sourcetype과 해당 sourcetype으로 채워지는 데이터 모델 개체 및 필드의 리스트 반환</td></tr>
+    </table>
 3. 사용 가능한 데이터가 없는 경우 데이터 모델이 가속되고 있는지 확인합니다.
-1. Enterprise Security에서 감사(audit) > 데이터 모델 감사(audit)로 이동합니다.
-2. 가속 세부정보 패널을 검토하여 최근에 데이터 모델 가속가 수행된 시간이나 가속 100% 완료 여부 등 데이터
-모델 가속 상태에 대한 정보를 확인합니다. 설치 및 업그레이드 매뉴얼에서 Splunk Enterprise Security의 데이
-터 모델 설정을 참조하십시오.
-4. 데이터 모델 가속 상태가 예상한 것과 같으면 추가로 필요한 데이터 원본이 사용 가능한지 확인합니다. 예를 들어 사용
-자 작업 대시보드에서는 추가 데이터 원본을 사용합니다.
-대시보
-드 이름
-데이터 유형 데이터 원본
-사용자
-작업
-룩업 클라우드 도메인, 기업 이메일 도메인, 기업 웹 도메인 룩업 파일
-ID
-ID 필드; bunit, email, watchlist, work_city, work_country, work_lat 및 work_long. 자세한
-내용은 이 매뉴얼에서 ID 룩업 필드를 참조하십시오.
-상관
-(correlation)
-검색
-* 비기업 도메인을 사용한 대량 이메일 작업
-* 허용 리스트에 있는 이벤트 관찰됨
-* 사용자가 웹에서 비기업 사이트에 업로드
-액세스
-이상
-상관
-(correlation)
-검색
-* 사용자에게 불가능한 여행 이벤트 탐지됨
-Splunk Enterprise Security 대시보드 요구사항 표
-Enterprise Security 대시보드는 CIM(Common Information Model)을 준수하는 이벤트에 의존하며, 달리 명시되어 있지 않
-은 한 데이터 모델 가속를 사용하여 채워집니다.
+    1. Enterprise Security에서 감사(audit) > 데이터 모델 감사(audit)로 이동합니다.
+    2. 가속 세부정보 패널을 검토하여 최근에 데이터 모델 가속가 수행된 시간이나 가속 100% 완료 여부 등 데이터 모델 가속 상태에 대한 정보를 확인합니다. 설치 및 업그레이드 매뉴얼에서 Splunk Enterprise Security의 데이터 모델 설정을 참조하십시오.
+4. 데이터 모델 가속 상태가 예상한 것과 같으면 추가로 필요한 데이터 원본이 사용 가능한지 확인합니다. 예를 들어 사용자 작업 대시보드에서는 추가 데이터 원본을 사용합니다.
+    <table>
+    <tr><td>대시보드 이름</td><td>데이터 유형</td><td>데이터 원본</td></tr>
+    <tr><td rowspan=3>사용자 작업</td><td>룩업</td><td>클라우드 도메인, 기업 이메일 도메인, 기업 웹 도메인 룩업 파일</td></tr>
+    <tr><td>ID</td><td>ID 필드; bunit, email, watchlist, work_city, work_country, work_lat 및 work_long. 자세한 내용은 이 매뉴얼에서 ID 룩업 필드를 참조하십시오.</td></tr>
+    <tr><td>상관(correlation)검색</td><td>* 비기업 도메인을 사용한 대량 이메일 작업</br>* 허용 리스트에 있는 이벤트 관찰됨</br>* 사용자가 웹에서 비기업 사이트에 업로드</td></tr>
+    <tr><td>액세스 이상</td><td>상관(correlation)검색</td><td>* 사용자에게 불가능한 여행 이벤트 탐지됨</td></tr>
+    </table>
+
+## Splunk Enterprise Security 대시보드 요구사항 표
+
+Enterprise Security 대시보드는 CIM(Common Information Model)을 준수하는 이벤트에 의존하며, 달리 명시되어 있지 않은 한 데이터 모델 가속를 사용하여 채워집니다.
+
 대시보드 패널과 데이터 모델
+
 A - E
-대시보드 이름 패널 제목 데이터 모델 데이터 모델 데이터 집합
+<table>
+    <tr><td>대시보드 이름</td><td>패널 제목</td><td>데이터 모델</td><td>데이터 모델 데이터 집합</td></tr>
+</table>
+
+<table>
+    <tr><td>대시보드 이름</td><td>패널 제목</td><td>데이터 모델</td><td>데이터 모델 데이터 집합</td></tr>
+</table>
+
 액세스 이상
 지리적으로 가능성이 매우 낮은 액
 세스 인증
@@ -686,7 +678,6 @@ Identity Investigator 스윔 레인(Swim lane) 선택에 따름
 근 48시간
 소유자별 주요 이벤트 -
 최근 24시간
-
 
 최근 검토 작업
 인덱싱 감사
@@ -1039,79 +1030,138 @@ Web.http_method
 상위 대상 Web.dest, .src
 웹 검색 Web.http_method, .status, .src, .dest,
 .url
-추가할 대시보드
-다음 대시보드는 Splunk Enterprise Security에 포함되어 있습니다. 탐색 편집기를 사용하여 대시보드를 메뉴 모음에(서) 추
-가하거나 재배열하십시오. 탐색 편집기 사용에 대한 자세한 내용은 Splunk Enterprise Security의 메뉴 모음 사용자 지정을
-참조하십시오.
-Enterprise Security의 전체 대시보드 리스트를 보려면 검색 > 대시보드를 선택하십시오. Enterprise Security의 대시보드
-리스트를 추가 기능별로 보려면 콘텐츠 프로파일 대시보드를 사용하십시오. 콘텐츠 프로파일을 참조하십시오.
-대시보드 이름 보안 도메인 추가 기능의 일부분
-액세스 이상 액세스 DA-ESS-AccessProtection
-액세스 센터 액세스 DA-ESS-AccessProtection
 
-액세스 검색 액세스 DA-ESS-AccessProtection
-액세스 추적기 액세스 DA-ESS-AccessProtection
-계정 관리 액세스 DA-ESS-AccessProtection
-자산 센터 자산 SA-IdentityManagement
-Asset Investigator 자산 SA-IdentityManagement
-콘텐츠 프로파일 감사(audit) SplunkEnterpriseSecuritySuite
-데이터 모델 감사(audit) 감사(audit) Splunk_SA_CIM
-기본 계정 작업 액세스 DA-ESS-AccessProtection
-DNS 작업 네트워크 DA-ESS-NetworkProtection
-DNS 검색 네트워크 DA-ESS-NetworkProtection
-이메일 작업 네트워크 DA-ESS-NetworkProtection
-이메일 검색 네트워크 DA-ESS-NetworkProtection
-endpoint 변경 사항 Endpoint DA-ESS-EndpointProtection
-포워더 감사(audit) 감사(audit) SA-AuditAndDataProtection
-HTTP 범주 분석 네트워크 DA-ESS-NetworkProtection
-HTTP 사용자 에이전트
-분석 네트워크 DA-ESS-NetworkProtection
-ID 센터 ID SA-IdentityManagement
-Identity_investigator ID SA-IdentityManagement
-인시던트 검토 위협 SA-ThreatIntelligence
-인시던트 검토 감사
-(audit)
-위협 SA-ThreatIntelligence
-인덱싱 감사(audit) 감사(audit) SA-AuditAndDataProtection
-침입 센터 네트워크 DA-ESS-NetworkProtection
-침입 검색 네트워크 DA-ESS-NetworkProtection
-멀웨어 센터 Endpoint DA-ESS-EndpointProtection
-멀웨어 작업 Endpoint DA-ESS-EndpointProtection
-멀웨어 검색 Endpoint DA-ESS-EndpointProtection
-네트워크 변경 사항 네트워크 DA-ESS-NetworkProtection
-새로운 도메인 분석 네트워크 DA-ESS-NetworkProtection
-패널당 필터 감사(audit) 감사(audit) SA-Utils
-포트 및 프로토콜 추적기 네트워크 DA-ESS-NetworkProtection
-예측 분석 Splunk_SA_CIM
-프로토콜 센터 네트워크 DA-ESS-NetworkProtection
-REST 감사(audit) 감사(audit) SA-Utils
-위험 분석 위협 SA-ThreatIntelligence
-검색 감사(audit) 감사(audit) SA-AuditAndDataProtection
-보안 포스처 SplunkEnterpriseSecuritySuite
-세션 센터 ID SA-IdentityManagement
+### 추가할 대시보드
 
-SSL 작업 네트워크 DA-ESS-NetworkProtection
-SSL 검색 네트워크 DA-ESS-NetworkProtection
-제거 감사(audit) 위협 SA-ThreatIntelligence
-시스템 센터 Endpoint DA-ESS-EndpointProtection
-위협 활동 위협 DA-ESS-ThreatIntelligence
-위협 아티팩트 위협 DA-ESS-ThreatIntelligence
-위협 인텔리전스 감사
-(audit)
-감사(audit) DA-ESS-ThreatIntelligence
-시간 센터 Endpoint DA-ESS-EndpointProtection
-트래픽 센터 네트워크 DA-ESS-NetworkProtection
-트래픽 검색 네트워크 DA-ESS-NetworkProtection
-트래픽 크기 분석 네트워크 DA-ESS-NetworkProtection
-업데이트 센터 Endpoint DA-ESS-EndpointProtection
-업데이트 검색 Endpoint DA-ESS-EndpointProtection
-URL 길이 분석 네트워크 DA-ESS-NetworkProtection
-사용자 작업 ID DA-ESS-IdentityManagement
-뷰 감사(audit) 감사(audit) SplunkEnterpriseSecuritySuite
-취약성 센터 네트워크 DA-ESS-NetworkProtection
-취약성 작업 네트워크 DA-ESS-NetworkProtection
-취약성 검색 네트워크 DA-ESS-NetworkProtection
-웹 센터 네트워크 DA-ESS-NetworkProtection
-웹 검색 네트워크 DA-ESS-NetworkProtection
+다음 대시보드는 Splunk Enterprise Security에 포함되어 있습니다. 탐색 편집기를 사용하여 대시보드를 메뉴 모음에(서) 추가하거나 재배열하십시오. 탐색 편집기 사용에 대한 자세한 내용은 Splunk Enterprise Security의 메뉴 모음 사용자 지정을 참조하십시오.
 
+Enterprise Security의 전체 대시보드 리스트를 보려면 검색 > 대시보드를 선택하십시오.
+Enterprise Security의 대시보드 리스트를 추가 기능별로 보려면 콘텐츠 프로파일 대시보드를 사용하십시오. 콘텐츠 프로파일을 참조하십시오.
 
+<table>
+<tr><td>대시보드 이름</td><td>보안 도메인</td><td>추가 기능의 일부분</td></tr>
+<tr><td>Access Anomalies</td><td>Access</td><td>DA-ESS-AccessProtection</td></tr>
+<tr><td>Access Center</td><td>Access</td><td>DA-ESS-AccessProtection</td></tr>
+<tr><td>Access Search</td><td>Access</td><td>DA-ESS-AccessProtection</td></tr>
+<tr><td>Access Tracker</td><td>Access</td><td>DA-ESS-AccessProtection</td></tr>
+<tr><td>Account Management</td><td>Access</td><td>DA-ESS-AccessProtection</td></tr>
+<tr><td>Asset Center</td><td>Asset</td><td>SA-IdentityManagement</td></tr>
+<tr><td>Asset Investigator</td><td>Asset</td><td>SA-IdentityManagement</td></tr>
+<tr><td>Content Profile</td><td>Audit</td><td>SplunkEnterpriseSecuritySuite</td></tr>
+<tr><td>Data Model Audit</td><td>Audit</td><td>Splunk_SA_CIM</td></tr>
+<tr><td>Default Account Activity</td><td>Access</td><td>DA-ESS-AccessProtection</td></tr>
+<tr><td>DNS Activity</td><td>Network</td><td>DA-ESS-NetworkProtection</td></tr>
+<tr><td>DNS Search</td><td>Network</td><td>DA-ESS-NetworkProtection</td></tr>
+<tr><td>Email Activity</td><td>Network</td><td>DA-ESS-NetworkProtection</td></tr>
+<tr><td>Email Search</td><td>Network</td><td>DA-ESS-NetworkProtection</td></tr>
+<tr><td>Endpoint Changes</td><td>Endpoint</td><td>DA-ESS-EndpointProtection</td></tr>
+<tr><td>Forwarder Audit</td><td>Audit</td><td>SA-AuditAndDataProtection</td></tr>
+<tr><td>HTTP Category Analysis</td><td>Network</td><td>DA-ESS-NetworkProtection</td></tr>
+<tr><td>HTTP User Agent Analysis</td><td>Network</td><td>DA-ESS-NetworkProtection</td></tr>
+<tr><td>Identity Center</td><td>Identity</td><td>SA-IdentityManagement</td></tr>
+<tr><td>Identity_investigator</td><td>Identity</td><td>SA-IdentityManagement</td></tr>
+<tr><td>Incident Review</td><td>Threat</td><td>SA-ThreatIntelligence</td></tr>
+<tr><td>Incident Review Audit</td><td>Threat</td><td>SA-ThreatIntelligence</td></tr>
+<tr><td>Indexing Audit</td><td>Audit</td><td>SA-AuditAndDataProtection</td></tr>
+<tr><td>Intrusion Center</td><td>Network</td><td>DA-ESS-NetworkProtection</td></tr>
+<tr><td>Intrusion Search</td><td>Network</td><td>DA-ESS-NetworkProtection</td></tr>
+<tr><td>Malware Center</td><td>Endpoint</td><td>DA-ESS-EndpointProtection</td></tr>
+<tr><td>Malware Operations</td><td>Endpoint</td><td>DA-ESS-EndpointProtection</td></tr>
+<tr><td>Malware Search</td><td>Endpoint</td><td>DA-ESS-EndpointProtection</td></tr>
+<tr><td>Network Changes</td><td>Network</td><td>DA-ESS-NetworkProtection</td></tr>
+<tr><td>New Domain Analysis</td><td>Network</td><td>DA-ESS-NetworkProtection</td></tr>
+<tr><td>Per-Panel Filter Audit</td><td>Audit</td><td>SA-Utils</td></tr>
+<tr><td>Port & Protocol Tracker</td><td>Network</td><td>DA-ESS-NetworkProtection</td></tr>
+<tr><td>Predictive Analytics</td><td></td><td>Splunk_SA_CIM</td></tr>
+<tr><td>Protocol Center</td><td>Network</td><td>DA-ESS-NetworkProtection</td></tr>
+<tr><td>REST Audit</td><td>Audit</td><td>SA-Utils</td></tr>
+<tr><td>Risk Analysis</td><td>Threat</td><td>SA-ThreatIntelligence</td></tr>
+<tr><td>Search Audit</td><td>Audit</td><td>SA-AuditAndDataProtection</td></tr>
+<tr><td>Security Posture</td><td></td><td>SplunkEnterpriseSecuritySuite</td></tr>
+<tr><td>Session Center</td><td>Identity</td><td>SA-IdentityManagement</td></tr>
+<tr><td>SSL Activity</td><td>Network</td><td>DA-ESS-NetworkProtection</td></tr>
+<tr><td>SSL Search</td><td>Network</td><td>DA-ESS-NetworkProtection</td></tr>
+<tr><td>Suppression Audit</td><td>Threat</td><td>SA-ThreatIntelligence</td></tr>
+<tr><td>System Center</td><td>Endpoint</td><td>DA-ESS-EndpointProtection</td></tr>
+<tr><td>Threat Activity</td><td>Threat</td><td>DA-ESS-ThreatIntelligence</td></tr>
+<tr><td>Threat Artifacts</td><td>Threat</td><td>DA-ESS-ThreatIntelligence</td></tr>
+<tr><td>Threat Intelligence Audit</td><td>Audit</td><td>DA-ESS-ThreatIntelligence</td></tr>
+<tr><td>Time Center</td><td>Endpoint</td><td>DA-ESS-EndpointProtection</td></tr>
+<tr><td>Traffic Center</td><td>Network</td><td>DA-ESS-NetworkProtection</td></tr>
+<tr><td>Traffic Search</td><td>Network</td><td>DA-ESS-NetworkProtection</td></tr>
+<tr><td>Traffic Size Analysis</td><td>Network</td><td>DA-ESS-NetworkProtection</td></tr>
+<tr><td>Update Center</td><td>Endpoint</td><td>DA-ESS-EndpointProtection</td></tr>
+<tr><td>Update Search</td><td>Endpoint</td><td>DA-ESS-EndpointProtection</td></tr>
+<tr><td>URL Length Analysis</td><td>Network</td><td>DA-ESS-NetworkProtection</td></tr>
+<tr><td>User Activity</td><td>Identity</td><td>DA-ESS-IdentityManagement</td></tr>
+<tr><td>View Audit</td><td>Audit</td><td>SplunkEnterpriseSecuritySuite</td></tr>
+<tr><td>Vulnerability Center</td><td>Network</td><td>DA-ESS-NetworkProtection</td></tr>
+<tr><td>Vulnerability Operations</td><td>Network</td><td>DA-ESS-NetworkProtection</td></tr>
+<tr><td>Vulnerability Search</td><td>Network</td><td>DA-ESS-NetworkProtection</td></tr>
+<tr><td>Web Center</td><td>Network</td><td>DA-ESS-NetworkProtection</td></tr>
+<tr><td>Web Search</td><td>Network</td><td>DA-ESS-NetworkProtection</td></tr>
+</table>
+
+<table>
+<tr><td>대시보드 이름</td><td>보안 도메인</td><td>추가 기능의 일부분</td></tr>
+<tr><td>액세스 이상</td><td>액세스</td><td>DA-ESS-AccessProtection</td></tr>
+<tr><td>액세스 센터</td><td>액세스</td><td>DA-ESS-AccessProtection</td></tr>
+<tr><td>액세스 검색</td><td>액세스</td><td>DA-ESS-AccessProtection</td></tr>
+<tr><td>액세스 추적기</td><td>액세스</td><td>DA-ESS-AccessProtection</td></tr>
+<tr><td>계정 관리</td><td>액세스</td><td>DA-ESS-AccessProtection</td></tr>
+<tr><td>자산 센터</td><td>자산</td><td>SA-IdentityManagement</td></tr>
+<tr><td>Asset Investigator</td><td>자산</td><td>SA-IdentityManagement</td></tr>
+<tr><td>콘텐츠 프로파일</td><td>감사(audit)</td><td>SplunkEnterpriseSecuritySuite</td></tr>
+<tr><td>데이터 모델</td><td>감사(audit) 감사(audit)</td><td>Splunk_SA_CIM</td></tr>
+<tr><td>기본 계정 작업</td><td>액세스</td><td>DA-ESS-AccessProtection</td></tr>
+<tr><td>DNS 작업</td><td>네트워크</td><td>DA-ESS-NetworkProtection</td></tr>
+<tr><td>DNS 검색</td><td>네트워크</td><td>DA-ESS-NetworkProtection</td></tr>
+<tr><td>이메일 작업</td><td>네트워크</td><td>DA-ESS-NetworkProtection</td></tr>
+<tr><td>이메일 검색</td><td>네트워크</td><td>DA-ESS-NetworkProtection</td></tr>
+<tr><td>endpoint 변경 사항</td><td>Endpoint</td><td>DA-ESS-EndpointProtection</td></tr>
+<tr><td>포워더 감사(audit)</td><td>감사(audit)</td><td>SA-AuditAndDataProtection</td></tr>
+<tr><td>HTTP 범주 분석</td><td>네트워크</td><td>DA-ESS-NetworkProtection</td></tr>
+<tr><td>HTTP 사용자 에이전트 분석</td><td>네트워크</td><td>DA-ESS-NetworkProtection</td></tr>
+<tr><td>ID 센터</td><td>ID</td><td>SA-IdentityManagement</td></tr>
+<tr><td>Identity_investigator</td><td>ID</td><td>SA-IdentityManagement</td></tr>
+<tr><td>인시던트 검토</td><td>위협</td><td>SA-ThreatIntelligence</td></tr>
+<tr><td>인시던트 검토</td><td>감사(audit) 위협</td><td>SA-ThreatIntelligence</td></tr>
+<tr><td>인덱싱 감사(audit)</td><td>감사(audit)</td><td>SA-AuditAndDataProtection</td></tr>
+<tr><td>침입 센터</td><td>네트워크</td><td>DA-ESS-NetworkProtection</td></tr>
+<tr><td>침입 검색</td><td>네트워크</td><td>DA-ESS-NetworkProtection</td></tr>
+<tr><td>멀웨어 센터</td><td>Endpoint</td><td>DA-ESS-EndpointProtection</td></tr>
+<tr><td>멀웨어 작업</td><td>Endpoint</td><td>DA-ESS-EndpointProtection</td></tr>
+<tr><td>멀웨어 검색</td><td>Endpoint</td><td>DA-ESS-EndpointProtection</td></tr>
+<tr><td>네트워크 변경 사항</td><td>네트워크</td><td>DA-ESS-NetworkProtection</td></tr>
+<tr><td>새로운 도메인 분석</td><td>네트워크</td><td>DA-ESS-NetworkProtection</td></tr>
+<tr><td>패널당 필터 감사(audit)</td><td>감사(audit)</td><td>SA-Utils</td></tr>
+<tr><td>포트 및 프로토콜 추적기</td><td>네트워크</td><td>DA-ESS-NetworkProtection</td></tr>
+<tr><td>예측 분석</td><td></td><td>Splunk_SA_CIM</td></tr>
+<tr><td>프로토콜 센터</td><td>네트워크</td><td>DA-ESS-NetworkProtection</td></tr>
+<tr><td>REST 감사(audit)</td><td>감사(audit)</td><td>SA-Utils</td></tr>
+<tr><td>위험 분석</td><td>위협</td><td>SA-ThreatIntelligence</td></tr>
+<tr><td>검색 감사(audit)</td><td>감사(audit)</td><td>SA-AuditAndDataProtection</td></tr>
+<tr><td>보안 포스처</td><td></td><td>SplunkEnterpriseSecuritySuite</td></tr>
+<tr><td>세션 센터</td><td>ID</td><td>SA-IdentityManagement</td></tr>
+<tr><td>SSL 작업</td><td>네트워크</td><td>DA-ESS-NetworkProtection</td></tr>
+<tr><td>SSL 검색</td><td>네트워크</td><td>DA-ESS-NetworkProtection</td></tr>
+<tr><td>제거 감사(audit)</td><td>위협</td><td>SA-ThreatIntelligence</td></tr>
+<tr><td>시스템 센터</td><td>Endpoint</td><td>DA-ESS-EndpointProtection</td></tr>
+<tr><td>위협 활동</td><td>위협</td><td>DA-ESS-ThreatIntelligence</td></tr>
+<tr><td>위협 아티팩트</td><td>위협</td><td>DA-ESS-ThreatIntelligence</td></tr>
+<tr><td>위협 인텔리전스 감사(audit)</td><td>감사(audit)</td><td>DA-ESS-ThreatIntelligence</td></tr>
+<tr><td>시간 센터</td><td>Endpoint</td><td>DA-ESS-EndpointProtection</td></tr>
+<tr><td>트래픽 센터</td><td>네트워크</td><td>DA-ESS-NetworkProtection</td></tr>
+<tr><td>트래픽 검색</td><td>네트워크</td><td>DA-ESS-NetworkProtection</td></tr>
+<tr><td>트래픽 크기 분석</td><td>네트워크</td><td>DA-ESS-NetworkProtection</td></tr>
+<tr><td>업데이트 센터</td><td>Endpoint</td><td>DA-ESS-EndpointProtection</td></tr>
+<tr><td>업데이트 검색</td><td>Endpoint</td><td>DA-ESS-EndpointProtection</td></tr>
+<tr><td>URL 길이 분석</td><td>네트워크</td><td>DA-ESS-NetworkProtection</td></tr>
+<tr><td>사용자 작업</td><td>ID</td><td>DA-ESS-IdentityManagement</td></tr>
+<tr><td>뷰 감사(audit)</td><td>감사(audit)</td><td>SplunkEnterpriseSecuritySuite</td></tr>
+<tr><td>취약성 센터</td><td>네트워크</td><td>DA-ESS-NetworkProtection</td></tr>
+<tr><td>취약성 작업</td><td>네트워크</td><td>DA-ESS-NetworkProtection</td></tr>
+<tr><td>취약성 검색</td><td>네트워크</td><td>DA-ESS-NetworkProtection</td></tr>
+<tr><td>웹 센터</td><td>네트워크</td><td>DA-ESS-NetworkProtection</td></tr>
+<tr><td>웹 검색</td><td>네트워크</td><td>DA-ESS-NetworkProtection</td></tr>
+</table>
