@@ -530,12 +530,33 @@ Enterprise Security 대시보드는 CIM(Common Information Model)을 준수하�
 대시보드 패널과 데이터 모델
 
 A - E
+
 <table>
-    <tr><td>대시보드 이름</td><td>패널 제목</td><td>데이터 모델</td><td>데이터 모델 데이터 집합</td></tr>
+<tr><td>대시보드 이름</td><td>패널 제목</td><td>데이터 모델</td><td>데이터 모델 데이터 집합</td></tr>
+<tr><td rowspan=2>Access Anomalies</td><td>Geographically Improbable Accesses</td><td>Relies on the gia_summary summary index, which is populated by the Access - Geographically Improbable Access - Summary Gen search. That search references the Authentication data model.</td><td>Authentication.app, .src, .user</td></tr>
+<tr><td>Concurrent Application Accesses</td><td>Authentication</td><td>Authentication.app, .src, .user</td></tr>
+<tr><td rowspan=4>Access Center</td><td>Access Over Time By Action</td><td rowspan=4>Authentication</td><td>Authentication.action</td></tr>
+<tr><td>Access Over Time By App</td><td>Authentication.app</td></tr>
+<tr><td>Top Access By Source</td><td>Authentication.src</td></tr>
+<tr><td>Top Access By Unique User</td><td>Authentication.user,.src</td></tr>
+<tr><td>Access Search</td><td></td><td></td><td>Authentication.action, .app, src, .dest, .user, src_user</td></tr>
+<tr><td rowspan=4>Access Tracker</td><td>First Time Access - Last 7 days</td><td rowspan=3 colspan=2>None. Calls access_tracker lookup</td></tr>
+<tr><td>Inactive Account Usage - Last 90 days</td></tr>
+<tr><td>Completely Inactive Accounts - Last 90 days</td></tr>
+<tr><td>Account Usage For Expired Identities - Last 7 days</td><td>Authentication</td><td>Authentication.dest</td></tr>
+<tr><td rowspan=4>Account Management</td><td>Account Management Over Time</td><td rowspan=4>Change Analysis</td><td>All_Changes.Account_Management, .action</td></tr>
+<tr><td>Account Lockouts</td><td>All_Changes.Account_Management, .result</td></tr>
+<tr><td>Account Management By Source User</td><td>All_Changes.Account_Management, .src_user</td></tr>
+<tr><td>Top Account Management Events</td><td>All_Changes.Account_Management, .action</td></tr>
+<tr><td rowspan=4>Asset Center</td><td>Assets By Priority</td><td rowspan=4>Assets And Identities</td><td rowspan=4>All_Assets.priority, .bunit, .category, .owner</td></tr>
+<tr><td>Assets By Business Unit</td></tr>
+<tr><td>Assets By Category</td></tr>
+<tr><td>Asset Information</td></tr>
+<tr><td>Asset Investigator</td><td>Asset Investigator</td><td colspan=2>Based on swim lane selection</td></tr>
 </table>
 
 <table>
-    <tr><td>대시보드 이름</td><td>패널 제목</td><td>데이터 모델</td><td>데이터 모델 데이터 집합</td></tr>
+<tr><td>대시보드 이름</td><td>패널 제목</td><td>데이터 모델</td><td>데이터 모델 데이터 집합</td></tr>
 </table>
 
 액세스 이상
