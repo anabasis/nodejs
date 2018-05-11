@@ -1,119 +1,189 @@
-Splunk Enterprise 설치설치
+# 설치
+
+## Splunk Enterprise 설치
+
 Splunk Enterprise Security를 사내 검색 헤드에 설치합니다. Splunk Cloud 고객은 Splunk 서포트와 협력하여 Enterprise Security 검색 헤드에 액세스해야 합니다.
-설치설치 전제전제 조건조건
-Splunk Enterprise Security 사용을 위한 Splunk 플랫폼 요구 사항을 검토합니다. 배포 계획을 참조하십시오. Splunk Enterprise Security에 포함된 앱이나 추가 기능을 배포 서버에서 관리하는 경우, 배포 서버에 대한 참조가 포 함된
-deploymentclient.conf
-파일을 제거하고 Splunk 서비스를 다시 시작합니다. 이 작업을 수행하지 않으면 설치가 완료되지 않습니다. 사용자 계정에 관리자 역할 및
-edit_local_apps
-기능이 있어야 합니다. 관리자 역할에는 기본적으로 이 기능이 배정됩 니다.
-1 단계단계. Splunk Enterprise Security 다운로드
-다운로드 1. Splunk.com 사용자 이름과 암호를 사용하여 splunk.com에 로그인합니다. 2. 최신 Splunk Enterprise Security 제품을 다운로드합니다. 라이선스가 있는 Enterprise Security 고객만 제품을 다운
-로드할 수 있습니다. 3. 다운로드를 다운로드 클릭하고 Splunk Enterprise Security 제품 파일을 데스크톱에 저장합니다. 4. 검색 헤드에 관리자 권한으로 로그인합니다.
-2 단계단계. Splunk Enterprise Security 설치설치
-1. Splunk 도구 모음에서 앱 > 앱 관리관리를 선택하고 파일에서 파일에서 앱 설치설치를 클릭합니다. 2. 파일파일 선택선택을 클릭하고 Splunk Enterprise Security 제품 파일을 선택합니다. 3. 업로드를 업로드 클릭하여 설치를 시작합니다. 4. 지금지금 설치설치를 클릭하여 Splunk Enterprise Security를 설치하기 시작합니다.
-3 단계단계. Splunk Enterprise 보안보안 설치설치
-1. 시작시작을 클릭합니다. 2. 설치 단계가 진행됨에 따라 Splunk Enterprise Security 설치설치 후 설정설정 페이지에 상태가 표시됩니다. 3. 선택된 추가 기능을 설치에서 제외할지 설치하고 비활성화할지 선택합니다. 설치가 완료되면 Splunk 플랫폼 서비스
-를 다시 시작하라는 메시지가 페이지에 표시됩니다. 4. Splunk 다시다시 시작시작을 클릭하여 설치를 마칩니다.
+
+### 설치 전제 조건
+
+- Splunk Enterprise Security 사용을 위한 Splunk 플랫폼 요구 사항을 검토합니다. 배포 계획을 참조하십시오.
+- Splunk Enterprise Security에 포함된 앱이나 추가 기능을 배포 서버에서 관리하는 경우, 배포 서버에 대한 참조가 포함된 deploymentclient.conf 파일을 제거하고 Splunk 서비스를 다시 시작합니다. 이 작업을 수행하지 않으면 설치가 완료되지 않습니다.
+- 사용자 계정에 관리자 역할 및 edit_local_apps 기능이 있어야 합니다. 관리자 역할에는 기본적으로 이 기능이 배정됩 니다.
+
+#### 1 단계. Splunk Enterprise Security 다운로드
+
+1. Splunk.com 사용자 이름과 암호를 사용하여 splunk.com에 로그인합니다.
+2. 최신 Splunk Enterprise Security 제품을 다운로드합니다. 라이선스가 있는 Enterprise Security 고객만 제품을 다운로드할 수 있습니다.
+3. 다운로드를 다운로드 클릭하고 Splunk Enterprise Security 제품 파일을 데스크톱에 저장합니다.
+4. 검색 헤드에 관리자 권한으로 로그인합니다.
+
+#### 2 단계. Splunk Enterprise Security 설치
+
+1. Splunk 도구 모음에서 앱 > 앱 관리관리를 선택하고 파일에서 파일에서 앱 설치설치를 클릭합니다.
+2. 파일파일 선택선택을 클릭하고 Splunk Enterprise Security 제품 파일을 선택합니다.
+3. 업로드를 업로드 클릭하여 설치를 시작합니다.
+4. 지금지금 설치설치를 클릭하여 Splunk Enterprise Security를 설치하기 시작합니다.
+
+#### 3 단계. Splunk Enterprise 보안 설치
+
+1. 시작시작을 클릭합니다.
+2. 설치 단계가 진행됨에 따라 Splunk Enterprise Security 설치 후 설정 페이지에 상태가 표시됩니다.
+3. 선택된 추가 기능을 설치에서 제외할지 설치하고 비활성화할지 선택합니다. 설치가 완료되면 Splunk 플랫폼 서비스를 다시 시작하라는 메시지가 페이지에 표시됩니다.
+4. Splunk 다시 시작을 클릭하여 설치를 마칩니다.
+
 Enterprise Security를 설치하면 검색 헤드에서 SSL이 활성화됩니다. ES 설치 후에
-https
-를 사용하여 검색 헤드에 액세스 하려면 Splunk Web URL을 변경해야 합니다.
-설치 완료 후 <code><font size="2">$SPLUNK_HOME/var/log/splunk/essinstaller2.log</font></code> 설치 로그를 검 토합니다
-$SPLUNK_HOME/var/log/splunk/essinstaller2.log
-.
-4 단계단계. Enterprise Security 설정설정
+https를 사용하여 검색 헤드에 액세스 하려면 Splunk Web URL을 변경해야 합니다.
+
+설치 완료 후 \<code\>\<font size="2"\>$SPLUNK_HOME/var/log/splunk/essinstaller2.log\</font\>\</code\> 설치 로그를 검토합니다 $SPLUNK_HOME/var/log/splunk/essinstaller2.log
+
+#### 4 단계. Enterprise Security 설정
+
 Splunk Enterprise Security를 계속 설정하려면 다음을 참조하십시오.
-1. Splunk Enterprise Security에 포함된 추가 기능 배포 2. 인덱스 설정 및 배포 3. 사용자 및 역할 설정 4. 데이터 모델 설정
+
+1. Splunk Enterprise Security에 포함된 추가 기능 배포
+2. 인덱스 설정 및 배포
+3. 사용자 및 역할 설정
+4. 데이터 모델 설정
+
 Enterprise Security 데이터 원본 및 컬렉션 고려 사항의 개요는 데이터 원본 계획을 참조하십시오.
-명령줄에서 명령줄에서 Splunk Enterprise Security 설치설치
+
+### 명령줄에서 명령줄에서 Splunk Enterprise Security 설치설치
+
 Splunk 소프트웨어 명령줄을 사용하여 Splunk Enterprise Security를 설치합니다. Splunk 소프트웨어 명령줄에 대한 자세 한 내용은 CLI를 참조하십시오.
-1. 1 단계: Splunk Enterprise Security 다운로드의 설명에 따라 Splunk Enterprise Security를 다운로드하고 검색 헤드
-에 저장합니다. 2. 검색 헤드에서 설치 프로세스를 시작합니다. 2 단계: Splunk Enterprise Security 설치의 설명을 따르거나 REST 호
-출을 수행하여 서버 명령줄에서 설치를 시작합니다. 예:
-curl -k -u admin:password https://localhost:8089/services/apps/local -d filename="true" -d name="<file name
-10
-. and directory>" -d update="true" -v 3. 검색 헤드에서 Splunk 소프트웨어 명령줄을 사용하여 다음 명령어어를 실행합니다.
-splunk search '| essinstall' -auth admin:password Splunk Web에서 이 검색 명령어어를 실행하고 검색 결과로 설치 진행 상태를 확인할 수도 있습니다.
-| essinstall
-4. (선택 사항) 추가 옵션을 사용하여 설치할 추가 기능을 지정하거나 설치를 건너뛰거나 설치 후 비활성화할 수 있습니
-다.
-|essinstall --install-ta <ta-name>+ --skip-ta <ta-name>+ --disable-ta <ta-name>+
-설치하거나 건너뛰거나 비활성화할 추가 기능의 이름을 지정하거나 *를 와일드카드로 사용합니다. 설치할 여러 추가 기능을 지정하려면
-+
-를 사용하십시오.
-Splunk Web에 Enterprise Security를 설치하기 위해 검색 명령어어를 실행하는 경우 검색 결과로 설치 진행 상태를 확인할 수 있습니다. 명령줄에서 검색 명령어어를 실행하면 다음 파일에서 설치 로그를 확인할 수 있습니다.
-$SPLUNK_HOME/var/log/splunk/essinstaller2.log
-.
-Splunk Enterprise Security의 설치설치 및 설정설정 테스트 테스트 다음을 추가하여 Splunk Enterprise Security의 설치 및 설정을 테스트할 수 있습니다.
-1. 1 단계: Splunk Enterprise Security 다운로드의 설명에 따라 Splunk Enterprise Security를 다운로드하고 검색 헤드
-에 저장합니다. 2. 검색 헤드에서 설치 프로세스를 시작합니다. 2 단계: Splunk Enterprise Security 설치의 설명을 따르거나 REST 호
-출을 수행하여 서버 명령줄에서 설치를 시작합니다. 예:
-curl -k -u admin:password https://localhost:8089/services/apps/local -d filename="true" -d name="<file name
-and directory>" -d update="true" -v
-. 3. Splunk Web에서 검색 및 보고 앱을 엽니다. 4. 다음 검색을 입력하여 설치 및 설정의 시험 실행을 수행합니다.
-|essinstall --dry run
-5. (선택 사항) 추가 옵션을 사용하여 설치할 추가 기능을 지정하거나 설치를 건너뛰거나 설치 후 비활성화할 수 있습니
-다.
-|essinstall --install-ta <ta-name>+ --skip-ta <ta-name>+ --disable-ta <ta-name>+
-설치하거나 건너뛰거나 비활성화할 추가 기능의 이름을 지정하거나 *를 와일드카드로 사용합니다. 설치할 여러 추가 기능을 지정하려면
-+
-를 사용하십시오.
-검색검색 헤드헤드 클러스터에 클러스터에 설치설치
+
+1. 1 단계: Splunk Enterprise Security 다운로드의 설명에 따라 Splunk Enterprise Security를 다운로드하고 검색 헤드에 저장합니다.
+2. 검색 헤드에서 설치 프로세스를 시작합니다. 2 단계: Splunk Enterprise Security 설치의 설명을 따르거나 REST 호출을 수행하여 서버 명령줄에서 설치를 시작합니다.
+    예: curl -k -u admin:password https://localhost:8089/services/apps/local -d filename="true" -d name="\<file name. and directory\>" -d update="true" -v
+3. 검색 헤드에서 Splunk 소프트웨어 명령줄을 사용하여 다음 명령어어를 실행합니다.
+    splunk search '| essinstall' -auth admin:password Splunk Web에서 이 검색 명령어어를 실행하고 검색 결과로 설치 진행 상태를 확인할 수도 있습니다.
+    | essinstall
+4. (선택 사항) 추가 옵션을 사용하여 설치할 추가 기능을 지정하거나 설치를 건너뛰거나 설치 후 비활성화할 수 있습니다.
+    | essinstall --install-ta \<ta-name\>+ --skip-ta \<ta-name\>+ --disable-ta <ta-name>+
+
+    설치하거나 건너뛰거나 비활성화할 추가 기능의 이름을 지정하거나 *를 와일드카드로 사용합니다. 설치할 여러 추가 기능을 지정하려면 +를 사용하십시오.
+
+### 검색 헤드 클러스터에 설치
+
 Splunk Enterprise Security에는 검색 헤드 클러스터링 구현에 관한 구체적인 요구 사항과 프로세스가 있습니다.
-검색 헤드 클러스터링에 대한 개요는 분산 검색 매뉴얼에서 검색 헤드 클러스터링 아키텍처를 참조하십시오. 검색 헤드 클러스터링 요구 사항이 나열된 전체 리스트는 분산 검색 매뉴얼에서 검색 헤드 클러스터에 대한 시스템 요 구 사항 및 기타 배포 고려 사항을 참조하십시오.
-스테이징 인스턴스를 사용하여 주 배포 노드의 Enterprise Security를 준비합니다. 사용 가능한 스테이징 인스턴스가 없는 경우, 다른 앱이 설치되어 있지 않은 테스트 또는 QA Splunk Enterprise 인스턴스를 사용할 수 있습니다. 스테이징 인스턴 스를 프로덕션 인덱서 또는 검색 피어에 연결하면 안 됩니다. 스테이징 인스턴스를 설정 변경 및 업그레이드에 사용하십시 오.
+
+- 검색 헤드 클러스터링에 대한 개요는 분산 검색 매뉴얼에서 검색 헤드 클러스터링 아키텍처를 참조하십시오.
+- 검색 헤드 클러스터링 요구 사항이 나열된 전체 리스트는 분산 검색 매뉴얼에서 검색 헤드 클러스터에 대한 시스템 요 구 사항 및 기타 배포 고려 사항을 참조하십시오.
+
+스테이징 인스턴스를 사용하여 주 배포노드의 Enterprise Security를 준비합니다. 사용 가능한 스테이징 인스턴스가 없는 경우, 다른 앱이 설치되어 있지 않은 테스트 또는 QA Splunk Enterprise 인스턴스를 사용할 수 있습니다. 스테이징 인스턴 스를 프로덕션 인덱서 또는 검색 피어에 연결하면 안 됩니다. 스테이징 인스턴스를 설정 변경 및 업그레이드에 사용하십시오.
+
 Enterprise Security를 검색 헤드 클러스터에 설치하는 방법:
-1. 스테이징 인스턴스를 준비합니다. 2. Enterprise Security를 스테이징 인스턴스에 설치합니다. 3. Enterprise Security 설치본을 주 배포 노드로 마이그레이션합니다. Splunk Enterprise Security Suite와 연결된 앱,
-SA, DA, TA를 스테이징 인스턴스의
-$SPLUNK_HOME/etc/apps
-에서 주 배포 노드의
-$SPLUNK_HOME/etc/shcluster/apps
-로 복사합니다. 검색 앱 같은 기본 앱이 포함되면 안 되므로 전체 폴더를 복사하지 마십시오. 4. 주 배포 노드를 사용하여 Enterprise Security를 클러스터 구성원에 배포합니다.
-검색검색 헤드헤드 클러스터에서 클러스터에서 설정설정 변경변경 사항사항 관리관리
-일부 시스템 설정 변경 사항은 주 배포 노드를 사용하여 배포해야 합니다.
+
+1. 스테이징 인스턴스를 준비합니다.
+2. Enterprise Security를 스테이징 인스턴스에 설치합니다.
+3. Enterprise Security 설치본을 주 배포노드로 마이그레이션합니다. Splunk Enterprise Security Suite와 연결된 앱,SA, DA, TA를 스테이징 인스턴스의 $SPLUNK_HOME/etc/apps에서 주 배포노드의 $SPLUNK_HOME/etc/shcluster/apps로 복사합니다. 검색 앱 같은 기본앱이 포함되면 안되므로 전체 폴더를 복사하지 마십시오.
+4. 주 배포노드를 사용하여 Enterprise Security를 클러스터 구성원에 배포합니다.
+
+#### 검색 헤드 클러스터에서 설정 변경 사항 관리
+
+일부 시스템 설정 변경 사항은 주 배포노드를 사용하여 배포해야 합니다.
+
 1. 변경 사항을 검색 헤드 클러스터 구성원에서 적용하지 말고, 스테이징 인스턴스에서 대신 적용합니다.
-11
-2. 스테이징 인스턴스에서 설정 변경 사항을 테스트합니다. 3. 필요한 파일을 검색 헤드 클러스터 주 배포 노드로 마이그레이션합니다. 4. 업데이트된 설정을 검색 헤드 클러스터에 배포합니다.
-주 배포 노드를 사용하여 배포해야 하는 설정 변경 사항:
-설정설정 변경변경 사항사항 수정되는 수정되는 파일파일
-일반 설정 페이지에서 인덱싱된 실시간 검색 활성화 또는 비활성화
-inputs.conf
-일반 설정 페이지에서 인덱싱된 실시간 디스크 동기화 지연 수정
-inputs.conf
-UBA 설정 페이지에서 주요 이벤트를 Splunk UBA로 전송
-outputs.conf
+2. 스테이징 인스턴스에서 설정 변경 사항을 테스트합니다.
+3. 필요한 파일을 검색 헤드 클러스터 주 배포노드로 마이그레이션합니다.
+4. 업데이트된 설정을 검색 헤드 클러스터에 배포합니다.
+
+주 배포노드를 사용하여 배포해야 하는 설정 변경 사항:
+
+|설정 변경 사항|수정되는 파일|
+|:--:|:--:|
+|일반 설정 페이지에서 인덱싱된 실시간 검색 활성화 또는 비활성화|inputs.conf|
+|일반 설정 페이지에서 인덱싱된 실시간 디스크 동기화 지연 수정|inputs.conf|
+|UBA 설정 페이지에서 주요 이벤트를 Splunk UBA로 전송|outputs.conf|
+
 검색 헤드 클러스터에서 변경하는 대부분의 설정은 다른 검색 헤드 클러스터 구성원에 자동으로 복제됩니다. 예:
-위협 인텔리전스 소스 추가, 수정, 비활성화 자산 및 ID 소스 리스트 추가, 수정, 비활성화 사용자 인터페이스 변경 검색 변경
+
+- 위협 인텔리전스 소스 추가, 수정, 비활성화
+- 자산 및 ID 소스 리스트 추가, 수정, 비활성화
+- 사용자 인터페이스 변경
+- 검색 변경
+
 분산 검색 매뉴얼에서 설정 변경 사항이 전체 검색 헤드 클러스터에 적용되는 방법을 참조하십시오.
-기존기존 배포배포 마이그레이션 마이그레이션
+
+#### 기존 배포 마이그레이션
+
 Enterprise Security 검색 헤드나 검색 헤드 풀 구성원을 검색 헤드 클러스터에 바로 추가할 수 없습니다. 검색 헤드나 검색 헤드 풀 구성원을 검색 헤드 클러스터로 마이그레이션하려면 새 검색 헤드 클러스터를 만들고 최신 Enterprise Security 버 전을 이 클러스터에 배포해야 합니다.
-검색 헤드 클러스터가 Enterprise Security를 실행하게 된 후에는 이전 Enterprise Security 설치본의 사용자 지정 설정을 수 동으로 검토하고 새 검색 헤드 클러스터의 주 배포 노드로 마이그레이션하여 변경 사항을 클러스터 구성원에 복제해야 합니 다.
+
+검색 헤드 클러스터가 Enterprise Security를 실행하게 된 후에는 이전 Enterprise Security 설치본의 사용자 지정 설정을 수 동으로 검토하고 새 검색 헤드 클러스터의 주 배포노드로 마이그레이션하여 변경 사항을 클러스터 구성원에 복제해야 합니다.
+
 자세한 내용은 Splunk Enterprise 분산 검색 매뉴얼에서 독립형 검색 헤드에서 검색 헤드 클러스터로 마이그레이션 항목을 참조하십시오.
-Splunk Enterprise Security 배포 마이그레이션을 계획하는 데 도움이 필요한 경우 Splunk 프로페셔널 서비스에 문의하십 시오.
-Splunk Enterprise Security에 포함된 포함된 추가추가 기능기능 배포배포
+
+Splunk Enterprise Security 배포 마이그레이션을 계획하는 데 도움이 필요한 경우 Splunk 프로페셔널 서비스에 문의하십시오.
+
+## Splunk Enterprise Security에 포함된 추가 기능 배포
+
 Splunk Enterprise Security 패키지에는 추가 기능 세트가 포함되어 있습니다.
-이름에 "SA-" 또는 "DA-"가 있는 추가 기능은 Splunk Enterprise Security 프레임워크를 구성합니다. 이런 추가 기능 의 설치 및 설정은 Splunk Enterprise Security 설치 프로세스의 일부로 처리되므로, 해당 기능을 배포하거나 설정하 기 위해 추가 작업을 수행하지 않아도 됩니다. Splunk Enterprise Security 프레임워크를 구성하는 추가 기능을 비활 성화하지 마십시오. 나머지 추가 기능은 이름에 "TA-"가 있는 기술별 추가 기능으로, 해당 원본 데이터를 Enterprise Security에 통합하기 위해 필요한 CIM 호환 지식을 제공합니다.
+
+- 이름에 "SA-" 또는 "DA-"가 있는 추가 기능은 Splunk Enterprise Security 프레임워크를 구성합니다. 이런 추가 기능 의 설치 및 설정은 Splunk Enterprise Security 설치 프로세스의 일부로 처리되므로, 해당 기능을 배포하거나 설정하 기 위해 추가 작업을 수행하지 않아도 됩니다. Splunk Enterprise Security 프레임워크를 구성하는 추가 기능을 비활 성화하지 마십시오.
+- 나머지 추가 기능은 이름에 "TA-"가 있는 기술별 추가 기능으로, 해당 원본 데이터를 Enterprise Security에 통합하기 위해 필요한 CIM 호환 지식을 제공합니다.
+
 다양한 유형의 추가 기능이 Splunk Enterprise Security와 상호 작용하는 방법에 대한 자세한 내용은 Splunk 개발자 포털에 서 ES 솔루션 아키텍처를 참조하십시오. 기술별 추가 기능은 Splunk Enterprise Security 프레임워크를 구성하는 추가 기 능과 다르게 지원됩니다. 릴리스 노트 매뉴얼의 Splunk Enterprise Security 및 제공된 추가 기능 지원을 참조하십시오.
+
 기술 추가 기능을 배포하는 방법은 Splunk 플랫폼 배포 아키텍처에 따라 다릅니다.
-전제전제 조건조건
+
+전제 조건
+
 Splunk Enterprise Security를 검색 헤드 또는 검색 헤드 클러스터에 설치하십시오. Enterprise Security 설치를 참조하십 시오 Splunk Enterprise Security를 분산 환경에 설치하는 경우, 설치 프로그램에서는 Enterprise Security 패키지에 포함 된 추가 기능을 검색 헤드나 검색 헤드 클러스터에 설치하고 활성화합니다.
-절차절차
-1. 포워더에 설치할 추가 기능 결정 2. 포워더에 추가 기능 배포 3. 인덱서에 추가 기능 배포
-포워더에 포워더에 설치할 설치할 추가추가 기능기능 결정결정
-12
+
+절차
+
+1. 포워더에 설치할 추가 기능 결정
+2. 포워더에 추가 기능 배포
+3. 인덱서에 추가 기능 배포
+
+### 포워더에 설치할 추가 기능 결정
+
 포워더에서 데이터를 수집하는 추가 기능을 설치합니다. 추가 기능에 대한 매뉴얼을 검토하여 포워더에 설치할 추가 기능과 각 추가 기능에 필요한 포워더 설정 유형을 결정합니다.
-대부분의 추가 기능에는 특정 데이터 원본에 대한 입력 설정이 포함되어 있습니다. 추가 기능에 포함된
-inputs.conf
-를 검토하 고 필요에 따라 추가 기능을 포워더에 배포합니다. 일부 추가 기능은 데이터 원본 시스템에 직접 설치된 포워더에 배포해야 합니다. 나머지 추가 기능에는 헤비 포워더가 필요합니다. 구체적인 설명은 각 추가 기능에 대한 매뉴얼이나 README 파일 을 참조하십시오.
-웹 기반 매뉴얼이 있는 추가 기능의 경우, 아래 링크를 사용하여 설치 및 설정 위치를 확인하십시오. 웹 기반 매뉴얼이 없는 추가 기능의 경우, 추가 기능의 루트 폴더에 있는 README 파일을 참조하십시오.
-포워더에 포워더에 추가추가 기능기능 배포배포
+
+대부분의 추가 기능에는 특정 데이터 원본에 대한 입력 설정이 포함되어 있습니다. 추가 기능에 포함된 inputs.conf를 검토하 고 필요에 따라 추가 기능을 포워더에 배포합니다. 일부 추가 기능은 데이터 원본 시스템에 직접 설치된 포워더에 배포해야 합니다. 나머지 추가 기능에는 헤비 포워더가 필요합니다. 구체적인 설명은 각 추가 기능에 대한 매뉴얼이나 README 파일 을 참조하십시오.
+
+- 웹 기반 매뉴얼이 있는 추가 기능의 경우, 아래 링크를 사용하여 설치 및 설정 위치를 확인하십시오.
+- 웹 기반 매뉴얼이 없는 추가 기능의 경우, 추가 기능의 루트 폴더에 있는 README 파일을 참조하십시오.
+
+### 포워더에 추가 기능 배포
+
 Splunk 추가 기능 매뉴얼에서 분산 Splunk Enterprise 배포에 추가 기능 설치를 참조하십시오.
-Enterprise Security와 함께함께 제공되는 제공되는 기술별 기술별 추가추가 기능기능
+
+#### Enterprise Security와 함께 제공되는 기술별 추가 기능
+
 Splunk Enterprise Security에는 보안과 관련된 다음과 같은 CIM 호환 기술 추가 기능이 포함되어 있습니다.
-Blue Coat ProxySG용 Splunk 추가 기능 Bro IDS용 Splunk 추가 기능 McAfee용 Splunk 추가 기능 Juniper용 Splunk 추가 기능 Microsoft Windows용 Splunk 추가 기능 Tenable용 Splunk 추가 기능 NetFlow용 Splunk 추가 기능 Oracle Database용 Splunk 추가 기능 OSSEC용 Splunk 추가 기능 RSA SecurID용 Splunk 추가 기능 Sophos용 Splunk 추가 기능 FireSIGHT용 Splunk 추가 기능 Symantec Endpoint Protection용 Splunk 추가 기능 UBA용 Splunk 추가 기능 Unix 및 Linux용 Splunk 추가 기능 Websense Content Gateway용 Splunk 추가 기능 TA-airdefense TA-alcatel TA-cef TA-fortinet TA-ftp TA-nmap TA-tippingpoint TA-trendmicro
-인덱서에 인덱서에 추가추가 기능기능 배포배포
+
+- Blue Coat ProxySG용 Splunk 추가 기능
+- Bro IDS용 Splunk 추가 기능
+- McAfee용 Splunk 추가 기능
+- Juniper용 Splunk 추가 기능
+- Microsoft Windows용 Splunk 추가 기능
+- Tenable용 Splunk 추가 기능
+- NetFlow용 Splunk 추가 기능
+- Oracle Database용 Splunk 추가 기능
+- OSSEC용 Splunk 추가 기능
+- RSA SecurID용 Splunk 추가 기능
+- Sophos용 Splunk 추가 기능
+- FireSIGHT용 Splunk 추가 기능
+- Symantec Endpoint Protection용 Splunk 추가 기능
+- UBA용 Splunk 추가 기능
+- Unix 및 Linux용 Splunk 추가 기능
+- Websense Content Gateway용 Splunk 추가 기능
+- TA-airdefense
+- TA-alcatel
+- TA-cef
+- TA-fortinet
+- TA-ftp
+- TA-nmap
+- TA-tippingpoint
+- TA-trendmicro
+
+### 인덱서에 추가 기능 배포
+
 Splunk는 Splunk 지원 추가 기능을 전체 Splunk 플랫폼 배포에 설치한 다음 필요한 경우에만 입력을 활성화하고 설정할 것 을 권장합니다. 자세한 내용은 Splunk 추가 기능 매뉴얼에서 Splunk 추가 기능 설치 위치를 참조하십시오.
+
 인덱서에 추가 기능을 배포하는 데 사용하는 절차는 Splunk 플랫폼 배포에 따라 다를 수 있습니다. 상황이나 기호에 맞는 옵 션을 선택하십시오.
-배포배포 상황상황 절차절차
+
+배포 상황 절차
 Splunk Enterprise Security가 Splunk Cloud에서 실행 중인 경우
 Splunk 서포트에 연락하여 필수 추가 기능을 인덱서에 설치해 달라고 요청합 니다.
 추가 기능을 인덱서에 수동으로 배포하는 방법을 선호하는 경우
