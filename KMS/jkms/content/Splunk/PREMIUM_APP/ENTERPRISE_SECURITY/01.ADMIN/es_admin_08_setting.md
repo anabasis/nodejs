@@ -46,7 +46,7 @@ Enterprise Security 메뉴 모음에서 설정 > 일반 > 일반 설정을 선�
 |:--:|:--|
 |자산 원본|자산 상관에 사용되는 자산 정보가 포함된 룩업 테이블을 열거하는 검색 매크로입니다.|
 |자동 일시 중지|드릴다운 검색을 일시 중지하기 전의 시간(초)을 입력합니다.|
-|기본 관심 대상 검색|'관심 대상 이벤트' 상관(correlation) 검색용 관심 대상 이벤트를 정의합니다.|
+|기본 관심 대상 검색|'관심 대상 이벤트' 상관(correlation)검색용 관심 대상 이벤트를 정의합니다.|
 |도메인 분석|웹 도메인에 대한 WHOIS 추적을 활성화하거나 비활성화합니다.|
 |URL 추출 정규식의 도메인|URL에서 도메인(url_domain)을 추출하는 데 사용하는 정규식입니다.|
 |ID 생성 자동 업데이트 활성화|true인 경우 ID 관리자가 asset_sources, identity_sources, generate_identities 매크로를 자동으로 업데이트할 수 있습니다. 기본값은 true입니다.|
@@ -76,7 +76,7 @@ Enterprise Security 메뉴 모음에서 설정 > 일반 > 일반 설정을 선�
 |TSTATS 로컬|TSTATS 매크로의 분산 여부를 결정합니다.|
 |TSTATS 요약 전용|TSTATS 또는 요약 전용 매크로가 가속된 이벤트만 검색할 것인지 결정합니다.|
 |기타 사용|기본 계열 제한을 초과하는 차트에서 OTHER 조건을 활성화하거나 비활성화합니다.|
-|웹사이트 관심 대상 검색|"관심 대상 이벤트" 상관(correlation) 검색에서 사용하는 관심 대상 웹사이트의 리스트입니다.|
+|웹사이트 관심 대상 검색|"관심 대상 이벤트" 상관(correlation)검색에서 사용하는 관심 대상 웹사이트의 리스트입니다.|
 
 참고 항목은 아래와 같습니다.
 
@@ -289,7 +289,7 @@ form.association_id</td><td>Used together, displays the notable events associate
 <tr><td>form.owner_form</td><td>이 매개변수를 통해 지정되는 사용자가 소유한 주요 이벤트를 표시합니다.</td><td>usernames</td></tr>
 <tr><td>form.source</td><td>이 매개변수를 통해 지정된 상관(correlation)검색에서 만드는 주요 이벤트를 표시합니다. 상관(correlation)검색 이름의
 공백을 HTML로 인코딩하고 주요 이벤트에 표시되는 이름을 콘텐츠 관리에 표시되는 이름 대신 사용하십시오.</td><td>Endpoint - Host With Multiple Infections - Rule</td></tr>
-<tr><td>form.rule_name</td><td>이 매개변수를 통해 지정된 상관(correlation) 검색에서 만드는 주요 이벤트를 표시합니다. 상관(correlation)검색 이름의 공백을 HTML로 인코딩합니다. 콘텐츠 관리에 표시되는 이름을 사용합니다.</td><td>Host With Multiple Infections</td></tr>
+<tr><td>form.rule_name</td><td>이 매개변수를 통해 지정된 상관(correlation)검색에서 만드는 주요 이벤트를 표시합니다. 상관(correlation)검색 이름의 공백을 HTML로 인코딩합니다. 콘텐츠 관리에 표시되는 이름을 사용합니다.</td><td>Host With Multiple Infections</td></tr>
 <tr><td>form.tag</td><td>이 매개변수를 통해 지정된 태그가 있는 주요 이벤트를 표시합니다.</td><td>malware, 사용지 지정 태그 값</td></tr>
 <tr><td>form.srch</td><td>이 매개변수에 지정된 SPL과 일치하는 주요 이벤트를 표시합니다. 키값 쌍의 = 같은 특수 문자를 HTML로 인코딩하십시오.</td><td>dest=127.0.0.1</td></tr>
 <tr><td>form.security_domain_form</td><td>이 매개변수를 통해 지정된 보안 도메인의 주요 이벤트를 표시합니다.</td><td>access, endpoint, network, threat, identity, audit</td></tr>
@@ -386,12 +386,12 @@ Splunk Web에서 Splunk 메시지 만들기 경고 작업을 사용하여 검색
 
 이 경고 작업을 사용하여 만드는 메시지는 이미 messages.conf에 존재해야 합니다. 메시지 만들기에 대한 자세한 내용은 Splunk Enterprise 관리자 매뉴얼의 Splunk Web 메시지 사용자 지정을 참조하십시오.
 
-1. 검색 또는 상관(correlation) 검색에서 Splunk Web 메시지를 만들 수 있습니다.
+1. 검색 또는 상관(correlation)검색에서 Splunk Web 메시지를 만들 수 있습니다.
     |옵션|절차|
     |:--:|:--|
     |새 경고 만들기|검색 및 보고 앱의 검색 페이지에서 다른 이름으로 저장 > 경고를 선택합니다. 경고 세부정보를 입력 및 선택하고 필요에 따라 트리거 및 조절을 설정합니다.|
-    |상관(correlation) 검색 만들기 또는 편집|ES 메뉴 모음에서 설정 > 콘텐츠 관리를 선택합니다. 새 콘텐츠 만들기 > 상관(correlation) 검색을 선택합니다. 필요에 따라 상관(correlation) 검색 설정을 입력 및 선택합니다.|
-    |상관(correlation)검색 편집|ES 메뉴 모음에서 설정 > 콘텐츠 관리를 선택합니다. 상관(correlation) 검색을 선택합니다.|
+    |상관(correlation)검색 만들기 또는 편집|ES 메뉴 모음에서 설정 > 콘텐츠 관리를 선택합니다. 새 콘텐츠 만들기 > 상관(correlation)검색을 선택합니다. 필요에 따라 상관(correlation)검색 설정을 입력 및 선택합니다.|
+    |상관(correlation)검색 편집|ES 메뉴 모음에서 설정 > 콘텐츠 관리를 선택합니다. 상관(correlation)검색을 선택합니다.|
 2. 작업 추가를 클릭하고 Splunk 메시지 작성을 선택합니다.
 3. 이름을 선택합니다. 이 이름은 기존 메시지의 messages.conf에 있는 스탠자에 해당합니다.
     예: DISK_MON:INSUFFICIENT_DISK_SPACE_ERROR.
@@ -529,7 +529,7 @@ Enterprise Security 대시보드는 CIM(Common Information Model)을 준수하�
 
 대시보드 패널과 데이터 모델
 
-A - E
+### A - E
 
 <table>
 <tr><td>대시보드 이름</td><td>패널 제목</td><td>데이터 모델</td><td>데이터 모델 데이터 집합</td></tr>
@@ -557,500 +557,260 @@ A - E
 
 <table>
 <tr><td>대시보드 이름</td><td>패널 제목</td><td>데이터 모델</td><td>데이터 모델 데이터 집합</td></tr>
+<tr><td rowspan=2>액세스 이상</td><td>지리적으로 가능성이 매우 낮은 액세스</td><td rowspan=2>인증</td><td>Authentication.app,.src,.user</td></tr>
+<tr><td>동시 애플리케이션 액세스</td><td>Authentication.app, .src, .user</td></tr>
+<tr><td rowspan=4>액세스 센터</td><td>작업별 시간에 따른 액세스</td><td rowspan=5>인증</td><td>Authentication.action</td></tr>
+<tr><td>앱별 시간에 따른 액세스</td><td>Authentication.app</td></tr>
+<tr><td>소스별 상위 액세스</td><td>Authentication.src</td></tr>
+<tr><td>고유 사용자별 상위 액세스</td><td>Authentication.user,.src</td></tr>
+<tr><td colspan=2>액세스 검색</td><td>Authentication.action,.app,src,.dest,.user,src_user</td></tr>
+<tr><td rowspan=4>액세스 추적기</td><td>첫 번째 액세스 - 최근 7일</td><td rowspan=3 colspan=2>없음. access_tracker 룩업 호출</td></tr>
+<tr><td>비활성 계정 사용량 - 최근 90일</td></tr>
+<tr><td>완전히 비활성화된 계정 - 최근 90일</td></tr>
+<tr><td>만료된 ID에 대한 계정 사용량 - 최근 7일</td><td>인증</td><td>Authentication.dest</td></tr>
+<tr><td rowspan=4>계정 관리</td><td>시간에 따른 계정 관리</td><td rowspan=4>변경 사항 분석</td><td>All_Changes.Account_Management,.action</td></tr>
+<tr><td>계정 잠금</td><td>All_Changes.Account_Management, .result</td></tr>
+<tr><td>소스 사용자별 계정 관리</td><td>All_Changes.Account_Management,.src_user</td></tr>
+<tr><td>상위 계정 관리 이벤트</td><td>All_Changes.Account_Management,.action</td></tr>
+<tr><td rowspan=4>자산 센터</td><td>우선순위별 자산</td><td rowspan=4>자산 및 ID</td><td rowspan=4>All_Assets.priority, .bunit, .category,.owner</td></tr>
+<tr><td>사업 부문별 자산</td></tr>
+<tr><td>범주별 자산</td></tr>
+<tr><td>자산 정보</td></tr>
+<tr><td>Asset Investigator</td><td>Asset Investigator</td><td colspan=2>스윔 레인(Swim lane) 선택에 따름</td></tr>
 </table>
 
-액세스 이상
-지리적으로 가능성이 매우 낮은 액
-세스 인증
-Authentication.app, .src, .user
-동시 애플리케이션 액세스 Authentication.app, .src, .user
+<table>
+<tr><td>대시보드 이름</td><td>패널 제목</td><td>데이터 모델</td><td>데이터 모델 데이터 집합</td></tr>
+<tr><td rowspan=2>데이터 보호</td><td>인덱스별 데이터 무결성 제어</td><td colspan=2>인시던트 관리</td></tr>
+<tr><td>민감한 데이터</td><td colspan=2>없음. 데이터 무결성 컨트롤이 있는지 확인하는 인덱스에서 REST 검색 호출</td></tr>
+<tr><td rowspan=3>기본 계정 작업</td><td>앱별 시간에 따른 기본 계정 사용량</td><td rowspan=2>인증</td><td>Authentication.Default_Authentication,.action, .app</td></tr>
+<tr><td>사용 중인 기본 계정</td><td>Authentication.user_category, .dest,.user</td></tr>
+<tr><td>기본 로컬 계정</td><td colspan=3>없음. useraccounts_tracker 룩업 호출</td></tr>
+<tr><td rowspan=5>DNS 작업</td><td>고유 소스별 상위 응답 코드</td><td rowspan=6>네트워크 분석 DNS</td><td>DNS.message_type, DNS.reply_code</td></tr>
+<tr><td>상위 DNS 쿼리 소스</td><td>DNS.message_type, DNS.src</td></tr>
+<tr><td>상위 DNS 쿼리</td><td>DNS.message_type, DNS.query</td></tr>
+<tr><td>도메인별 쿼리</td><td>DNS.message_type, DNS.query</td></tr>
+<tr><td>최근 DNS 쿼리</td><td>DNS.message_type</td></tr>
+<tr><td colspan=2>DNS 검색</td><td>DNS.message_type,DNS.reply_code,DNS.dest, DNS.src,DNS.query_type, DNS.query,DNS.answer</td></tr>
+</table>
 
-액세스 센터
-작업별 시간에 따른 액세스
-인증
-Authentication.action
-앱별 시간에 따른 액세스 Authentication.app
-소스별 상위 액세스 Authentication.src
-고유 사용자별 상위 액세스 Authentication.user,.src
-액세스 검색 Authentication.action, .app, src, .dest,
-.user, src_user
-액세스 추적기
-첫 번째 액세스 - 최근 7일
-없음. access_tracker 룩업 비활성 계정 사용량 - 최근 90일 호출
-완전히 비활성화된 계정 - 최근 90
-일
-만료된 ID에 대한 계정 사용량 - 최
-근 7일 인증 Authentication.dest
-계정 관리
-시간에 따른 계정 관리
-변경 사항 분석
-All_Changes.Account_Management,
-.action
-계정 잠금 All_Changes.Account_Management,
-.result
-소스 사용자별 계정 관리 All_Changes.Account_Management,
-.src_user
-상위 계정 관리 이벤트 All_Changes.Account_Management,
-.action
-자산 센터
-우선순위별 자산
-자산 및 ID
-All_Assets.priority, .bunit, .category,
-.owner
-사업 부문별 자산
-범주별 자산
-자산 정보
-Asset Investigator Asset Investigator 스윔 레인(Swim lane) 선택에 따름
-대시보드 이름 패널 제목 데이터 모델 데이터 모델 데이터 집합
-데이터 보호
-인덱스별 데이터 무결성 제어 인시던트 관리
-민감한 데이터 없음. 데이터 무결성 컨트롤이 있는지 확인하는 인덱스에서
-REST 검색 호출
-기본 계정 작업
-앱별 시간에 따른 기본 계정 사용
-량
-인증
-Authentication.Default_Authentication,
-.action, .app
-사용 중인 기본 계정 Authentication.user_category, .dest,
-.user
-기본 로컬 계정 없음. useraccounts_tracker 룩업 호출
-DNS 작업
-고유 소스별 상위 응답 코드
-네트워크 분석
-DNS
-DNS.message_type, DNS.reply_code
-상위 DNS 쿼리 소스 DNS.message_type, DNS.src
-상위 DNS 쿼리 DNS.message_type, DNS.query
-도메인별 쿼리 DNS.message_type, DNS.query
-최근 DNS 쿼리 DNS.message_type
-DNS 검색
-DNS.message_type,
-DNS.reply_code, DNS.dest, DNS.src
-,DNS.query_type, DNS.query,
-DNS.answer
+<table>
+<tr><td>대시보드 이름</td><td>패널 제목</td><td>데이터 모델</td><td>데이터 모델 데이터 집합</td></tr>
+<tr><td rowspan=4>이메일 작업</td><td>상위 이메일 소스</td><td rowspan=5>이메일</td><td>All_Email.src</td></tr>
+<tr><td>대용량 이메일</td><td>All_Email.size, src, .src_user, .dest</td></tr>
+<tr><td>거의 보이지 않는 발신자</td><td>All_Email.protocol, .src, .src_user,.recipient</td></tr>
+<tr><td>거의 보이지 않는 수신자</td><td>All_Email.protocol, .src,.recipient</td></tr>
+<tr><td colspan=2>이메일 검색</td><td>All_Email.protocol, .recipient, .src, .src_user, .dest</td></tr>
+<tr><td rowspan=3>endpoint 변경 사항</td><td>작업별 endpoint 변경 사항</td><td rowspan=3>변경 사항 분석</td><td>All_Changes.Endpoint_Changes,.action</td></tr>
+<tr><td>유형별 endpoint 변경 사항</td><td>All_Changes.Endpoint_Changes,.object_category</td></tr>
+<tr><td>시스템별 endpoint 변경 사항</td><td>All_Changes.Endpoint_Changes,.object_category, .dest</td></tr>
+</table>
 
-대시보드 이름 패널 제목 데이터 모델 데이터 모델 데이터 집합
-이메일 작업
-상위 이메일 소스
-이메일
-All_Email.src
-대용량 이메일 All_Email.size, src, .src_user, .dest
-거의 보이지 않는 발신자 All_Email.protocol, .src, .src_user,
-.recipient
-거의 보이지 않는 수신자 All_Email.protocol, .src, .recipient
-이메일 검색 All_Email.protocol, .recipient, .src,
-.src_user, .dest
-endpoint 변경 사항
-작업별 endpoint 변경 사항
-변경 사항 분석
-All_Changes.Endpoint_Changes,
-.action
-유형별 endpoint 변경 사항 All_Changes.Endpoint_Changes,
-.object_category
-시스템별 endpoint 변경 사항 All_Changes.Endpoint_Changes,
-.object_category, .dest
-F - M
-대시보드 이름 패널 제목 데이터 모
-델
-데이터 모델 데이터 집합
-포워더 감사
-(audit)
-호스트별 시간에 따른 이벤
-트 수 없음. host_eventcount 매크로 및 검색 호출
-마지막 보고 시간별 호스트
-Splunkd 프로세스 이용률
-애플리케이
-션 상태
-All_Application_State.Processes.cpu_load_percent,
-.mem_used, .process, All_Application_State.dest
-Splunk 서비스 시작 모드 All_Application_State.Services.start_mode, .status,
-.service
-HTTP 범주 분석
-범주 분포
-웹
-Web.src, .category
-범주 세부정보 Web.src, .dest, .category,
-HTTP 사용자 에
-이전트 분석
-사용자 에이전트 분포
-웹
-Web.http_user_agent_length, .http_user_agent
-사용자 에이전트 세부정보 Web.http_user_agent_length, .src, .dest,
-.http_user_agent
-대시보드 이름 패널 제목 데이터 모
-델
-데이터 모델 데이터 집합
-ID 센터
-우선순위별 ID
-자산 및 ID All_Identities.priority, .bunit, .category
-사업 부문별 ID
-범주별 ID
-ID 정보
-Identity
-Investigator
-Identity Investigator 스윔 레인(Swim lane) 선택에 따름
-인시던트 검토 감
-사(audit)
-검토자별 검토 작업
-없음. es_notable_events KV 스토어 컬렉션을 통해 검색 호출
-상위 검토자
-상태별 주요 이벤트 - 최
-근 48시간
-소유자별 주요 이벤트 -
-최근 24시간
+### F - M
 
-최근 검토 작업
-인덱싱 감사
-(audit)
-시간에 따른 일별 이벤
-트
-없음. licensing_epd KV 일별 이벤트 스토어 컬렉션을 통해 검색 호출
-인덱스별 이벤트(마지막
-날)
-침입 센터
-심각도별 시간에 따른
-공격
-침입 탐지
-IDS_Attacks.severity
-상위 공격 IDS_Attacks.dest, .src, .signature
-스캔 작업(여러 공격) IDS_Attacks.signature
-새로운 공격 IDS_Attacks.ids_type
-침입 검색 IDS_Attacks.severity, .category, .signature, .src, .dest
-조사
-조사 없음. 조사 KV 스토어 컬렉션을 통해 검색 호출
-조사 시간 표시줄 없음. investigation_event KV 스토어 컬렉션을 통해 검색 호출
-조사 메모 첨부 파일 없음. investigation_attachment KV 스토어 컬렉션을 통해 검색 호출
-작업 이력
-없음. 다섯 개 중 하나의 검색 호출 Splunk Enterprise Security에서 조사
-관리를 참조하십시오.
-조사 워크벤치 아티팩트 없음. investigation_leads KV 스토어 컬렉션을 통해 검색 호출
-조사 워크벤치
-인증 데이터 인증 Authentication.app, .action, .src, .src_user, .dest, .user
-인증서 활동 인증서
-Certificates.SSL, .src, .src_port, .dest, .dest_port,
-.ssl_is_valid, .ssl_validity_window, .ssl_hash,
-.ssl_serial, .ssl_subject, .ssl_start_time, .ssl_end_time
-컴퓨터 인벤토리 인벤토리 Compute_Inventory.All_Inventory, .os, .vendor_product,
-.user, .dest
-DNS 데이터
-네트워크
-분석 DNS
-Network_Resolution.DNS, DNS.dest, .query,
-.query_count, .message_type, .answer, .reply_code
-이메일 데이터 이메일 Email.All_Email, .src, .dest, .src_user, .action, .recipient,
-.recipient_count, .subject
-파일 시스템 변경 사항 변경 사항
-분석
-Change_Analysis.All_Changes, .user, .dest, .action,
-.status,
-All_Changes.Endpoint_Changes.Filesystem_Changes,
-.file_name, .file_hash, .file_path, .file_size,
-.file_create_time, .file_modify_time, .file_access_time
-IDS 경고 침입 탐지
-Intrusion_Detection.IDS_Attacks, .user, .src, .dest,
-.severity, .category, .signature, .ids_type,
-.vendor_product, .dvc
-최신 OS 업데이트 업데이트 Updates.status, .user, .dest, .signature_id, .signature,
-.vendor_product
-네트워크 세션 데이터 네트워크
-세션
-Network_Sessions.All_Sessions, .src_ip, .dest_ip,
-.dest_nt_host, .tag, .action, .vendor_product
-네트워크 트래픽 데이터 네트워크
-트래픽
-Network_Traffic.All_Traffic, .packets, .src_ip, .dest_ip,
-.user, .transport, .action, .src, .src_port, .dest, .dest_port
-주요 이벤트
-인시던트
-관리
-Incident_Management.Notable_Events, .user, .src,
-.dest, .rule_name, .severity, .urgency, .security_domain,
-.status_label, .owner, .savedsearch_description
-포트 활동
-애플리케이
-션 상태
-Application_State.Ports, .dest, .user, dest_port,
-.transport, .process_name, .process
+<table>
+<tr><td>대시보드 이름</td><td>패널 제목</td><td>데이터 모델</td><td>데이터 모델 데이터 집합</td></tr>
+<tr><td rowspan=4>포워더 감사(audit)</td><td>호스트별 시간에 따른 이벤트 수</td><td colspan=2 rowspan=2>없음. host_eventcount 매크로 및 검색 호출</td></tr>
+<tr><td>마지막 보고 시간별 호스트</td></tr>
+<tr><td>Splunkd 프로세스 이용률</td><td rowspan=2>애플리케이션 상태</td><td>All_Application_State.Processes.cpu_load_percent,.mem_used, .process, All_Application_State.dest</td></tr>
+<tr><td>Splunk 서비스 시작 모드</td><td>All_Application_State.Services.start_mode, .status,.service</td></tr>
+<tr><td rowspan=2>HTTP 범주 분석</td><td>범주 분포</td><td rowspan=2>웹</td><td>Web.src, .category</td></tr>
+<tr><td>범주 세부정보</td><td>Web.src, .dest, .category,</td></tr>
+<tr><td rowspan=2>HTTP 사용자 에이전트 분석</td><td>사용자 에이전트 분포</td><td rowspan=2>웹</td><td>Web.http_user_agent_length, .http_user_agent</td></tr>
+<tr><td>사용자 에이전트 세부정보</td><td>Web.http_user_agent_length, .src, .dest,
+.http_user_agent</td></tr>
+</table>
 
-프로세스 활동
-애플리케이
-션 상태
-Application_State.All_Application_State, .dest, .user,
-.process_name, .process
-레지스트리 활동 변경 사항
-분석
-Change_Analysis_All_Changes, .user, .dest, .action,
-.status, .object, object_path, .object_attrs, .object_id,
-.Endpoint_Changes.Registry_Changes
-위험 점수 위험 분석 Risk.All_Risk, .risk_score, .risk_object_type,
-.risk_object
-서비스 작업
-애플리케이
-션 상태
-Application_State.Services, .dest, .user, .service,
-.service_id, .status, .start_mode, .process_name,
-.process
-시스템 취약점 취약점 Vulnerabilities.Vulnerabilities, .user, .dest, .severity,
-.signature, .category, .vendor_product
-사용자 계정 변경 사항
-변경 사항
-분석
-Change_Analysis.All_Changes, .user, .dest, .action,
-.status, .object, .object_path, .object_attrs, .object_id,
-.Account_Management
-웹 활동 웹
-Web.Web, .src, .dest, .user, .action, .http_method, .url,
-.http_referrer, .http_user_agent, .http_content_type,
-.status
-대시보드 이름 패널 제목 데이터 모델 데이터 모델 데이터 집합
-멀웨어 센터
-작업별 시간에 따른 멀웨어
-작업
-멀웨어
-Malware_Attacks.action
-서명별 시간에 따른 멀웨어
-작업 Malware_Attacks.signature
-상위 감염 Malware_Attacks.signature, .dest
-새로운 멀웨어 - 최근 30일 없음. malware_tracker 룩업 호출
-멀웨어 작업
-제품 버전별 클라이언트
-없음. malware_operations_서명 버전별 클라이언트 tracker 룩업 호출
-가장 오래된 감염
-반복적인 감염
-멀웨어
-Malware_Attacks.action, .signature, .dest
-멀웨어 검색 Malware_Attacks.action, .file_name, .user,
-.signature, .dest
-모듈식 작업 센터
-이름별 시간에 따른 작업 호
-출
-Splunk 감사
-(audit) 로그
-Modular_Actions.Modular_Action_Invocations,
-.action_name
-이름별 상위 작업
-Modular_Actions.Modular_Action_Invocations,
-.action_mode, .user, .duration, .search_name,
-.rid, .sid
-검색별 상위 작업
-Modular_Actions.Modular_Action_Invocations,
-.action_name, .action_mode, .user,
-.search_name, .rid, .sid
-N - S
-대시보드 이름 패널 제목 데이터 모델 데이터 모델 데이터 집합
-네트워크 변경 사항
-작업별 네트워크 변경 사항
-변경 사항 분석
-All_Changes.Network_Changes,
-.action
-장치별 네트워크 변경 사항 All_Changes.Network_Changes, .dvc
-새로운 도메인 분석
-새로운 도메인 작업
-기간별 새로운 도메인 작업 웹 Web.dest
+<table>
+<tr><td>대시보드 이름</td><td>패널 제목</td><td>데이터 모델</td><td>데이터 모델 데이터 집합</td></tr>
+<tr><td rowspan=4>ID 센터</td><td>우선순위별 ID</td><td rowspan=4>자산 및 ID</td><td rowspan=4>All_Identities.priority, .bunit, .category</td></tr>
+<tr><td>사업 부문별 ID</td></tr>
+<tr><td>범주별 ID</td></tr>
+<tr><td>ID 정보</td></tr>
+<tr><td>Identity Investigator</td><td>Identity Investigator</td><td colspan=2>스윔 레인(Swim lane) 선택에 따름</td></tr>
+<tr><td rowspan=5>인시던트 검토 감사(audit)</td><td>검토자별 검토 작업</td><td rowspan=5 colspan=2>
+없음. es_notable_events KV 스토어 컬렉션을 통해 검색 호출</td></tr>
+<tr><td>상위 검토자</td></tr>
+<tr><td>상태별 주요 이벤트 - 최근 48시간</td></tr>
+<tr><td>소유자별 주요 이벤트 -최근 24시간</td></tr>
+<tr><td>최근 검토 작업</td></tr>
+<tr><td rowspan=3>인덱싱 감사(audit)</td><td>시간에 따른 일별 이벤트</td><td rowspan=3 colspan=2>없음. licensing_epd KV 스토어 컬렉션을 통해 검색 호출</td></tr>
+<tr><td>일별 이벤트</td></tr>
+<tr><td>인덱스별 이벤트(마지막 날)</td></tr>
+<tr><td rowspan=4>침입 센터</td><td>심각도별 시간에 따른 공격</td><td rowspan=5>침입 탐지</td><td>IDS_Attacks.severity</td></tr>
+<tr><td>상위 공격</td><td>IDS_Attacks.dest, .src, .signature</td></tr>
+<tr><td>스캔 작업(여러 공격)</td><td>IDS_Attacks.signature</td></tr>
+<tr><td>새로운 공격</td><td>IDS_Attacks.ids_type</td></tr>
+<tr><td colspan=2>침입 검색</td><td>IDS_Attacks.severity, .category, .signature, .src, .dest</td></tr>
+<tr><td rowspan=5>조사</td><td>조사</td><td colspan=2>없음. 조사 KV 스토어 컬렉션을 통해 검색 호출</td></tr>
+<tr><td>조사 시간 표시줄</td><td colspan=2>없음. investigation_event KV 스토어 컬렉션을 통해 검색 호출</td></tr>
+<tr><td>조사 메모 첨부 파일</td><td colspan=2>없음. investigation_attachment KV 스토어 컬렉션을 통해 검색 호출</td></tr>
+<tr><td>작업 이력</td><td colspan=2>없음. 다섯 개 중 하나의 검색 호출 Splunk Enterprise Security에서 조사관리를 참조하십시오.</td></tr>
+<tr><td>조사 워크벤치 아티팩트</td><td colspan=2>없음. investigation_leads KV 스토어 컬렉션을 통해 검색 호출</td></tr>
+<tr><td rowspan=19>조사 워크벤치</td><td>인증 데이터</td><td>인증</td><td>Authentication.app, .action, .src, .src_user, .dest, .user</td></tr>
+<tr><td>인증서 활동</td><td>인증서</td><td>Certificates.SSL, .src, .src_port, .dest, .dest_port,.ssl_is_valid, .ssl_validity_window, .ssl_hash,.ssl_serial, .ssl_subject, .ssl_start_time, .ssl_end_time</td></tr>
+<tr><td>컴퓨터 인벤토리</td><td>인벤토리</td><td>Compute_Inventory.All_Inventory, .os, .vendor_product,.user, .dest</td></tr>
+<tr><td>DNS 데이터</td><td>네트워크 분석 DNS</td><td>Network_Resolution.DNS, DNS.dest, .query,.query_count, .message_type, .answer, .reply_code</td></tr>
+<tr><td>이메일 데이터</td><td>이메일</td><td>Email.All_Email, .src, .dest, .src_user, .action, .recipient,.recipient_count, .subject</td></tr>
+<tr><td>파일 시스템 변경 사항</td><td>변경 사항 분석</td><td>Change_Analysis.All_Changes, .user, .dest, .action, .status,
+All_Changes.Endpoint_Changes.Filesystem_Changes, .file_name, .file_hash, .file_path, .file_size, .file_create_time, .file_modify_time, .file_access_time</td></tr>
+<tr><td>IDS 경고</td><td>침입 탐지</td><td>Intrusion_Detection.IDS_Attacks, .user, .src, .dest,.severity, .category, .signature, .ids_type,.vendor_product, .dvc</td></tr>
+<tr><td>최신 OS 업데이트</td><td>업데이트</td><td>Updates.status, .user, .dest, .signature_id, .signature,.vendor_product</td></tr>
+<tr><td>네트워크 세션 데이터</td><td>네트워크 세션</td><td>Network_Sessions.All_Sessions, .src_ip, .dest_ip, .dest_nt_host, .tag, .action, .vendor_product</td></tr>
+<tr><td>네트워크 트래픽 데이터</td><td>네트워크 트래픽</td><td>Network_Traffic.All_Traffic, .packets, .src_ip, .dest_ip, .user, .transport, .action, .src, .src_port, .dest, .dest_port</td></tr>
+<tr><td>주요 이벤트</td><td>인시던트 관리</td><td>Incident_Management.Notable_Events, .user, .src, .dest, .rule_name, .severity, .urgency, .security_domain, .status_label, .owner, .savedsearch_description</td></tr>
+<tr><td>포트 활동</td><td>애플리케이션 상태</td><td>Application_State.Ports, .dest, .user, dest_port,.transport, .process_name, .process</td></tr>
+<tr><td>프로세스 활동</td><td>애플리케이션 상태</td><td>Application_State.All_Application_State, .dest, .user, .process_name, .process</td></tr>
+<tr><td>레지스트리 활동</td><td>변경 사항 분석</td><td>Change_Analysis_All_Changes, .user, .dest, .action,.status, .object, object_path, .object_attrs, .object_id,
+.Endpoint_Changes.Registry_Changes</td></tr>
+<tr><td>위험 점수</td><td>위험 분석</td><td>Risk.All_Risk, .risk_score, .risk_object_type,.risk_object</td></tr>
+<tr><td>서비스 작업</td><td>애플리케이션 상태</td><td>Application_State.Services, .dest, .user, .service,.service_id, .status, .start_mode, .process_name, .process</td></tr>
+<tr><td>시스템 취약점</td><td>취약점</td><td>Vulnerabilities.Vulnerabilities, .user, .dest, .severity,.signature, .category, .vendor_product</td></tr>
+<tr><td>사용자 계정 변경 사항</td><td>변경 사항 분석</td><td>Change_Analysis.All_Changes, .user, .dest, .action,
+.status, .object, .object_path, .object_attrs, .object_id,.Account_Management</td></tr>
+<tr><td>웹 활동</td><td>웹</td><td>Web.Web, .src, .dest, .user, .action, .http_method, .url,.http_referrer, .http_user_agent, .http_content_type,
+.status</td></tr>
+</table>
 
-TLD별 새로운 도메인 작업
-등록 세부정보 없음
-대시보드 이름 패널 제목 데이터 모델 데이터 모델 데이터 집합
-포트 및 프로토콜 추적
-기
-포트/프로토콜 프로파일러
-네트워크 트래
-픽
-All_Traffic.transport, .dest_port
-시간에 따른 금지된 트래픽 또는
-안전하지 않은 트래픽 - 최근 24시
-간
-All_Traffic.src_category,
+<table>
+<tr><td>대시보드 이름</td><td>패널 제목</td><td>데이터 모델</td><td>데이터 모델 데이터 집합</td></tr>
+<tr><td rowspan=4>멀웨어 센터</td><td>작업별 시간에 따른 멀웨어 작업</td><td rowspan=3>멀웨어</td><td>Malware_Attacks.action</td></tr>
+<tr><td>서명별 시간에 따른 멀웨어 작업</td><td>Malware_Attacks.signature</td></tr>
+<tr><td>상위 감염</td><td>Malware_Attacks.signature, .dest</td></tr>
+<tr><td>새로운 멀웨어 - 최근 30일</td><td colspan=2>없음. malware_tracker 룩업 호출</td></tr>
+<tr><td rowspan=4>멀웨어 작업</td><td>제품 버전별 클라이언트</td><td rowspan=3  colspan=2>없음. malware_operations_tracker 룩업 호출</td></tr>
+<tr><td>서명 버전별 클라이언트</td></tr>
+<tr><td>가장 오래된 감염</td></tr>
+<tr><td>반복적인 감염</td><td rowspan=2>멀웨어</td><td>Malware_Attacks.action, .signature, .dest</td></tr>
+<tr><td colspan=2>멀웨어 검색</td><td>Malware_Attacks.action, .file_name, .user,
+.signature, .dest</td></tr>
+<tr><td rowspan=3>모듈식 작업 센터</td><td>이름별 시간에 따른 작업 호출</td><td rowspan=3>Splunk 감사 (audit) 로그</td><td>Modular_Actions.Modular_Action_Invocations,.action_name</td></tr>
+<tr><td>이름별 상위 작업</td><td>Modular_Actions.Modular_Action_Invocations,
+.action_mode, .user, .duration, .search_name,.rid, .sid</td></tr>
+<tr><td>검색별 상위 작업</td><td>Modular_Actions.Modular_Action_Invocations,
+.action_name, .action_mode, .user,.search_name, .rid, .sid</td></tr>
+</table>
+
+### N - S
+
+<table>
+<tr><td>대시보드 이름</td><td>패널 제목</td><td>데이터 모델</td><td>데이터 모델 데이터 집합</td></tr>
+<tr><td rowspan=2>네트워크 변경 사항</td><td>작업별 네트워크 변경 사항</td><td rowspan=2>변경 사항 분석</td><td>All_Changes.Network_Changes,.action</td></tr>
+<tr><td>장치별 네트워크 변경 사항</td><td>All_Changes.Network_Changes, .dvc</td></tr>
+<tr><td rowspan=4>새로운 도메인 분석</td><td>새로운 도메인 작업</td><td rowspan=3>웹</td><td rowspan=3>Web.dest</td></tr>
+<tr><td>기간별 새로운 도메인 작업</td></tr>
+<tr><td>TLD별 새로운 도메인 작업</td></tr>
+<tr><td>등록 세부정보</td><td colspan=2>없음</td></tr>
+</table>
+
+<table>
+<tr><td>대시보드 이름</td><td>패널 제목</td><td>데이터 모델</td><td>데이터 모델 데이터 집합</td></tr>
+<tr><td rowspan=4>포트 및 프로토콜 추적기</td><td>포트/프로토콜 프로파일러</td><td rowspan=4>네트워크 트래픽</td><td>All_Traffic.transport, .dest_port</td></tr>
+<tr><td>시간에 따른 금지된 트래픽 또는 안전하지 않은 트래픽 - 최근 24시간</td><td>All_Traffic.src_category,
 .dest_category, .src, .dest, .transport,
-.dest_port
-금지된 트래픽 세부정보 - 최근 24
-시간
-All_Traffic.src_category,
-.dest_category, .src, .dest, .transport,
-.dest_port
-새로운 포트 작업 - 최근 7일 없음. 애플리케이션 프로토콜 룩업 호출
-프로토콜 센터
-프로토콜별 연결
-네트워크 트래
-픽
-All_Traffic.app
-프로토콜별 사용량 All_Traffic.app, .bytes
-상위 연결 소스 All_Traffic.src
-잘 알려진 포트에 대한 사용량 All_Traffic.bytes, .dest_port
-장시간 운용 가능한 연결 All_Traffic.src, .src_port, .duration,
-.dest, .dest_port, .transport
-위험 분석
-시간에 따른 위험 수정자
-위험 분석
-All_Risk.risk_score
-개체별 위험 점수 All_Risk.risk_score
-가장 활성화된 소스 All_Risk.risk_score, .risk_object
-최근 위험 수정자 All_Risk.*
-대시보드 이름 패널 제목 데이터 모델 데이터 모델 데이터 집합
-보안 포스처
-긴급도별 주요 이벤트
-없음. es_notable_events KVStore 컬렉션을 통해 검색 호출
-시간에 따른 주요 이벤트
-상위 주요 이벤트
-상위 주요 이벤트 소스
-세션 센터
-시간에 따른 세션 네트워크 세
-션
-All_Sessions.Session_*
-세션 세부정보 All_Sessions.*
-SSL 작업
-공통 이름별 SSL 작업
-인증서
-All_Certificates.SSL.ssl_subject_common_name
-SSL 클라우드 세션 All_Certificates.SSL.ssl_subject_common_name,
-.src,
-최근 SSL 세션
-SSL 검색
-All_Certificates.src, .dest,
-.ssl_subject_common_name, .ssl_subject_email,
-.ssl_issuer_common_name,
-.ssl_issuer_organization, .ssl_start_time,
-.ssl_end_time, .ssl_validity_window, .ssl_is_valid
-제거 감사(audit)
-시간에 따른 제거된 이벤트 -
-최근 24시간
-없음
-주요 이벤트를 검색하기 위한 매크로 호출
-시간에 따른 제거 내역 - 최
-근 30일 요약 생성 정보에 대한 매크로 및 검색 호출
-제거 관리 작업 eventtype별 검색 호출
-만료된 제거 eventtype별 검색 호출
+.dest_port</td></tr>
+<tr><td>금지된 트래픽 세부정보 - 최근 24시간</td><td>All_Traffic.src_category,
+.dest_category, .src, .dest, .transport,.dest_port</td></tr>
+<tr><td>새로운 포트 작업 - 최근 7일</td><td>없음. 애플리케이션 프로토콜 룩업 호출</td></tr>
+<tr><td rowspan=5>프로토콜 센터</td><td>프로토콜별 연결</td><td rowspan=5>네트워크 트래픽</td><td>All_Traffic.app</td></tr>
+<tr><td>프로토콜별 사용량</td><td>All_Traffic.app, .bytes</td></tr>
+<tr><td>상위 연결 소스</td><td>All_Traffic.src</td></tr>
+<tr><td>잘 알려진 포트에 대한 사용량</td><td>All_Traffic.bytes, .dest_port</td></tr>
+<tr><td>장시간 운용 가능한 연결</td><td>All_Traffic.src, .src_port, .duration, .dest, .dest_port, .transport</td></tr>
+<tr><td rowspan=4>위험 분석</td><td>시간에 따른 위험 수정자</td><td rowspan=4>위험 분석</td><td>All_Risk.risk_score</td></tr>
+<tr><td>개체별 위험 점수</td><td>All_Risk.risk_score</td></tr>
+<tr><td>가장 활성화된 소스</td><td>All_Risk.risk_score, .risk_object</td></tr>
+<tr><td>최근 위험 수정자</td><td>All_Risk.*</td></tr>
+</table>
 
-시스템 센터
-운영 체제 없음. system_version_tracker 룩업 호출
-시스템별 상위 평균 CPU 로
-드
-성능 All_Performance.CPU.cpu_load_percent,
-All_Performance.dest
-시스템 수별 서비스 애플리케이
-션 상태
-All_Application_State.Services
-시스템 수별 포트 All_Application_State.Ports
-T - Z
-대시보드 이름 패널 제목 데이터 모델 데이터 모델 데이터 집합
-위협 활동
-시간에 따른 위협 활동
-침입 탐지, 네트워크 트래픽, 웹. 자세한 내용은 위협 활동 데이
-터 소스를 참조하십시오.
-가장 활동적인 위협 컬렉션
-가장 활동적인 위협 소스
-위협 활동 세부정보
-위협 아티팩트
-위협 개요
-없음. 위협 인텔리전스 KV 스토어 컬렉션을 호출합니다. 위협
-인텔리전스 컬렉션 리스트는 Splunk Enterprise Security에서
-지원되는 위협 인텔리전스 유형을 참조하십시오.
-endpoint 아티팩트
-네트워크 아티팩트
-이메일 아티팩트
-인증서 아티팩트
-위협 인텔리전스 감
-사(audit)
-위협 인텔리전스 다운로드 없음. REST endpoint별로 검색 호출
-위협 인텔리전스 감사(audit) 이
-벤트 없음. eventtype별 검색 호출
-시간 센터
-시간 동기화 실패
-성능
-All_Performance.OS.Timesync,
-All_Performance.dest,
-.dest_should_timesync,
-OS.Timesync.action
-시간 동기화하지 않은 시스템
-인덱싱 시간 지연 없음. Summary Gen 검색 결과 호출
-시간 서비스 시작 모드 이상
-애플리케이션
-상태
-All_Application_State.Services.start_mode,
-.Services.status, .dest_should_timesync,
-.tag, .dest
-트래픽 센터
-작업별 시간에 따른 트래픽
-네트워크 트래
-픽
-All_Traffic.action
-프로토콜별 시간에 따른 트래픽 All_Traffic.transport
-스캔 작업(여러 시스템) All_Traffic.dest, .src
-상위 소스 All_Traffic.src
-트래픽 검색 All_Traffic.action, .src_port, .src, .dest,
-.transport, .dest_port
-트래픽 크기 분석
-시간에 따른 트래픽 크기 이상 네트워크 트래
-픽
-All_Traffic.transport, .src
-트래픽 크기 세부정보 All_Traffic.bytes, .dest, .src
-대시보드 이름 패널 제목 데이터 모델 데이터 모델 데이터 집합
-업데이트 센터
-업데이트가 필요한 상위 시스템
-업데이트
-Updates.status, .dest, .signature_id,
-.vendor_product
-필요한 상위 업데이트 Updates.status, .dest, .signature_id,
-.vendor_product
-업데이트하지 않은 시스템 - 30
-일 이상
-Updates.dest_should_update, .dest,
-.signature_id, .vendor_product, .status
+<table>
+<tr><td>대시보드 이름</td><td>패널 제목</td><td>데이터 모델</td><td>데이터 모델 데이터 집합</td></tr>
+<tr><td rowspan=4>보안 포스처</td><td>긴급도별 주요 이벤트</td><td rowspan=4 colspan=2>없음. es_notable_events KVStore 컬렉션을 통해 검색 호출</td></tr>
+<tr><td>시간에 따른 주요 이벤트</td></tr>
+<tr><td>상위 주요 이벤트</td></tr>
+<tr><td>상위 주요 이벤트 소스</td></tr>
+<tr><td rowspan=2>세션 센터</td><td>시간에 따른 세션</td><td rowspan=2>네트워크 세션</td><td>All_Sessions.Session_*</td></tr>
+<tr><td>세션 세부정보</td><td>All_Sessions.*</td></tr>
+<tr><td rowspan=3>SSL 작업</td><td>공통 이름별 SSL 작업</td><td rowspan=4>인증서</td><td>All_Certificates.SSL.ssl_subject_common_name</td></tr>
+<tr><td>SSL 클라우드 세션</td><td>All_Certificates.SSL.ssl_subject_common_name, .src,</td></tr>
+<tr><td>최근 SSL 세션</td></tr>
+<tr><td colspan=2>SSL 검색</td><td>All_Certificates.src, .dest,.ssl_subject_common_name,.ssl_subject_email,.ssl_issuer_common_name,.ssl_issuer_organization, .ssl_start_time,.ssl_end_time, .ssl_validity_window, .ssl_is_valid</td></tr>
+<tr><td rowspan=4>제거 감사(audit)</td><td>시간에 따른 제거된 이벤트 -최근 24시간</td><td rowspan=4>없음</td><td>주요 이벤트를 검색하기 위한 매크로 호출</td></tr>
+<tr><td>시간에 따른 제거 내역 - 최근 30일</td><td>요약 생성 정보에 대한 매크로 및 검색 호출</td></tr>
+<tr><td>제거 관리 작업</td><td>eventtype별 검색 호출</td></tr>
+<tr><td>만료된 제거</td><td>eventtype별 검색 호출</td></tr>
+<tr><td rowspan=4>시스템 센터</td><td>운영 체제</td><td colspan=2>없음. system_version_tracker 룩업 호출</td></tr>
+<tr><td>시스템별 상위 평균 CPU 로드</td><td>성능</td><td>All_Performance.CPU.cpu_load_percent,All_Performance.dest</td></tr>
+<tr><td>시스템 수별 서비스</td><td rowspan=2>애플리케이션 상태</td><td>All_Application_State.Services</td></tr>
+<tr><td>시스템 수별 포트</td><td>All_Application_State.Ports</td></tr>
+</table>
 
-업데이트 서비스 시작 모드 이
-상
-애플리케이션
-상태
-All_Application_State.Services.start_mode,
-.Services.status, .Services.service, .tag
-업데이트 검색 업데이트 Updates.dest_should_update, .status,
-.dest, .signature_id, .vendor_product
-URL 길이 분석
-시간에 따른 URL 길이 이상
-웹
-Web.http_method, .url
-URL 길이 세부정보 Web.url_length, .src, .dest, .url
-사용자 작업
-위험 점수별 사용자 위험 분석 All_Risk.risk_object
-비기업 웹 업로드 웹 Web.bytes, .user, .http_method, .url
-비기업 이메일 작업 이메일 All_Email.size, .recipient, .src_user,
-관심 대상 사이트 작업 웹 Web.src, .url
-원격 액세스 인증 Authentication.src, .user
-티켓 작업 티켓 관리 All_Ticket_Management.description,
-.priority, . severity, .src_user
-대시보드 이름 패널 제목 데이터 모델 데이터 모델 데이터 집합
-뷰 감사(audit)
-시간에 따른 뷰 작업 Splunk 감사
-(audit) 로그
-View_Activity.app, .view
-예상된 뷰 작업 View_Activity.app, .view, .user
-취약성 센터
-상위 취약성
-취약점
-Vulnerabilities.signature, .dest
-가장 취약한 호스트 Vulnerabilities.signature, .severity,
-.dest
-심각도별 취약성 Vulnerabilities.signature, .severity,
-.dest
-새로운 취약성 vuln_signature_reference 룩업 호출
-취약성 작업
-시간에 따른 스캔 작업 취약점 Vulnerabilities.dest
-기간별 취약성 vulnerability_tracker 룩업 호출
-지체된 스캐닝
-취약점
-Vulnerabilities.dest
-취약성 검색 Vulnerabilities.category, .signature,
-.dest, .severity, .cve,
-웹 센터
-메서드별 시간에 따른 이벤트
-웹
-Web.http_method
-상태별 시간에 따른 이벤트 Web.status
-상위 소스 Web.dest, .src
-상위 대상 Web.dest, .src
-웹 검색 Web.http_method, .status, .src, .dest,
-.url
+### T - Z
+
+<table>
+<tr><td>대시보드 이름</td><td>패널 제목</td><td>데이터 모델</td><td>데이터 모델 데이터 집합</td></tr>
+<tr><td rowspan=4>위협 활동</td><td>시간에 따른 위협 활동</td><td rowspan=4 colspan=2>침입 탐지, 네트워크 트래픽, 웹. 자세한 내용은 위협 활동 데이터 소스를 참조하십시오.</td></tr>
+<tr><td>가장 활동적인 위협 컬렉션</td></tr>
+<tr><td>가장 활동적인 위협 소스</td></tr>
+<tr><td>위협 활동 세부정보</td></tr>
+<tr><td rowspan=5>위협 아티팩트</td><td>위협 개요</td><td rowspan=5 colspan=2>없음. 위협 인텔리전스 KV 스토어 컬렉션을 호출합니다. 위협 인텔리전스 컬렉션 리스트는 Splunk Enterprise Security에서 지원되는 위협 인텔리전스 유형을 참조하십시오.</td></tr>
+<tr><td>endpoint 아티팩트</td></tr>
+<tr><td>네트워크 아티팩트</td></tr>
+<tr><td>이메일 아티팩트</td></tr>
+<tr><td>인증서 아티팩트</td></tr>
+<tr><td rowspan=2>위협 인텔리전스 감사(audit)</td><td>위협 인텔리전스 다운로드</td><td colspan=5>없음. REST endpoint별로 검색 호출</td></tr>
+<tr><td>위협 인텔리전스 감사(audit) 이벤트</td><td colspan=2>없음. eventtype별 검색 호출</td></tr>
+<tr><td rowspan=4>시간 센터</td><td>시간 동기화 실패</td><td rowspan=2>성능</td><td rowspan=2>All_Performance.OS.Timesync,
+All_Performance.dest,.dest_should_timesync,OS.Timesync.action</td></tr>
+<tr><td>시간 동기화하지 않은 시스템</td></tr>
+<tr><td>인덱싱 시간 지연</td><td colspan=2>없음. Summary Gen 검색 결과 호출</td></tr>
+<tr><td>시간 서비스 시작 모드 이상</td><td>애플리케이션 상태</td><td>All_Application_State.Services.start_mode,.Services.status, .dest_should_timesync,.tag, .dest</td></tr>
+<tr><td rowspan=4>트래픽 센터</td><td>작업별 시간에 따른 트래픽</td><td rowspan=5>네트워크 트래픽</td><td>All_Traffic.action</td></tr>
+<tr><td>프로토콜별 시간에 따른 트래픽</td><td>All_Traffic.transport</td></tr>
+<tr><td>스캔 작업(여러 시스템)</td><td>All_Traffic.dest, .src</td></tr>
+<tr><td>상위 소스</td><td>All_Traffic.src</td></tr>
+<tr><td colspan=2>트래픽 검색</td><td>All_Traffic.action, .src_port, .src, .dest,
+.transport, .dest_port</td></tr>
+<tr><td rowspan=2>트래픽 크기 분석</td><td>시간에 따른 트래픽 크기 이상</td><td rowspan=2>네트워크 트래픽</td><td>All_Traffic.transport, .src</td></tr>
+<tr><td>트래픽 크기 세부정보</td><td>All_Traffic.bytes, .dest, .src</td></tr>
+</table>
+
+<table>
+<tr><td>대시보드 이름</td><td>패널 제목</td><td>데이터 모델</td><td>데이터 모델 데이터 집합</td></tr>
+<tr><td rowspan=4>업데이트 센터</td><td>업데이트가 필요한 상위 시스템</td><td rowspan=3>업데이트</td><td>Updates.status, .dest, .signature_id,.vendor_product</td></tr>
+<tr><td>필요한 상위 업데이트</td><td>Updates.status, .dest, .signature_id,.vendor_product</td></tr>
+<tr><td>업데이트하지 않은 시스템 - 30일 이상</td><td>Updates.dest_should_update, .dest,
+.signature_id, .vendor_product, .status</td></tr>
+<tr><td>업데이트 서비스 시작 모드 이상</td><td>애플리케이션 상태</td><td>All_Application_State.Services.start_mode,.Services.status, .Services.service, .tag</td></tr>
+<tr><td colspan=2>업데이트 검색</td><td>업데이트</td><td>Updates.dest_should_update, .status,.dest, .signature_id, .vendor_product</td></tr>
+<tr><td rowspan=2>URL 길이 분석</td><td>시간에 따른 URL 길이 이상</td><td rowspan=2>웹</td><td>Web.http_method, .url</td></tr>
+<tr><td>URL 길이 세부정보</td><td>Web.url_length, .src, .dest, .url</td></tr>
+<tr><td rowspan=6>사용자 작업</td><td>위험 점수별 사용자</td><td>위험 분석</td><td>All_Risk.risk_object</td></tr>
+<tr><td>비기업 웹 업로드</td><td>웹</td><td>Web.bytes, .user, .http_method, .url</td></tr>
+<tr><td>비기업 이메일 작업</td><td>이메일</td><td>All_Email.size, .recipient, .src_user,</td></tr>
+<tr><td>관심 대상 사이트 작업</td><td>웹</td><td>Web.src, .url</td></tr>
+<tr><td>원격 액세스</td><td>인증</td><td>Authentication.src, .user</td></tr>
+<tr><td>티켓 작업</td><td>티켓 관리</td><td>All_Ticket_Management.description,.priority, . severity, .src_user</td></tr>
+</table>
+
+<table>
+<tr><td>대시보드 이름</td><td>패널 제목</td><td>데이터 모델</td><td>데이터 모델 데이터 집합</td></tr>
+<tr><td rowspan=2>뷰 감사(audit)</td><td>시간에 따른 뷰 작업</td><td rowspan=2>Splunk 감사(audit) 로그</td><td>View_Activity.app, .view</td></tr>
+<tr><td>예상된 뷰 작업</td><td>View_Activity.app, .view, .user</td></tr>
+<tr><td rowspan=4>취약성 센터</td><td>상위 취약성</td><td rowspan=3>취약점</td><td>Vulnerabilities.signature, .dest</td></tr>
+<tr><td>가장 취약한 호스트</td><td>Vulnerabilities.signature, .severity,.dest</td></tr>
+<tr><td>심각도별 취약성</td><td>Vulnerabilities.signature, .severity,.dest</td></tr>
+<tr><td>새로운 취약성</td><td colspan=2>vuln_signature_reference 룩업 호출</td></tr>
+<tr><td rowspan=3>취약성 작업</td><td>시간에 따른 스캔 작업</td><td>취약점</td><td>Vulnerabilities.dest</td></tr>
+<tr><td>기간별 취약성</td><td colspan=2>vulnerability_tracker 룩업 호출</td></tr>
+<tr><td>지체된 스캐닝</td><td rowspan=2>취약점</td><td>Vulnerabilities.dest</td></tr>
+<tr><td colspan=2>취약성 검색</td><td>Vulnerabilities.category, .signature,.dest, .severity, .cve,</td></tr>
+<tr><td rowspan=4>웹 센터</td><td>메서드별 시간에 따른 이벤트</td><td rowspan=5>웹</td><td>Web.http_method</td></tr>
+<tr><td>상태별 시간에 따른 이벤트</td><td>Web.status</td></tr>
+<tr><td>상위 소스</td><td>Web.dest, .src</td></tr>
+<tr><td>상위 대상</td><td>Web.dest, .src</td></tr>
+<tr><td colspan=2>웹 검색</td><td>Web.http_method, .status, .src, .dest,.url</td></tr>
+</table>
 
 ### 추가할 대시보드
 

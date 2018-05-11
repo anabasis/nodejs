@@ -42,12 +42,12 @@ Enterprise Security에서 Extreme Search 명령어를 사용하기 위해 추가
 
 - Enterprise Security에서 구현되는 컨텍스트와 저장된 검색의 리스트는 이 항목에서 컨테이터, 컨텍스트 및 저장된 검색을 참조하십시오.
 - Extreme Search을 사용하는 핵심 보안 지표의 리스트는 이 항목에서 Extreme Search 핵심 보안 지표를 참조하십시오.
-- Extreme Search을 사용하는 상관(correlation) 검색의 리스트는 이 항목에서 Extreme Search을 사용하는 상관(correlation) 검색을 참조하십시오. 모든 상관(correlation) 검색은 기본적으로 비활성화됩니다.
+- Extreme Search을 사용하는 상관(correlation)검색의 리스트는 이 항목에서 Extreme Search을 사용하는 상관(correlation)검색을 참조하십시오. 모든 상관(correlation)검색은 기본적으로 비활성화됩니다.
 
 #### Extreme Search을 사용하는 상관 (correlation) 검색
 
-Enterprise Security의 모든 상관(correlation) 검색은 기본적으로 비활성화됩니다. 이 매뉴얼에서 상관(correlation) 검색 활성화를 참조하십시오.
-가이드식 검색 만들기는 Extreme Search 명령어를 사용하는 상관(correlation) 검색에 사용할 수 없습니다. 이런 상관(correlation)검색에서는 Extreme Search을 사용합니다.
+Enterprise Security의 모든 상관(correlation)검색은 기본적으로 비활성화됩니다. 이 매뉴얼에서 상관(correlation)검색 활성화를 참조하십시오.
+가이드식 검색 만들기는 Extreme Search 명령어를 사용하는 상관(correlation)검색에 사용할 수 없습니다. 이런 상관(correlation)검색에서는 Extreme Search을 사용합니다.
 
 |검색 이름|컨텍스트|
 |:--:|:--|
@@ -107,17 +107,17 @@ Enterprise Security는 컨텍스트를 컨테이너라는 개체에 저장합니
 
 ## Splunk Enterprise Security의 Extreme Search 예
 
-Extreme Search 명령어를 사용하도록 기존 상관(correlation) 검색을 변환할 수 있습니다. Extreme Search 명령어를 사용하도록 변환된 검색을 사용하기 위해 설정을 변경하거나 수정하지 않아도 됩니다. Extreme Search 명령어의 리스트는 Extreme Search 명령어를
+Extreme Search 명령어를 사용하도록 기존 상관(correlation)검색을 변환할 수 있습니다. Extreme Search 명령어를 사용하도록 변환된 검색을 사용하기 위해 설정을 변경하거나 수정하지 않아도 됩니다. Extreme Search 명령어의 리스트는 Extreme Search 명령어를
 참조하십시오.
-다음은 기존 "무차별 공격(Brute Force) 액세스 동작이 탐지됨" 상관(correlation) 검색을 Extreme Search 명령어를 사용하도록 변환하는 방법의 예입니다.
-이 예는 설명 용도로만 작성되었습니다. Splunk Enterprise Security에 포함된 "무차별 공격(Brute Force) 액세스 동작이 탐지됨" 상관(correlation) 검색은 이미 Extreme Search 명령어를 사용하도록 변환되어 있습니다.
+다음은 기존 "무차별 공격(Brute Force) 액세스 동작이 탐지됨" 상관(correlation)검색을 Extreme Search 명령어를 사용하도록 변환하는 방법의 예입니다.
+이 예는 설명 용도로만 작성되었습니다. Splunk Enterprise Security에 포함된 "무차별 공격(Brute Force) 액세스 동작이 탐지됨" 상관(correlation)검색은 이미 Extreme Search 명령어를 사용하도록 변환되어 있습니다.
 
 ### 무차별 공격(Brute Force) 액세스 동작이 탐지됨 검색
 
-"무차별 공격(Brute Force) 액세스 동작이 탐지됨" 상관(correlation) 검색은 과도한 로그인 실패 시도에 이은 성공적인 시도횟수를 검색합니다. 기본 검색은 관련 이벤트를 찾고, "failure" 유형별로 이벤트 수를 집계하고, 그에 이은 "success" 이벤트를 지난 1시간 동안의 모든 호스트 인증에 대해 찾습니다. 확인된 이벤트가 임계값을 충족하는 경우, 검색에서 주요 이벤트나
+"무차별 공격(Brute Force) 액세스 동작이 탐지됨" 상관(correlation)검색은 과도한 로그인 실패 시도에 이은 성공적인 시도횟수를 검색합니다. 기본 검색은 관련 이벤트를 찾고, "failure" 유형별로 이벤트 수를 집계하고, 그에 이은 "success" 이벤트를 지난 1시간 동안의 모든 호스트 인증에 대해 찾습니다. 확인된 이벤트가 임계값을 충족하는 경우, 검색에서 주요 이벤트나
 기타 경보 유형을 만드는 경고 작업을 트리거합니다.
 
-Extreme Search 명령어가 없는 "무차별 공격(Brute Force) 액세스 동작이 탐지됨" 상관(correlation) 검색:
+Extreme Search 명령어가 없는 "무차별 공격(Brute Force) 액세스 동작이 탐지됨" 상관(correlation)검색:
 
 ```sql
 | `datamodel("Authentication","Authentication")` | stats values(Authentication.tag) as
@@ -132,7 +132,7 @@ Extreme Search을 이행하는 검색은 정적인 값을 제거하고, 이 예�
 
 1. 데이터 조사
     Extreme Search을 사용하려면 명령어가 의존할 데이터 모델을 작성해야 합니다. 데이터 모델을 작성하려면 데이터가 무엇을 나타내는지, 그리고 어떤 질문에 대한 답을 얻으려고 하는지 알아야 합니다.
-    이 예의 "무차별 공격(Brute Force) 액세스 동작이 탐지됨" 상관(correlation) 검색에서는 인증 실패 수가 영(0) 밑으로 떨어지지 않을 것이고 범위가 훨씬 더 높을 수 있음을 압니다. 크기 척도는 검색하는 인증 값을 나타냅니다.
+    이 예의 "무차별 공격(Brute Force) 액세스 동작이 탐지됨" 상관(correlation)검색에서는 인증 실패 수가 영(0) 밑으로 떨어지지 않을 것이고 범위가 훨씬 더 높을 수 있음을 압니다. 크기 척도는 검색하는 인증 값을 나타냅니다.
 2. 컨텍스트 선택
     데이터 지점이 3개씩 요구되는 세 가지 유형의 컨텍스트 중 하나를 선택할 수 있습니다.
 
@@ -180,9 +180,9 @@ Extreme Search을 이행하는 검색은 정적인 값을 제거하고, 이 예�
     ```
 
 5. 컨텍스트를 검색에 적용
-    xsWhere 검색 명령어를 사용하여 데이터 값을 컨텍스트와 대조하여 평가할 수 있습니다. 이 상관(correlation) 검색은 xsWhere를 사용하여 인증 실패 횟수를 failures_by_src_count_1h 컨텍스트에 비교하여 횟수가 "medium"보다 큰 값을 나타내는지 결정합니다.
+    xsWhere 검색 명령어를 사용하여 데이터 값을 컨텍스트와 대조하여 평가할 수 있습니다. 이 상관(correlation)검색은 xsWhere를 사용하여 인증 실패 횟수를 failures_by_src_count_1h 컨텍스트에 비교하여 횟수가 "medium"보다 큰 값을 나타내는지 결정합니다.
 
-    이 예에서 중간(medium)이라는 개념은 컨텍스트가 데이터로 업데이트된 후에 변경되는 값의 범위를 나타냅니다. 저장된 검색이 컨텍스트를 업데이트합니다. 저장된 검색에서 식별된 이벤트 수가 중간보다 큰 경우, Extreme Search을 사용하는 상관(correlation) 검색이 경고 작업을 트리거하고 주요 이벤트를 만듭니다.
+    이 예에서 중간(medium)이라는 개념은 컨텍스트가 데이터로 업데이트된 후에 변경되는 값의 범위를 나타냅니다. 저장된 검색이 컨텍스트를 업데이트합니다. 저장된 검색에서 식별된 이벤트 수가 중간보다 큰 경우, Extreme Search을 사용하는 상관(correlation)검색이 경고 작업을 트리거하고 주요 이벤트를 만듭니다.
 
     Extreme Search 기능이 있는 "무차별 공격(Brute Force) 액세스 동작이 탐지됨"
 
@@ -193,7 +193,7 @@ Extreme Search을 이행하는 검색은 정적인 값을 제거하고, 이 예�
 6. 컨텍스트 업데이트
     검색 임계값은 저장된 검색을 사용하여 컨텍스트를 업데이트하므로 동적일 수 있습니다. Extreme Search을 위한 컨텍스트 정보를 생성하는 ES에 포함된 저장된 검색은 "컨텍스트 생성(Context Gen)"으로 끝나므로 쉽게 식별할 수 있습니다.
 
-    "무차별 공격(Brute Force) 액세스 동작이 탐지됨" 상관(correlation) 검색에서 사용하는 영역 컨텍스트는 최소, 최대 및 카운트 값을 요구합니다. 이 세 값은 인증 데이터 모델에서 가져옵니다. "액세스 - 소스별 인증 실패 수 - 컨텍스트 생성" 저장된 검색은 "무차별 공격(Brute Force) 액세스 동작" 상관(correlation) 검색에 사용되는 failures_by_src_count_1h 컨텍스트를 생성합니다.
+    "무차별 공격(Brute Force) 액세스 동작이 탐지됨" 상관(correlation)검색에서 사용하는 영역 컨텍스트는 최소, 최대 및 카운트 값을 요구합니다. 이 세 값은 인증 데이터 모델에서 가져옵니다. "액세스 - 소스별 인증 실패 수 - 컨텍스트 생성" 저장된 검색은 "무차별 공격(Brute Force) 액세스 동작" 상관(correlation)검색에 사용되는 failures_by_src_count_1h 컨텍스트를 생성합니다.
     failures_by_src_count_1h 컨텍스트의 경우, 컨텍스트 생성 검색의 결과는 최대값을 중간값의 배수로 변경하여 이상값으로 인해 기본 컨텍스트가 왜곡되고 실패가 초래될 가능성을 방지합니다.
 
     "액세스 - 소스별 인증 실패 수 - 컨텍스트 생성" 저장된 검색
@@ -204,12 +204,12 @@ Extreme Search을 이행하는 검색은 정적인 값을 제거하고, 이 예�
 
     이 검색은 failures_by_src_count_1h 컨텍스트를 xsUpdateDDContext로 업데이트합니다. 이 사례에서는 검색의 데이터가 컨텍스트에 추가되어 컨텍스트를 알리는 과거 추세를 만듭니다. 이 검색은 검색의 첫 번째 부분에서 사용자에 의해 제공되는 것이 아니라 컨텍스트에 의해 사용되는 데이터를 제공하므로 xsUpdateUDContext를 사용한 4단계의 컨텍스트 검색과 다릅니다.
 
-    상관(correlation) 검색과 저장된 검색 "액세스 - 소스별 인증 실패 횟수 - 컨텍스트 생성" 검색은 기본적으로 매 시간마다 실행되도록 예약됩니다.
+    상관(correlation)검색과 저장된 검색 "액세스 - 소스별 인증 실패 횟수 - 컨텍스트 생성" 검색은 기본적으로 매 시간마다 실행되도록 예약됩니다.
 
 7. 헤지를 사용하여 결과 수정
     헤지는 개념이 나타내는 범위를 수정하는 의미 용어입니다. 헤지를 사용하여 개념 용어가 데이터를 모델링하는 데 사용하는 곡선의 모양을 제한, 축소 또는 수정할 수 있습니다. "above" 및 "below" 헤지는 일치할 값의 범위를 다시 정의하므로 경고 검색에 유용합니다.
 
-    Extreme Search을 사용하는 "무차별 공격(Brute Force) 액세스 동작이 탐지됨 " 상관(correlation) 검색은 실패 횟수가 "above medium"인 경우에만 경고 작업이 트리거되도록 헤지를 적용합니다.
+    Extreme Search을 사용하는 "무차별 공격(Brute Force) 액세스 동작이 탐지됨 " 상관(correlation)검색은 실패 횟수가 "above medium"인 경우에만 경고 작업이 트리거되도록 헤지를 적용합니다.
 
 여러 헤지가 적용된 개념의 예:
 
@@ -231,9 +231,9 @@ Splunk_SA_ExtremeSearch 앱의 synonyms.csv 룩업 파일에는 Extreme Search �
 
 요약
 
-Extreme Search을 사용하는 "무차별 공격(Brute Force) 액세스 동작이 탐지됨" 상관(correlation) 검색이 Splunk Enterprise Security에 포함되어 있습니다. 컨텍스트 생성 검색은 컨텍스트를 반복적인 간격으로 실행하고 업데이트합니다. 상관(correlation) 검색은 컨텍스트를 참조하고, 컨텍스트 안에 있는 개념은 임계값을 설정합니다. 개념은 "above medium"으로 헤지되므로 실패한 인증 횟수에 이은 성공적인 인증이 "high" 또는 "extreme"인 경우에만 상관(correlation) 검색이 주요 이벤트를 만듭니다.
+Extreme Search을 사용하는 "무차별 공격(Brute Force) 액세스 동작이 탐지됨" 상관(correlation)검색이 Splunk Enterprise Security에 포함되어 있습니다. 컨텍스트 생성 검색은 컨텍스트를 반복적인 간격으로 실행하고 업데이트합니다. 상관(correlation)검색은 컨텍스트를 참조하고, 컨텍스트 안에 있는 개념은 임계값을 설정합니다. 개념은 "above medium"으로 헤지되므로 실패한 인증 횟수에 이은 성공적인 인증이 "high" 또는 "extreme"인 경우에만 상관(correlation)검색이 주요 이벤트를 만듭니다.
 
-쉽게 말하면, Extreme Search이 "무차별 공격(Brute Force) 액세스 동작이 탐지됨" 상관(correlation) 검색을 "X 회의 실패한 인증 후에 인증에 성공한 인증 시도 모두 찾기"에서 "많거나 극도로 많은 횟수의 실패한 인증 후에 인증에 성공한 인증 시도 모두찾기"로 변환했습니다.
+쉽게 말하면, Extreme Search이 "무차별 공격(Brute Force) 액세스 동작이 탐지됨" 상관(correlation)검색을 "X 회의 실패한 인증 후에 인증에 성공한 인증 시도 모두 찾기"에서 "많거나 극도로 많은 횟수의 실패한 인증 후에 인증에 성공한 인증 시도 모두찾기"로 변환했습니다.
 
 ## Extreme Search 명령어
 

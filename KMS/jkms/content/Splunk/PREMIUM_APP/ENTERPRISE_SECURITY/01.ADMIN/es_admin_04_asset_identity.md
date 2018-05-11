@@ -111,7 +111,7 @@ ip,mac,nt_host,dns,owner,priority,lat,long,city,country,bunit,category,pci_domai
     <tr><td>bunit</td><td>문자열</td><td>권장. 자산의 사업 부문. Splunk Enterprise Security에서 대시보드기준 필터링에 사용됩니다.</td><td>EMEA, NorCal</td></tr>
     <tr><td>category</td><td>파이프로구분된 문자열</td><td>권장. 자산의 논리적 분류를 파이프로 구분한 리스트입니다. Asset 및 Identity상관 및 분류에 사용됩니다. 범주를 참조하십시오.</td><td>server|web_farm|cloud</td></tr>
     <tr><td>pci_domain</td><td>파이프로구분된 문자열</td><td>PCI 도메인의 파이프로 구분된 리스트입니다. 설치 및 설정 매뉴얼에서 Splunk App for PCI Compliance의 자산 설정을 참조하십시오.</td><td>cardholder, trust|dmz, untrust 비워 둘 경우 untrust기 기본값으로 지정됩니다.</td></tr>
-    <tr><td>is_expected</td><td>부울</td><td>이 자산의 이벤트를 항상 기대해야 하는지 나타냅니다. True로 설정할 경우, 이 자산이 이벤트 보고를 중지하면 Expected Host Not Reporting 상관(correlation) 검색이 adaptive     response 작업을 수행합니다.</td><td>"true" 또는 "false"를 나타내는 공백</td></tr>
+    <tr><td>is_expected</td><td>부울</td><td>이 자산의 이벤트를 항상 기대해야 하는지 나타냅니다. True로 설정할 경우, 이 자산이 이벤트 보고를 중지하면 Expected Host Not Reporting 상관(correlation)검색이 adaptive     response 작업을 수행합니다.</td><td>"true" 또는 "false"를 나타내는 공백</td></tr>
     <tr><td>should_timesync</td><td>부울</td><td>이 자산에서 시간 동기화 이벤트를 모니터링해야 하는지 여부를 나타냅니다. True로 설정할 경우, 이 자산이 지난 24시간의 시간 동기화 이벤트를 보고하지 않으면 Should Timesync Host Not Syncing 상관 (correlation) 검색이 adaptive response 작업을 수행합니다.</td><td>"true" 또는 "false"를 나타내는 공백</td></tr>
     <tr><td>should_update</td><td>부울</td><td>이 자산에서 시스템 업데이트 이벤트를 모니터링해야 하는지 여부를 나타냅니다.</td><td>"true" 또는 "false"를 나타내는 공백</td></tr>
     <tr><td>requires_av</td><td>부울</td><td>이 자산에 바이러스 백신 소프트웨어가 설치되어 있어야 하는지 여부를 나타냅니다.</td><td>"true" 또는 "false"를 나타내는 공백</td></tr>
@@ -295,7 +295,7 @@ Asset 및 Identity 데이터가 Splunk Enterprise Security에 추가되었는지
 4. sourcetype에 따라 선택적으로 활성화를 선택하는 경우, source type을 입력하고 Asset 및 Identity에 해당하는 체크박스를 선택합니다.
 5. 저장을 클릭합니다.
 
-Asset 및 Identity 상관을 완전히 비활성화하면 Asset 및 Identity 룩업에서 얻은 Asset 및 Identity 데이터로 이벤트를 보강할 수 없습니다. 그러면 상관(correlation) 검색, 대시보드 및 기타 기능이 정상적으로 작동하지 않을 수 있습니다. Asset 및 Identity 상관을 비활성화하기 전에 Splunk 프로페셔널 서비스 또는 Splunk 서포트와 상의하십시오.
+Asset 및 Identity 상관을 완전히 비활성화하면 Asset 및 Identity 룩업에서 얻은 Asset 및 Identity 데이터로 이벤트를 보강할 수 없습니다. 그러면 상관(correlation)검색, 대시보드 및 기타 기능이 정상적으로 작동하지 않을 수 있습니다. Asset 및 Identity 상관을 비활성화하기 전에 Splunk 프로페셔널 서비스 또는 Splunk 서포트와 상의하십시오.
 
 ### Asset 및 Identity 상관 작동 방식
 
@@ -524,7 +524,7 @@ SA-ldapsearch에서 Active Directory의 Asset 및 Identity 데이터를 검색�
 
 1. 다음 절차에 따라 새 Asset 및 Identity 리스트를 설정하십시오. Splunk Enterprise Security에서 새 Asset 및 Identity 리스트 설정을 참조하십시오.
 2. 만든 룩업 파일을 저장된 검색을 설정하는 작업을 마칠 때까지 비활성화하여 Asset 및 Identity 데이터가 불완전하거나 부정확한 데이터와 병합되지 않도록 합니다. Asset 및 Identity 룩업 비활성화 또는 활성화를 참조하십시오.
-3. ldapsearch 명령어어를 사용하여 SA-IdentityManagement에 저장된 검색을 만들어 룩업 파일을 채웁니다. 이 검색의 정확한 구문은 AD 설정에 따라 다릅니다. Active Directory의 ID 데이터 수집을 위한 검색 예와 Active Directory의 자산 데이터 수집을 위한 검색 예의 두 가지 예를 참조하십시오.
+3. ldapsearch 명령어를 사용하여 SA-IdentityManagement에 저장된 검색을 만들어 룩업 파일을 채웁니다. 이 검색의 정확한 구문은 AD 설정에 따라 다릅니다. Active Directory의 ID 데이터 수집을 위한 검색 예와 Active Directory의 자산 데이터 수집을 위한 검색 예의 두 가지 예를 참조하십시오.
 4. 병합 프로세스를 테스트합니다. Splunk Enterprise Security에서 Asset 및 Identity 병합 프로세스 테스트를 참조하십시오.
 
 #### Active Directory의 ID 데이터 수집을 위한 검색 예
