@@ -55,7 +55,7 @@ scale-color($color, [$red], [$green], [$blue], [$saturation], [$lightness], [$al
 change-color($color, [$red], [$green], [$blue], [$hue], [$saturation], [$lightness], [$alpha]) : Changes one or more properties of a color.
 ie-hex-str($color) : Converts a color into the format understood by IE filters.
 
-========== ####List Functions
+### List Functions
 
 Visit Sass Functions.
 
@@ -72,72 +72,59 @@ index($list, $value) : Returns the position of a value within a list.
 list-separator($list) : Returns the separator of a list.
 is-bracketed($list) : Returns whether a list has square brackets.
 
+### Map Functions
 
-========== ####Map Functions
+Maps in Sass are immutable; all map functions return a new map rather than updating the existing map in-place.
 
-Visit Sass Functions.
+map-get($map, $key) : Returns the value in a map associated with a given key.
+map-merge($map1, $map2) : Merges two maps together into a new map.
+map-remove($map, $keys…) : Returns a new map with keys removed.
+map-keys($map) : Returns a list of all keys in a map.
+map-values($map) : Returns a list of all values in a map.
+map-has-key($map, $key) : Returns whether a map has a value associated with a given key.
+keywords($args) : Returns the keywords passed to a function that takes variable arguments.
 
-========== ####Selector Functions
+### Selector Functions
 
 sele­cto­r-n­est­($s­ele­cto­rs...) Nests selector beneath one another like they would be nested in the styles­heet.
-
 sele­cto­r-r­epl­ace­($s­ele­ctor, $original, $repla­cem­ent) Replaces $original with $repla­cement within $selector.
 
 More at Sass Functions.
 
-========== ####String Functions
+### String Functions
 
 unqu­ote­($s­tri­ng) Removes quotes from a string.
-
 quot­e($­str­ing) Adds quotes to a string.
-
 str-­len­gth­($s­tri­ng) Returns the number of characters in a string.
 
 More at Sass Functions.
 
-========== ####Number Functions
+### Number Functions
 
 perc­ent­age­($n­umb­er) Converts a unitless number to a percen­tage.
-
 roun­d($­num­ber) Rounds a number to the nearest whole number.
-
 ceil­($n­umb­er) Rounds a number up to the next whole number.
-
 floo­r($­num­ber) Rounds a number down to the previous whole number.
-
 abs(­$nu­mber) Returns the absolute value of a number.
-
 min(­$nu­mbe­rs...) Finds the minimum of several numbers.
-
 max(­$nu­mbe­rs...) Finds the maximum of several numbers.
-
 rand­om(­[$l­imi­t]) Returns a random number.
 
-========== ####Introspection Functions
+### Introspection Functions
 
 feat­ure­-ex­ist­s($­fea­ture) Returns whether a feature exists in the current Sass runtime.
-
 vari­abl­e-e­xis­ts(­$na­me) Returns whether a variable with the given name exists in the current scope.
-
 glob­al-­var­iab­le-­exi­sts­($n­ame) Returns whether a variable with the given name exists in the global scope.
-
 func­tio­n-e­xis­ts(­$na­me) Returns whether a function with the given name exists.
-
 mixi­n-e­xis­ts(­$na­me) Returns whether a mixin with the given name exists.
-
 insp­ect­($v­alue) Returns the string repres­ent­ation of a value as it would be repres­ented in Sass.
-
 type­-of­($v­alue) Returns the type of a value.
-
 unit­($n­umb­er) Returns the unit(s) associated with a number.
-
 unit­les­s($­num­ber) Returns whether a number has units.
-
 comp­ara­ble­($n­umber1, $numbe­r2) Returns whether two numbers can be added, subtra­cted, or compared.
-
 call­($name, $args…) Dynami­cally calls a Sass function.
 
-========== ####Miscel­laneous Functions
+### Miscel­laneous Functions
 
 if($­con­dition, $if-true, $if-fa­lse) Returns one of two values, depending on whether or not $condition is true.
 

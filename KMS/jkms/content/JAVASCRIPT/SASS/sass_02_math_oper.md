@@ -19,7 +19,7 @@ Sass 에서는 수학 연산자들을 사용
 다음과 같은 식은 오류 없이 작동합니다: $box-width: 300px / 960px * 100%
 
 ```scss
-# SCSS
+/*  SCSS */
 .container { width: 100%; }
 
 article[role="main"] {
@@ -34,7 +34,7 @@ aside[role="complementary"] {
 ```
 
 ```css
-# CSS
+/* CSS */
 .container {
   width: 100%;
 }
