@@ -6,22 +6,24 @@ Function은 위에서 소개한 mixin 과도 사뭇 비슷한데요, 차이점�
 
 Function을 선언 할 때는,  예상하셨겠지만! @function directive 를 사용합니다.
 
-Sass
-
+```scss
+/* SCSS */
 @function calc-percent($target, $container) {
   @return ($target / $container) * 100%;
 }
-
 @function cp($target, $container) {
   @return calc-percent($target, $container);
 }
-
 .my-module {
   width: calc-percent(650px, 1000px);
 }
-CSS
+```
 
+```css
+/* CSS */
 .my-module {
   width: 65%;
 }
-꿀 팁: 자주 사용 할 것 같은 함수는 위와같이 단축함수를 만들어 사용하세요. 그런다고해서 결과물의 용량이 늘어나지는 않으니까요.
+```
+
+꿀 팁: 자주 사용 할 것 같은 함수는 위와같이 단축함수를 만들어 사용하세요. 그런다고 해서 결과물의 용량이 늘어나지는 않으니까요.

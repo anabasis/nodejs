@@ -59,7 +59,8 @@ VSCODE App
                 "table",
                 "tr",
                 "td",
-                "th"
+                "th",
+                "dr"
             ]
         }
     }
