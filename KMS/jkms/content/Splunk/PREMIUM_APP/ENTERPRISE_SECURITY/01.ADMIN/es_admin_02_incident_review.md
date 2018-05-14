@@ -17,16 +17,16 @@ Splunk Enterprise Security는 데이터에서 패턴을 감지하고 상관(corr
 
 모든 Asset 및 Identity에 대한 위험 점수가 인시던트 검토에 표시되지는 않음
 위험 점수가 있고 위험 개체 유형이 "system" 또는 "user"인 Asset 및 Identity(위험 개체)만 인시던트 검토에 표시
-위험 점수는 orig_host, dvc, src, dest, src_user 및 user 필드에만 표시
+위험 점수는 **orig_host, dvc, src, dest, src_user 및 user** 필드에만 표시
 Asset 및 Identity의 위험 점수는 위험 분석 대시보드에 표시되는 점수와 일치하지 않을 수 있음
 위험 점수는 정확한 사용자 이름으로 한정되는 점수가 아니라 Asset 및 Identity에 대한 누적 점수
 
-- 예를 들어 어떤 사람에게 위험 점수가 40인 "buttercup"이라는 사용자 이름이 있고 위험 점수가 60인 "buttercup@splunk.com"이라는 이메일 주소가 있는데 ID 룩업에서 "buttercup"과 "buttercup@splunk.com"이 동일 한 사람의 사용자 이름과 이메일 주소로 확인될 경우, 인시던트 검토에 "buttercup" 및 "buttercup@splunk.com" 계정의 위험 점수가 100으로 표시
+- 예를 들어 어떤 사람에게 위험 점수가 40인 "buttercup"이라는 사용자 이름이 있고 위험 점수가 60인 "buttercup@splunk.com"이라는 이메일 주소가 있는데 Identity 룩업에서 "buttercup"과 "buttercup@splunk.com"이 동일 한 사람의 사용자 이름과 이메일 주소로 확인될 경우, 인시던트 검토에 "buttercup" 및 "buttercup@splunk.com" 계정의 위험 점수가 100으로 표시
 - 또 다른 예로, IP 10.11.36.1의 위험 점수가 80이고 IP 10.11.36.19의 위험 점수가 30인데 자산 룩업에서 "10.11.36.1 - 10.11.36.19"가 동일한 자산에 속한 IP 범위로 확인될 경우, 인시던트 검토에 IP 주소 "10.11.36.1" 및 "10.11.36.19"의 위험 점수가 모두 110으로 표시
 
-인시던트 검토에 표시되는 위험 점수는 위협 - 위험 상관 - 룩업 생성 룩업 생성 검색을 사용하여 계산
-
-이 검색은 30분마다 실행되어 risk_correlation_lookup 룩업 파일을 업데이트합니다. 인시던트 검토에서 위험 점수가 더 자주 업데이트되도록 하려면 saved search의 cron_schedule을 업데이트
+위험도 점수는 **"Threat - Risk Correlation - Lookup Gen"** 룩업 생성 검색을 사용하여 Incident Review에 대해 계산
+검색은 30 분마다 실행되고 **risk_correlation_lookup** 룩업 파일을 업데이트
+인시던트 검토에서 위험 점수가 더 자주 업데이트되도록 하려면 saved search의 cron_schedule을 업데이트
 
 ### 분류되지 않은 notable event에 대해 애널리스트에게 알림
 
@@ -39,62 +39,69 @@ notable event가 분류되지 않은 경우 상관(correlation)검색을 사용�
 5. 변경 사항을 저장
 6. 분류되지 않은 notable event 상관(correlation)검색을 활성화
 
-## Splunk Enterprise Security에서 인시던트 검토 사용자 지정
+## Splunk Enterprise Security에서 인시던트 검토 커스터마이징
 
-Splunk Enterprise Security 관리자는 애널리스트가 인시던트 검토 대시보드에서 notable event를 보고 notable event와 상호 작용하는 방법을 사용자 지정할 수 있음
+Splunk Enterprise Security 관리자는 애널리스트가 인시던트 검토 대시보드에서 notable event를 보고 notable event와 상호 작용하는 방법을 커스터마이징할 수 있음
 
 ### 애널리스트 기능 및 권한 수정
 
 인시던트 검토 설정 페이지에서 애널리스트가 notable event의 계산된 긴급도를 재정의할 수 있는지 설정
 애널리스트가 notable event를 업데이트할 때 주석을 추가하도록 요구할 것인지 선택할 수 있음
 
-1. 설정 > 인시던트 관리 > 인시던트 검토 설정을 선택하여 인시던트 검토 설정을 봅니다.
-2. 긴급도 재정의 허용 체크박스를 사용하여 애널리스트가 notable event의 계산된 긴급도를 재정의하는 것을 허용하거나 차단합니다. 애널리스트는 기본적으로 긴급도를 재정의할 수 있습니다.
-3. 주석 아래의 필수 체크박스를 선택하여 애널리스트가 notable event를 업데이트할 때 주석을 추가할 것을 요구합니다.
-4. 애널리스트가 주석을 추가하도록 요구할 경우, 필수 주석의 최소 문자 수를 입력합니다. 기본 문자 수는 20자입니다.
+1. **설정 > 인시던트 관리 > 인시던트 검토 설정**을 선택하여 인시던트 검토 설정
+2. 긴급도 재정의 허용 체크박스를 사용하여 애널리스트가 notable event의 계산된 긴급도를 재정의하는 것을 허용하거나 차단(애널리스트는 기본적으로 긴급도를 재정의할 수 있음)
+3. 주석 아래의 필수 체크박스를 선택하여 애널리스트가 notable event를 업데이트할 때 주석을 추가할 것을 요구
+4. 애널리스트가 주석을 추가하도록 요구할 경우, 필수 주석의 최소 문자 수를 입력(기본 문자 수는 20자)
 
 ### 애널리스트 권장 용량 설정
 
 일반 설정 페이지에서 보안 애널리스트 1인당 배정할 notable event의 권장 최대 수를 설정합니다.
 
-1. 설정 > 일반 > 일반 설정을 선택하여 일반 설정을 표시합니다.
-2. 인시던트 검토 애널리스트 용량 설정을 사용하여 애널리스트에게 배정할 notable event 수를 입력.(기본값은 12)
+1. **설정 > 일반 > 일반 설정**을 선택하여 일반 설정을 표시
+2. **인시던트 검토 애널리스트 용량 설정**을 사용하여 애널리스트에게 배정할 notable event 수를 입력.(기본값은 12)
 
-이 값은 감사(audit) 용도로 사용되며, 애널리스트에게 기본 수보다 많은 notable event가 배정되는 것을 방지하지 않습니다.
+이 값은 감사(audit) 용도로 사용되며, 애널리스트에게 기본 수보다 많은 notable event가 배정되는 것을 방지하지 않음
 
 ### 인시던트 검토 컬럼 변경
 
-사건 검토 대시보드에 표시되는 컬럼을 변경할 수 있습니다.
+사건 검토 대시보드에 표시되는 컬럼을 변경할 수 있음
 
-1. 인시던트 검토 - 테이블 속성에서 기존 컬럼을 검토합니다.
-2. 작업 컬럼을 사용하여 사용 가능한 컬럼을 편집 또는 제거하거나 컬럼 순서를 변경합니다.
+1. **인시던트 검토 - 테이블 속성**에서 기존 컬럼을 검토
+2. 작업 컬럼을 사용하여 사용 가능한 컬럼을 편집 또는 제거하거나 컬럼 순서를 변경
 3. 아래에 삽입을 선택하거나 더 보기...를 선택한 다음 위에 삽입을 선택하여 사용자 지정 컬럼을 추가합니다.
 
 ### 애널리스트가 인시던트 검토에서 notable event를 성공적으로 편집할 수 없는 경우 문제 해결
 
 애널리스트가 인시던트 검토에서 notable event를 성공적으로 편집할 수 없는 경우 몇 가지 이유 때문일 수 있습니다.
 
-- 애널리스트에게 상태를 전환할 수 있는 권한이 없을 수도 있습니다. notable event 상태 관리를 참조하십시오.
-- 애널리스트가 표시되지만 버킷에서 제한된 수의 이벤트만 가져올 수 있기 때문에 성공적으로 편집할 수 없는 notable event를 편집하려고 시도할 수도 있습니다.
+- 애널리스트에게 상태를 전환할 수 있는 권한이 없을 수도 있습니다. [notable event 상태 관리](http://docs.splunk.com/Documentation/ES/5.0.0/Admin/Customizenotables#Manage_notable_event_statuses)를 참조
+- 애널리스트가 표시되지만 버킷에서 제한된 수의 이벤트만 가져올 수 있기 때문에 성공적으로 편집할 수 없는 notable event를 편집하려고 시도할 수도 있음
 
-상관(correlation)검색에서 짧은 기간에 많은 수(예: 5분 미만에 1000개)의 notable event를 만드는 경우 notable 인덱스에서 표시할 notable event를 가져오려고 시도할 때 인시던트 검토 대시보드가 max_events_per_bucket 한도에 도달할 수 있습니다.
+상관(correlation)검색에서 짧은 기간에 많은 수(예: 5분 미만에 1000개)의 notable event를 만드는 경우 notable 인덱스에서 표시할 notable event를 가져오려고 시도할 때 인시던트 검토 대시보드가 **max_events_per_bucket** 한도에 도달할 수 있습니다.
+
+```properties
+[limits.conf]
+max_events_per_bucket = <integer>
+* For searches with “status_buckets>0”, this setting limits the number of
+  events retrieved for each timeline bucket.
+* Default: 1000 in code.
+```
 
 이러한 이유로 notable event를 편집할 수 없는 경우 애널리스트는 더 짧은 기간에 인시던트 검토의 notable event를 검토할 수 있습니다. 예를 들어, 인시던트 검토 대시보드에서 1000개 미만의 이벤트를 검토할 수 있습니다. 1000은 max_events_per_bucket의 기본값이므로 이벤트를 1000개 미만 생성하는 검색의 경우 이 오류가 발생하지 않습니다.
 
 어떤 경우에도 이 문제가 발생하지 않게 하려면 버킷에서 반환될 수 있는 최대 이벤트 수를 수정할 수 있습니다. 하지만, 이 설정을 수정할 경우 Splunk 소프트웨어 베포의 성능에 부정적인 영향을 미칠 수 있습니다.
 
-Splunk Enterprise Security를 Splunk Cloud에서 실행하는 경우, 지원 요청을 접수하여 이 설정에 관한 도움을 받으십시오.
+Splunk Enterprise Security를 Splunk Cloud에서 실행하는 경우, 지원 요청을 접수하여 이 설정에 관한 도움
 
-1. limits.conf를 열어서 편집합니다. Splunk Enterprise 관리자 매뉴얼에서 설정 파일 편집 방법을 참조하십시오.
-2. max_events_per_bucket을 1,000보다 큰 숫자로 설정합니다.
-3. 저장합니다.
+1. limits.conf를 열어서 편집. Splunk Enterprise 관리자 매뉴얼에서 설정 파일 편집 방법을 참조
+2. max_events_per_bucket을 1,000보다 큰 숫자로 설정
+3. 저장
 
-max_events_per_bucket 설정에 대한 자세한 내용은 limits.conf를 참조하십시오.
+max_events_per_bucket 설정에 대한 자세한 내용은 limits.conf를 참조
 
 ### 인시던트 검토의 필터링된 뷰에 탐색 링크 추가
 
-ES 애널리스트의 워크로드 처리를 돕기 위해, 필터가 적용된 인시던트 검토 버전을 로드하는 링크를 앱 탐색에 추가할 수 있
-습니다. 인시던트 검토의 필터링된 뷰에 링크 추가를 참조하십시오.
+ES 애널리스트의 워크로드 처리를 돕기 위해, 필터가 적용된 인시던트 검토 버전을 로드하는 링크를 앱 탐색에 추가할 수 있습니다. 인시던트 검토의 필터링된 뷰에 링크 추가를 참조하십시오.
 
 ## Splunk Enterprise Security에서 notable event 수동으로 만들기
 
