@@ -32,7 +32,7 @@ Asset 및 Identity의 위험 점수는 위험 분석 대시보드에 표시되�
 
 notable event가 분류되지 않은 경우 상관(correlation)검색을 사용하여 애널리스트에게 알릴 수 있음
 
-1. 설정 > 콘텐츠 관리를 선택
+1. **설정 > 콘텐츠 관리**를 선택
 2. 필터를 사용하여 분류되지 않은 notable event 상관(correlation)검색
 3. notable event 소유자 또는 상태 필드를 원하는 대로 변경하여 검색을 수정
 4. 원하는 경고 작업을 설정
@@ -55,10 +55,10 @@ Splunk Enterprise Security 관리자는 애널리스트가 인시던트 검토 �
 
 ### 애널리스트 권장 용량 설정
 
-일반 설정 페이지에서 보안 애널리스트 1인당 배정할 notable event의 권장 최대 수를 설정합니다.
+일반 설정 페이지에서 보안 애널리스트 1인당 배정할 notable event의 권장 최대 수를 설정
 
 1. **설정 > 일반 > 일반 설정**을 선택하여 일반 설정을 표시
-2. **인시던트 검토 애널리스트 용량 설정**을 사용하여 애널리스트에게 배정할 notable event 수를 입력.(기본값은 12)
+2. **인시던트 검토 애널리스트 용량 설정**을 사용하여 애널리스트에게 배정할 notable event 수를 입력.(Incident Review Analyst Capacity 기본값은 12)
 
 이 값은 감사(audit) 용도로 사용되며, 애널리스트에게 기본 수보다 많은 notable event가 배정되는 것을 방지하지 않음
 
@@ -68,11 +68,11 @@ Splunk Enterprise Security 관리자는 애널리스트가 인시던트 검토 �
 
 1. **인시던트 검토 - 테이블 속성**에서 기존 컬럼을 검토
 2. 작업 컬럼을 사용하여 사용 가능한 컬럼을 편집 또는 제거하거나 컬럼 순서를 변경
-3. 아래에 삽입을 선택하거나 더 보기...를 선택한 다음 위에 삽입을 선택하여 사용자 지정 컬럼을 추가합니다.
+3. 아래에 삽입을 선택하거나 더 보기...를 선택한 다음 위에 삽입을 선택하여 사용자 지정 컬럼을 추가
 
 ### 애널리스트가 인시던트 검토에서 notable event를 성공적으로 편집할 수 없는 경우 문제 해결
 
-애널리스트가 인시던트 검토에서 notable event를 성공적으로 편집할 수 없는 경우 몇 가지 이유 때문일 수 있습니다.
+애널리스트가 인시던트 검토에서 notable event를 성공적으로 편집할 수 없는 경우 몇 가지 이유 때문일 수 있음
 
 - 애널리스트에게 상태를 전환할 수 있는 권한이 없을 수도 있습니다. [notable event 상태 관리](http://docs.splunk.com/Documentation/ES/5.0.0/Admin/Customizenotables#Manage_notable_event_statuses)를 참조
 - 애널리스트가 표시되지만 버킷에서 제한된 수의 이벤트만 가져올 수 있기 때문에 성공적으로 편집할 수 없는 notable event를 편집하려고 시도할 수도 있음
@@ -89,88 +89,93 @@ max_events_per_bucket = <integer>
 
 이러한 이유로 notable event를 편집할 수 없는 경우 애널리스트는 더 짧은 기간에 인시던트 검토의 notable event를 검토할 수 있습니다. 예를 들어, 인시던트 검토 대시보드에서 1000개 미만의 이벤트를 검토할 수 있습니다. 1000은 max_events_per_bucket의 기본값이므로 이벤트를 1000개 미만 생성하는 검색의 경우 이 오류가 발생하지 않습니다.
 
-어떤 경우에도 이 문제가 발생하지 않게 하려면 버킷에서 반환될 수 있는 최대 이벤트 수를 수정할 수 있습니다. 하지만, 이 설정을 수정할 경우 Splunk 소프트웨어 베포의 성능에 부정적인 영향을 미칠 수 있습니다.
+어떤 경우에도 이 문제가 발생하지 않게 하려면 버킷에서 반환될 수 있는 최대 이벤트 수를 수정할 수 있습니다. 하지만, 이 설정을 수정할 경우 Splunk 소프트웨어 베포의 성능에 부정적인 영향을 미칠 수 있음
 
 Splunk Enterprise Security를 Splunk Cloud에서 실행하는 경우, 지원 요청을 접수하여 이 설정에 관한 도움
 
 1. limits.conf를 열어서 편집. Splunk Enterprise 관리자 매뉴얼에서 설정 파일 편집 방법을 참조
-2. max_events_per_bucket을 1,000보다 큰 숫자로 설정
+2. **max_events_per_bucket**을 1,000보다 큰 숫자로 설정
 3. 저장
 
 max_events_per_bucket 설정에 대한 자세한 내용은 limits.conf를 참조
 
-### 인시던트 검토의 필터링된 뷰에 탐색 링크 추가
+### 인시던트 검토의 필터링된 뷰에 탐색링크 추가
 
-ES 애널리스트의 워크로드 처리를 돕기 위해, 필터가 적용된 인시던트 검토 버전을 로드하는 링크를 앱 탐색에 추가할 수 있습니다. 인시던트 검토의 필터링된 뷰에 링크 추가를 참조하십시오.
+ES 애널리스트의 워크로드 처리를 돕기 위해, 필터가 적용된 인시던트 검토 버전을 로드하는 링크를 앱 탐색에 추가
+[인시던트 검토의 필터링된 뷰에 링크 추가](http://docs.splunk.com/Documentation/ES/5.0.0/Admin/Customizemenubar#Add_a_link_to_a_filtered_view_of_Incident_Review)를 참조
 
 ## Splunk Enterprise Security에서 notable event 수동으로 만들기
 
-인덱싱된 이벤트를 사용하여 notable event를 수동으로 만들거나 처음부터 새로 만들 수 있습니다.
+인덱싱된 이벤트를 사용하여 notable event를 수동으로 만들거나 처음부터 새로 만듬
 
-참고: 기본적으로 관리자만 notable event를 수동으로 만들 수 있습니다. 다른 사용자에게 이 기능을 부여하는 방법은 설치 및 업그레이드 매뉴얼에서 사용자 및 역할 설정을 참조하십시오.
+참고: 기본적으로 관리자만 notable event를 수동으로 만들 수 있음.
+다른 사용자에게 이 기능을 부여하는 방법은 설치 및 업그레이드 매뉴얼에서 사용자 및 역할 설정을 참조
 
 ### 기존 이벤트를 토대로 notable event 만들기
 
-이벤트 작업 메뉴를 사용해 인덱싱된 이벤트를 토대로 notable event를 만들 수 있습니다. 인시던트 검토 대시보드에 있는 notable event를 토대로 notable event를 만들지 마십시오.
+이벤트 작업 메뉴를 사용해 인덱싱된 이벤트를 토대로 notable event를 만들 수 있음
+인시던트 검토 대시보드에 있는 notable event를 토대로 notable event를 만들지 마십시오.
 
-1. 이벤트에서 이벤트 세부 정보를 보고 이벤트 작업을 클릭합니다.
-2. notable event 만들기를 선택합니다.
-3. 이벤트의 제목을 입력합니다.
-4. (선택 사항) 보안 도메인을 선택합니다.
-5. (선택 사항) 긴급도 레벨을 선택합니다.
-6. (선택 사항) 소유자를 선택합니다.
-7. (선택 사항) 상태를 선택합니다.
-8. notable event를 만든 이유와 무엇을 조사해야 하는지 설명하는 이벤트에 대한 설명을 입력합니다.
-9. 새 notable event를 저장합니다. 새 notable event가 있는 인시던트 검토 대시보드가 표시됩니다.
+1. 이벤트에서 이벤트 세부 정보를 보고 이벤트 작업을 클릭
+2. notable event 만들기를 선택
+3. 이벤트의 제목을 입력
+4. (선택 사항) 보안 도메인을 선택
+5. (선택 사항) 긴급도 레벨을 선택
+6. (선택 사항) 소유자를 선택
+7. (선택 사항) 상태를 선택
+8. notable event를 만든 이유와 무엇을 조사해야 하는지 설명하는 이벤트에 대한 설명을 입력
+9. 새 notable event를 저장. 새 notable event가 있는 인시던트 검토 대시보드가 표시
 
-참고: 이 방법으로 만든 notable event에는 소유자와 상태 같은 추척 필드가 포함되지만, notable event가 상관(correlation) 검
-색 경고 작업을 통해 생성되는 경우에 만들어지는 고유 필드 또는 링크는 포함되지 않습니다.
+참고: 이 방법으로 만든 notable event에는 소유자와 상태 같은 추척 필드가 포함되지만, notable event가 상관(correlation) 검색 경고 작업을 통해 생성되는 경우에 만들어지는 고유 필드 또는 링크는 포함되지 않음
 
 ### notable event 처음부터 새로 만들기
 
 관찰 결과나 Splunk 외부 보안 시스템에서 발견한 사항 등을 기반으로 notable event를 만듭니다.
 
-1. 설정 > 인시던트 관리 > 새로운 notable event를 선택합니다.
-2. 이벤트의 제목을 입력합니다.
-3. (선택 사항) 보안 도메인을 선택합니다.
-4. (선택 사항) 긴급도 레벨을 선택합니다.
-5. (선택 사항) 소유자를 선택합니다.
-6. (선택 사항) 상태를 선택합니다.
-7. notable event를 만든 이유와 무엇을 조사해야 하는지 설명하는 이벤트에 대한 설명을 입력합니다.
-8. 새 notable event를 저장합니다. 새 notable event가 있는 인시던트 검토 대시보드가 표시됩니다.
+1. **설정 > 인시던트 관리 > 새로운 notable event**를 선택
+2. 이벤트의 제목을 입력
+3. (선택 사항) 보안 도메인을 선택
+4. (선택 사항) 긴급도 레벨을 선택
+5. (선택 사항) 소유자를 선택
+6. (선택 사항) 상태를 선택
+7. notable event를 만든 이유와 무엇을 조사해야 하는지 설명하는 이벤트에 대한 설명을 입력
+8. 새 notable event를 저장. 새 notable event가 있는 인시던트 검토 대시보드가 표시됨
 
 ## Splunk Enterprise Security에서 notable event 설정 사용자 지정
 
-Splunk Enterprise Security 관리자는 notable event 설정을 변경할 수 있습니다.
+Splunk Enterprise Security 관리자는 notable event 설정을 변경
 
-notable event 필드 변경
-notable event 상태 관리
-notable event 제거 작성 및 관리
+[notable event 필드 변경](http://docs.splunk.com/Documentation/ES/5.0.0/Admin/Customizenotables#Change_notable_event_fields)
+[notable event 상태 관리](http://docs.splunk.com/Documentation/ES/5.0.0/Admin/Customizenotables#Manage_notable_event_statuses)
+[notable event 제거 작성 및 관리](http://docs.splunk.com/Documentation/ES/5.0.0/Admin/Customizenotables#Create_and_manage_notable_event_suppressions)
 
 ### notable event 필드 변경
 
-인시던트 검토 설정 대시보드에서 인시던트 검토 대시보드에 notable event에 대해 표시되는 필드를 변경합니다. 예를 들어 notable event 세부 정보의 필드 레이블을 변경하거나, 필드를 제거하거나, 필드를 notable event 세부 정보의 추가 필드 섹션에 추가할 수 있습니다. notable event 필드에 적용하는 변경 사항은 모든 notable event에 영향을 미칩니다.
+인시던트 검토 설정 대시보드에서 인시던트 검토 대시보드에 notable event에 대해 표시되는 필드를 변경
+예를 들어 notable event 세부 정보의 필드 레이블을 변경하거나, 필드를 제거하거나, 필드를 notable event 세부 정보의 추가 필드 섹션에 추가
+notable event 필드에 적용하는 변경 사항은 모든 notable event에 영향
 
-1. Splunk Enterprise Security 메뉴 모음에서 설정 > 인시던트 관리 > 인시던트 검토 설정을 선택합니다.
+1. Splunk Enterprise Security 메뉴 모음에서 **설정 > 인시던트 관리 > 인시던트 검토 설정**을 선택합니다.
 2. 인시던트 검토 - 이벤트 속성을 검토합니다.
-3. 편집을 클릭하여 인시던트 검토에 표시되는 필드나 특정 필드의 레이블을 변경합니다.
-4. 제거를 클릭하여 인시던트 검토 대시보드의 notable event 세부 정보에서 필드를 제거합니다.
-5. 저장을 클릭하여 변경 사항을 저장합니다.
+3. 편집을 클릭하여 인시던트 검토에 표시되는 필드나 특정 필드의 레이블을 변경
+4. 제거를 클릭하여 인시던트 검토 대시보드의 notable event 세부 정보에서 필드를 제거
+5. 저장을 클릭하여 변경 사항을 저장
 
 ### notable event 세부 정보에 필드 추가
 
-필드가 상관(correlation)검색 결과에 있고 인시던트 검토에 필드를 표시할 수 있는 경우, notable event 세부 정보의 추가 필드에 필드가 표시됩니다. notable event 세부 정보에 필드를 추가하려면 상관(correlation)검색 결과에 필드가 포함되어 있는지 먼저 확인한 다음 인시던트 검토에 필드가 표시될 수 있는지 확인하십시오.
+필드가 상관(correlation)검색 결과에 있고 인시던트 검토에 필드를 표시할 수 있는 경우, notable event 세부 정보의 추가 필드에 필드가 표시
+notable event 세부 정보에 필드를 추가하려면 상관(correlation)검색 결과에 필드가 포함되어 있는지 먼저 확인한 다음 인시던트 검토에 필드가 표시될 수 있는지 확인
 
-1. 보고 싶은 필드가 상관(correlation)검색 결과에 포함되어 있는지 확인합니다. 검색 페이지에서 상관(correlation)검색을 실행하여 출력 또는 검색 구문을 검토합니다.
-    - 필드가 검색 결과에 있으면 4 단계로 진행합니다.
-    - 필드가 검색 결과에 없으면 2 단계로 진행합니다.
-2. 필드를 포함하도록 상관(correlation)검색을 수정합니다.
-    - 가이드식 검색 편집기로 검색을 편집할 수 있는 경우, 별칭을 사용하여 필드를 집계 함수로 추가합니다. values함수를 사용하여 특정 필드의 모든 가능한 값을 반환하거나, latest 함수를 사용하여 필드의 최근 값을 반환합니다.
-    - 검색을 수동으로 만든 경우, 필드를 추출하도록 검색을 수정합니다. 검색을 수정할 때 상관 조건을 수정하지 않도록 하십시오.
-      - 검색에 통계 변환이 포함되지 않은 경우 | fields + newfieldname을 검색 끝에 추가합니다. 여기서 newfieldname은 추가 세부 정보에 표시할 새 필드의 이름입니다.
-      - 검색에 통계 변환이 포함되어 있는 경우 통계 변환을 수행할 때 필드를 추출합니다. 예를 들어 검색에 | stats count by src | where count>5 통계 검색이 포함된 경우 src 및 count 필드가 notable event 세부 정보 에 표시됩니다. notable event 세부 정보에 dest 필드를 추가하려면, 검색을 다음과 같이 변경해야 할 수 있습니다. | stats values(dest) as dest,count by src.
-3. 상관(correlation)검색을 변경한 후 저장하기 전에 검색 페이지에서 변경 사항을 확인합니다.
-4. 필드를 추가 필드 리스트에 추가합니다.
+1. 보고 싶은 필드가 상관(correlation)검색 결과에 포함되어 있는지 확인. 검색 페이지에서 상관(correlation)검색을 실행하여 출력 또는 검색 구문을 검토
+    - 필드가 검색 결과에 있으면 4 단계로 진행
+    - 필드가 검색 결과에 없으면 2 단계로 진행
+2. 필드를 포함하도록 상관(correlation)검색을 수정
+    - 가이드식 검색 편집기로 검색을 편집할 수 있는 경우, 별칭을 사용하여 필드를 집계 함수로 추가. values함수를 사용하여 특정 필드의 모든 가능한 값을 반환하거나, latest 함수를 사용하여 필드의 최근 값을 반환.
+    - 검색을 수동으로 만든 경우, 필드를 추출하도록 검색을 수정. 검색을 수정할 때 상관 조건을 수정하지 않음
+      - 검색에 통계 변환이 포함되지 않은 경우 | fields + newfieldname을 검색 끝에 추가. 여기서 newfieldname은 추가 세부 정보에 표시할 새 필드의 이름.
+      - 검색에 통계 변환이 포함되어 있는 경우 통계 변환을 수행할 때 필드를 추출. 예를 들어 검색에 | stats count by src | where count>5 통계 검색이 포함된 경우 src 및 count 필드가 notable event 세부 정보에 표시. notable event 세부 정보에 dest 필드를 추가하려면, 검색을 다음과 같이 변경. | stats values(dest) as dest,count by src.
+3. 상관(correlation)검색을 변경한 후 저장하기 전에 검색 페이지에서 변경 사항을 확인.
+4. 필드를 추가 필드 리스트에 추가.
     1. Splunk Enterprise Security 메뉴 모음에서 설정 > 인시던트 관리 > 인시던트 검토 설정을 선택합니다.
     2. 새 항목 추가를 클릭하여 새 필드를 notable event 세부 정보의 추가 필드 섹션에 추가합니다.
     3. notable event 세부 정보에 있는 필드의 표시 이름으로 사용할 레이블을 입력합니다.
