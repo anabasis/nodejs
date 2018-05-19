@@ -15,12 +15,12 @@ Markdown 설정
 VSCODE App
 
 - Markdown Extension Pack
-  - Markdown All in One - All you need for Markdown (keyboard shortcuts, table of contents, auto preview and more).
-  - markdownlint - Markdown/CommonMark linting and style checking for Visual Studio Code.
-  - Markdown PDF - This extension convert Markdown file to pdf, html, png or jpeg file.
-  - Markdown+Math - Mdmath allows to use Visual Studio Code as a markdown editor capable of typesetting and rendering TeX math. In fact it now reuses the built in markdown viewer. KaTeX works inside as a fast math renderer.
-  - Markdown Preview Enhanced - Markdown Preview Enhanced is an extension that provides you with many useful functionalities such as automatic scroll sync, math typesetting, mermaid, PlantUML, pandoc, PDF export, code chunk, presentation writer, etc.
-  - Markdown TOC - Generate TOC (table of contents) of headlines from parsed markdown file.
+    - Markdown All in One - All you need for Markdown (keyboard shortcuts, table of contents, auto preview and more).
+    - markdownlint - Markdown/CommonMark linting and style checking for Visual Studio Code.
+    - Markdown PDF - This extension convert Markdown file to pdf, html, png or jpeg file.
+    - Markdown+Math - Mdmath allows to use Visual Studio Code as a markdown editor capable of typesetting and rendering TeX math. In fact it now reuses the built in markdown viewer. KaTeX works inside as a fast math renderer.
+    - Markdown Preview Enhanced - Markdown Preview Enhanced is an extension that provides you with many useful functionalities such as automatic scroll sync, math typesetting, mermaid, PlantUML, pandoc, PDF export, code chunk, presentation writer, etc.
+    - Markdown TOC - Generate TOC (table of contents) of headlines from parsed markdown file.
 
 - Auto-Open Markdown Preview
 - Markdown Shortcuts
@@ -38,7 +38,7 @@ VSCODE App
 {
     "window.zoomLevel": 0,
     "markdown.preview.breaks": true,
-    "git.enabled": false,
+    "git.enabled": true,
     "git.path": "E:/REPO/GIT/SERVER/bin/git.exe",
     "explorer.confirmDelete": false,
 
@@ -62,8 +62,11 @@ VSCODE App
                 "th",
                 "dr"
             ]
-        }
-    }
+        },
+        "MD007": { "indent": 4 }
+    },
+    "workbench.startupEditor": "newUntitledFile",
+    "team.showWelcomeMessage": false
 }
 ```
 

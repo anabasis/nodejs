@@ -39,7 +39,7 @@ $mysqld --remove
 ## DB 생성
 
 ```sql
--- 데이터페이스 보기 
+-- 데이터페이스 보기
 show databases;
 
 -- 데이터베이스 생성
@@ -51,7 +51,7 @@ create user node@localhost identified by '1';
 create user 'node'@'%' identified by '1';  -- 외부접근 아이디 생성
 insert into user (host,user,password) values ('%','node',password('1'));
 
--- 사용자 삭제 
+-- 사용자 삭제
 drop user 'node';
 delete from user where user = 'node';
 

@@ -13,20 +13,20 @@ Splunk Enterprise Security는 데이터에서 패턴을 감지하고 상관(corr
 - notable event 설정을 커스터마이징하려면 Splunk Enterprise Security에서 [notable event 설정 커스터마이징](http://docs.splunk.com/Documentation/ES/5.0.0/Admin/Customizenotables)을 참조
 - notable event 프레임워크에 의해 notable event가 채워지고 관리되는 방법에 대한 자세한 내용은 Splunk 개발자 포털에서 Splunk Enterprise Security의 [notable event 프레임워크](http://dev.splunk.com/view/enterprise-security/SP-CAAAFA9)를 참조
 
-### 인시던트 검토에 위험 점수가 표시되는 방법
+### 인시던트 검토에 risk score가 표시되는 방법
 
-모든 Asset 및 Identity에 대한 위험 점수가 인시던트 검토에 표시되지는 않음
-위험 점수가 있고 위험 개체 유형이 "system" 또는 "user"인 Asset 및 Identity(위험 개체)만 인시던트 검토에 표시
-위험 점수는 **orig_host, dvc, src, dest, src_user 및 user** 필드에만 표시
-Asset 및 Identity의 위험 점수는 위험 분석 대시보드에 표시되는 점수와 일치하지 않을 수 있음
-위험 점수는 정확한 사용자 이름으로 한정되는 점수가 아니라 Asset 및 Identity에 대한 누적 점수
+모든 Asset 및 Identity에 대한 risk score가 인시던트 검토에 표시되지는 않음
+risk score가 있고 위험 개체 유형이 "system" 또는 "user"인 Asset 및 Identity(위험 개체)만 인시던트 검토에 표시
+risk score는 **orig_host, dvc, src, dest, src_user 및 user** 필드에만 표시
+Asset 및 Identity의 risk score는 위험 분석 대시보드에 표시되는 점수와 일치하지 않을 수 있음
+risk score는 정확한 사용자 이름으로 한정되는 점수가 아니라 Asset 및 Identity에 대한 누적 점수
 
-- 예를 들어 어떤 사람에게 위험 점수가 40인 "buttercup"이라는 사용자 이름이 있고 위험 점수가 60인 "buttercup@splunk.com"이라는 이메일 주소가 있는데 Identity 룩업에서 "buttercup"과 "buttercup@splunk.com"이 동일 한 사람의 사용자 이름과 이메일 주소로 확인될 경우, 인시던트 검토에 "buttercup" 및 "buttercup@splunk.com" 계정의 위험 점수가 100으로 표시
-- 또 다른 예로, IP 10.11.36.1의 위험 점수가 80이고 IP 10.11.36.19의 위험 점수가 30인데 자산 룩업에서 "10.11.36.1 - 10.11.36.19"가 동일한 자산에 속한 IP 범위로 확인될 경우, 인시던트 검토에 IP 주소 "10.11.36.1" 및 "10.11.36.19"의 위험 점수가 모두 110으로 표시
+- 예를 들어 어떤 사람에게 risk score가 40인 "buttercup"이라는 사용자 이름이 있고 risk score가 60인 "buttercup@splunk.com"이라는 이메일 주소가 있는데 Identity 룩업에서 "buttercup"과 "buttercup@splunk.com"이 동일 한 사람의 사용자 이름과 이메일 주소로 확인될 경우, 인시던트 검토에 "buttercup" 및 "buttercup@splunk.com" 계정의 risk score가 100으로 표시
+- 또 다른 예로, IP 10.11.36.1의 risk score가 80이고 IP 10.11.36.19의 risk score가 30인데 자산 룩업에서 "10.11.36.1 - 10.11.36.19"가 동일한 자산에 속한 IP 범위로 확인될 경우, 인시던트 검토에 IP 주소 "10.11.36.1" 및 "10.11.36.19"의 risk score가 모두 110으로 표시
 
 위험도 점수는 **"Threat - Risk Correlation - Lookup Gen"** 룩업 생성 검색을 사용하여 Incident Review에 대해 계산
 검색은 30 분마다 실행되고 **risk_correlation_lookup** 룩업 파일을 업데이트
-인시던트 검토에서 위험 점수가 더 자주 업데이트되도록 하려면 saved search의 cron_schedule을 업데이트
+인시던트 검토에서 risk score가 더 자주 업데이트되도록 하려면 saved search의 **cron_schedule**을 업데이트
 
 ### 분류되지 않은 notable event에 대해 애널리스트에게 알림
 
@@ -45,7 +45,7 @@ Splunk Enterprise Security 관리자는 애널리스트가 인시던트 검토 �
 
 ### 애널리스트 기능 및 권한 수정
 
-인시던트 검토 설정 페이지에서 애널리스트가 notable event의 계산된 긴급도를 재정의할 수 있는지 설정
+**인시던트 검토 설정** 페이지에서 애널리스트가 notable event의 계산된 긴급도를 재정의할 수 있는지 설정
 애널리스트가 notable event를 업데이트할 때 주석을 추가하도록 요구할 것인지 선택할 수 있음
 
 1. **설정 > 인시던트 관리 > 인시던트 검토 설정**을 선택하여 인시던트 검토 설정
@@ -58,26 +58,28 @@ Splunk Enterprise Security 관리자는 애널리스트가 인시던트 검토 �
 일반 설정 페이지에서 보안 애널리스트 1인당 배정할 notable event의 권장 최대 수를 설정
 
 1. **설정 > 일반 > 일반 설정**을 선택하여 일반 설정을 표시
-2. **인시던트 검토 애널리스트 용량 설정**을 사용하여 애널리스트에게 배정할 notable event 수를 입력.(Incident Review Analyst Capacity 기본값은 12)
+2. **인시던트 검토 애널리스트 용량** 설정을 사용하여 애널리스트에게 배정할 notable event 수를 입력.(Incident Review Analyst Capacity 기본값은 12)
 
-이 값은 감사(audit) 용도로 사용되며, 애널리스트에게 기본 수보다 많은 notable event가 배정되는 것을 방지하지 않음
+> Tip
+> 이 값은 감사(audit) 용도로 사용되며, 애널리스트에게 기본 수보다 많은 notable event가 배정되는 것을 방지하지 않음
 
 ### 인시던트 검토 컬럼 변경
 
-사건 검토 대시보드에 표시되는 컬럼을 변경할 수 있음
+인시턴트 검토 대시보드에 표시되는 컬럼을 변경할 수 있음
 
-1. **인시던트 검토 - 테이블 속성**에서 기존 컬럼을 검토
-2. 작업 컬럼을 사용하여 사용 가능한 컬럼을 편집 또는 제거하거나 컬럼 순서를 변경
-3. 아래에 삽입을 선택하거나 더 보기...를 선택한 다음 위에 삽입을 선택하여 사용자 지정 컬럼을 추가
+1. **설정 > 인시던트 관리 > 인시던트 검토 설정**을 선택하여 인시던트 검토 설정
+2. **인시던트 검토 - 테이블 속성**에서 기존 컬럼을 검토
+3. 작업 컬럼을 사용하여 사용 가능한 컬럼을 편집 또는 제거하거나 컬럼 순서를 변경
+4. 아래에 삽입을 선택하거나 더 보기...를 선택한 다음 위에 삽입을 선택하여 사용자 지정 컬럼을 추가
 
 ### 애널리스트가 인시던트 검토에서 notable event를 성공적으로 편집할 수 없는 경우 문제 해결
 
 애널리스트가 인시던트 검토에서 notable event를 성공적으로 편집할 수 없는 경우 몇 가지 이유 때문일 수 있음
 
-- 애널리스트에게 상태를 전환할 수 있는 권한이 없을 수도 있습니다. [notable event 상태 관리](http://docs.splunk.com/Documentation/ES/5.0.0/Admin/Customizenotables#Manage_notable_event_statuses)를 참조
+- 애널리스트에게 상태를 전환할 수 있는 권한이 없음. [notable event 상태 관리](http://docs.splunk.com/Documentation/ES/5.0.0/Admin/Customizenotables#Manage_notable_event_statuses)를 참조
 - 애널리스트가 표시되지만 버킷에서 제한된 수의 이벤트만 가져올 수 있기 때문에 성공적으로 편집할 수 없는 notable event를 편집하려고 시도할 수도 있음
 
-상관(correlation)검색에서 짧은 기간에 많은 수(예: 5분 미만에 1000개)의 notable event를 만드는 경우 notable 인덱스에서 표시할 notable event를 가져오려고 시도할 때 인시던트 검토 대시보드가 **max_events_per_bucket** 한도에 도달할 수 있습니다.
+상관(correlation)검색에서 짧은 기간에 많은 수(예: 5분 미만에 1000개)의 notable event를 만드는 경우 notable 인덱스에서 표시할 notable event를 가져오려고 시도할 때 인시던트 검토 대시보드가 `max_events_per_bucket` 한도에 도달
 
 ```properties
 [limits.conf]
@@ -87,17 +89,21 @@ max_events_per_bucket = <integer>
 * Default: 1000 in code.
 ```
 
-이러한 이유로 notable event를 편집할 수 없는 경우 애널리스트는 더 짧은 기간에 인시던트 검토의 notable event를 검토할 수 있습니다. 예를 들어, 인시던트 검토 대시보드에서 1000개 미만의 이벤트를 검토할 수 있습니다. 1000은 max_events_per_bucket의 기본값이므로 이벤트를 1000개 미만 생성하는 검색의 경우 이 오류가 발생하지 않습니다.
+이러한 이유로 notable event를 편집할 수 없는 경우 애널리스트는 더 짧은 기간에 인시던트 검토의 notable event를 검토
+예를 들어, 인시던트 검토 대시보드에서 1000개 미만의 이벤트를 검토
+1000은 `max_events_per_bucket`의 기본값이므로 이벤트를 1000개 미만 생성하는 검색의 경우 이 오류가 발생하지 않음.
 
-어떤 경우에도 이 문제가 발생하지 않게 하려면 버킷에서 반환될 수 있는 최대 이벤트 수를 수정할 수 있습니다. 하지만, 이 설정을 수정할 경우 Splunk 소프트웨어 베포의 성능에 부정적인 영향을 미칠 수 있음
+어떤 경우에도 이 문제가 발생하지 않게 하려면 버킷에서 반환될 수 있는 최대 이벤트 수를 수정
+하지만, 이 설정을 수정할 경우 Splunk 소프트웨어 베포의 성능에 부정적인 영향을 미칠 수 있음
 
-Splunk Enterprise Security를 Splunk Cloud에서 실행하는 경우, 지원 요청을 접수하여 이 설정에 관한 도움
+> Tip
+> Splunk Enterprise Security를 Splunk Cloud에서 실행하는 경우, 지원 요청을 접수하여 이 설정에 관한 도움
 
-1. limits.conf를 열어서 편집. Splunk Enterprise 관리자 매뉴얼에서 설정 파일 편집 방법을 참조
-2. **max_events_per_bucket**을 1,000보다 큰 숫자로 설정
+1. `limits.conf`를 열어서 편집. Splunk Enterprise 관리자 매뉴얼에서 설정 파일 편집 방법을 참조
+2. `max_events_per_bucket`을 1,000보다 큰 숫자로 설정
 3. 저장
 
-max_events_per_bucket 설정에 대한 자세한 내용은 limits.conf를 참조
+`max_events_per_bucket` 설정에 대한 자세한 내용은 `limits.conf`를 참조
 
 ### 인시던트 검토의 필터링된 뷰에 탐색링크 추가
 
@@ -108,15 +114,15 @@ ES 애널리스트의 워크로드 처리를 돕기 위해, 필터가 적용된 
 
 인덱싱된 이벤트를 사용하여 notable event를 수동으로 만들거나 처음부터 새로 만듬
 
-참고: 기본적으로 관리자만 notable event를 수동으로 만들 수 있음.
-다른 사용자에게 이 기능을 부여하는 방법은 설치 및 업그레이드 매뉴얼에서 사용자 및 역할 설정을 참조
+> 참고: 기본적으로 관리자만 notable event를 수동으로 만들 수 있음.
+> 다른 사용자에게 이 기능을 부여하는 방법은 설치 및 업그레이드 매뉴얼에서 [사용자 및 역할 설정](http://docs.splunk.com/Documentation/ES/5.0.0/Install/ConfigureUsersRoles)을 참조
 
 ### 기존 이벤트를 토대로 notable event 만들기
 
-이벤트 작업 메뉴를 사용해 인덱싱된 이벤트를 토대로 notable event를 만들 수 있음
+**이벤트 작업(Actions)** 메뉴를 사용해 인덱싱된 이벤트를 토대로 notable event를 만들 수 있음
 인시던트 검토 대시보드에 있는 notable event를 토대로 notable event를 만들지 마십시오.
 
-1. 이벤트에서 이벤트 세부 정보를 보고 이벤트 작업을 클릭
+1. 이벤트에서 이벤트 세부 정보를 보고 **이벤트 작업(Actions)**을 클릭
 2. notable event 만들기를 선택
 3. 이벤트의 제목을 입력
 4. (선택 사항) 보안 도메인을 선택
@@ -124,9 +130,9 @@ ES 애널리스트의 워크로드 처리를 돕기 위해, 필터가 적용된 
 6. (선택 사항) 소유자를 선택
 7. (선택 사항) 상태를 선택
 8. notable event를 만든 이유와 무엇을 조사해야 하는지 설명하는 이벤트에 대한 설명을 입력
-9. 새 notable event를 저장. 새 notable event가 있는 인시던트 검토 대시보드가 표시
+9. 새 notable event를 저장. 새 notable event가 있는 **인시던트 검토** 대시보드에 표시
 
-참고: 이 방법으로 만든 notable event에는 소유자와 상태 같은 추척 필드가 포함되지만, notable event가 상관(correlation) 검색 경고 작업을 통해 생성되는 경우에 만들어지는 고유 필드 또는 링크는 포함되지 않음
+> 참고: 이 방법으로 만든 notable event에는 소유자와 상태 같은 추척 필드가 포함되지만, notable event가 상관(correlation) 검색 경고 작업을 통해 생성되는 경우에 만들어지는 고유 필드 또는 링크는 포함되지 않음
 
 ### notable event 처음부터 새로 만들기
 
@@ -155,8 +161,8 @@ Splunk Enterprise Security 관리자는 notable event 설정을 변경
 예를 들어 notable event 세부 정보의 필드 레이블을 변경하거나, 필드를 제거하거나, 필드를 notable event 세부 정보의 추가 필드 섹션에 추가
 notable event 필드에 적용하는 변경 사항은 모든 notable event에 영향
 
-1. Splunk Enterprise Security 메뉴 모음에서 **설정 > 인시던트 관리 > 인시던트 검토 설정**을 선택합니다.
-2. 인시던트 검토 - 이벤트 속성을 검토합니다.
+1. Splunk Enterprise Security 메뉴 모음에서 **설정 > 인시던트 관리 > 인시던트 검토 설정**을 선택(**모든 설정 > 인시던트 설정**)
+2. **인시던트 검토 - 이벤트 속성**을 검토
 3. 편집을 클릭하여 인시던트 검토에 표시되는 필드나 특정 필드의 레이블을 변경
 4. 제거를 클릭하여 인시던트 검토 대시보드의 notable event 세부 정보에서 필드를 제거
 5. 저장을 클릭하여 변경 사항을 저장
@@ -170,59 +176,65 @@ notable event 세부 정보에 필드를 추가하려면 상관(correlation)검�
     - 필드가 검색 결과에 있으면 4 단계로 진행
     - 필드가 검색 결과에 없으면 2 단계로 진행
 2. 필드를 포함하도록 상관(correlation)검색을 수정
-    - 가이드식 검색 편집기로 검색을 편집할 수 있는 경우, 별칭을 사용하여 필드를 집계 함수로 추가. values함수를 사용하여 특정 필드의 모든 가능한 값을 반환하거나, latest 함수를 사용하여 필드의 최근 값을 반환.
+    - 가이드식 검색 편집기로 검색을 편집할 수 있는 경우, 별칭을 사용하여 필드를 집계 함수로 추가. `values`함수를 사용하여 특정 필드의 모든 가능한 값을 반환하거나, `latest` 함수를 사용하여 필드의 최근 값을 반환.
     - 검색을 수동으로 만든 경우, 필드를 추출하도록 검색을 수정. 검색을 수정할 때 상관 조건을 수정하지 않음
-      - 검색에 통계 변환이 포함되지 않은 경우 | fields + newfieldname을 검색 끝에 추가. 여기서 newfieldname은 추가 세부 정보에 표시할 새 필드의 이름.
-      - 검색에 통계 변환이 포함되어 있는 경우 통계 변환을 수행할 때 필드를 추출. 예를 들어 검색에 | stats count by src | where count>5 통계 검색이 포함된 경우 src 및 count 필드가 notable event 세부 정보에 표시. notable event 세부 정보에 dest 필드를 추가하려면, 검색을 다음과 같이 변경. | stats values(dest) as dest,count by src.
+      - 검색에 통계 변환이 포함되지 않은 경우 `| fields + newfieldname`을 검색 끝에 추가. 여기서 `newfieldname`은 추가 세부 정보에 표시할 새 필드의 이름.
+      - 검색에 통계 변환이 포함되어 있는 경우 통계 변환을 수행할 때 필드를 추출. 예를 들어 검색에 `| stats count by src | where count>5` 통계 검색이 포함된 경우 `src` 및 `count` 필드가 notable event 세부 정보에 표시. notable event 세부 정보에 `dest` 필드를 추가하려면, 검색을 다음과 같이 변경. `| stats values(dest) as dest,count by src`.
 3. 상관(correlation)검색을 변경한 후 저장하기 전에 검색 페이지에서 변경 사항을 확인.
 4. 필드를 추가 필드 리스트에 추가.
-    1. Splunk Enterprise Security 메뉴 모음에서 설정 > 인시던트 관리 > 인시던트 검토 설정을 선택합니다.
-    2. 새 항목 추가를 클릭하여 새 필드를 notable event 세부 정보의 추가 필드 섹션에 추가합니다.
-    3. notable event 세부 정보에 있는 필드의 표시 이름으로 사용할 레이블을 입력합니다.
-    4. notable event 세부 정보에 표시할 필드와 일치하는 필드를 입력합니다.
-    5. 완료를 클릭합니다.
-    6. 저장을 클릭합니다.
+    1. Splunk Enterprise Security 메뉴 모음에서 **설정 > 인시던트 관리 > 인시던트 검토 설정**을 선택
+    2. 새 항목 추가를 클릭하여 새 필드를 notable event 세부 정보의 추가 필드 섹션에 추가
+    3. notable event 세부 정보에 있는 필드의 표시 이름으로 사용할 레이블을 입력
+    4. notable event 세부 정보에 표시할 필드와 일치하는 필드를 입력
+    5. 완료를 클릭
+    6. 저장을 클릭
 
 ### notable event 상태 관리
 
-애널리스트는 조사 워크플로의 notable event에 상태를 배정합니다. 상태는 조사의 단계와 일치하고, 인시던트 검토 감사(audit) 대시보드에서 notable event 조사의 진행률을 검토하고 보고하는 데 사용할 수 있습니다.
+애널리스트는 조사케이스 워크플로의 notable event에 상태를 배정. 상태는 조사케이스의 단계와 일치하고, 인시던트 검토 감사(audit) 대시보드에서 notable event 조사의 진행률을 검토하고 보고하는 데 사용
 
-사용 가능한 notable event 상태를 보려면 설정 > 인시던트 관리 > 상태 설정을 선택하십시오.
+사용 가능한 notable event 상태를 보려면 **설정 > 인시던트 관리 > 상태 설정**을 선택하십시오.
 
 |레이블|설명|편집 가능|
 |:--:|:--|:--:|
-|배정되지 않음|오류로 인해 notable event에 유효한 상태를 배정할 수 없을 때 Enterprise Security에 의해사용됩니다.|아니오|
-|새 이벤트(기본값)|notable event가 검토되지 않았습니다.|아니오|
-|진행 중|notable event 조사 또는 대응이 진행 중입니다.|예|
-|보류 중|notable event 종료가 일부 작업을 보류 중입니다.|예|
-|해결됨|notable event가 해결되었고 확인을 기다리는 중입니다.|예|
-|종료됨|notable event가 해결되고 확인되었습니다.|예|
+|Unassigned[배정되지 않음]|오류로 인해 notable event에 유효한 상태를 배정할 수 없을 때 Enterprise Security에 의해 사용됨|아니오|
+|New(Default) [새 이벤트(기본값)]|notable event가 검토되지 않음|아니오|
+|In Progress[진행 중]|notable event 조사 또는 대응이 진행 중|예|
+|Pending[보류 중]|notable event 종료가 일부 작업을 보류 중|예|
+|Resolved[해결됨]|notable event가 해결되었고 확인을 기다리는 중|예|
+|Closed[종료됨]|notable event가 해결되고 확인|예|
 
-상관(correlation)검색이 notable event를 만들 때 모든 이벤트에 기본적으로 새 이벤트 상태가 배정됩니다. notable event 상태를 사용자 지정하여 조직의 기존 워크플로와 일치시킬 수 있습니다.
+상관(correlation)검색이 notable event를 만들 때 모든 이벤트에 기본적으로 **New** 이벤트 상태가 배정. notable event 상태를 커스터마이징하여 조직의 기존 워크플로와 일치시킬 수 있습니다.
 
 ### notable event 상태 편집
 
-notable event 상태 편집 페이지에서 사용 가능한 notable event 상태를 변경합니다.
+**notable event 상태 편집** 페이지에서 사용 가능한 notable event 상태 변경
 
-1. Splunk Enterprise Security 도구 모음에서 설정 > 인시던트 관리 > 상태 설정을 선택합니다.
-2. notable event 상태를 선택하여 notable event 상태 편집 페이지를 엽니다.
-3. (선택 사항) 레이블 또는 설명을 변경합니다.
+1. Splunk Enterprise Security 도구 모음에서 **설정 > 인시던트 관리 > 상태 설정**을 선택
+2. notable event 상태를 선택하여 **notable event 상태 편집** 페이지
+3. (선택 사항) **레이블** 또는 **설명**을 변경
 
-배정되지 않음 및 새 이벤트 상태는 notable event를 만들 때 사용되는 기본값이므로 편집할 수 없습니다.
+> Tip
+> **Unassigned** 및 **New** 이벤트 상태는 notable event를 만들 때 사용되는 기본값이므로 편집할 수 없음
 
 ### notable event 상태 이력 관리
 
-notable event는 사용자, 상태 및 주석과 연결됩니다. 변경한 상태 이름은 상태 이름에만 적용되고 주요 인덱스의 notable event에 배정된 상태 ID에는 적용되지 않습니다.
-기본 notable event 상태의 이름을 변경하면 과거 및 미래 notable event의 이름이 모두 변경됩니다. 예를 들어 이름을 "보류 중"에서 "고객 대기 중"으로 바꾸면 상태가 "보류 중"인 모든 notable event의 상태가 "고객 대기 중"으로 바뀝니다. 주요 이벤
-트에 배정된 상태 ID는 똑같이 유지됩니다.
+notable event는 사용자, 상태 및 주석과 연결
+변경한 상태 이름은 상태 이름에만 적용되고 주요 인덱스의 notable event에 배정된 상태 ID에는 적용되지 않음
+기본 notable event 상태의 이름을 변경하면 과거 및 미래 notable event의 이름이 모두 변경
+예를 들어 이름을 "보류 중"에서 "고객 대기 중"으로 바꾸면 상태가 "보류 중"인 모든 notable event의 상태가 "고객 대기 중"으로 바뀜
+주요 이벤트에 배정된 상태 ID는 똑같이 유지됨
 
 ### notable event 상태 전환
 
-상태는 notable event를 조사하는 단계를 나타냅니다. 상태 전환은 notable event 조사 경로를 정의합니다.
-애널리스트가 조사가 진행됨에 따라 notable event의 상태를 변경합니다. notable event의 상태를 변경하는 방법:
+상태는 notable event를 조사하는 단계를 나타냄
+상태 전환은 notable event 조사 경로를 정의
+애널리스트가 조사가 진행됨에 따라 notable event의 상태를 변경
+notable event의 상태를 변경하는 방법:
 
-- 에널리스트는 상태를 바꿀 권한이 있는 역할의 구성원이어야 합니다. notable event 상태를 변경할 수 있는 기능은 기본적으로 ess_analyst 및 ess_admin 역할이 사용할 수 있습니다.
-- 후속 상태는 현재 상태에서 전환할 수 있는 상태여야 합니다. 기본적으로 모든 상태는 기타 상태로 전환할 수 있습니다. 예를 들어, 애널리스트는 새 이벤트 상태인 notable event의 상태를 다른 상태(예: 종료됨)로 변경할 수 있습니다.
+- 에널리스트는 상태를 바꿀 권한이 있는 역할의 구성원
+- notable event 상태를 변경할 수 있는 기능은 기본적으로 **ess_analyst(보안분석가)** 및 **ess_admin(보안운영자)** 역할이 사용
+- 후속 상태는 현재 상태에서 전환할 수 있는 상태. 기본적으로 모든 상태는 기타 상태로 전환할 수 있음. 예를 들어, 애널리스트는 **New** 이벤트 상태인 notable event의 상태를 다른 상태(예: **Closed**)로 변경할 수 있음
 
 ### notable event 상태 전환 제한
 

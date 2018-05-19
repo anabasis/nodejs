@@ -87,7 +87,6 @@ console.log(mymodule);
 ## 실행 결과
 $ node mymain.js
 ```
- 
 
 #### index.js 파일
 
