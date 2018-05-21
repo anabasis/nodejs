@@ -2,6 +2,7 @@
 
 <http://poiemaweb.com/bootstrap-basics>
 <http://bootstrapk.com/getting-started/>
+<http://tworab.tistory.com/category/IT%20Story/about%20Bootstrap>
 
 Bootstrap은 빠르고 간편한 반응형 웹 디자인(responsive web design)을 위한 open-source front-end framework
 
