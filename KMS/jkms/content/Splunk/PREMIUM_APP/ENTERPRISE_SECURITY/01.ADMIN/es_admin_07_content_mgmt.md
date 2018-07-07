@@ -2,7 +2,7 @@
 
 ## Splunk Enterprise Security에서 콘텐츠 관리
 
-Splunk Enterprise Security 관리자는 콘텐츠 관리 페이지를 사용하여 상관(correlation)검색, 핵심 지표, 저장된 검색, 스윔레인(Swim lane) 검색 같은 Splunk Enterprise Security만의 고유 콘텐츠를 표시하고, 만들고, 설정하고, 편집할 수 있습니다.
+Splunk Enterprise Security 관리자는 콘텐츠 관리 페이지를 사용하여 상관(correlation)검색, 핵심 지표, 저장된 검색, 스윔레인(Swim lane) 검색 같은 Splunk Enterprise Security만의 고유 콘텐츠를 표시하고, 만들고, 설정하고, 편집할 수 있음.
 
 - 상관(correlation)검색 작성
 - 데이터 모델 작성 및 관리
@@ -32,12 +32,12 @@ Splunk Enterprise Security에서 콘텐츠 관리 페이지를 사용하여 데�
 2. 새 콘텐츠 만들기를 클릭하고 데이터 모델을 선택합니다.
 3. Splunk 플랫폼 매뉴얼의 지침에 따라 데이터 모델을 만듭니다.
 
-- Splunk Enterprise의 경우 Splunk Enterprise 지식 관리자 매뉴얼에서 데이터 모델 만들기를 참조하십시오.
-- Splunk Cloud의 경우 Splunk Cloud 지식 관리자 매뉴얼에서 데이터 모델 만들기를 참조하십시오.
+- Splunk Enterprise의 경우 Splunk Enterprise 지식 관리자 매뉴얼에서 데이터 모델 만들기를 참조.
+- Splunk Cloud의 경우 Splunk Cloud 지식 관리자 매뉴얼에서 데이터 모델 만들기를 참조.
 
 ## Splunk Enterprise Security에서 키 표시기 검색 작성 및 관리
 
-Splunk Enterprise Security의 콘텐츠 관리에서 핵심 지표 검색을 설정합니다. 필터를 사용하여 핵심 지표 유형을 선택하여 핵심 지표 검색만 볼 수 있습니다.
+Splunk Enterprise Security의 콘텐츠 관리에서 핵심 지표 검색을 설정합니다. 필터를 사용하여 핵심 지표 유형을 선택하여 핵심 지표 검색만 볼 수 있음.
 
 ### 사용자 지정 핵심 지표 검색 만들기
 
@@ -52,14 +52,14 @@ Splunk Enterprise Security의 콘텐츠 관리에서 핵심 지표 검색을 설
 5. (선택 사항) 데이터 모델 가속를 사용자 지정 핵심 지표에 사용하려면 예약을 선택합니다.
 6. 핵심 지표 값에 해당하는 필드의 이름을 값 필드에 입력합니다.
 7. 핵심 지표 변동에 해당하는 필드의 이름을 델타 필드에 입력합니다.
-8. (선택 사항) 핵심 지표의 임계값을 입력합니다. 임계값은 핵심 지표 색상 변경 여부를 제어합니다. 임계값을 대시보드와 글래스 테이블에서도 설정할 수 있습니다.
+8. (선택 사항) 핵심 지표의 임계값을 입력합니다. 임계값은 핵심 지표 색상 변경 여부를 제어합니다. 임계값을 대시보드와 글래스 테이블에서도 설정할 수 있음.
 9. 핵심 지표 뒤에 오는 단위나 다른 단어를 나타내는 값 접미사를 입력합니다.
-10. 핵심 지표 색상을 반전하려면 반전 체크박스를 선택합니다. 높은 값이 좋고 낮은 값이 나쁨을 나타내려면 이 체크박스를 선택하십시오.
+10. 핵심 지표 색상을 반전하려면 반전 체크박스를 선택합니다. 높은 값이 좋고 낮은 값이 나쁨을 나타내려면 이 체크박스를 선택.
 11. 저장을 클릭합니다.
 
 ### 핵심 지표 검색 예약
 
-Splunk Enterprise Security에 포함된 핵심 지표에는 데이터 모델 가속가 사용됩니다. 가속를 활성화하고 검색이 예약된 보고서로 실행되도록 예약합니다. 예약된 보고서 결과는 캐시에 저장되므로, 지표가 대시보드에 결과를 더 빨리 표시할 수 있습니다.
+Splunk Enterprise Security에 포함된 핵심 지표에는 데이터 모델 가속가 사용됩니다. 가속를 활성화하고 검색이 예약된 보고서로 실행되도록 예약합니다. 예약된 보고서 결과는 캐시에 저장되므로, 지표가 대시보드에 결과를 더 빨리 표시할 수 있음.
 
 1. 설정 > 콘텐츠 관리를 선택합니다.
 2. 가속할 핵심 지표 검색을 찾습니다.
@@ -81,11 +81,11 @@ Splunk Enterprise Security에 포함된 핵심 지표에는 데이터 모델 가
 5. (선택 사항) 핵심 지표 제목을 변경합니다. 제목이 대시보드의 핵심 지표 위에 표시되거나 글래스 테이블의 보안 메트릭 옆에 표시됩니다.
 6. (선택 사항) 대시보드에서 핵심 지표 함수의 유형을 설명하는 데 사용되는 핵심 지표의 부제를 변경합니다.
 7. (선택 사항) 핵심 지표를 채우는 검색 문자열을 변경합니다.
-8. (선택 사항) 사용자 지정 검색 또는 대시보드 링크 같은 드릴다운 URL을 추가하여 기본 드릴다운 동작을 재정의합니다. 기본적으로, 핵심 지표 드릴다운은 핵심 지표 값을 생성한 검색 결과를 엽니다. 글래스 테이블에 핵심 지표를 추가하는 경우 사용자 지정 드릴다운을 설정할 수 있습니다.
+8. (선택 사항) 사용자 지정 검색 또는 대시보드 링크 같은 드릴다운 URL을 추가하여 기본 드릴다운 동작을 재정의합니다. 기본적으로, 핵심 지표 드릴다운은 핵심 지표 값을 생성한 검색 결과를 엽니다. 글래스 테이블에 핵심 지표를 추가하는 경우 사용자 지정 드릴다운을 설정할 수 있음.
 9. (선택 사항) 예약 체크박스를 선택하여 핵심 지표 가속를 활성화하고 지표가 대시보드에 더 빨리 로드될 수 있게 합니다.
 10. (선택 사항) 표준 크론 표기법을 사용하여 크론 스케줄 빈도를 변경합니다.
 11. (선택 사항) 임계값 동작을 변경하여 값 지표에 배정되는 색을 결정합니다. 기본적으로 검정색 값 지표를 생성하는 임계값은 없으며, 임계값 숫자가 값 지표 카운트보다 크면 녹색 값 지표가 생성되고 임계값 숫자가 값 지표 카운트보다 작으면 빨간색 값 지표가 생성됩니다.
-12. (선택 사항) 값 지표를 설명하는 값 접미사를 추가합니다. 예를 들어 단위를 지정할 수 있습니다. 대시보드에서 값 접미사는 값 지표와 추세 지표 사이에 나타납니다.
+12. (선택 사항) 값 지표를 설명하는 값 접미사를 추가합니다. 예를 들어 단위를 지정할 수 있음. 대시보드에서 값 접미사는 값 지표와 추세 지표 사이에 나타납니다.
 13. (선택 사항) 추세 지표 임계값의 기본 색을 변경하려면 반전 체크박스를 선택합니다. 이 체크박스를 선택할 경우, 임계값 숫자가 값 지표 카운트보다 크면 빨간색 값 지표가 생성되고 임계값 숫자가 값 지표 카운트보다 작으면 녹색 값 지표가 생성됩니다.
 14. 저장을 클릭합니다.
 
@@ -97,21 +97,21 @@ Splunk Enterprise Security에서 예약된 보고서라고도 하는 저장된 �
 2. 새 콘텐츠 만들기를 클릭하고 저장된 검색을 선택합니다.
 3. Splunk 플랫폼 매뉴얼의 지침에 따라 예약된 보고서라고도 하는 저장된 검색을 작성합니다.
 
-- Splunk Enterprise의 경우, Splunk Enterprise 보고 매뉴얼에서 새 보고서 만들기를 참조하십시오.
-- Splunk Cloud의 경우, Splunk Cloud 보고 매뉴얼에서 새 보고서 만들기를 참조하십시오.
+- Splunk Enterprise의 경우, Splunk Enterprise 보고 매뉴얼에서 새 보고서 만들기를 참조.
+- Splunk Cloud의 경우, Splunk Cloud 보고 매뉴얼에서 새 보고서 만들기를 참조.
 
 - Enterprise Security에서 검색을 보고 관리할 수 있도록 Splunk 플랫폼 매뉴얼의 지침에 따라 보고서 권한을 수정하여 보고서를 Enterprise Security와 공유합니다.
-      - Splunk Enterprise의 경우, Splunk Enterprise 보고 매뉴얼에서 보고서 권한 설정을 참조하십시오.
-      - Splunk Cloud의 경우, Splunk Cloud보고 매뉴얼에서 보고서 권한 설정을 참조하십시오.
+      - Splunk Enterprise의 경우, Splunk Enterprise 보고 매뉴얼에서 보고서 권한 설정을 참조.
+      - Splunk Cloud의 경우, Splunk Cloud보고 매뉴얼에서 보고서 권한 설정을 참조.
 
 ## Splunk Enterprise Security에서 검색 기반 룩업 작성 및 관리
 
-검색 기반 룩업을 사용하면 주기적으로 예약된 간격에 실행되는 검색의 결과를 기반으로 룩업을 만들 수 있습니다. 검색을 데이터 모델이나 기존 룩업에 저장된 데이터에 대해서만 실행할 수 있습니다. 검색 기반 룩업은 번들 복제에서 제외되고 인덱서로 전송되지 않습니다.
+검색 기반 룩업을 사용하면 주기적으로 예약된 간격에 실행되는 검색의 결과를 기반으로 룩업을 만들 수 있음. 검색을 데이터 모델이나 기존 룩업에 저장된 데이터에 대해서만 실행할 수 있음. 검색 기반 룩업은 번들 복제에서 제외되고 인덱서로 전송되지 않음.
 
 ### 검색 기반 룩업을 사용하는 경우
 
 환경에서 새로운 일이 일어날 때 알고 싶거나 데이터 모델 또는 다른 룩업에서 계속 변하는 정보에 따라 룩업을 지속적으로 업데이트해야 하는 경우 검색 기반 룩업을 만듭니다.
-검색 기반 룩업은 데이터 모델이나 기타 룩업에서 정보를 수집하고 저장합니다. 룩업에 저장된 데이터는 이벤트에서 수집된 선택된 필드의 과거 요약을 나타냅니다. 대시보드에서 변경 사항을 보거나 상관(correlation)검색을 사용하여 검색 기반 룩업의 데이터를 새 이벤트와 비교하고, 일치 항목이 있는 경우 경고할 수 있습니다. (예: 새로운 사용자가 웹 서버에 로그인할 때 알기 위해)
+검색 기반 룩업은 데이터 모델이나 기타 룩업에서 정보를 수집하고 저장합니다. 룩업에 저장된 데이터는 이벤트에서 수집된 선택된 필드의 과거 요약을 나타냅니다. 대시보드에서 변경 사항을 보거나 상관(correlation)검색을 사용하여 검색 기반 룩업의 데이터를 새 이벤트와 비교하고, 일치 항목이 있는 경우 경고할 수 있음. (예: 새로운 사용자가 웹 서버에 로그인할 때 알기 위해)
 
 1. where 명령어를 사용하여 사용자 데이터를 인증 데이터 모델에서 검색하고 웹 서버 호스트 이름을 기준으로 필터링합니다.
 2. 검색 결과가 환경에서 알려진 호스트 및 사용자와 일치하는지 확인합니다.
@@ -124,21 +124,21 @@ Splunk Enterprise Security에서 예약된 보고서라고도 하는 저장된 �
 
 1. Splunk Enterprise Security 메뉴 모음에서 설정 > 콘텐츠 관리를 선택합니다.
 2. 새 콘텐츠 만들기를 클릭하고 검색 기반 룩업을 선택합니다.
-3. (선택 사항) 앱을 선택합니다. 기본 앱은 SplunkEnterpriseSecuritySuite입니다. SA-NetworkProtection 같은 특정앱이나 사용자 지정 앱에서 룩업을 만들 수 있습니다. 검색 기반 룩업을 저장한 후에 앱을 변경할 수 없습니다.
+3. (선택 사항) 앱을 선택합니다. 기본 앱은 SplunkEnterpriseSecuritySuite입니다. SA-NetworkProtection 같은 특정앱이나 사용자 지정 앱에서 룩업을 만들 수 있음. 검색 기반 룩업을 저장한 후에 앱을 변경할 수 없습니다.
 4. (선택 사항) 검색에 대한 설명을 입력합니다.
 5. 룩업 레이블을 입력합니다. 이 레이블은 콘텐츠 관리에 표시되는 검색 기반 룩업 이름입니다.
 6. 룩업 이름을 입력합니다. 룩업을 저장한 후에 이름을 변경할 수 없습니다.
 7. 검색을 실행할 빈도를 정의하는 크론 스케줄을 입력합니다.
 8. 검색에 대해 실시간 또는 연속 예약을 선택합니다. 실시간 예약에서는 검색 성능이 우선이지만, 연속 예약에서는 데이터 무결성이 우선입니다.
 9. 저장된 검색의 이름을 정의하는 검색 이름을 입력합니다. 룩업을 저장한 후에 이름을 변경할 수 없습니다.
-10. 가이드 모드를 선택하여 검색 구문을 직접 만들지 않고 검색을 만들거나, 수동을 선택하여 검색을 직접 작성합니다.가이드식 검색 편집기로 검색을 작성하는 데 도움이 되는 예를 참조하십시오.
+10. 가이드 모드를 선택하여 검색 구문을 직접 만들지 않고 검색을 만들거나, 수동을 선택하여 검색을 직접 작성합니다.가이드식 검색 편집기로 검색을 작성하는 데 도움이 되는 예를 참조.
 11. 수동 모드에서 검색을 만드는 경우 검색을 입력합니다.
 12. 저장을 클릭하여 검색을 저장합니다.
 
 ### 검색 기반 룩업 예
 
 Splunk Enterprise Security에 포함된 이 검색 기반 룩업 예에서는 IDS(침입 탐지 시스템)에서 확인된 공격을 추적합니다.
-그런 다음 상관(correlation)검색을 사용하여 새 공격에 대한 알림을 수신하거나, 공격이 환경에 새로운 공격인지 확인할 수 있습니다. 침입 센터 대시보드에서는 이 검색 기반 룩업을 새로운 공격 - 지난 30일 패널에 사용합니다. 침입 센터 대시보드를 참조하십시오.
+그런 다음 상관(correlation)검색을 사용하여 새 공격에 대한 알림을 수신하거나, 공격이 환경에 새로운 공격인지 확인할 수 있음. 침입 센터 대시보드에서는 이 검색 기반 룩업을 새로운 공격 - 지난 30일 패널에 사용합니다. 침입 센터 대시보드를 참조.
 
 1. Splunk Enterprise Security 메뉴 모음에서 설정 > 콘텐츠 관리를 선택합니다.
 2. 새 콘텐츠 만들기를 클릭하고 검색 기반 룩업을 선택합니다.
@@ -165,11 +165,10 @@ Splunk Enterprise Security에 포함된 이 검색 기반 룩업 예에서는 ID
     2. IDS_Attacks.signature의 이름을 signature로 변경하는 분할 기준 절을 추가합니다.
     3. IDS_Attacks.vendor_product의 이름을 vendor_product로 변경하는 분할 기준 절을 추가합니다.
 20. 다음을 클릭합니다.
-21. 룩업에 데이터를 저장할 기간을 정의하는 보존 기간을 선택합니다. 예를 들어 이 룩업에 5년 치 IDS 공격 증거를 저장해 두려고 합니다. IDS에서 공격을 마지막으로 확인한 시간을 기준으로 보존하려면 lastTime 시간 필드를 선택합니다. -5y를 시작 시간으로 입력하고 입력한 시간 값의 형식을 나타냅니다. %s. 시간 서식에 대한 설명은 Splunk 플랫폼
-매뉴얼에서 확인할 수 있습니다.
+21. 룩업에 데이터를 저장할 기간을 정의하는 보존 기간을 선택합니다. 예를 들어 이 룩업에 5년 치 IDS 공격 증거를 저장해 두려고 합니다. IDS에서 공격을 마지막으로 확인한 시간을 기준으로 보존하려면 lastTime 시간 필드를 선택합니다. -5y를 시작 시간으로 입력하고 입력한 시간 값의 형식을 나타냅니다. %s. 시간 서식에 대한 설명은 Splunk 플랫폼 매뉴얼에서 확인할 수 있음.
 
-- Splunk Enterprise의 경우, Splunk Enterprise 검색 참조 매뉴얼에서 날짜 및 시간 형식 변수를 참조하십시오.
-- Splunk Cloud의 경우, Splunk Cloud 검색 참조 매뉴얼에서 날짜 및 시간 형식 변수를 참조하십시오.
+- Splunk Enterprise의 경우, Splunk Enterprise 검색 참조 매뉴얼에서 날짜 및 시간 형식 변수를 참조.
+- Splunk Cloud의 경우, Splunk Cloud 검색 참조 매뉴얼에서 날짜 및 시간 형식 변수를 참조.
 
 다음을 클릭합니다.
 마법사에서 만든 검색을 검토하고 완료를 클릭하여 가이드식 검색 편집기 사용을 마칩니다.
@@ -184,14 +183,14 @@ Splunk Enterprise Security에 포함된 이 검색 기반 룩업 예에서는 ID
 
 ### 검색 기반 룩업을 채우는 검색 활성화 또는 비활성화
 
-검색 기반 룩업의 검색을 활성화하거나 비활성화하여 검색이 룩업을 업데이트하지 않게 할 수 있습니다. 검색 기반 룩업을 채우는 검색을 비활성화하면 검색이 룩업 업데이트를 중지하고, 룩업의 데이터가 업데이트되지 않습니다. 룩업 안에 있는 데이터에 의존하는 상관(correlation)검색이나 대시보드가 최신 상태로 유지되지 않습니다.
+검색 기반 룩업의 검색을 활성화하거나 비활성화하여 검색이 룩업을 업데이트하지 않게 할 수 있음. 검색 기반 룩업을 채우는 검색을 비활성화하면 검색이 룩업 업데이트를 중지하고, 룩업의 데이터가 업데이트되지 않음. 룩업 안에 있는 데이터에 의존하는 상관(correlation)검색이나 대시보드가 최신 상태로 유지되지 않음.
 
 1. 설정 > 콘텐츠 관리를 선택합니다.
 2. 검색 기반 룩업 유형을 기준으로 필터링하고 활성화하거나 비활성화할 검색 기반 룩업을 엽니다.
 3. 검색 기반 룩업의 검색 이름을 찾습니다.
 4. Splunk 플랫폼 메뉴 모음에서 설정 > 검색, 보고서, 경고를 선택합니다.
 5. 검색을 찾아서 활성화하거나 비활성화합니다.
- 
+
 ## Splunk Enterprise Security에서 스윔 레인(Swim lane) 검색 작성 및 관리
 
 스윔 레인(Swim lane) 검색을 만들어 Asset Investigator 또는 Identity Investigator 대시보드에 추가할 수 있는 스윔 레인(Swim lane)을 만듭니다. Investigator 대시보드의 스윔 레인(Swim lane)은 일정 기간 동안 특정 자산 또는 ID별로 작업을 프로파일링하는 데 도움이 됩니다.
@@ -205,12 +204,12 @@ Splunk Enterprise Security에 포함된 이 검색 기반 룩업 예에서는 ID
 7. 사용자가 스윔 레인(Swim lane) 항목을 클릭하면 실행되는 드릴다운 검색을 입력합니다. 스윔 레인(Swim lane) 항목 드릴다운은 기본적으로 원시 이벤트를 표시합니다.
 8. 색상을 선택합니다.
 9. 자산 또는 ID를 엔티티 유형으로 선택합니다.
-10. 제약조건 필드를 입력합니다. 검색에 제약조건을 지정하는 필드를 입력합니다. 이런 제약조건 필드를 검색에 사용하려면 검색에 where $constraints$가 포함되어야 합니다. 각 스윔 레인(Swim lane) 검색 유형에는 특정 제약조건만 유효합니다. 예를 들어 Malware 데이터 모델과 Malware_Attacks 데이터 모델 데이터 집합을 사용하는 Asset Investigator 스윔레인(Swim lane) 검색에서는 Malware_Attacks.user 필드를 제약조건으로 지정할 수 있습니다.
+10. 제약조건 필드를 입력합니다. 검색에 제약조건을 지정하는 필드를 입력합니다. 이런 제약조건 필드를 검색에 사용하려면 검색에 where $constraints$가 포함되어야 합니다. 각 스윔 레인(Swim lane) 검색 유형에는 특정 제약조건만 유효합니다. 예를 들어 Malware 데이터 모델과 Malware_Attacks 데이터 모델 데이터 집합을 사용하는 Asset Investigator 스윔레인(Swim lane) 검색에서는 Malware_Attacks.user 필드를 제약조건으로 지정할 수 있음.
 11. 저장을 클릭합니다.
 
 예
 
-예를 들어 특정 자산과 관련된 인증 이벤트를 모두 식별하는 스윔 레인(Swim lane)을 만들 수 있습니다.
+예를 들어 특정 자산과 관련된 인증 이벤트를 모두 식별하는 스윔 레인(Swim lane)을 만들 수 있음.
 
 1. 검색 이름에 자산별 인증 - 예를 입력합니다.
 2. DA-ESS-AccessProtection을 대상 앱으로 선택합니다.
@@ -242,10 +241,10 @@ Authentication.dest=1.2.3.4 OR Authentication.dest=server.example.com OR Authent
 
 전제 조건
 
-콘텐츠 관리에서 새 뷰 또는 대시보드를 만들려면 단순 XML에 대해 잘 알고 있어야 합니다. 단순 XML을 사용한 작업 등 대시보드 작성 및 편집에 대한 개요는 Splunk 플랫폼 매뉴얼을 참조하십시오.
+콘텐츠 관리에서 새 뷰 또는 대시보드를 만들려면 단순 XML에 대해 잘 알고 있어야 합니다. 단순 XML을 사용한 작업 등 대시보드 작성 및 편집에 대한 개요는 Splunk 플랫폼 매뉴얼을 참조.
 
-- Splunk Enterprise의 경우, Splunk Enterprise 대시보드 및 시각화에서 대시보드 개요를 참조하십시오.
-- Splunk Enterprise의 경우, Splunk Enterprise 대시보드 및 시각화에서 대시보드 개요를 참조하십시오.
+- Splunk Enterprise의 경우, Splunk Enterprise 대시보드 및 시각화에서 대시보드 개요를 참조.
+- Splunk Enterprise의 경우, Splunk Enterprise 대시보드 및 시각화에서 대시보드 개요를 참조.
 
 작업
 
@@ -258,18 +257,18 @@ Authentication.dest=1.2.3.4 OR Authentication.dest=server.example.com OR Authent
     3. 권한을 클릭하고 뷰를 Enterprise Security와 공유하도록 권한을 수정합니다.
     4. 저장을 클릭합니다.
 
-대화형 대시보드 편집기를 사용하여 새 대시보드를 만들 수도 있습니다. 검색 > 대시보드를 선택하여 대시보드 페이지를 엽니다. 대시보드 편집기에 대한 내용은 Splunk 플랫폼 매뉴얼에서 확인할 수 있습니다.
+대화형 대시보드 편집기를 사용하여 새 대시보드를 만들 수도 있음. 검색 > 대시보드를 선택하여 대시보드 페이지를 엽니다. 대시보드 편집기에 대한 내용은 Splunk 플랫폼 매뉴얼에서 확인할 수 있음.
 
-- Splunk Enterprise의 경우, Splunk Enterprise 대시보드 및 시각화에서 대시보드 편집기 열기를 참조하십시오.
-- Splunk Cloud의 경우, Splunk Cloud 대시보드 및 시각화에서 대시보드 편집기 열기를 참조하십시오.
+- Splunk Enterprise의 경우, Splunk Enterprise 대시보드 및 시각화에서 대시보드 편집기 열기를 참조.
+- Splunk Cloud의 경우, Splunk Cloud 대시보드 및 시각화에서 대시보드 편집기 열기를 참조.
 
-탐색 편집기를 사용하여 배포의 메뉴에 표시되는 대시보드를 변경합니다. 자세한 내용은 Splunk Enterprise Security의 메뉴 모음 사용자 지정을 참조하십시오.
+탐색 편집기를 사용하여 배포의 메뉴에 표시되는 대시보드를 변경합니다. 자세한 내용은 Splunk Enterprise Security의 메뉴 모음 사용자 지정을 참조.
 
 ## Splunk Enterprise Security에서 콘텐츠를 앱으로 내보내기
 
-Content Management 페이지에서 Splunk Enterprise Security의 콘텐츠를 앱으로 내보냅니다. 내보내기 옵션을 사용하여 사용자 지정 검색을 배포 또는 테스트 환경에서 실제 환경으로 마이그레이션하는 등 사용자 지정 콘텐츠를 다른 ES 인스턴스와 공유하십시오. 콘텐츠 관리 페이지에서 상관(correlation)검색, 글래스 테이블, 데이터 모델 및 뷰 같은 모든 유형의 콘텐츠를 내보낼 수 있습니다.
+Content Management 페이지에서 Splunk Enterprise Security의 콘텐츠를 앱으로 내보냅니다. 내보내기 옵션을 사용하여 사용자 지정 검색을 배포 또는 테스트 환경에서 실제 환경으로 마이그레이션하는 등 사용자 지정 콘텐츠를 다른 ES 인스턴스와 공유함. 콘텐츠 관리 페이지에서 상관(correlation)검색, 글래스 테이블, 데이터 모델 및 뷰 같은 모든 유형의 콘텐츠를 내보낼 수 있음.
 
-기본적으로 관리자 사용자만 콘텐츠를 내보낼 수 있습니다. 내보내기 기능을 다른 역할에 추가하는 방법은 설치 및 업그레이드 매뉴얼에서 역할에 기능 추가를 참조하십시오.
+기본적으로 관리자 사용자만 콘텐츠를 내보낼 수 있음. 내보내기 기능을 다른 역할에 추가하는 방법은 설치 및 업그레이드 매뉴얼에서 역할에 기능 추가를 참조.
 
 1. ES 메뉴 모음에서 설정 > 콘텐츠 관리를 선택합니다.
 2. 내보낼 콘텐츠의 체크박스를 선택합니다.
@@ -286,7 +285,7 @@ Content Management 페이지에서 Splunk Enterprise Security의 콘텐츠를 �
 
 ### 내보낸 콘텐츠의 한계
 
-내보낸 콘텐츠는 오래된 Enterprise Security 버전에서 사용하지 못할 수 있습니다. 다음 항목이 내보낸 콘텐츠에 포함되거나 포함되지 않을 수 있습니다.
+내보낸 콘텐츠는 오래된 Enterprise Security 버전에서 사용하지 못할 수 있음. 다음 항목이 내보낸 콘텐츠에 포함되거나 포함되지 않을 수 있음.
 
 <table>
 <tr><td>내보낸 항목</td><td>내보내기에 포함됨</td><td>내보내기에 포함되지 않음</td></tr>
@@ -313,7 +312,7 @@ transforms.conf</td><td>해당 없음</td></tr>
 
 Splunk Enterprise Security는 자산 및 ID의 이벤트와의 상관을 관리하고 위협 지표를 이벤트와 일치시키고 정보를 사용하여 대시보드와 패널을 보강하기 위한 룩업을 제공합니다.
 
-관리자는 Splunk Enterprise Security에 룩업을 추가할 수 있습니다. Splunk Enterprise Security에 룩업을 추가한 후에 룩업을 검색에 사용하고 편집하고 설명을 추가하고 내보낼 수 있습니다.
+관리자는 Splunk Enterprise Security에 룩업을 추가할 수 있음. Splunk Enterprise Security에 룩업을 추가한 후에 룩업을 검색에 사용하고 편집하고 설명을 추가하고 내보낼 수 있음.
 
 ### Splunk Enterprise Security에 룩업 추가
 
@@ -334,7 +333,7 @@ Splunk Enterprise Security에서 룩업을 업데이트하고 만듭니다.
 
 ### Splunk Enterprise Security에 기존 룩업 추가
 
-룩업 파일 및 정의가 이미 Splunk 플랫폼에 존재하면 Splunk Enterprise Security에 추가하여 편집할 수 있습니다.
+룩업 파일 및 정의가 이미 Splunk 플랫폼에 존재하면 Splunk Enterprise Security에 추가하여 편집할 수 있음.
 
 1. 설정 > 콘텐츠 관리를 선택합니다.
 2. 새 콘텐츠 만들기 > 관리형 룩업을 클릭합니다.
@@ -356,21 +355,21 @@ inputlookup 검색 명령어를 사용해 리스트를 표시하여 룩업 파�
 
 ### Splunk Enterprise Security에서 룩업 편집
 
-적절한 권한을 보유한 사용자만 룩업을 편집할 수 있습니다. Splunk Enterprise Security에서 권한 관리를 참조하십시오. 룩업에는 정규식을 사용할 수 없으며 룩업 편집기는 항목의 정확성을 검사하지 않습니다. 빈 헤더 필드가 있는 룩업 파일을 저장할 수 없습니다.
+적절한 권한을 보유한 사용자만 룩업을 편집할 수 있음. Splunk Enterprise Security에서 권한 관리를 참조. 룩업에는 정규식을 사용할 수 없으며 룩업 편집기는 항목의 정확성을 검사하지 않음. 빈 헤더 필드가 있는 룩업 파일을 저장할 수 없습니다.
 
 ### 룩업 관리 중지
 
-관리 중지를 클릭하여 콘텐츠 관리 페이지에서 룩업 관리를 중지할 수 있습니다. 룩업 관리를 중지하면 더 이상 Splunk Web에서 룩업을 편집할 수 없지만 룩업이 삭제되지는 않습니다.
+관리 중지를 클릭하여 콘텐츠 관리 페이지에서 룩업 관리를 중지할 수 있음. 룩업 관리를 중지하면 더 이상 Splunk Web에서 룩업을 편집할 수 없지만 룩업이 삭제되지는 않음.
 
 #### Splunk Enterprise Security에서 룩업 내보내기
 
 1. 콘텐츠 관리에서 내보낼 룩업을 찾습니다.
 2. 작업 컬럼 아래에서 내보내기를 클릭하여 파일의 복사본을 CSV 형식으로 내보냅니다.
-여러 룩업 파일 및 기타 knowledge object를 앱의 일부로 내보낼 수 있습니다. Splunk Enterprise Security 관리에서 Splunk Enterprise Security에서 콘텐츠를 앱으로 내보내기를 참조하십시오.
+    여러 룩업 파일 및 기타 knowledge object를 앱의 일부로 내보낼 수 있음. Splunk Enterprise Security 관리에서 Splunk Enterprise Security에서 콘텐츠를 앱으로 내보내기를 참조.
 
 ### 룩업 파일의 변경 사항 감사(audit)
 
-룩업 파일을 마지막으로 편집한 시간과 사용자를 확인하려면 검색을 사용하십시오. 예:
+룩업 파일을 마지막으로 편집한 시간과 사용자를 확인하려면 검색을 사용함. 예:
 
 ```sql
 index=_internal uri_path="/splunk-es/en-US/app/SplunkEnterpriseSecuritySuite/ess_lookups_edit"
@@ -386,7 +385,7 @@ Splunk Enterprise Security는 대시보드, 검색 및 기타 내부 프로세�
 - 검색 기반 룩업이라고 하는 검색 명령어에 의해 내부적으로 채워짐
 - 인터넷에서 수집한 정보로 채워짐
 
-인터넷에서 수집한 정보로 채워지는 내부 룩업은 일부 상관(correlation)검색에서 SANS Institute 같은 여러 온라인 소스에 서 악성이거나 수상한 것으로 확인된 호스트를 식별하는 데 사용됩니다. Splunk Enterprise Security가 인터넷에 연결되어 있지 않은 경우, 이러한 룩업 파일이 업데이트되지 않고 룩업에 의존하는 상관(correlation)검색이 올바르게 작동하지 않을 수 있습니다. 인터넷 정보로 채워지는 내부 룩업은 대부분 위협 인텔리전스 소스입니다. 이 매뉴얼에서 Splunk Enterprise Security에 포함된 위협 인텔리전스 소스 설정을 참조하십시오.
+인터넷에서 수집한 정보로 채워지는 내부 룩업은 일부 상관(correlation)검색에서 SANS Institute 같은 여러 온라인 소스에 서 악성이거나 수상한 것으로 확인된 호스트를 식별하는 데 사용됩니다. Splunk Enterprise Security가 인터넷에 연결되어 있지 않은 경우, 이러한 룩업 파일이 업데이트되지 않고 룩업에 의존하는 상관(correlation)검색이 올바르게 작동하지 않을 수 있음. 인터넷 정보로 채워지는 내부 룩업은 대부분 위협 인텔리전스 소스입니다. 이 매뉴얼에서 Splunk Enterprise Security에 포함된 위협 인텔리전스 소스 설정을 참조.
 
 Splunk Enterprise Security에서 편집할 수 있는 기존 룩업을 보려면 설정 > 콘텐츠 관리를 선택합니다.
 
@@ -404,15 +403,15 @@ Splunk Enterprise Security에서는 내부 룩업을 여러 방법으로 사용�
 <table>
 <tr><td>룩업 유형</td><td>설명</td><td>예</td></tr>
 <tr><td>리스트</td><td>대시보드를 보강하는 데 사용되는 비교적 정적인 작은 리스트.</td><td>범주</td></tr>
-<tr><td>자산 또는 ID 리스트</td><td>모듈식 입력 및 검색에 의해 유지됨. Splunk Enterprise Security가 자산 및 ID 데이터를 처리 및 병합하는 방법을 참조하십시오.</td><td>자산</td></tr>
-<tr><td>위협 인텔리전스 컬렉션</td><td>여러 모듈식 입력에 의해 유지됨. Splunk 개발자 포털의 Splunk ES의 위협 인텔리전스 프레임워크를 참조하십시오.</td><td>로컬 인증서 인텔리전스</td></tr>
+<tr><td>자산 또는 ID 리스트</td><td>모듈식 입력 및 검색에 의해 유지됨. Splunk Enterprise Security가 자산 및 ID 데이터를 처리 및 병합하는 방법을 참조.</td><td>자산</td></tr>
+<tr><td>위협 인텔리전스 컬렉션</td><td>여러 모듈식 입력에 의해 유지됨. Splunk 개발자 포털의 Splunk ES의 위협 인텔리전스 프레임워크를 참조.</td><td>로컬 인증서 인텔리전스</td></tr>
 <tr><td>추적기</td><td>대시보드 패널에 데이터를 제공하는 데 사용되는 검색 기반 룩업.</td><td>멀웨어 추적기</td></tr>
 <tr><td>패널별 필터 룩업</td><td>특정 대시보드에서 패널별 필터의 리스트를 유지하는 데 사용됨.</td><td>HTTP 범주 분석 필터</td></tr>
 </table>
 
 ### 수정할 수 있는 내부 룩업
 
-일부 룩업은 검색(검색 기반 룩업)에 의해 관리되며 일부 룩업은 수동으로 업데이트합니다. 이 테이블에는 Splunk Enterprise Security에서 수정해야 할 수도 있는 룩업이 나열되어 있습니다.
+일부 룩업은 검색(검색 기반 룩업)에 의해 관리되며 일부 룩업은 수동으로 업데이트합니다. 이 테이블에는 Splunk Enterprise Security에서 수정해야 할 수도 있는 룩업이 나열되어 있음.
 
 <table>
 <tr><td>Lookup name</td><td>Type</td><td>Description</td><td>Usage details</td></tr>
@@ -438,7 +437,7 @@ Splunk Enterprise Security에서는 내부 룩업을 여러 방법으로 사용�
 <tr><td>PCI Domain Lookup</td><td>Identity list</td><td>Used by the Splunk App for PCI Compliance to enrich the pci_domain field. Contains the PCI domains relevant to the PCI standard.</td><td>See Set up asset categories.</td></tr>
 <tr><td>Primary Functions</td><td>List</td><td>Identifies the primary process or service running on a host. Used by a correlation search.</td><td>See Primary Functions.</td></tr>
 <tr><td>Prohibited Traffic</td><td>List</td><td>Identifies process and service traffic prohibited in your environment. Used by a correlation search.</td><td>See Prohibited Traffic.</td></tr>
-<tr><td>Risk Object Types</td><td>List</td><td>The types of risk objects available.	Edit the lookup to create a custom risk object type. You can then filter on the new risk object type or add a new risk entry on the Risk Analysis dashboard.</td><td>See Create risk and edit risk objects in Splunk Enterprise Security.</td></tr>
+<tr><td>Risk Object Types</td><td>List</td><td>The types of risk objects available. Edit the lookup to create a custom risk object type. You can then filter on the new risk object type or add a new risk entry on the Risk Analysis dashboard.</td><td>See Create risk and edit risk objects in Splunk Enterprise Security.</td></tr>
 <tr><td>Security Domains</td><td>List</td><td>Lists the security domains that you can use to categorize notable events when created and on Incident Review.</td><td>Edit the lookup and add a custom security domain.</td></tr>
 <tr><td>Threat Activity Filter</td><td>Per-panel filter lookup</td><td>Per-panel filtering for the Threat Activity dashboard.</td><td>See Configure per-panel filtering in Splunk Enterprise Security.</td></tr>
 <tr><td>Traffic Size Analysis</td><td>Per-panel filter lookup</td><td>Per-panel filtering for the Traffic Size Analysis dashboard.</td><td>See Configure per-panel filtering in Splunk Enterprise Security.</td></tr>
@@ -449,38 +448,38 @@ Splunk Enterprise Security에서는 내부 룩업을 여러 방법으로 사용�
 <table>
 <tr><td>룩업이름</td><td>유형</td><td>설명</td><td>사용법</td></tr>
 <tr><td>작업이력 검색 추적 허용 리스트</td><td>리스트</td><td>이 허용 리스트에 검색을 추가하여 조사를 위한 작업이력 항목을 만들 수 없도록 합니다.</td><td>검색을 허용 리스트에 추가하려면 start_time을 1로 입력합니다. 특정 기간에 대한 검색을 허용 리스트에 추가하려면 start_time 및 end_time을 입력합니다.</td></tr>
-<tr><td>관리 ID</td><td>리스트</td><td>이 룩업을 사용하여 액세스 센터, 계정 관리 대시보드등 관련 대시보드에서 권한 ID 또는 관리 ID를 식별할수 있습니다.</td><td>계정의 권한 상태를 나타내도록 범주 컬럼을 수정합니다. default|privileged로 권한이 있는 기본 계정을 지정하거나 기본 계정이 아닌 권한 계정의 경우 privileged, 권한이 없는 기본 계정의 경우 default를 입력합니다.</td></tr>
-<tr><td>애플리케이션 프로토콜</td><td>리스트</td><td>포트 및 프로토콜 대시보드에 의해 사용됨.</td><td>애플리케이션 프로토콜을 참조하십시오.</td></tr>
-<tr><td>자산/ID 범주</td><td>리스트</td><td>자산 또는 ID를 구성하는 데 사용할 범주를 설정하기 위해 사용할 수 있습니다. 일반적으로 선택되는 자산 범주로는 PCI 같은 컴플라이언스 및 보안 표준이나 서버 및 web_farm 같은 기능적 범주 등이 있습니다. 일반적으로 선택되는 ID 범주로는 직함과 역할 등이 있습니다.</td><td>자산/ID 범주를 참조하십시오.</td></tr>
-<tr><td>자산</td><td>자산 리스트</td><td>환경의 자산을 이 룩업에 수동으로 추가하여 자산 상관(correlation)에 사용될 자산 룩업에 포함할 수 있습니다.</td><td>수동으로 새 자산 또는 ID 데이터 추가를 참조하십시오.</td></tr>
-<tr><td>데모 자산</td><td>자산 리스트</td><td>데모 또는 예시용 샘플 자산 데이터를 제공합니다.</td><td>프로덕션 환경에 사용하기 위해 룩업을 비활성화합니다. 데모 자산 및 ID 룩업 비활성화를 참조하십시오.</td></tr>
-<tr><td>데모 ID</td><td>ID 리스트</td><td>데모 또는 예시용 샘플 ID 데이터를 제공합니다.</td><td>프로덕션 환경에 사용하기 위해 룩업을 비활성화 합니다. 데모 자산 및 ID 룩업 비활성화를 참조하십시오.</td></tr>
-<tr><td>ES 설정 상태 필터</td><td>패널별 필터 룩업</td><td>ES 설정 상태 대시보드용 패널별 필터링.</td><td>Splunk Enterprise Security에서 패널별 필터링 설정을 참조하십시오.</td></tr>
-<tr><td>예상된 뷰</td><td>리스트</td><td>애널리스트가 정기적으로 모니터링할 수 있도록 Enterprise Security 뷰를 나열합니다.</td><td>예상된 뷰를 참조하십시오.</td></tr>
-<tr><td>HTTP 범주 분석 필터</td><td>패널별 필터 룩업</td><td>HTTP 범주 분석 대시보드용 패널별 필터링.</td><td>Splunk Enterprise Security에서 패널별 필터링 설정을 참조하십시오.</td></tr>
-<tr><td>HTTP 사용자 에이전트 분석</td><td>패널별 필터 룩업</td><td>HTTP 사용자 에이전트 분석 대시보드용 패널별 필터링.</td><td>Splunk Enterprise Security에서 패널별 필터링 설정을 참조하십시오.</td></tr>
-<tr><td>ID</td><td>ID 리스트</td><td>이 룩업을 수동으로 편집하여 ID 상관(correlation)에 사용될 ID 룩업에 ID를 추가할 수 있습니다.</td><td>수동으로 새 자산 또는 ID 데이터 추가를 참조하십시오.</td></tr>
+<tr><td>관리 ID</td><td>리스트</td><td>이 룩업을 사용하여 액세스 센터, 계정 관리 대시보드등 관련 대시보드에서 권한 ID 또는 관리 ID를 식별할수 있음.</td><td>계정의 권한 상태를 나타내도록 범주 컬럼을 수정합니다. default|privileged로 권한이 있는 기본 계정을 지정하거나 기본 계정이 아닌 권한 계정의 경우 privileged, 권한이 없는 기본 계정의 경우 default를 입력합니다.</td></tr>
+<tr><td>애플리케이션 프로토콜</td><td>리스트</td><td>포트 및 프로토콜 대시보드에 의해 사용됨.</td><td>애플리케이션 프로토콜을 참조.</td></tr>
+<tr><td>자산/ID 범주</td><td>리스트</td><td>자산 또는 ID를 구성하는 데 사용할 범주를 설정하기 위해 사용할 수 있음. 일반적으로 선택되는 자산 범주로는 PCI 같은 컴플라이언스 및 보안 표준이나 서버 및 web_farm 같은 기능적 범주 등이 있음. 일반적으로 선택되는 ID 범주로는 직함과 역할 등이 있음.</td><td>자산/ID 범주를 참조.</td></tr>
+<tr><td>자산</td><td>자산 리스트</td><td>환경의 자산을 이 룩업에 수동으로 추가하여 자산 상관(correlation)에 사용될 자산 룩업에 포함할 수 있음.</td><td>수동으로 새 자산 또는 ID 데이터 추가를 참조.</td></tr>
+<tr><td>데모 자산</td><td>자산 리스트</td><td>데모 또는 예시용 샘플 자산 데이터를 제공합니다.</td><td>프로덕션 환경에 사용하기 위해 룩업을 비활성화합니다. 데모 자산 및 ID 룩업 비활성화를 참조.</td></tr>
+<tr><td>데모 ID</td><td>ID 리스트</td><td>데모 또는 예시용 샘플 ID 데이터를 제공합니다.</td><td>프로덕션 환경에 사용하기 위해 룩업을 비활성화 합니다. 데모 자산 및 ID 룩업 비활성화를 참조.</td></tr>
+<tr><td>ES 설정 상태 필터</td><td>패널별 필터 룩업</td><td>ES 설정 상태 대시보드용 패널별 필터링.</td><td>Splunk Enterprise Security에서 패널별 필터링 설정을 참조.</td></tr>
+<tr><td>예상된 뷰</td><td>리스트</td><td>애널리스트가 정기적으로 모니터링할 수 있도록 Enterprise Security 뷰를 나열합니다.</td><td>예상된 뷰를 참조.</td></tr>
+<tr><td>HTTP 범주 분석 필터</td><td>패널별 필터 룩업</td><td>HTTP 범주 분석 대시보드용 패널별 필터링.</td><td>Splunk Enterprise Security에서 패널별 필터링 설정을 참조.</td></tr>
+<tr><td>HTTP 사용자 에이전트 분석</td><td>패널별 필터 룩업</td><td>HTTP 사용자 에이전트 분석 대시보드용 패널별 필터링.</td><td>Splunk Enterprise Security에서 패널별 필터링 설정을 참조.</td></tr>
+<tr><td>ID</td><td>ID 리스트</td><td>이 룩업을 수동으로 편집하여 ID 상관(correlation)에 사용될 ID 룩업에 ID를 추가할 수 있음.</td><td>수동으로 새 자산 또는 ID 데이터 추가를 참조.</td></tr>
 <tr><td>IIN 룩업</td><td>리스트</td><td>이벤트 데이터의 가능한 신용카드 번호를 식별하는데 사용되는 발급자 ID 번호(IIN)의 고정 리스트.</td><td>이벤트에서 개인 식별 정보(PII)를 탐지하는 데 사용됨.</td></tr>
-<tr><td>관심 포트</td><td>리스트</td><td>상관(correlation)검색에서 네트워크 보안 정책과 관련된 포트를 식별하는 데 사용됨</td><td>관심 포트를 참조하십시오.</td></tr>
-<tr><td>관심 프로세스</td><td>리스트</td><td>상관(correlation)검색에서 보안 정책과 관련된 호스트에서 실행되는 프로세스를 식별하는 데 사용됨.</td><td>관심 프로세스를 참조하십시오.</td></tr>
-<tr><td>관심 서비스</td><td>리스트</td><td>상관(correlation)검색에서 보안 정책과 관련된 호스트에서 실행되는 서비스를 식별하는 데 사용됨.</td><td>관심 서비스를 참조하십시오.</td></tr>
-<tr><td>로컬 *인텔리전스</td><td>위협 인텔리전스 룩업</td><td>수동으로 위협 인텔리전스를 추가하는 데 사용됨.</td><td>Splunk Enterprise Security에서 위협 인텔리전스를 로컬에서 추가 및 유지 관리를 참조하십시오.</td></tr>
+<tr><td>관심 포트</td><td>리스트</td><td>상관(correlation)검색에서 네트워크 보안 정책과 관련된 포트를 식별하는 데 사용됨</td><td>관심 포트를 참조.</td></tr>
+<tr><td>관심 프로세스</td><td>리스트</td><td>상관(correlation)검색에서 보안 정책과 관련된 호스트에서 실행되는 프로세스를 식별하는 데 사용됨.</td><td>관심 프로세스를 참조.</td></tr>
+<tr><td>관심 서비스</td><td>리스트</td><td>상관(correlation)검색에서 보안 정책과 관련된 호스트에서 실행되는 서비스를 식별하는 데 사용됨.</td><td>관심 서비스를 참조.</td></tr>
+<tr><td>로컬 *인텔리전스</td><td>위협 인텔리전스 룩업</td><td>수동으로 위협 인텔리전스를 추가하는 데 사용됨.</td><td>Splunk Enterprise Security에서 위협 인텔리전스를 로컬에서 추가 및 유지 관리를 참조.</td></tr>
 <tr><td>모듈식 작업 범주</td><td>리스트</td><td>선택 가능한 adaptive response 작업 유형을 범주로 구분하는 데 사용됨.</td><td>인시던트 검토 또는 상관(correlation)검색 편집기에서 사용자 지정 adaptive response 작업 유형을 범주로 구분하려면 사용자 지정 범주를 추가합니다.</td></tr>
-<tr><td>새로운 도메인 분석</td><td>패널별 필터 룩업</td><td>새로운 도메인 분석 대시보드용 패널별 필터링.</td><td>Splunk Enterprise Security에서 패널별 필터링 설정을 참조하십시오.</td></tr>
-<tr><td>PCI 도메인 룩업</td><td>ID 리스트</td><td>Splunk App for PCI Compliance에서 pci_domain 필드를 보강하는 데 사용됨. PCI 표준과 관련된 PCI 도메인이 포함됩니다.</td><td>자산 범주 설정을 참조하십시오.</td></tr>
-<tr><td>주요 기능</td><td>리스트</td><td>호스트에서 실행되는 주요 프로세스 또는 서비스를 식별합니다. 상관(correlation)검색에 의해 사용됨.</td><td>주요 기능을 참조하십시오.</td></tr>
-<tr><td>금지된 트래픽</td><td>리스트</td><td>환경에서 금지된 프로세스 및 서비스 트래픽을 식별합니다. 상관(correlation)검색에 의해 사용됨.</td><td>금지된 트래픽을 참조하십시오.</td></tr>
-<tr><td>위험 개체 유형</td><td>리스트</td><td>사용 가능한 위험 개체의 유형.사용자 지정 위험 개체 유형을 만들려면 룩업을 편집합니다. 그런 다음 새 위험 개체 유형을 기준으로 필터링하거나 위험 분석 대시보드에서 새 위험항목을 추가합니다.</td><td>Splunk Enterprise Security에서 위험 작성 및 위험 개체 편집을 참조하십시오.</td></tr>
+<tr><td>새로운 도메인 분석</td><td>패널별 필터 룩업</td><td>새로운 도메인 분석 대시보드용 패널별 필터링.</td><td>Splunk Enterprise Security에서 패널별 필터링 설정을 참조.</td></tr>
+<tr><td>PCI 도메인 룩업</td><td>ID 리스트</td><td>Splunk App for PCI Compliance에서 pci_domain 필드를 보강하는 데 사용됨. PCI 표준과 관련된 PCI 도메인이 포함됩니다.</td><td>자산 범주 설정을 참조.</td></tr>
+<tr><td>주요 기능</td><td>리스트</td><td>호스트에서 실행되는 주요 프로세스 또는 서비스를 식별합니다. 상관(correlation)검색에 의해 사용됨.</td><td>주요 기능을 참조.</td></tr>
+<tr><td>금지된 트래픽</td><td>리스트</td><td>환경에서 금지된 프로세스 및 서비스 트래픽을 식별합니다. 상관(correlation)검색에 의해 사용됨.</td><td>금지된 트래픽을 참조.</td></tr>
+<tr><td>위험 개체 유형</td><td>리스트</td><td>사용 가능한 위험 개체의 유형.사용자 지정 위험 개체 유형을 만들려면 룩업을 편집합니다. 그런 다음 새 위험 개체 유형을 기준으로 필터링하거나 위험 분석 대시보드에서 새 위험항목을 추가합니다.</td><td>Splunk Enterprise Security에서 위험 작성 및 위험 개체 편집을 참조.</td></tr>
 <tr><td>보안 도메인</td><td>리스트</td><td>만들 때 및 인시던트 검토 시 주요 이벤트의 범주를 구분하는 데 사용할 수 있는 보안 도메인을 나열합니다.</td><td>룩업을 편집하고 사용자 지정 보안 도메인을 추가합니다.</td></tr>
-<tr><td>위협 활동 필터</td><td>패널별 필터 룩업</td><td>위협 활동 대시보드용 패널별 필터링.</td><td>Splunk Enterprise Security에서 패널별 필터링 설정을 참조하십시오.</td></tr>
-<tr><td>트래픽 크기 분석</td><td>패널별 필터 룩업</td><td>트래픽 크기 분석 대시보드용 패널별 필터링.</td><td>Splunk Enterprise Security에서 패널별 필터링 설정을 참조하십시오.</td></tr>
-<tr><td>긴급도 레벨</td><td>리스트</td><td>긴급도 레벨에는 주요 이벤트의 긴급도를 나타내는 우선순위와 심각도의 조합이 포함됩니다.</td><td>Splunk Enterprise Security 사용의 Splunk Enterprise Security에서 긴급도가 주요 이벤트에 배정되는 방법을 참조하십시오.</td></tr>
-<tr><td>URL 길이 분석</td><td>패널별 필터 룩업</td><td>URL 길이 분석 대시보드용 패널별 필터링.</td><td>Splunk Enterprise Security에서 패널별 필터링 설정을 참조하십시오.</td></tr>
+<tr><td>위협 활동 필터</td><td>패널별 필터 룩업</td><td>위협 활동 대시보드용 패널별 필터링.</td><td>Splunk Enterprise Security에서 패널별 필터링 설정을 참조.</td></tr>
+<tr><td>트래픽 크기 분석</td><td>패널별 필터 룩업</td><td>트래픽 크기 분석 대시보드용 패널별 필터링.</td><td>Splunk Enterprise Security에서 패널별 필터링 설정을 참조.</td></tr>
+<tr><td>긴급도 레벨</td><td>리스트</td><td>긴급도 레벨에는 주요 이벤트의 긴급도를 나타내는 우선순위와 심각도의 조합이 포함됩니다.</td><td>Splunk Enterprise Security 사용의 Splunk Enterprise Security에서 긴급도가 주요 이벤트에 배정되는 방법을 참조.</td></tr>
+<tr><td>URL 길이 분석</td><td>패널별 필터 룩업</td><td>URL 길이 분석 대시보드용 패널별 필터링.</td><td>Splunk Enterprise Security에서 패널별 필터링 설정을 참조.</td></tr>
 </table>
 
 ### 애플리케이션 프로토콜
 
-애플리케이션 프로토콜 리스트는 포트 및 프로토콜 조합과 각 조합의 조직 내 승인 상태가 나열된 리스트입니다. 이 리스트는 포트 및 프로토콜 추적기 대시보드에서 사용됩니다. 포트 및 프로토콜 추적기 대시보드를 참조하십시오.
+애플리케이션 프로토콜 리스트는 포트 및 프로토콜 조합과 각 조합의 조직 내 승인 상태가 나열된 리스트입니다. 이 리스트는 포트 및 프로토콜 추적기 대시보드에서 사용됩니다. 포트 및 프로토콜 추적기 대시보드를 참조.
 
 이 파일에서 사용 가능한 필드는 다음과 같습니다.
 
@@ -492,16 +491,16 @@ Splunk Enterprise Security에서는 내부 룩업을 여러 방법으로 사용�
 
 ### 자산/ID 범주
 
-범주 리스트에는 자산 또는 ID를 정리하기 위해 선택하는 범주 집합이 포함될 수 있습니다. 범주는 자산 및 ID에 사용되는 논리적 분류 또는 그룹입니다. 일반적으로 선택되는 자산으로는 PCI 같은 컴플라이언스 및 보안 표준이나 서버 및 web_farm같은 기능적 범주 등이 있습니다. 일반적으로 선택되는 ID로는 직함과 역할 등이 있습니다. 더 많은 예는 Splunk Enterprise
-Security에서 자산 또는 ID 리스트를 룩업 형식으로 지정을 참조하십시오.
+범주 리스트에는 자산 또는 ID를 정리하기 위해 선택하는 범주 집합이 포함될 수 있음. 범주는 자산 및 ID에 사용되는 논리적 분류 또는 그룹입니다. 일반적으로 선택되는 자산으로는 PCI 같은 컴플라이언스 및 보안 표준이나 서버 및 web_farm같은 기능적 범주 등이 있음. 일반적으로 선택되는 ID로는 직함과 역할 등이 있음. 더 많은 예는 Splunk Enterprise
+Security에서 자산 또는 ID 리스트를 룩업 형식으로 지정을 참조.
 
-자산 및 ID 상관에서 이벤트를 범주 정보로 보강하려면 category 필드를 자산/ID 범주 리스트 대신 자산 및 ID 리스트에 유지해야 합니다. Splunk Enterprise Security에서 자산 또는 ID 리스트를 룩업 형식으로 지정을 참조하십시오.
+자산 및 ID 상관에서 이벤트를 범주 정보로 보강하려면 category 필드를 자산/ID 범주 리스트 대신 자산 및 ID 리스트에 유지해야 합니다. Splunk Enterprise Security에서 자산 또는 ID 리스트를 룩업 형식으로 지정을 참조.
 
-두 가지 방법으로 자산/ID 범주 리스트를 유지할 수 있습니다.
+두 가지 방법으로 자산/ID 범주 리스트를 유지할 수 있음.
 
 #### 저장된 검색을 실행하여 범주 리스트 유지
 
-Splunk Enterprise Security에는 자산 및 ID 리스트에서 정의된 범주를 자산/ID 범주 리스트에 추가하는 저장된 검색이 포함되어 있습니다. 검색은 기본적으로 예약되지 않습니다.
+Splunk Enterprise Security에는 자산 및 ID 리스트에서 정의된 범주를 자산/ID 범주 리스트에 추가하는 저장된 검색이 포함되어 있음. 검색은 기본적으로 예약되지 않음.
 
 1. Splunk 플랫폼 메뉴 모음에서 설정 > 검색, 보고서, 경고를 선택합니다.
 2. Identity - Make Categories - Lookup Gen 저장된 검색을 찾습니다.
@@ -518,9 +517,9 @@ Splunk Enterprise Security에는 자산 및 ID 리스트에서 정의된 범주�
 
 예상된 뷰
 
-예상된 뷰 리스트는 정기적으로 모니터링되는 Splunk Enterprise Security 뷰를 지정합니다. 이 룩업은 뷰 감사(audit) 대시보드에서 사용합니다. 대시보드에 대한 자세한 내용은 뷰 감사(audit)를 참조하십시오.
+예상된 뷰 리스트는 정기적으로 모니터링되는 Splunk Enterprise Security 뷰를 지정합니다. 이 룩업은 뷰 감사(audit) 대시보드에서 사용합니다. 대시보드에 대한 자세한 내용은 뷰 감사(audit)를 참조.
 
-아래 테이블에는 이 파일의 필드가 설명되어 있습니다.
+아래 테이블에는 이 파일의 필드가 설명되어 있음.
 
 |필드|설명|
 |:--:|:--|
@@ -535,32 +534,32 @@ Splunk Enterprise Security에는 자산 및 ID 리스트에서 정의된 범주�
 
 예를 들어 다음 URL에 있는 뷰의 이름은 incident_review입니다.
 
-https://127.0.0.1:8000/en-US/app/SplunkEnterpriseSecuritySuite/incident_review
+<https://127.0.0.1:8000/en-US/app/SplunkEnterpriseSecuritySuite/incident_review>
 
 관심 포트
 
-관심 포트에는 배포에서 필수, 금지 또는 비보안으로 확인된 TCP 및 UDP 포트의 리스트가 포함됩니다. 관리자는 허용되고 허용되지 않는 포트를 정의하는 정책을 설정하고 룩업을 정책에 맞게 수정할 수 있습니다. 환경에서 이런 포트가 보일 때 경고를 수신하려면 각 포트에 대한 경고를 트리거하는 Prohibited Port Activity Detected 같은 상관(correlation)검색을 활성화하십시오.
+관심 포트에는 배포에서 필수, 금지 또는 비보안으로 확인된 TCP 및 UDP 포트의 리스트가 포함됩니다. 관리자는 허용되고 허용되지 않는 포트를 정의하는 정책을 설정하고 룩업을 정책에 맞게 수정할 수 있음. 환경에서 이런 포트가 보일 때 경고를 수신하려면 각 포트에 대한 경고를 트리거하는 Prohibited Port Activity Detected 같은 상관(correlation)검색을 활성화함.
 
-아래 테이블에는 이 파일의 필드가 설명되어 있습니다.
+아래 테이블에는 이 파일의 필드가 설명되어 있음.
 
 |필드|설명|예|
 |:--:|:--|:--|
 |app|포트를 사용하는 애플리케이션 또는 서비스의 이름.|Win32Time|
 |dest|네트워크 서비스의 대상 호스트. 모든 호스트를 일치시키려면 와일드카드 *를 사용합니다.|DARTH*, 10.10.1.100,my_host.|
-|dest_pci_domain|선택적인 PCI 도메인. 와일드카드를 사용할 수 있습니다.|trust, untrust|
-|dest_port|대상 포트 번호. 와일드카드를 사용할 수 있습니다.|443, 3389, 5900|
-|transport|전송 프로토콜. 와일드카드를 사용할 수 있습니다.|tcp 또는 udp|
+|dest_pci_domain|선택적인 PCI 도메인. 와일드카드를 사용할 수 있음.|trust, untrust|
+|dest_port|대상 포트 번호. 와일드카드를 사용할 수 있음.|443, 3389, 5900|
+|transport|전송 프로토콜. 와일드카드를 사용할 수 있음.|tcp 또는 udp|
 |is_required|서비스를 실행해야 하며 서비스가 실행되지 않을 경우 상관(correlation)검색을 통해 경고를 만들려면 true로 설정합니다.|true 또는 false|
 |is_prohibited|포트를 네트워크에서 사용하지 않고 서비스가 실행 중일 경우 상관(correlation)검색을 통해 경고를 만들려면 true로 설정합니다.|true 또는 false|
 |is_secure|포트를 통해 전송된 트래픽이 안전한 경우 true로 설정합니다.|true 또는 false|
-|note|포트를 사용하는 서비스 및 포트 정책을 설명합니다.|암호화되지 않은 텔넷 서비스는 안전하지 않습니다.|
+|note|포트를 사용하는 서비스 및 포트 정책을 설명합니다.|암호화되지 않은 텔넷 서비스는 안전하지 않음.|
 
 ### 관심 프로세스
 
 관심 프로세스에는 프로세스의 리스트 및 프로세스의 필수, 금지 또는 환경에서 실행하기에 안전한지 여부가 포함됩니다.
 Splunk Enterprise Security는 이 리스트를 Prohibited Process Detected 상관(correlation)검색에 사용합니다.
 
-아래 테이블에는 이 파일의 필드가 설명되어 있습니다.
+아래 테이블에는 이 파일의 필드가 설명되어 있음.
 
 |필드|설명|
 |:--:|:--|
@@ -576,7 +575,7 @@ Splunk Enterprise Security는 이 리스트를 Prohibited Process Detected 상�
 
 관심 서비스에는 배포의 서비스 리스트가 포함됩니다. Prohibited Service Detected 상관(correlation)검색에서는 이 룩업을 사용하여 서비스의 필수, 금지 및/또는 보안 여부를 확인합니다.
 
-아래 테이블에는 이 파일의 필드가 설명되어 있습니다.
+아래 테이블에는 이 파일의 필드가 설명되어 있음.
 
 |필드|설명|
 |:--:|:--|
@@ -590,10 +589,10 @@ Splunk Enterprise Security는 이 리스트를 Prohibited Process Detected 상�
 
 ### 주요 기능
 
-주요 기능에는 주 프로세스 및 서비스와 배포에서 각각 수행하는 기능의 리스트가 포함됩니다. 이 리스트를 사용하여 어떤 서비스가 중요하고 서비스에서 어떤 포트와 트랜스포트를 사용해야 하는지 정의하십시오. 이 룩업은 Multiple Primary
+주요 기능에는 주 프로세스 및 서비스와 배포에서 각각 수행하는 기능의 리스트가 포함됩니다. 이 리스트를 사용하여 어떤 서비스가 중요하고 서비스에서 어떤 포트와 트랜스포트를 사용해야 하는지 정의함. 이 룩업은 Multiple Primary
 Functions Detected 상관(correlation)검색에 의해 사용됩니다.
 
-아래 테이블에는 이 파일의 필드가 설명되어 있습니다.
+아래 테이블에는 이 파일의 필드가 설명되어 있음.
 
 |필드|설명|
 |:--:|:--|
@@ -608,7 +607,7 @@ Functions Detected 상관(correlation)검색에 의해 사용됩니다.
 금지된 트래픽
 
 금지된 트래픽은 네트워크 트래픽에 표시될 경우 악의적인 행동을 나타낼 수 있는 프로세스가 나열됩니다. 이 리스트는 시스템 센터 대시보드에 사용되고 IRC, 데이터 파괴 도구, 파일 전송 소프트웨어, 또는 최근에 창궐한 것으로 의심되는 멀웨어처럼 악성이라고 알려진 소프트웨어 등 보안 정책에 따라 금지되는 소프트웨어를 탐지하는 데 유용합니다.
-아래 테이블에는 이 파일의 필드가 설명되어 있습니다.
+아래 테이블에는 이 파일의 필드가 설명되어 있음.
 
 |필드|설명|
 |:--:|:--|
@@ -618,12 +617,11 @@ Functions Detected 상관(correlation)검색에 의해 사용됩니다.
 
 ## Splunk Enterprise Security에서 위험 작성 및 위험 개체 편집
 
-ES 관리자는 위험 개체를 만들고 편집할 수 있습니다.
+ES 관리자는 위험 개체를 만들고 편집할 수 있음.
 
 ### 새 위험 개체 만들기
 
-1. Enterprise Security 메뉴에서 설정 > 데이터 보강 > 리스트 및 룩업을 선택하고 위험 개체 유형 리스트를 선택합니
-다.
+1. Enterprise Security 메뉴에서 설정 > 데이터 보강 > 리스트 및 룩업을 선택하고 위험 개체 유형 리스트를 선택합니다.
 2. 테이블에서 risk_object_type 셀을 강조 표시하고 마우스 오른쪽 단추를 클릭하여 테이블 편집기를 표시합니다.
 3. 새 행을 테이블에 삽입합니다.
 4. 새 행을 두 번 클릭하여 편집한 다음 새 개체 유형 이름을 추가합니다.
