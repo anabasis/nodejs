@@ -76,7 +76,7 @@ Splunk Enterprise Security에서 Asset 및 Identity 데이터 수집 및 추출
 절차
 
 1. Unix 줄 마감과 .csv 파일 확장자가 있는 일반 텍스트, CSV 형식 파일을 만듭니다.
-2. CSV 파일에 올바른 헤더를 사용함. Splunk Enterprise Security에서 기대하는 헤더는 자산 룩업 헤더 또는 ID 룩업 헤더를 참조.
+2. CSV 파일에 올바른 헤더를 사용. Splunk Enterprise Security에서 기대하는 헤더는 자산 룩업 헤더 또는 ID 룩업 헤더를 참조.
 3. CSV 행을 Asset 및 Identity 필드로 채웁니다. 자산 룩업 필드 또는 ID 룩업 필드를 참조.
 
 자산 리스트의 예는 데모 자산 룩업을 참조.
@@ -138,7 +138,7 @@ identity,prefix,nick,first,last,suffix,email,phone,phone2,managedBy,priority,bun
     <tr><td>priority</td><td>문자열</td><td>권장. 인시던트 검토에서 주요 이벤트의 긴급도 필드를 계산하기 위해 ID에 배정된 우선 순위입니다. 우선 순위가 "알 수 없음"인 경우 배정되는 긴급도가 기본적으로 낮아집니다. 자세한 내용은 Splunk Enterprise Security에서 긴급도가 주요 이벤트에 배정되는 방법을 참조.</td><td>알 수 없음, 낮음, 중간, 높음 또는 중요.</td></tr>
     <tr><td>bunit</td><td>문자열</td><td>권장. ID의 그룹 또는 부서분류 Splunk Enterprise Security에서 대시보드 기준 필터링에 사용됩니다.</td><td>Field Reps, ITS, Products, HR</td></tr>
     <tr><td>category</td><td>파이프로구분된 문자열</td><td>권장. ID의 논리적 분류를 파이프로 구분한 리스트입니다. Asset 및 Identity 상관 및 분류에 사용됩니다. 범주를 참조.</td><td>Privileged|Officer|CISO</td></tr>
-    <tr><td>watchlist</td><td>부울</td><td>작업 모니터링에 사용되는 ID를 표시함.</td><td>허용 값: "true" 또는 비워 둠. 이 매뉴얼에서 사용자 작업 모니터링을 참조.</td></tr>
+    <tr><td>watchlist</td><td>부울</td><td>작업 모니터링에 사용되는 ID를 표시.</td><td>허용 값: "true" 또는 비워 둠. 이 매뉴얼에서 사용자 작업 모니터링을 참조.</td></tr>
     <tr><td>startDate</td><td>문자열</td><td>ID의 시작 또는 채용 날짜</td><td>형식: %m/%d/%Y %H:%M, %m/%d/%y %H:%M, %s</td></tr>
     <tr><td>endDate</td><td>문자열</td><td>ID의 종료 또는 만료 날짜</td><td>형식: %m/%d/%Y %H:%M, %m/%d/%y %H:%M, %s</td></tr>
     <tr><td>work_city</td><td>문자열</td><td>ID의 주 작업장 도시</td><td></td></tr>
@@ -249,7 +249,7 @@ Splunk Enterprise Security에서 새 Asset 및 Identity 리스트 설정
 
 - 다음 방법 중 하나를 사용하여 인스턴스의 사용 가능한 자산을 모두 봅니다. 행 수를 자산 데이터 원본와 비교하여 자산 레코드 수가 예상한 수와 일치하는지 확인하거나, 특정 레코드를 임의로 조사함.
       - 자산 센터 대시보드를 봅니다. Splunk Enterprise Security 사용에서 자산 센터 대시보드를 참조.
-      - 자산 매크로를 사용함.
+      - 자산 매크로를 사용.
       ```sql
       | `assets`
       ```
@@ -270,7 +270,7 @@ ID 룩업 데이터를 확인함.
 다음 방법 중 하나를 사용하여 인스턴스의 사용 가능한 ID를 모두 봅니다. 행 수를 ID 데이터 원본와 비교하여 ID 레코드 수가 예상한 수와 일치하는지 확인하거나, 특정 레코드를 임의로 조사함.
 
 - ID 센터 대시보드를 봅니다. Splunk Enterprise Security 사용에서 ID 센터 대시보드를 참조.
-- ID 매크로를 사용함.
+- ID 매크로를 사용.
     ```sql
     | `identities`
     ```
@@ -295,12 +295,12 @@ Asset 및 Identity 데이터가 Splunk Enterprise Security에 추가되었는지
 4. sourcetype에 따라 선택적으로 활성화를 선택하는 경우, source type을 입력하고 Asset 및 Identity에 해당하는 체크박스를 선택.
 5. 저장을 클릭함.
 
-Asset 및 Identity 상관을 완전히 비활성화하면 Asset 및 Identity 룩업에서 얻은 Asset 및 Identity 데이터로 이벤트를 보강할 수 없습니다. 그러면 상관(correlation)검색, 대시보드 및 기타 기능이 정상적으로 작동하지 않을 수 있음. Asset 및 Identity 상관을 비활성화하기 전에 Splunk 프로페셔널 서비스 또는 Splunk 서포트와 상의함.
+Asset 및 Identity 상관을 완전히 비활성화하면 Asset 및 Identity 룩업에서 얻은 Asset 및 Identity 데이터로 이벤트를 보강할 수 없음. 그러면 상관(correlation)검색, 대시보드 및 기타 기능이 정상적으로 작동하지 않을 수 있음. Asset 및 Identity 상관을 비활성화하기 전에 Splunk 프로페셔널 서비스 또는 Splunk 서포트와 상의함.
 
 ### Asset 및 Identity 상관 작동 방식
 
 조직이 보안 침입을 효과적으로 감지하려면 로그 데이터의 이벤트를 침입의 원인이 되거나 침입에 영향을 받은 특정 Asset 및 Identity와 상관할 수 있어야 함. Asset 및 Identity 상관이 활성화된 경우, Splunk Enterprise Security는 인덱싱된 이벤트를 자산 및
-ID 리스트의 Asset 및 Identity 데이터와 비교하여 데이터 보강과 컨텍스트를 제공함. 비교 프로세스에서는 자동 룩업을 사용함. 자동 룩업에 대한 내용은 Splunk 플랫폼 매뉴얼에서 확인할 수 있음.
+ID 리스트의 Asset 및 Identity 데이터와 비교하여 데이터 보강과 컨텍스트를 제공함. 비교 프로세스에서는 자동 룩업을 사용. 자동 룩업에 대한 내용은 Splunk 플랫폼 매뉴얼에서 확인할 수 있음.
 
 - Splunk Enterprise의 경우 Splunk Enterprise 지식 관리자 매뉴얼에서 룩업 자동화를 참조.
 - Splunk Cloud의 경우 Splunk Cloud 지식 관리자 매뉴얼에서 룩업 자동화를 참조.

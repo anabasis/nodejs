@@ -12,7 +12,7 @@ Splunk Enterprise Security에서 이행하는 Extreme Search 명령어를 사용
 예를 들어 Enterprise Security 멀웨어 센터 대시보드에서 총 감염 수 핵심 보안 지표는 지난 48시간 동안 멀웨어에 감염된 총 시스템 수를 표시합니다.
 
 Splunk ES는 현재 감염 카운트를 전날 감염된 시스템 카운트와 비교하여 표시되는 변동률을 결정합니다. 사용자 환경에서 하루에 감염되는 시스템 수의 일반적인 범위는 자동으로 결정되지 않음. 임계값은 전적으로 사용자에 의해 설정됩니다.
-감염 수가 3만큼 증가했지만, 이 증가폭이 중요한지 나타내는 컨텍스트가 값에 없습니다.
+감염 수가 3만큼 증가했지만, 이 증가폭이 중요한지 나타내는 컨텍스트가 값에 없음.
 Extreme Search을 사용하는 동일한 지표는 관련 정보를 표시하지만, 기본 총 감염 수 지표에서 제공되지 않던 심층적인 정보를 포함합니다.
 
 Extreme Search을 사용하여, Splunk ES는 감염 수와 새 감염 비율을 동적으로 업데이트되는 모델을 사용하여 계산합니다. 핵심 보안 지표에는 상황에 맞고 이해하기 쉬운 언어가 사용됩니다. 이 사례에서는 총 멀웨어 감염 수가 다른 날보다 높지 않고 감염 변동률이 우려할 수준이 아님을 확인할 수 있음.
@@ -38,7 +38,7 @@ Extreme Search은 컨텍스트와 개념을 합쳐서 데이터에 의미와 가
 
 ### Enterprise Security Extreme Search 설정
 
-Enterprise Security에서 Extreme Search 명령어를 사용하기 위해 추가로 설정해야 하는 사항은 없습니다. ES의 기본 설치본이 Extreme Search 명령어에 사용되는 컨텍스트를 모두 제공하고 컨텍스트를 유지하는 저장된 검색을 활성화합니다.
+Enterprise Security에서 Extreme Search 명령어를 사용하기 위해 추가로 설정해야 하는 사항은 없음. ES의 기본 설치본이 Extreme Search 명령어에 사용되는 컨텍스트를 모두 제공하고 컨텍스트를 유지하는 저장된 검색을 활성화합니다.
 
 - Enterprise Security에서 구현되는 컨텍스트와 저장된 검색의 리스트는 이 항목에서 컨테이터, 컨텍스트 및 저장된 검색을 참조.
 - Extreme Search을 사용하는 핵심 보안 지표의 리스트는 이 항목에서 Extreme Search 핵심 보안 지표를 참조.
@@ -47,7 +47,7 @@ Enterprise Security에서 Extreme Search 명령어를 사용하기 위해 추가
 #### Extreme Search을 사용하는 상관 (correlation) 검색
 
 Enterprise Security의 모든 상관(correlation)검색은 기본적으로 비활성화됩니다. 이 매뉴얼에서 상관(correlation)검색 활성화를 참조.
-가이드식 검색 만들기는 Extreme Search 명령어를 사용하는 상관(correlation)검색에 사용할 수 없습니다. 이런 상관(correlation)검색에서는 Extreme Search을 사용합니다.
+가이드식 검색 만들기는 Extreme Search 명령어를 사용하는 상관(correlation)검색에 사용할 수 없음. 이런 상관(correlation)검색에서는 Extreme Search을 사용합니다.
 
 |검색 이름|컨텍스트|
 |:--:|:--|
