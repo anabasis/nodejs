@@ -43,16 +43,16 @@ Splunk Enterprise Security에서 지속적인 설정 작업을 수행하려면 �
 - 상관(correlation)검색 작성
 - 키 표시기 검색 작성 및 관리
 - 저장된 검색 작성 및 관리
-- 검색 기반 룩업 작성 및 관리
+- 검색 기반 Lookup 작성 및 관리
 - 스윔 레인(Swim lane) 검색 작성 및 관리
 - 뷰 작성 및 관리
-- 룩업 작성 및 관리
+- Lookup 작성 및 관리
 - 위험 작성 및 위험 개체 편집
 
 사용자 지정 콘텐츠를 다른 ES 인스턴스와 공유하려면 Splunk Enterprise Security에서 콘텐츠를 앱으로 내보내기를 참조
 
 ### 대시보드 문제 해결
 
-- 대시보드 문제를 해결하는 데 유용한 팁과 모범 사례는 Splunk Enterprise Security의 대시보드 문제 해결을 참조
+- 대시보드 문제를 해결하는데 유용한 팁과 모범 사례는 Splunk Enterprise Security의 대시보드 문제 해결을 참조
 - 대시보드를 채우는 데이터 모델 데이터 집합에 대한 내용은 Splunk Enterprise Security 대시보드 요구사항 표를 참조
 - 모든 대시보드의 개요는 Splunk Enterprise Security 사용의 Splunk Enterprise Security에서 사용 가능한 대시보드 소개를 참조
