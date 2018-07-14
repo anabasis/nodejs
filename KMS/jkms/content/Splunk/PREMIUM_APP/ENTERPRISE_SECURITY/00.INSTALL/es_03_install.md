@@ -183,6 +183,8 @@ Splunk는 Splunk 지원 추가 기능을 전체 Splunk 플랫폼 배포에 설�
 
 인덱서에 추가 기능을 배포하는 데 사용하는 절차는 Splunk 플랫폼 배포에 따라 다를 수 있습니다. 상황이나 기호에 맞는 옵 션을 선택하십시오.
 
+<table>
+<tr><td></td></tr>
 배포 상황 절차
 Splunk Enterprise Security가 Splunk Cloud에서 실행 중인 경우
 Splunk 서포트에 연락하여 필수 추가 기능을 인덱서에 설치해 달라고 요청합 니다.
