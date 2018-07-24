@@ -1,0 +1,25 @@
+@import '../../../@theme/styles/themes';
+@import '~@nebular/theme/styles/global/bootstrap/breakpoints';
+@import '~bootstrap/scss/mixins/breakpoints';
+
+@include nb-install-component() {
+
+  nb-card {
+    background-image: nb-theme(radial-gradient);
+  }
+  nb-card-header {
+    height: 100%;
+    padding: 0.6rem;
+  }
+  nb-card-body {
+    height: 100%;
+    padding: 2rem;
+    color: nb-theme(color-fg);
+  }
+
+  chart {
+    display: block;
+    height: nb-theme(card-height-xsmall);
+    width: 100%;
+  }
+}

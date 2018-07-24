@@ -1,0 +1,30 @@
+@import '../../../@theme/styles/themes';
+@import '~@nebular/theme/styles/global/bootstrap/breakpoints';
+@import '~bootstrap/scss/mixins/breakpoints';
+
+@include nb-install-component() {
+
+  nb-card-header {
+    height: 100%;
+    padding: 0.2rem;
+  }
+  nb-card {
+    background-image: nb-theme(radial-gradient);
+  }
+
+  nb-card-body {
+    height: 100%;
+    padding: 0.0rem;
+    color: nb-theme(color-fg);
+  }
+
+
+  :host /deep/ ng2-smart-table {
+    display: block;
+    font-size: 5px;
+    height: 100%;
+    width: 100%;
+    padding: 0.0rem;
+  }
+
+}

@@ -1,0 +1,20 @@
+@import '../../../@theme/styles/themes';
+
+@include nb-install-component() {
+  app-chartjs-blocktime,
+  app-chartjs-blockpropagation,
+  app-chartjs-gaslimit,
+  app-chartjs-gasspending,
+  app-chartjs-transactions,
+  app-chartjs-unclecount {
+    display: block;
+    height: nb-theme(card-height-xsmall);
+    width: 100%;
+
+    /deep/ chart {
+      display: block;
+      height: nb-theme(card-height-xsmall);
+      width: 100%;
+    }
+  }
+}
