@@ -47,7 +47,7 @@ Splunk Enterprise Security를 계속 설정하려면 다음을 참조하십시�
 
 Enterprise Security 데이터 원본 및 컬렉션 고려 사항의 개요는 데이터 원본 계획을 참조하십시오.
 
-### 명령줄에서 명령줄에서 Splunk Enterprise Security 설치설치
+### 명령줄에서 명령줄에서 Splunk Enterprise Security 설치
 
 Splunk 소프트웨어 명령줄을 사용하여 Splunk Enterprise Security를 설치합니다. Splunk 소프트웨어 명령줄에 대한 자세 한 내용은 CLI를 참조하십시오.
 

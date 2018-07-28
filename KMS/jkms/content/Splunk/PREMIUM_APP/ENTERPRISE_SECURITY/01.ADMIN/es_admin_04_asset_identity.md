@@ -76,23 +76,23 @@ Splunk Enterprise Security에서 Asset 및 Identity 데이터 수집 및 추출
 절차
 
 1. Unix 줄 마감과 .csv 파일 확장자가 있는 일반 텍스트, CSV 형식 파일을 만듬.
-2. CSV 파일에 올바른 헤더를 사용. Splunk Enterprise Security에서 기대하는 헤더는 자산 Lookup 헤더 또는 ID Lookup 헤더를 참조.
-3. CSV 행을 Asset 및 Identity 필드로 채움. 자산 Lookup 필드 또는 ID Lookup 필드를 참조.
+2. CSV 파일에 올바른 헤더를 사용. Splunk Enterprise Security에서 기대하는 헤더는 Asset Lookup 헤더 또는 ID Lookup 헤더를 참조.
+3. CSV 행을 Asset 및 Identity 필드로 채움. Asset Lookup 필드 또는 ID Lookup 필드를 참조.
 
-자산 리스트의 예는 데모 자산 Lookup을 참조.
+자산 리스트의 예는 데모 Asset Lookup을 참조.
 
 - 설정 > 데이터 보강 > 리스트 및 Lookup으로 이동하여 Splunk Web에서 리스트를 찾음.
 - 파일 시스템에서 리스트를 찾음. demo_assets.csv 파일은 SA-IdentityManagement/package/lookups에 있음.
 
 사용자 지정 검색을 사용하여 Lookup을 생성하는 경우, 검색 결과에 의해 생성되는 Lookup에 헤더와 일치하는 필드가 있는지 확인.
 
-### 자산 Lookup 헤더
+### Asset Lookup 헤더
 
 ip,mac,nt_host,dns,owner,priority,lat,long,city,country,bunit,category,pci_domain,is_expected,should_timesync,should_update,requires_av
 
-### 자산 Lookup 필드
+### Asset Lookup 필드
 
-자산 Lookup의 다음 필드를 채움.
+Asset Lookup의 다음 필드를 채움.
 
 멀티홈 지원은 제한적이며, 서로 다른 네트워크에 IP 주소가 같은 여러 호스트가 있으면 병합 프로세스에서 충돌이 발생할 수 있음.
 
@@ -238,9 +238,9 @@ Splunk Enterprise Security에서 새 Asset 및 Identity Lookup을 설정. 이 �
 Splunk Enterprise Security에서 새 Asset 및 Identity 리스트 설정
 
 절차
-자산 Lookup 데이터를 확인.
+Asset Lookup 데이터를 확인.
 
-1. 특정 자산 레코드가 자산 Lookup에 있는지 확인.
+1. 특정 자산 레코드가 Asset Lookup에 있는지 확인.
     1. ip, mac, nt_host 또는 dns 필드에 데이터가 있는 자산 레코드를 자산 리스트에서 선택.
     2. 선택한 레코드를 Splunk Web에서 검색함.
     ```sql
@@ -328,7 +328,7 @@ Splunk Enterprise Security는 생성된 Lookup 파일을 사용해 Asset 및 Ide
 7. Splunk Enterprise Security ID 관리자 모듈식 입력은 inputs.conf에서 현재 활성화되어 있는 스탠자에 따라 입력 원본을 식별하는데 사용되는 매크로를 업데이트. 예를 들어 `generate_identities` 매크로는 ID Lookup 설정 페이지에서 지정된 규칙에 따라 동적으로 업데이트.
 8. Splunk Enterprise Security ID 관리자 모듈식 입력은 Asset 및 Identity 리스트를 병합해야 하는 변경 사항이 확인되는 경우 Lookup을 생성하는 저장된 검색을 처리.
 9. Lookup을 생성하는 저장된 검색은 설정되고 활성화된 Asset 및 Identity 리스트를 모두 병합함. 주 저장된 검색은 ID 관리자 입력에 의해 참조된 Lookup 테이블을 연결하고, 새 필드를 생성하고, 연결된 자산 및 ID 리스트를 대상 Lookup 테이블 파일에 출력함. 보조 저장된 검색은 자산 범주, ID 범주 및 자산 PCI 도메인(Splunk App for PCI Compliance 내)에 대한 Lookup테이블을 생성.
-10. 사용자는 데이터가 예상한 대로 표시되는지 확인. Asset 및 Identity 데이터가 Splunk Enterprise Security에 추가되었는지 확인을 참조. ID 및 자산 Lookup 병합 시 입력의 유효성이 확인되거나 중복이 제거되지 않음. ID 관리자 모듈식 입력에서 발생하는 오류는 identity_manager.log에 기록됨. 이 로그에는 데이터 오류가 표시되지 않음.
+10. 사용자는 데이터가 예상한 대로 표시되는지 확인. Asset 및 Identity 데이터가 Splunk Enterprise Security에 추가되었는지 확인을 참조. ID 및 Asset Lookup 병합 시 입력의 유효성이 확인되거나 중복이 제거되지 않음. ID 관리자 모듈식 입력에서 발생하는 오류는 identity_manager.log에 기록됨. 이 로그에는 데이터 오류가 표시되지 않음.
 
 ## Splunk Enterprise Security에서 병합된 Asset 및 Identity 데이터를 저장하는 Lookup
 
@@ -367,7 +367,7 @@ Security에서 병합된 Asset 및 Identity 데이터를 저장하는 Lookup을 
 
 ### 처리 후의 자산 필드
 
-저장된 검색이 병합 프로세스를 수행한 후의 자산 Lookup 자산 필드
+저장된 검색이 병합 프로세스를 수행한 후의 Asset Lookup 자산 필드
 
 |필드|ETL에서 수행하는 작업|
 |:--:|:--|
@@ -591,6 +591,6 @@ host,ip,mac,nt_host,dns,owner,priority,lat,long,city,country,bunit,category,pci_
 Asset 및 Identity Lookup을 편집하여 새 Asset 및 Identity 데이터를 Splunk Enterprise Security에 수동으로 추가할 수 있음. 예를들어 내부 서브넷과, 허용 리스트에 포함할 IP 주소, 그리고 기타 정적 자산 및 식별 데이터를 추가할 수 있음.
 
 1. Splunk ES 메뉴 모음에서 설정 > 콘텐츠 관리를 선택.
-2. 자산 데이터를 추가하려면 자산 Lookup을 클릭하여 편집함. ID 데이터를 추가하려면 ID 리스트를 클릭하여 편집함.
+2. 자산 데이터를 추가하려면 Asset Lookup을 클릭하여 편집함. ID 데이터를 추가하려면 ID 리스트를 클릭하여 편집함.
 3. 스크롤 막대를 사용하여 테이블의 컬럼과 행을 봄. 셀을 두 번 클릭하여 콘텐츠를 추가, 변경 또는 제거.
 4. 변경 사항을 저장함.
