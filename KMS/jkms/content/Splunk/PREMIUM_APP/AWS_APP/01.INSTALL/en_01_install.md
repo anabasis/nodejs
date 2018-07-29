@@ -108,7 +108,7 @@ After you have deployed the app and the add-on to your search heads, change the 
     [tcpout]
     defaultGroup = my_search_peers  # Name of the search peer group
     forwardedindex.filter.disable = true
-    indexAndForward = false 
+    indexAndForward = false
     [tcpout:my_search_peers]
     server=10.10.10.1:9997,10.10.10.2:9997,10.10.10.3:9997  # list of peers
     ```
@@ -169,7 +169,7 @@ is_visible =  false
     [tcpout]
     defaultGroup = my_search_peers  # Name of the search peer group
     forwardedindex.filter.disable = true
-    indexAndForward = false 
+    indexAndForward = false
     [tcpout:my_search_peers]
     server=10.10.10.1:9997,10.10.10.2:9997,10.10.10.3:9997  # list of peers
     ```
@@ -180,12 +180,12 @@ is_visible =  false
 #### Distribute the summary index configuration bundle across clustered indexers
 
 On the indexer cluster master node, merge all the settings from $SPLUNK_HOME/etc/apps/splunk_apps_aws/default/indexes.conf into $SPLUNK_HOME/etc/master-apps/_cluster/local/indexes.conf to incorporate the summary index configurations.
-On the master node, run this CLI command to distribute the indexes.conf to the peer nodes: 
+On the master node, run this CLI command to distribute the indexes.conf to the peer nodes:
 splunk apply cluster-bundle
 
 When the configuration bundle distribution is complete, the indexes.conffile is copied to $SPLUNK_HOME/etc/slave-apps/_cluster/local on the peer nodes.
 
-#### Install the add-on to heavy forwarders
+#### Install the add-on to heavy forwarders(2)
 
 Follow your preferred method of deploying the Splunk Add-on for Amazon Web Services to one or more heavy forwarders. You can:
 
