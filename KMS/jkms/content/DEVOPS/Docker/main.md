@@ -199,4 +199,25 @@ https://gist.github.com/nacyot/8366310 도커 치트 시트
 https://docs.docker.com/engine/reference/builder/ 도커파일 레퍼런스
 http://programmingsummaries.tistory.com/392 도커파일 작성하기
 
+###################################
+[SPLUNK]
 
+```bash
+## 실행중인 컨테이너에 들어감.
+## docker exec -t -i [컨테이너명] /bin/bash
+docker exec -t -i splunkpublic /bin/bash
+```
+
+자동라이센스 추가
+
+```bash
+./splunk add licenses /opt/splunk/etc/licenses/enterprise/enterprise.lic
+./splunk list licenses
+./splunk list licenser-pools
+./splunk list licenser-slaves
+./splunk list licenser-localslave
+./splunk edit licenser-localslave -master_uri 'https://master:port'
+./splunk list licenser-messages
+```
+
+./splunk add licenses /opt/splunk/etc/licenses/Splunk.License
