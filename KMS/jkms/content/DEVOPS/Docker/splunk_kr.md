@@ -268,3 +268,9 @@ Splunk Enterprise Docker 이미지로 데이터를 수집하거나 분석하는 
 * [Splunk Slack channel](http://splunk-usergroups.slack.com)
 * [EFNet Internet Relay Chat](http://www.efnet.org)의 #splunk 채널 방문
 * [docker-maint@splunk.com](mailto:docker-maint@splunk.com)으로 전자 메일 보내기
+
+## Splunk Dev
+
+```bash
+docker exec -i -t splunkpublic /bin/bash
+```
