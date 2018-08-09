@@ -11,7 +11,7 @@ Splunk Enterprise 및 Splunk Cloud의 응용 프로그램을 사용하면 조직
 
 ![Splunk Enterprise Security](./images/a54adeaa-69fb-11e3-a5ed-005056ad5c72.png)
 
-## Splunk 앱이란?
+## Splunk 앱이란
 
 Splunk 응용 프로그램은 Splunk Enterprise 또는 Splunk Cloud를보다 효과적으로 사용할 수 있도록 특정 기술 또는 사용 사례 용으로 패키징 된 지식 개체 및 확장 모음입니다. Splunk 응용 프로그램에는 대시 보드, 보고서, 사용자 정의 검색 명령, 모듈 식 입력, 필드 추출 정의, 데이터 조회, 탐색 메뉴, 사용자 지정 경고 작업, 사용자 지정 코드 파일 등이 포함 된 사용자 지정 UI와 같은 요소가 포함될 수 있습니다. Splunk 응용 프로그램은 Splunk Web에서 실행되며 홈 페이지 또는 응용 프로그램 메뉴에서 액세스 할 수 있습니다.
 
@@ -33,7 +33,7 @@ Splunk 앱의이 정의를 확장하려면 다음을 수행하십시오.
 - NetApp Data ONTAP 용 Splunk App은 스토리지 관리자 용입니다. 이 응용 프로그램을 사용하면 모든 NetApp Data ONTAP 스토리지 시스템의 구성, 로그 및 성능을 시각화 할 수 있습니다.
 - S.O.S - Splunk on Splunk 앱은 Splunk 문제를 해결하려는 모든 사용자를위한 프로그램입니다. 이 앱을 사용하면 Splunk 환경의 문제를 분석하고 해결할 수 있습니다.
 
-## Splunk 애드온이란 무엇입니까?
+## Splunk 애드온이란 무엇입니까
 
 기술적으로 Splunk 애드온은 Splunk 응용 프로그램입니다. 실제로 Splunk 애드온은 전체 UI를 포함하지 않는 Splunk 응용 프로그램을 말하며 일반적으로 사용자 정의 구성이나 데이터 입력을 제공합니다. 또한 UI가 없으면 Splunk 웹 홈페이지 또는 Splunk App 메뉴에서 추가 기능을 사용할 수 없으며 전용 URL이 없습니다.
 
