@@ -49,7 +49,6 @@ The most basic way to programmatically access Splunk's resources is by using the
 
 However, we want to make it even easier for you to develop Splunk applications using common programming languages, so we've created software development kits (SDKs) to help out. We've got Splunk SDKs for Python, Java, and JavaScript. But first, here's some background on how the SDKs relate to the REST API.
 
- 
 A little about the Splunk REST API
 Each of Splunk's resources (apps, users, searches, jobs, indexes, inputs, and others) has a corresponding REST endpoint that indicates the resource's category (for example, the operation for streaming search results is GET search/jobs/export). To use the REST API to interact with Splunk's resources, you send a request to the management port of a Splunk server (which is port 8089 by default). The request requires admin access and is over HTTPS, using the URI of the REST endpoint. You can use any web browser, command-line tool, REST client, scripting language, or programming language that supports making HTTP calls. Curl and Wget are common tools. By default, responses are returned in Atom Syndication Format (an Atom Feed) with entries containing information about the Splunk resource.
 
@@ -57,13 +56,13 @@ The URI for the request includes the location of the Splunk server splunkd, the 
 
 The Atom Feed response contains the following containers:
 
-<feed> is a top-level element containing meta data that pertains to the entire response, such as the time of the request or the total number of results.
-<entry> corresponds to each individual result, containing meta data that pertains to one result and its content.
-<content> includes the key-value pairs that make up each result.
+\<feed\> is a top-level element containing meta data that pertains to the entire response, such as the time of the request or the total number of results.
+\<entry\> corresponds to each individual result, containing meta data that pertains to one result and its content.
+\<content\> includes the key-value pairs that make up each result.
 So what does that look like in practice? Here's an example of an HTTP POST request that creates a new index with a given name ("myindexname"):
 
 The username:password credentials are admin:pass.
-The location of splunkd is https://localhost:8089/servicesNS.
+The location of splunkd is <https://localhost:8089/servicesNS>.
 The user/app context is admin/search.
 The endpoint is data/indexes.
 You put it all together at the command line with curl and you get this:
