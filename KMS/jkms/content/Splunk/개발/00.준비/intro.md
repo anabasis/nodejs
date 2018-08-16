@@ -223,4 +223,8 @@ app_folder
 
 ## EXAMPLE
 
-[Tutorial: Convert a Simple XML dashboard to HTML](http://dev.splunk.com/view/SP-CAAAETP)[Tutorial: Use KV Store with a simple app](http://dev.splunk.com/view/SP-CAAAEZT)[Tutorial: Create a custom Splunk view](http://dev.splunk.com/view/SP-CAAAEQ8)[Tutorial: Create a Music dashboard](http://dev.splunk.com/view/SP-CAAAEMU)[Tutorial: Create an app using Django Bindings:Deprecation](http://dev.splunk.com/view/SP-CAAAESP)
+- [Tutorial: Convert a Simple XML dashboard to HTML](http://dev.splunk.com/view/SP-CAAAETP)
+- [Tutorial: Use KV Store with a simple app](http://dev.splunk.com/view/SP-CAAAEZT)
+- [Tutorial: Create a custom Splunk view](http://dev.splunk.com/view/SP-CAAAEQ8)
+- [Tutorial: Create a Music dashboard](http://dev.splunk.com/view/SP-CAAAEMU)
+- [Tutorial: Create an app using Django Bindings:Deprecation](http://dev.splunk.com/view/SP-CAAAESP)
