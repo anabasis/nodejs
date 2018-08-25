@@ -268,7 +268,7 @@ Now that we've got some data and a report, let's add a dashboard with a visualiz
 
 Let's take a look at your dashboard. Look at your app's /local folder and noticed that it now has a /data/ui/views subfolder with a new .xml file matching the name of the dashboard you just created.
 
-Dashboards are by default defined using Simple XML. For more, see [Simple XML Reference](http://dev.splunk.com/docs.splunk.com/Documentation/Splunk/latest/Viz/PanelreferenceforSimplifiedXML) in the Dashboards and Visualizations manual.
+Dashboards are by default defined using Simple XML. For more, see [Simple XML Reference](http://docs.splunk.com/Documentation/Splunk/7.1.2/Viz/PanelreferenceforSimplifiedXML) in the Dashboards and Visualizations manual.
 
 The label and description fields define the title and description text displayed in the upper left corner of the dashboard:
 ![대시보드2](./images/quickstart_15.png)

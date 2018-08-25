@@ -1,13 +1,15 @@
 # WebFramework Example Code
 
+<http://dev.splunk.com/view/SP-CAAAEU7>
+
 ## Simple XML extensions
 
 <table>
-<thead><tr><th>Code example</th><th>Description</th></tr></thead>
-<tr><td>Basic dashboard</td><td>검색 결과를 표시하는 차트 및 이벤트 뷰어가있는 기본 템플릿입니다.</td></tr>
-<tr><td>A collection of views on one page</td><td>한 페이지에 가장 일반적인보기를 표시합니다. 검색 컨트롤을 검색 관리자와 동기화하는 방법과 정적 옵션 및 검색 기반 선택 항목으로 양식 컨트롤을 채우는 방법을 보여줍니다.</td></tr>
-<tr><td>Charts</td><td>가능한 각 차트 유형의 예를 보여줍니다.</td></tr>
-<tr><td>Tables with custom renderers</td><td>Shows how to display a table that includes a sparkline in the search results, a custom cell renderer, and a custom row renderer.</td></tr>
+<thead><tr><th>Code example</th><th>Description</th><th>Dashboard</th><th>Dashboard Page</th></tr></thead>
+<tr><td>Basic dashboard</td><td>검색 결과를 표시하는 차트 및 이벤트 뷰어가있는 기본 템플릿입니다.</td><td>01.Basic Example</td><td>example_basicpage</td></tr>
+<tr><td>A collection of views on one page</td><td>한 페이지에 가장 일반적인보기를 표시합니다. 검색 컨트롤을 검색 관리자와 동기화하는 방법과 정적 옵션 및 검색 기반 선택 항목으로 양식 컨트롤을 채우는 방법을 보여줍니다.</td><td>02.Collection of Views</td><td>example_all</td></tr>
+<tr><td>Charts</td><td>가능한 각 차트 유형의 예를 보여줍니다.</td><td>03.Chart Example</td><td>example_chart</td></tr>
+<tr><td>Tables with custom renderers</td><td>Shows how to display a table that includes a sparkline in the search results, a custom cell renderer, and a custom row renderer.</td><td>04.Tables Example</td><td>example_customtables</td></tr>
 <tr><td>Events viewers</td><td>Shows examples of each of the possible types of events viewer.</td></tr>
 <tr><td>Maps</td><td>Shows data displayed on a Splunk map.</td></tr>
 <tr><td>Drilldown properties</td><td>Shows the result of setting different combinations of drilldown properties for the views that allow drilldown actions.</td></tr>
