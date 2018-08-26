@@ -845,6 +845,932 @@ td.icon .low {
 }
 ```
 
+### Example: Events viewers using a Simple XML extension
+
+이 예제는 단순 XML 확장을 사용하여 가능한 각 유형의 이벤트 뷰어의 예제를 표시합니다.
+
+![Events viewers using a Simple XML extension](./images/SWF_codeex_13.jpg)
+
+- example_eventsviewers.xml
+- example_eventsviewers.js
+
+#### example_eventsviewers.xml
+
+```xml
+<dashboard script="example_eventsviewers.js" >
+    <label>Events Viewers</label>
+    <row>
+        <panel>
+            <html>
+                <table>
+                    <tr>
+                        <td style="width: 60%;">
+                            <h3>Events viewer: list</h3>
+                            <div id="myeventsviewer-list"></div>
+                        </td>
+                    </tr>
+
+                    <!-- Row for the table events viewer -->
+                    <tr>
+                        <td style="width: 60%;">
+                            <h3>Events viewer: table</h3>
+                            <div id="myeventsviewer-table"></div>
+                        </td>
+                    </tr>
+
+                    <!-- Row for the raw events viewer -->
+                    <tr>
+                        <td style="width: 60%;">
+                            <h3>Events viewer: raw</h3>
+                            <div id="myeventsviewer-raw"></div>
+                        </td>
+                    </tr>
+                </table>
+            </html>
+        </panel>
+    </row>
+</dashboard>
+```
+
+#### example_eventsviewers.js
+
+```js
+require([
+    "splunkjs/mvc/searchmanager",
+    "splunkjs/mvc/eventsviewerview",
+    "splunkjs/mvc/simplexml/ready!"
+], function(
+    SearchManager,
+    EventsViewer
+) {
+
+    // Set up a search manager
+    var search1 = new SearchManager({
+        id: "example-search",
+        search: "index=_internal | head 100",
+        preview: true,
+        cache: true
+    });
+
+    // Create 3 events viewers: list, table, and raw
+    var listviewer = new EventsViewer({
+        id: "example-eventsviewer-list",
+        managerid: "example-search",
+        type: "list",
+        "list.drilldown": "outer",
+        drilldownRedirect: true,
+        "list.wrap": true,
+        count: 3,
+        pagerPosition: "top",
+        showPager: true,
+        rowNumbers: false,
+        el: $("#myeventsviewer-list")
+    }).render();
+
+    var tableviewer = new EventsViewer({
+        id: "example-eventsviewer-table",
+        managerid: "example-search",
+        type: "table",
+        "table.drilldown": true,
+        drilldownRedirect: true,
+        "table.sortColumn": "sourcetype",
+        "table.sortDirection": "asc",
+        "table.wrap": true,
+        count: 3,
+        showPager: false,
+        rowNumbers: false,
+        el: $("#myeventsviewer-table")
+    }).render();
+
+    var rawviewer = new EventsViewer({
+        id: "example-eventsviewer-raw",
+        managerid: "example-search",
+        type: "raw",
+        "raw.drilldown": "inner",
+        drilldownRedirect: true,
+        count: 3,
+        pagerPosition: "top",
+        showPager: true,
+        rowNumbers: false,
+        el: $("#myeventsviewer-raw")
+    }).render();
+});
+```
+
+### Example: Maps using a Simple XML extension
+
+이 예제는 Simple XML 확장을 사용하여 Splunk 맵에 데이터를 표시합니다.
+
+![Maps using a Simple XML extension](./images/SWF_codeex_28.jpg)
+
+- example_map.xml
+- example_map.js
+
+#### example_map.xml
+
+```xml
+<dashboard script="example_map.js">
+  <label>Map view</label>
+  <row>
+    <panel>
+      <html>
+        <div>
+          <div class="main-area">
+            <h4>Table view</h4>
+            <div id="markerinfotable"></div>
+
+            <h4>SplunkMap view</h4>
+            <div id="mysplunkmapview"></div>
+          </div>
+        </div>
+      </html>
+    </panel>
+  </row>
+</dashboard>
+```
+
+#### example_map.js
+
+```js
+require([
+    "splunkjs/mvc/searchmanager",
+    "splunkjs/mvc/postprocessmanager",
+    "splunkjs/mvc/tableview",
+    "splunkjs/mvc/splunkmapview",
+    "splunkjs/mvc/simplexml/ready!"
+], function(
+    SearchManager,
+    PostProcessManager,
+    TableView,
+    SplunkMapView
+) {
+
+    // Define the search manager and postprocess manager
+    var searchmain = new SearchManager({
+        id: "search-map",
+        search: "| inputlookup earthquakes.csv | search  Region=Washington",
+        preview: true,
+        cache: true
+    });
+
+    var searchsub1 = new PostProcessManager({
+        id: "search-splunkmap",
+        managerid: "search-map",
+        search: "| rename Lat as lat, Lon as lon | geostats count"
+    });
+
+    // Set up a table for displaying marker info
+    new TableView({
+        id: "markerinfo",
+        managerid: "search-map",
+        el: $("#markerinfotable")
+    }).render();
+
+    // Set up the Splunk map
+    var mysplunkmap = new SplunkMapView({
+        id: "example-splunkmap",
+        managerid: "search-splunkmap",
+        drilldown: true,
+        drilldownRedirect: true,
+        tileSource: "splunk",
+        "mapping.map.zoom": 7,
+        "mapping.map.center": "(47.5,-120)", // Center on Washington state
+        "mapping.markerLayer.markerOpacity": 0.6,
+        "mapping.markerLayer.markerMinSize": 15,
+        el: $("#mysplunkmapview")
+    }).render();
+
+    // Capture click data and display the object in the console
+    mysplunkmap.on("click:marker", function(e) {
+        e.preventDefault();
+
+        // Display a data object in the console
+        console.log("Map click: ", e.data['row.count'] + " earthquakes near (" + e.data['row.latitude'] + ", " +e .data['row.longitude'] + ")");
+    });
+
+});
+```
+
+### Example: Drilldown properties using a Simple XML extension
+
+이 예제에서는 단순 XML 확장을 사용하여 드릴 다운 작업을 허용하는보기에 대해 다양한 드릴 다운 속성 조합을 설정 한 결과를 보여줍니다.
+
+![Drilldown properties using a Simple XML extension](./images/SWF_codeex_15.jpg)
+
+- example_drilldown.xml
+- example_drilldown.js
+
+#### example_drilldown.xml
+
+```xml
+<dashboard script="example_drilldown.js">
+  <label>Drilldown properties</label>
+  <row>
+    <panel>
+      <html>
+        <div>
+            <div class="main-area">
+                <p>You can set drilldown properties for the EventsViewer, Chart, Table, and SplunkMap views. This example shows different ways to set these properties in JavaScript.</p>
+            </div>
+
+            <h2>EVENTS: Change drilldown to "inner", allow redirect to Search:</h2>
+            <div id="myeventsviewer"></div>
+
+            <h2>CHART: Disable redirect using the <tt>drilldownRedirect</tt> property,
+            display chart-click and legend-click info in the console:</h2>
+            <div id="mychart"></div>
+
+            <h2>TABLE: Enable drilldown for table cells, disable redirect using the <tt>preventDefault</tt>
+            method, and display table-click info in the console:</h2>
+            <div id="mytable"></div>
+
+            <h2>MAP: Disable redirect and display map-click info in the console:</h2>
+            <div id="mymap"></div>
+        </div>
+      </html>
+    </panel>
+  </row>
+</dashboard>
+```
+
+#### example_drilldown.js
+
+```js
+require([
+    "splunkjs/mvc",
+    "splunkjs/mvc/searchmanager",
+    "splunkjs/mvc/postprocessmanager",
+    "splunkjs/mvc/eventsviewerview",
+    "splunkjs/mvc/chartview",
+    "splunkjs/mvc/tableview",
+    "splunkjs/mvc/splunkmapview",
+    "splunkjs/mvc/simplexml/ready!"
+], function(
+    mvc,
+    SearchManager,
+    PostProcessManager,
+    EventsViewer,
+    ChartView,
+    TableView,
+    SplunkMapView
+) {
+
+    // Define the search managers and postprocess search managers
+    var searchmain = new SearchManager({
+        id: "main-search",
+        search: "index=_internal | head 100 | fields *",
+        preview: true,
+        cache: true
+    });
+
+    var searchsub1 = new PostProcessManager({
+        id: "subsearch1",
+        managerid: "main-search",
+        search: " | stats count by sourcetype"
+    });
+
+    var searchsub2 = new PostProcessManager({
+        id: "subsearch2",
+        managerid: "main-search",
+        search: " | fields sourcetype, source, host"
+    });
+
+    var searchmap = new SearchManager({
+        id: "map-search",
+        search: "| inputlookup earthquakes.csv | rename Lat as lat Lon as lon | geostats count",
+        preview: true,
+        cache: true
+    });
+
+    // Set up the views
+    var myeventsviewer = new EventsViewer({
+        id: "example-eventsviewer",
+        managerid: "main-search",
+        type: "raw",
+        "raw.drilldown": "inner",
+        count: 3,
+        el: $("#myeventsviewer")
+    }).render();
+
+    var mychart = new ChartView({
+        id: "example-chart",
+        managerid: "subsearch1",
+        type: "bar",
+        drilldown: "all",
+        drilldownRedirect: false,
+        el: $("#mychart")
+    }).render();
+
+    var mytable = new TableView({
+        id: "example-table",
+        managerid: "subsearch2",
+        pageSize: 3,
+        wrap: true,
+        drilldown: "cell",
+        el: $("#mytable")
+    }).render();
+
+    var mymap = new SplunkMapView({
+        id: "example-splunkmap",
+        managerid: "map-search",
+        drilldownRedirect: false,
+        el: $("#mymap")
+    }).render();
+
+    // Set up event handlers to customize drilldown behavior
+    mychart.on("click:legend", function(e) {
+        // Displays a data object in the console--the legend text
+        console.log("Clicked the chart legend: ", e.name2);
+    });
+
+    mychart.on("click:chart", function(e) {
+        // Displays a data object in the console
+        console.log("Clicked the chart: ", e.value);
+    });
+
+    mytable.on("click", function(e) {
+        // Bypass the default behavior
+        e.preventDefault();
+
+        // Displays a data object in the console
+        console.log("Clicked the table:", e.data);
+    });
+
+    mymap.on("click:marker", function(e) {
+        // Displays a data object in the console
+        console.log("Clicked the map: ", e.data['row.count'] + " earthquakes near (" + e.data['row.latitude'] + ", " +e .data['row.longitude'] + ")");
+    });
+
+});
+```
+
+### Example: Search controls using tokens using a Simple XML extension
+
+이 예제는 단순 XML 확장을 사용하여 토큰 변수를 사용하여 검색 컨트롤을 검색 관리자와 동기화합니다.
+
+![Search controls using tokens using a Simple XML extension](./images/SWF_codeex_17.jpg)
+
+- example_searchcontrolstokens.xml
+- example_searchcontrolstokens.js
+
+#### example_searchcontrolstokens.xml
+
+```xml
+<dashboard script="example_searchcontrolstokens.js">
+  <label>Search controls and tokens</label>
+  <row>
+    <panel>
+      <html>
+        <div>
+            <div class="main-area">
+                <p>This example shows how to set up SearchBar and SearchControls views and sync them with a SearchManager using tokens.</p>
+                <p><b>Note:</b> The Timeline view can't be synced using tokens. Use events instead.</p>
+                <div id="mysearchbar1"></div>
+                <div id="mysearchcontrols1"></div>
+                <div id="mytable1"></div>
+            </div>
+        </div>
+      </html>
+    </panel>
+  </row>
+</dashboard>
+```
+
+#### example_searchcontrolstokens.js
+
+```js
+require([
+    "splunkjs/mvc",
+    "splunkjs/mvc/searchmanager",
+    "splunkjs/mvc/searchbarview",
+    "splunkjs/mvc/searchcontrolsview",
+    "splunkjs/mvc/tableview",
+    "splunkjs/mvc/simplexml/ready!"
+], function(
+    mvc,
+    SearchManager,
+    SearchbarView,
+    SearchControlsView,
+    TableView
+) {
+
+    // Create the search manager and views
+    var mysearch = new SearchManager({
+        id: "search1",
+        search: mvc.tokenSafe("$searchquery$"),
+        earliest_time: mvc.tokenSafe("$earlyval$"),
+        latest_time: mvc.tokenSafe("$lateval$"),
+        app: "search",
+        preview: true,
+        required_field_list: "*",
+        status_buckets: 300
+    });
+
+    var mysearchbar = new SearchbarView({
+        id: "searchbar1",
+        managerid: "search1",
+        value: mvc.tokenSafe("$searchquery$"),
+        timerange_earliest_time: mvc.tokenSafe("$earlyval$"),
+        timerange_latest_time: mvc.tokenSafe("$lateval$"),
+        default: "index=_internal | head 100",
+        el: $("#mysearchbar1")
+    }).render();
+
+    var mysearchcontrols = new SearchControlsView({
+        id: "searchcontrols1",
+        managerid: "search1",
+        el: $("#mysearchcontrols1")
+    }).render();
+
+    var mytable = new TableView({
+        id: "table1",
+        managerid: "search1",
+        el: $("#mytable1")
+    }).render();
+});
+```
+
+### Example: Search controls using events using a Simple XML extension
+
+이 예제는 단순 XML 확장을 사용하여 변경 이벤트를 사용하여 검색 컨트롤을 검색 관리자에 동기화합니다.
+
+![Tables with custom renderers using a Simple XML extension](./images/SWF_codeex_16.jpg)
+
+- example_searchcontrolsevents.xml
+- example_searchcontrolsevents.js
+
+#### example_searchcontrolsevents.xml
+
+```xml
+<dashboard script="example_searchcontrolsevents.js">
+  <label>Search controls and events</label>
+  <row>
+    <panel>
+      <html>
+        <div>
+            <div class="main-area">
+                <p>This example shows how to set up SearchBar, SearchControls, and Timeline views in JavaScript and sync them with a SearchManager using events.</p>
+                <div id="mysearchbar1"></div>
+                <div id="mysearchcontrols1"></div>
+                <div id="mytimeline1"></div>
+                <div id="mytable1"></div>
+            </div>
+        </div>
+      </html>
+    </panel>
+  </row>
+</dashboard>
+```
+
+#### example_searchcontrolsevents.js
+
+```js
+require([
+    "splunkjs/mvc/searchmanager",
+    "splunkjs/mvc/searchbarview",
+    "splunkjs/mvc/searchcontrolsview",
+    "splunkjs/mvc/timelineview",
+    "splunkjs/mvc/tableview",
+    "splunkjs/mvc/simplexml/ready!"
+], function(
+    SearchManager,
+    SearchbarView,
+    SearchControlsView,
+    TimelineView,
+    TableView
+) {
+
+    // Create the search manager
+    var mysearch = new SearchManager({
+        id: "search1",
+        app: "search",
+        preview: true,
+        cache: true,
+        status_buckets: 300,
+        required_field_list: "*",
+        search: "index=_internal | head 100"
+    });
+
+    // Create the views
+    var mytimeline = new TimelineView ({
+        id: "timeline1",
+        managerid: "search1",
+        el: $("#mytimeline1")
+    }).render();
+
+    var mysearchbar = new SearchbarView ({
+        id: "searchbar1",
+        managerid: "search1",
+        el: $("#mysearchbar1")
+    }).render();
+
+    var mysearchcontrols = new SearchControlsView ({
+        id: "searchcontrols1",
+        managerid: "search1",
+        el: $("#mysearchcontrols1")
+    }).render();
+
+    var mytable = new TableView ({
+        id: "table1",
+        managerid: "search1",
+        el: $("#mytable1")
+    }).render();
+
+    // When the timeline changes, update the search manager
+    mytimeline.on("change", function() {
+        mysearch.settings.set(mytimeline.val());
+    });
+
+    // When the query in the searchbar changes, update the search manager
+    mysearchbar.on("change", function() {
+        mysearch.settings.unset("search");
+        mysearch.settings.set("search", mysearchbar.val());
+    });
+
+    // When the timerange in the searchbar changes, update the search manager
+    mysearchbar.timerange.on("change", function() {
+        mysearch.settings.set(mysearchbar.timerange.val());
+    });
+});
+```
+
+### Example: Search progress events using a Simple XML extension
+
+이 예제에서는 Simple XML 확장을 사용하여 검색 상태 및 검색 작업의 속성을 포함하여 검색 진행률을 검색합니다.
+
+![Search progress events using a Simple XML extension](./images/SWF_codeex_18.jpg)
+
+- example_progressevents.xml
+- example_progressevents.js
+
+#### example_progressevents.xml
+
+```xml
+<dashboard script="example_progressevents.js">
+  <label>Search progress events</label>
+  <row>
+    <panel>
+      <html>
+        <div>
+            <div class="main-area">
+                <p>A search (<tt>index=_internal | head 50000</tt>) runs when the page is loaded. Progress is indicated by displaying the
+                number of matching events.</p>
+                <p><b>Open the developer console!</b> Search progress is displayed in the console. And, when the search has completed, an object
+                containing the properties of the search job is displayed there.</p>
+                <h4><div id="progresstext">...status...</div></h4>
+
+            </div>
+        </div>
+      </html>
+    </panel>
+  </row>
+</dashboard>
+```
+
+#### example_progressevents.js
+
+```js
+require([
+    "splunkjs/mvc/searchmanager",
+    "splunkjs/mvc/simplexml/ready!"
+], function(SearchManager) {
+
+    // Create the search manager
+    var mysearch = new SearchManager({
+        id: "search1",
+        app: "search",
+        cache: false,
+        search: "index=_internal | head 50000"
+    });
+
+    mysearch.on('search:failed', function(properties) {
+        // Print the entire properties object
+        console.log("FAILED:", properties);
+        document.getElementById("progresstext").innerHTML="Failed!";
+    });
+
+    mysearch.on('search:progress', function(properties) {
+        // Print just the event count from the search job
+        console.log("IN PROGRESS.\nEvents so far:", properties.content.eventCount);
+        document.getElementById("progresstext").innerHTML="In progress with " + properties.content.eventCount + " events...";
+    });
+
+    mysearch.on('search:done', function(properties) {
+        // Print the search job properties
+        console.log("DONE!\nSearch job properties:", properties.content);
+        document.getElementById("progresstext").innerHTML="Done!";
+    });
+});
+```
+
+### Example: Search results model using a Simple XML extension
+
+이 예제에서는 단순 XML 확장을 사용하여 이벤트 모델, 미리보기, 결과 및 요약과 같은 다양한 유형의 검색 결과를 결과 모델에서 검색합니다.
+
+![Search results model using a Simple XML extension](./images/SWF_codeex_24.jpg)
+
+- example_resultsmodel.xml
+- example_resultsmodel.js
+
+#### example_resultsmodel.xml
+
+```xml
+<dashboard script="example_resultsmodel.js" >
+  <label>Search results model</label>
+  <row>
+    <panel>
+      <html>
+        <div>
+          <div class="main-area">
+            <h3>search index=_internal | head 5</h3>
+            <div id="mytable"></div>
+            <h4>Results model</h4>
+            <p>Select the type of results to retrieve, then look in the developer console to explore the <tt>data</tt> object and Backbone collection.</p>
+            <div id="mydropdown"></div>
+          </div>
+        </div>
+      </html>
+    </panel>
+  </row>
+</dashboard>
+```
+
+#### example_resultsmodel.js
+
+```js
+require([
+    "splunkjs/mvc",
+    "splunkjs/mvc/searchmanager",
+    "splunkjs/mvc/tableview",
+    "splunkjs/mvc/dropdownview",
+    "splunkjs/mvc/simplexml/ready!"
+], function(
+    mvc,
+    SearchManager,
+    TableView,
+    DropdownView
+) {
+
+    // Create the search manager and views
+    var mainSearch = new SearchManager({
+        id: "mysearch",
+        search: "index=_internal | head 5",
+        data: mvc.tokenSafe("$datamod$"),
+        status_buckets: 300,
+        preview: true,
+        cache: false
+    });
+
+    var table1 = new TableView({
+        id:"table",
+        managerid: "mysearch",
+        el: $("#mytable")
+    }).render();
+
+    var mydropdown = new DropdownView({
+        id: "selData",
+        showClearButton: false,
+        value: mvc.tokenSafe("$datamod$"),
+        el: $("#mydropdown")
+    }).render();
+
+    // Set the dropdown list choices
+    var choices = [
+        {label: "events",  value: "events" },
+        {label: "preview", value: "preview"},
+        {label: "results", value: "results"},
+        {label: "summary", value: "summary"}
+    ];
+    mydropdown.settings.set("choices", choices);
+
+    // Display the type of selected results model in the console
+    var myChoice = "results";
+    mydropdown.on("change", function(){
+        myChoice = mydropdown.settings.get("value");
+        var myResults = mainSearch.data(myChoice);
+        myResults.on("data", function() {
+            console.log("Type: ", myChoice);
+            console.log("Has data? ", myResults.hasData());
+            console.log("Data (rows): ", myResults.data().rows);
+            console.log("Backbone collection: (rows) ", myResults.collection().raw.rows);
+        });
+    });
+
+});
+```
+
+### Example: Token manipulation using a Simple XML extension
+
+이 예제는 간단한 XML 확장을 사용하여 토큰을 사용하여 드롭 다운 목록에서 선택된 인덱스 값을 사용하여 검색을 실행합니다. 토큰은 [토큰 변경 이벤트 핸들러](http://dev.splunk.com/view/SP-CAAAEW4)를 사용하여 조작됩니다.
+
+![Token manipulation using a Simple XML extension](./images/SWF_codeex_16.jpg)
+
+- example_tokensmanip.xml
+- example_tokensmanip.js
+
+#### example_tokensmanip.xml
+
+```xml
+<dashboard script="example_tokensmanip.js">
+  <label>Token manipulation</label>
+  <description></description>
+  <row>
+    <panel>
+      <html>
+        <h2>Token manipulation</h2>
+
+        <p>Select an index:</p>
+        <div id="indexlist"></div><br/>
+        <p>Here's the search:</p>
+        <div id="text1"></div>
+        <div id="tableindex"></div>
+      </html>
+    </panel>
+  </row>
+</dashboard>
+```
+
+#### example_tokensmanip.js
+
+```js
+require([
+    "splunkjs/mvc",
+    "splunkjs/mvc/searchmanager",
+    "splunkjs/mvc/dropdownview",
+    "splunkjs/mvc/tableview",
+    "splunkjs/mvc/textinputview",
+    "splunkjs/mvc/simplexml/ready!"
+], function(
+    mvc,
+    SearchManager,
+    DropdownView,
+    TableView,
+    TextInputView
+) {
+
+    // Search query is based on the selected index
+    var indexsearch = new SearchManager({
+        id: "indexsearch",
+        cache: true,
+        search: mvc.tokenSafe("$searchQuery$")
+    });
+
+    // Display an arbitrary list of indexes
+    var indexlist = new DropdownView({
+        id:"indexlist",
+        choices: [
+            {label: "main", value: "main"},
+            {label: "_internal", value: "_internal"},
+            {label: "_audit", value: "_audit"},
+            {label: "<all>", value: "all"} // Not a valid index name
+        ],
+        showClearButton: false,
+        value: mvc.tokenSafe("$indexName$"),
+        el: $("#indexlist")
+    }).render();
+
+    // When the $indexName$ token changes, form the search query
+    var defaultTokenModel = mvc.Components.get("default");
+    defaultTokenModel.on("change:indexName", function(formQuery, indexName) {
+        var newQuery = " | stats count by sourcetype, index";
+        if (indexName == "all") {
+            newQuery = "index=_internal OR index=_audit OR index=main" + newQuery;
+        } else {
+            newQuery = "index=" + indexName + newQuery;
+        }
+        // Update the $searchQuery$ token value
+        defaultTokenModel.set('searchQuery', newQuery);
+    });
+
+    // Display the search results
+    var textinput1 = new TextInputView({
+        id: "textinput1",
+        value: mvc.tokenSafe("$searchQuery$"),
+        el: $("#text1")
+    }).render();
+    var tableindex = new TableView({
+        id: "tableindex",
+        managerid: "indexsearch",
+        pageSize: 5,
+        el: $("#tableindex")
+    }).render();
+});
+```
+
+### Example: Token transform and forwarding using a Simple XML extension
+
+이 예제에서는 단순 XML 확장을 사용하여 토큰 필터와 전달자를 사용하여 토큰 값을 변경하는 여러 가지 방법을 보여줍니다.
+
+![Token transform and forwarding using a Simple XML extension](./images/SWF_codeex_25.jpg)
+
+- example_tokenstransform.xml
+- example_tokenstransform.js
+
+#### example_tokenstransform.xml
+
+```xml
+<dashboard script="example_tokenstransform.js">
+  <label>Token transform and forwarding</label>
+  <description></description>
+  <row>
+    <panel>
+      <html>
+        <h2>Token transform and forwarding</h2>
+        <div id="fieldChoices"></div>
+
+        <p>Method one</p>
+        <div id="mytable1"></div>
+        <p>Method 2</p>
+        <div id="mytable2"></div>
+      </html>
+    </panel>
+  </row>
+</dashboard>
+```
+
+#### example_tokenstransform.js
+
+```js
+require([
+    "splunkjs/mvc",
+    "splunkjs/mvc/searchmanager",
+    "splunkjs/mvc/dropdownview",
+    "splunkjs/mvc/tableview",
+    "splunkjs/mvc/tokenforwarder",
+    "splunkjs/mvc/simplexml/ready!"
+], function(
+    mvc,
+    SearchManager,
+    DropdownView,
+    TableView,
+    TokenForwarder
+) {
+
+    // Display a list of fields choices for searching
+    var fieldChoices = new DropdownView({
+        id: "fieldChoices",
+        choices: [
+            {label:"host", value: "host"},
+            {label:"sourcetype", value: "sourcetype"},
+            {label:"source", value: "source"},
+            {label:"status", value: "status"},
+            {label:"message", value: "message"} // Only valid when index=_internal
+        ],
+        default: "host",
+        showClearButton: false,
+        value: mvc.tokenSafe("$selectedField$"),
+        el: $("#fieldChoices")
+    }).render();
+
+
+    // Method 1: Return a transformed token value
+    // Create a search manager that transforms a token
+    var search_method1 = new SearchManager({
+        id: "search_method1",
+        cache: true,
+        search: mvc.tokenSafe("$selectedField|makeSearchQuery1$")
+    });
+
+    // Transform $selectedField$ and return a value. $selectedField$ is not affected.
+    mvc.setFilter('makeSearchQuery1', function(selectedField) {
+        var searchQuery1 = (selectedField==="message")
+            ? "index=_internal | top 3 message"
+            : "* | top 3 " + selectedField;
+        return searchQuery1;
+    });
+
+
+    // Method 2: Forward one token to form a new one
+    // Create a search manager that uses token forwarding
+    var search_method2 = new SearchManager({
+        id: "search_method2",
+        cache: true,
+        search: mvc.tokenSafe("$searchQuery2$ ")
+    });
+
+    // Form a new token $searchQuery2$ from $selectedField$
+    new TokenForwarder('$selectedField$', '$searchQuery2$', function(selectedField) {
+        var searchQuery2 = (selectedField === "message")
+            ? "index=_internal | top 3 message"
+            : "* | top 3 " + selectedField;
+        return searchQuery2;
+    });
+
+    // Display the results for each method
+    var mytable1 = new TableView({
+        id: "mytable1",
+        managerid: "search_method1",
+        el: $("#mytable1")
+    }).render();
+
+    var mytable2 = new TableView({
+        id: "mytable2",
+        managerid: "search_method2",
+        el: $("#mytable2")
+    }).render();
+});
+```
+
 ## HTML dashboards
 
 ## SplunkJS Stack for apps outside Splunk Web
