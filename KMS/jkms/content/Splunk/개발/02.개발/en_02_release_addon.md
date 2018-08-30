@@ -12,13 +12,13 @@ An easy way to deploy your Splunk app (or add-on) to other computers is to insta
 
 The Packaging Toolkit provides tools for authoring, packaging, and validating a Splunk app to help improve app management, including installation, configuration, and updating the app.
 
-> Learn more about the Splunk Packaging Toolkit
+> Learn more about the [Splunk Packaging Toolkit](http://dev.splunk.com/view/packaging-toolkit/SP-CAAAE9V)
 
 ## Get your app inspected
 
 Splunk AppInspect evaluates your Splunk app against a set of Splunk-defined criteria so that you can be assured of its quality and robustness. AppInspect runs various checks on your app package, and then produces a report that clearly details any missed criteria.
 
-> Learn more about Splunk AppInspect
+> Learn more about [Splunk AppInspect](http://dev.splunk.com/view/appinspect/SP-CAAAE9U)
 
 ## Publish your app
 
