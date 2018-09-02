@@ -81,7 +81,8 @@ Since the Splunk Web Framework is included with Splunk Enterprise 6 and later, y
 • Runs outside Splunk Web</td></tr>
 <tr><td>Drawbacks</td><td>• Limited layout
 • Limited features</td><td>• Limited layout
-• Limited features</td><td>None	• No drag-and-drop UI
+• Limited features</td><td>None
+• No drag-and-drop UI
 • No PDF generation</td><td>• No drag-and-drop UI
 • No PDF generation</td></tr>
 <tr><td>Get Started</td><td>About the Dashboard Editor</td><td>About editing Simple XML</td><td>Modify dashboards using Simple XML extensions</td><td>Convert Simple XML dashboards to HTML</td><td>Use SplunkJS Stack in your own web apps</td></tr>

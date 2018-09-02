@@ -47,6 +47,7 @@ Use the Splunk Add-on Builder to create add-ons, configure data inputs, create a
 > Learn more about the Splunk Add-on Builder
 
 [Splunk Add-on Builder](http://dev.splunk.com/view/addon-builder/SP-CAAAE83)
+[SPLUNKBASE/APPBUILDER](../../SPLUNKBASE/APPBUILDER/app_builder.md)
 
 ## Create dashboards and visualizations
 
@@ -55,6 +56,7 @@ The Splunk Web Framework is the full stack that makes building a Splunk app look
 > Learn more about the Splunk Web Framework
 
 [Splunk Web Framework](http://dev.splunk.com/webframework)
+[개발/04.WEBFRAMEWORK](../..//개발/04.WEBFRAMEWORK/intro_overview.md)
 
 ## Add navigation
 
@@ -245,6 +247,7 @@ The App Key Value Store (KV Store) feature of Splunk Enterprise provides a way t
 > Learn more about the App Key Value Store
 
 [App Key Value Store](http://dev.splunk.com/view/kvstore/SP-CAAAEY7)
+[개발/02.KVSTORE](../../개발/05.KVSTORE/manage_state.md)
 
 ## Add supportability
 
@@ -699,6 +702,7 @@ If your app requires user input to be configured, add a setup page for users to 
 > Learn how to create setup pages
 
 [create setup pages](http://dev.splunk.com/view/setup-page/SP-CAAAE8U)
+[개발/06.SETUP_PAGE](../../개발/06.SETUP_PAGE/create_setuppage.md)
 
 ## Create custom search commands
 
@@ -706,6 +710,7 @@ Customize search commands to better meet your needs to perform custom processing
 
 > Learn how to create custom search commands using the Splunk SDK for Python
 [Splunk SDK for Python](http://dev.splunk.com/view/SP-CAAAEU2)
+[개발/07.SPLUNK_SDK_PYTHON](../../개발/07.SPLUNK_SDK_PYTHON/splunk_sdk_for_python.md)
 > Read about custom search commands in the Search Manual
 [custom search commands](http://docs.splunk.com/Documentation/Splunk/latest/Search/Aboutcustomsearchcommands)
 
