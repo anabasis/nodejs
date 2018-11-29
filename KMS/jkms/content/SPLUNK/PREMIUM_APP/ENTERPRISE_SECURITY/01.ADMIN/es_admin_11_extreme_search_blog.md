@@ -15,103 +15,115 @@ Contexts are nothing but fancy lookup tables. They actually get created in the d
 
 To use XS we need to make the “context” and ideally freshen it up on some time interval using a scheduled search. Then we have our search that uses that context to filter for what we are looking for.
 
-Construction of a context generating search:
-We need a search that gets the data we want bucketed into some time chunks that is meaningful to us.
+### Construction of a context generating search:
 
-Next we generate the statistics that XS needs to generate our context lookup table for us based on the data.
+1. We need a search that gets the data we want bucketed into some time chunks that is meaningful to us.
+2. Next we generate the statistics that XS needs to generate our context lookup table for us based on the data.
+3. We calculate/handle the depth of our context by working with the values such as max, min, and what are called cross over points. We will talk more about those shortly.
+4. We add on the context create/update statement.
 
-We calculate/handle the depth of our context by working with the values such as max, min, and what are called cross over points. We will talk more about those shortly.
+### Scenario
 
-We add on the context create/update statement.
-
-Scenario:
 This example needs both the XS and XSV apps installed. XSV adds a command called xsCreateADContext that we will need. This stands for Extreme Search Create Anomaly Driven Context. All these XS commands are just custom search commands in a Splunk perspective.
 
 We are interested in event per second spikes beyond “normal” for a sending host. We will take advantage of Splunk’s own internal metrics logs to do this.
 
-Context Generation:
+### Context Generation
+
 This search will give us all metrics events bucketed into 5 minute averages for a host by day of week and hour of day.
 
+```sql
 index= _internal source=*metrics.log group=per_host_thruput | bucket _time span=5m | stats max(eps) as eps by _time, series, date_hour, date_wday
+```
 
 Next we expand that to generate the overall statistics.
 
+```sql
 index= _internal source=*metrics.log group=per_host_thruput | bucket _time span=5m | stats max(eps) as eps by _time, series, date_hour, date_wday | stats avg(eps) as average, stdev(eps) as stddev, count by series, date_hour, date_wday
+```
 
-screen-shot-2016-12-06-at-7-19-12-pm
+![결과](./images/Screen-Shot-2016-12-06-at-7.19.12-PM-620x133.png)
 
 We want to find EPS values that are anomalous to their normal levels. We will be using xsCreateADContext from the XSV app. That command needs the fields min, max, anomalous_normal, and normal_anomalous.
 
+```sql
 index= _internal source=*metrics.log group=per_host_thruput | bucket _time span=5m | stats max(eps) as eps by _time, series, date_hour, date_wday | stats avg(eps) as average, stdev(eps) as stddev, count by series, date_hour, date_wday | eval min=(average-3*stddev-3), max=(average+3*stddev+3), anomalous_normal=(average-2*stddev-1), normal_anomalous=(average+2*stddev+1)
+```
 
-screen-shot-2016-12-06-at-7-23-41-pm
+![결과](./images/Screen-Shot-2016-12-06-at-7.23.41-PM-620x93.png)
 
 Last we add the command to create the context file.
 
+```sql
 index= _internal source=*metrics.log group=per_host_thruput | bucket _time span=5m | stats max(eps) as eps by _time, series, date_hour, date_wday | stats avg(eps) as average, stdev(eps) as stddev, count by series, date_hour, date_wday | eval min=(average-3*stddev-3), max=(average+3*stddev+3), anomalous_normal=(average-2*stddev-1), normal_anomalous=(average+2*stddev+1) | xsCreateADContext name=eps_by_series_5m app=search container=splunk_metrics scope=app terms="anomalous,normal,anomalous" notes="eps by host by 5m" uom="eps" class="series, date_wday, date_hour"
+```
 
-screen-shot-2016-12-04-at-4-51-38-pm
+![결과](./images/Screen-Shot-2016-12-04-at-4.51.38-PM-620x198.png)
 
-Fields and Depth:
-Min: We calculate min to be the average EPS minus 3 times the standard deviation minus 3. We have to subtract off that last 3 in case the standard deviation is zero. If we did not do this we would get a min=max situation when it was zero. XS has to has ranges to work with.
+#### Fields and Depth
 
-Max: We calculate min to be the average EPS plus 3 times the standard deviation plus 3. We have to add on that last 3 in case the standard deviation is zero. If we did not do this we would get a min=max situation when it was zero. XS has to has ranges to work with.
+- `Min` : We calculate min to be the average EPS minus 3 times the standard deviation minus 3. We have to subtract off that last 3 in case the standard deviation is zero. If we did not do this we would get a min=max situation when it was zero. XS has to has ranges to work with.
+- `Max` : We calculate min to be the average EPS plus 3 times the standard deviation plus 3. We have to add on that last 3 in case the standard deviation is zero. If we did not do this we would get a min=max situation when it was zero. XS has to has ranges to work with.
 
-Anomalous_Normal: This is the cross over point between a low (left side) anomalous section. So it is similar to calculating Min. But we pull it in some from Min by only using 2 times standard deviation and tacking on a 1 to handle the standard deviation being zero.
+- `Anomalous_Normal` : This is the cross over point between a low (left side) anomalous section. So it is similar to calculating Min. But we pull it in some from Min by only using 2 times standard deviation and tacking on a 1 to handle the standard deviation being zero.
 
-Normal_Anomalous: This is the cross over point between a high (right side) anomalous section. So it is similar to calculating Max. But we pull it in some from Max by only using 2 times standard deviation and tacking on a 1 to handle the standard deviation being zero.
+- `Normal_Anomalous` : This is the cross over point between a high (right side) anomalous section. So it is similar to calculating Max. But we pull it in some from Max by only using 2 times standard deviation and tacking on a 1 to handle the standard deviation being zero.
 
 In my experience so far playing with the computation of min, max and the cross over points are an experiment. In large volume authentication data I have used 5 times standard deviation for min/max and 3 times for the cross over points. What you use will be some trial and error to fit your data and environment. But you have to create a spread or none of your results will have a depth and then you might as well search for all raw events rather than looking for “abnormal” conditions.
 
-Breaking down the xsCreateADContext command:
-Name: that is the name of our data context. In this case we called it eps_by_series_5m to represent it is events per second by the series field values in 5 minute averages.
+#### Breaking down the xsCreateADContext command
 
-App: this is the app context we want our stuff to exist in within Splunk. In this case we have it make the context file in the search/lookup folder.
+- `Name` : that is the name of our data context. In this case we called it eps_by_series_5m to represent it is events per second by the series field values in 5 minute averages.
+- `App` : this is the app context we want our stuff to exist in within Splunk. In this case we have it make the context file in the search/lookup folder.
+- `Container` : this is the name of the csv file that is created in the lookup folder location. The trick to remember here is that the entire csv “container” is loaded into RAM when Splunk uses it. So you want to consider making contexts that have very large numbers of row into their own containers rather than putting multiple named contexts into the same file.
+- `Scope` : this is same how to scope access permissions. Normally I just keep it to the app that I am making the context in using the word “app”
+- `Terms` : Since we are making an AD context we need to set “anomalous, normal, anomalous” You can understand why when you look at the graphic below. We are saying that the left low side has the word mapped to the ranges as anomalous, the middle range is normal values, then the right high side is anomalous. This is important because when we use this context to search we will say something like “eps is anomalous” which will match any values in the ranges to the left or right of “normal”. This is what I meant by we range map values to words.
 
-Container: this is the name of the csv file that is created in the lookup folder location. The trick to remember here is that the entire csv “container” is loaded into RAM when Splunk uses it. So you want to consider making contexts that have very large numbers of row into their own containers rather than putting multiple named contexts into the same file.
+> Notes and uom: the notes and units of measure fields are just optional. They only matter when you look at the contexts in something like the XSV app GUI.
 
-Scope: this is same how to scope access permissions. Normally I just keep it to the app that I am making the context in using the word “app”
-
-Terms: Since we are making an AD context we need to set “anomalous, normal, anomalous” You can understand why when you look at the graphic below. We are saying that the left low side has the word mapped to the ranges as anomalous, the middle range is normal values, then the right high side is anomalous. This is important because when we use this context to search we will say something like “eps is anomalous” which will match any values in the ranges to the left or right of “normal”. This is what I meant by we range map values to words.
-
-Notes and uom: the notes and units of measure fields are just optional. They only matter when you look at the contexts in something like the XSV app GUI.
-
-Class: this is critical as this is saying we are profiling the values BY series, date_wday and date_hour. This is exactly the same as the split by in a stats command in Splunk.
+- `Class` : this is critical as this is saying we are profiling the values BY series, date_wday and date_hour. This is exactly the same as the split by in a stats command in Splunk.
 
 In this chart notice how the light blue middle region is “normal” and to the left and right we have the “anomalous” zones. This helps you visualize what areas you will match when you make compatibility statements like “is normal”, “is anomalous”, ” is above normal”.
 
-screen-shot-2016-12-04-at-4-53-24-pm
+![결과화면](./images/Screen-Shot-2016-12-04-at-4.53.24-PM-620x275.png)
 
-Using our Context:
+### Using our Context
+
 The key to using the context is making sure we search for data with the same time bucketing and split by fields. Otherwise the context value model won’t line up with our real data very well.
 
 There are several XS commands we should be familiar with in getting ready to use the context.
 
-xsFindBestConcept: this takes our search and compares it to our context and gives us a guide on what “term” we should use for that result line if we wanted to get it from the filter.
+1. xsFindBestConcept: this takes our search and compares it to our context and gives us a guide on what “term” we should use for that result line if we wanted to get it from the filter.
+2. xsgetwherecix: this shows us all the results without filtering them but gives us the CIX or compatibility fit value based on the compatibility statement we make. Aka “is anomalous”
+3. xswhere: this is the filtering command we will actually use when we are done.
 
-xsgetwherecix: this shows us all the results without filtering them but gives us the CIX or compatibility fit value based on the compatibility statement we make. Aka “is anomalous”
+#### xsFindBestConcept
 
-xswhere: this is the filtering command we will actually use when we are done.
-
-xsFindBestConcept:
+```sql
 index= _internal source=*metrics.log group=per_host_thruput | bucket _time span=5m | stats max(eps) as eps by _time, series, date_wday, date_hour | xsFindBestConcept eps from eps_by_series_5m by series, date_wday, date_hour in splunk_metrics
+```
 
-screen-shot-2016-12-06-at-7-10-45-pm
+![결과](./images/Screen-Shot-2016-12-06-at-7.10.45-PM-620x114.png)
 
-xsgetwherecix:
+#### xsgetwherecix
+
+```sql
 index= _internal source=*metrics.log group=per_host_thruput | bucket _time span=5m | stats max(eps) as eps by _time, series, date_wday, date_hour | xsgetwherecix eps from eps_by_series_5m by series, date_wday, date_hour in splunk_metrics is anomalous
+```
 
-screen-shot-2016-12-06-at-7-34-25-pm
+![결과](./images/Screen-Shot-2016-12-06-at-7.34.25-PM-620x110.png)
 
-xswhere:
+#### xswhere
+
+```sql
 index= _internal source=*metrics.log group=per_host_thruput | bucket _time span=5m | stats max(eps) as eps by _time, series, date_wday, date_hour | xswhere eps from eps_by_series_5m by series, date_wday, date_hour in splunk_metrics is anomalous
+```
 
-screen-shot-2016-12-06-at-7-35-28-pm
+![결과](./images/Screen-Shot-2016-12-06-at-7.35.28-PM-620x55.png)
 
 There out of our data for yesterday only two hours were classified as “anomalous.” We did not have to hard code in specific limiting values. Our own existing data helped create an XS context and we then applied that to data going forward.
 
 Next in our series we will start going through different use cases related to security. We will also cover the other types of contexts than just simply “anomalous.”
-
 
 ## Splunk Getting Extreme Part Two
 
@@ -309,9 +321,12 @@ First, we have glossed over an important question. What does data match when you
 
 You get a message like the following when a class value is not in the context you are trying to use.
 
+```txt
 xsWhere-I-111: There is no context 'urllen_by_src' with class 'Not Found' from container '120.43.17.24' in scope 'none', using default context urllen_by_src
+```
 
-Use Case: Finding long urls of interest
+### Use Case: Finding long urls of interest
+
 Just the longer URLs:
 Let’s try just creating a context of all our url_length data from the Web Data Model. This version of the search will not break this up by class. We will just see if we can find “extreme” length urls in our logs based on the log data itself.
 
@@ -363,12 +378,15 @@ Welcome to part six of my series on Splunk Extreme Search. I am dedicating this 
 
 We saw in part five that we do not have to always bucket data and stats across time. Still, it is the most common thing to do in Extreme Search. How you handle time is important.
 
-Saving Time
+### Saving Time
+
 There are two main things you can do to make your searches time efficient.
 
-Use well defined searches. The more precise you can make the up front restrictions like action=success src_ip=10.0.0.0/8 the better the job the indexers can do. This also applies when using tstats by placing these up front restrictions in the where statement.
-Use accelerated data and tstats. Use the Common Information Model data models where you can. Accelerate them over the time ranges you need. Remember, you can also make custom data models and accelerate those even if your data does not map well to the common ones.
-Accelerated Data Models
+1. Use well defined searches. The more precise you can make the up front restrictions like action=success src_ip=10.0.0.0/8 the better the job the indexers can do. This also applies when using tstats by placing these up front restrictions in the where statement.
+2. Use accelerated data and tstats. Use the Common Information Model data models where you can. Accelerate them over the time ranges you need. Remember, you can also make custom data models and accelerate those even if your data does not map well to the common ones.
+
+### Accelerated Data Models
+
 Seriously. I hot linked the title of this section. Go read it! And remember to hug a Splunk Docs team member at conf. They do an amazing job putting all that in there for us to read.
 
 You choose how much data to accelerate by time. Splunk takes the DMs that are to be accelerated and launches special hidden searches behind the scenes. These acceleration jobs consume memory and CPU core resources like all the other searches. If you do not have enough resources you may start running into warning about hitting the maximum number of searches and your accelerations may be skipped. Think about that. If you are running ES Notables that use summariesonly=true you will miss matching data. This is because the correlation search runs over a time range and it finds no matching accelerated data. Woo! It is quiet and no notables are popping up. Maybe that isn’t so great… uh oh…
@@ -381,42 +399,47 @@ How far back in time your accelerations are relative to percentages complete is 
 
 If your data is pretty constant, like in high volume environments this is a down and dirty search to gauge latest event time compared to now.
 
+```sql
 | tstats summariesonly=true min(_time) as earliestTime, max(_time) as latestTime from datamodel=Authentication | eval lagHours=(now()-latestTime)/3600 | convert ctime(*Time)
+```
 
-
+![결과](./images/Screen-Shot-2016-12-14-at-7.00.41-PM-620x38.png)
 
 The message is be a good Splunk Admin. Check your data model accelerations daily in your operations review process. Make sure you are adding enough indexers for your data load so DM accelerations can build quickly and stay caught up. You can increase the acceleration.max_concurrent for a given datamodel if you have the CPU resources on both Search Heads and Indexers. Use accelerated bucket replication if you can afford it.
 
 One way you can spot acceleration jobs using search is something like the following. You may have to mess with the splunk_server field to match your search head pattern if you are on search clustering.
 
+```sql
 | rest splunk_server=local /servicesNS/-/-/search/jobs | regex label="ACCELERATE" | fields label, dispatchState ,id, latestTime, runDuration
+```
 
+![결과](./images/Screen-Shot-2016-12-15-at-3.58.19-PM-620x102.png)
 
-
-There is another option to help accelerations stay caught up for your critical searches. The gui doesn’t show it but there is a setting called acceleration.backfill_time from datamodels.conf. You can say accelerate the Web data model for 30 days of data, but only backfill 7 days. This means if data is not accelerated, such as by an index cluster rolling restart, Splunk will only go back 7 days to catch up accelerations. That can address short run correlation searches for ES. It still creates gaps when using summariesonly for context generation searches that trend over the full 30 days. That brings you back to acceleration replication as the solution.
+There is another option to help accelerations stay caught up for your critical searches. The gui doesn’t show it but there is a setting called acceleration.backfill_time from [datamodels.conf](http://docs.splunk.com/Documentation/Splunk/latest/Admin/Datamodelsconf). You can say accelerate the Web data model for 30 days of data, but only backfill 7 days. This means if data is not accelerated, such as by an index cluster rolling restart, Splunk will only go back 7 days to catch up accelerations. That can address short run correlation searches for ES. It still creates gaps when using summariesonly for context generation searches that trend over the full 30 days. That brings you back to acceleration replication as the solution.
 
 Oh, one other little item about data models. A data model acceleration is tied to a search head guid. If you are using search head clustering, it will use a guid for the whole cluster. ONLY searches with the matching GUID can access the accelerated data. No sharing accelerations across search heads not in the same cluster. This is why most of us cringe when Splunk customers ask about running multiple Enterprise Security instances against the same indexers. It requires data model acceleration builds for each GUID. You can imagine how resource hungry that can be at all levels.
 
-Context Gens and Correlation Searches
-Search Scheduling
+### Context Gens and Correlation Searches
+
+#### Search Scheduling
+
 A context is about defining ways to ask if something is normal, high, extreme etc. Most of our context gens run across buckets of time for time ranges like 24 hours, 30 days and so on.
 
 Scenario. Lets say we have a context gen that is anomalous login successes by source, app and user. This should let me catch use of credentials from sources not normally seen or at a volume off of normal. If I refresh that context hourly but also run my detection search that uses xswhere hourly; I run the risk of a race condition. I could normalize in the new bad or unexpected source into the context BEFORE I detect it. I would probably schedule my context gen nightly so during the day before it refreshes I get every chance to have ES Notables trigger before the data is normalized into our context. So be sure to compare how often you refresh your context compared to when you use the context.
 
-Time Windows
+#### Time Windows
+
 Check your context generation time range lines up with how far back you accelerate the models. It is easy to say run over 90 days then find out you only accelerated 30 days.
 
 Check the run duration of your searches. Validate your search is not taking longer to run than the scheduled interval of the context gen or correlation search. That always leads to tears. Your search will run on its schedule. Take longer to run and get scheduled for its next run. It will actually start to “time slide” as the next run time gets farther and farther behind compared to the real time the search job finished. I saw this happen with a threat gen search for a threat intel product app once. It was painful. Job/Activity inspector is your friend on checking run durations. Also check the scheduled search panel now and then.
 
 Look back at the previous posts. We make contexts over time buckets and we make sure to run a search that leverages it over the same bucket width of time. Do trending over a day? Make sure you run your matching correlation search over a day’s worth of time to get numbers on the same scale. Same goes for by hour. Normally you would not make a context by day and search by hour. The scales are different. Mixing scales can lead to odd results.
 
-Embracing the odd:
+### Embracing the odd
+
 One thing you should get from this series. It is all about The Question. Imagine we trend event count, or data volume per day for a source. Would it ever make sense to use that context over only an hour’s worth of data? Sure. You would get the real low end of the terms like minimal, low, maybe medium. If you saw hits matching “is extreme” you know that you have a bad situation going on. After all, you are seeing a days worth of whatever in only an hour window. Sometimes you break the “rules” because that is the question you want to ask.
 
 I probably would not do that with the Anomaly Driven contexts. After all, you want anomalous deviation off normal.
-
-TwitterLinkedInInstapaperPocketGoogle+FlipboardShare
-POSTED ON2016-12-12
 
 ## Splunk Getting Extreme Part Seven
 
@@ -424,166 +447,197 @@ Welcome to part seven where we will try a User Driven context for Extreme Search
 
 Our use case is to find domain names in a from email address that are look alike domains to our own. We need to use Levenshtein to do this. There is a Splunk app for it on splunkbase. The app does have some issues and needs to be fixed. I also recommend editing the returned fields to be levenshtein_distance and levenshtein_ratio.
 
-Test Data:
+### Test Data
+
 I took the new Top 1 Million Sites list from Cisco Umbrella as a source of random domain names. Then I matched it with usernames from a random name list. I needed some test data to pretend I had good email server logs. I do not have those kind of logs at home. The below data is MOCK data. Any resemblance to real email addresses is accidental.
 
+```sql
 source="testdata.txt" sourcetype="demo"
+```
 
+![결과](./images/Screen-Shot-2016-12-18-at-10.47.43-AM-620x260.png)
 
+### Context Gen
 
-Context Gen:
 This time we do not want to make a context based on data. We need to create a mapping of terms to values that we define regardless of the data. Technically we could just use traditional SPL to filter based on Levenshtein distance values. What fun would that be for this series? We also want to demonstrate a User Driven context. Levenshtein is the number of characters difference between two strings, aka the distance. A distance of zero means the strings match. I arbitrarily picked a max value of 15. Pretty much anything 10 or more characters different are so far out we could never care about them. I then picked terms I wanted to call the distance ranges. The closer to zero the more likely it is a look alike domain. “Uhoh” is generally going to be a distance of 0-2 then we go up from there. You could play with the max to get different value ranges mapped to the terms. It depends on your needs.
 
+```sql
+ | xsCreateUDContext name=distances container=levenshtein app=search scope=app terms=“uhoh,interesting,maybe,meh" type=domain min=0 max=15 count=4 uom=distance
+```
 
- | xsCreateUDContext name=distances container=levenshtein app=search scope=app terms=“uhoh,interesting,maybe,meh" type=domain min=0 max=15 count=4 uom=distance
-1
- | xsCreateUDContext name=distances container=levenshtein app=search scope=app terms=“uhoh,interesting,maybe,meh" type=domain min=0 max=15 count=4 uom=distance
 We can use the Extreme Search Visualization app to examine our context curves and values.
 
+![결과화면](./images/Screen-Shot-2016-12-18-at-10.47.43-AM-620x260.png)
 
+### Exploring the Data
 
-Exploring the Data:
 We can try a typical stats count and wildcard search to see what domains might resemble ours of “georgestarcher.com”
 
-
+```sql
 source="testdata.txt" sourcetype="demo" from="*@geo*" | rex field=from "(?P<from_user>[^@]+)@(?P<from_domain>[^$]+)"  | stats count by from_domain
-1
-source="testdata.txt" sourcetype="demo" from="*@geo*" | rex field=from "(?P<from_user>[^@]+)@(?P<from_domain>[^$]+)"  | stats count by from_domain
+```
 
+![결과](./images/Screen-Shot-2016-12-18-at-11.03.41-AM-620x101.png)
 
 It gets close but matches domains clearly not even close to our good one. Here is the list from my test data generation script.
 
+```json
 georgeDomain = ['georgestarcher.com','ge0rgestarcher.com', 'g5orgestarhcer.net', 'georgestarcher.au', 'georgeestarcher.com']
+```
 
 We can see we didn’t find the domain staring with g5. Trying to define a regex to find odd combinations of our domain would be very difficult. So we will start testing our Levenshtein context.
 
 Let’s try a getwhereCIX and sort on the distance.
 
-
+```sql
 source="testdata.txt" sourcetype="demo" | rex field=from "(?P<from_user>[^@]+)@(?P<from_domain>[^$]+)" | search from_domain="g*" | eval mydomain="georgestarcher.com" | levenshtein distance mydomain from_domain | search levenshtein_distance!=0 | stats values(levenshtein_distance) as levenshtein_distance by from_domain | xsGetWhereCIX levenshtein_distance from distances in levenshtein is below meh
-1
-source="testdata.txt" sourcetype="demo" | rex field=from "(?P<from_user>[^@]+)@(?P<from_domain>[^$]+)" | search from_domain="g*" | eval mydomain="georgestarcher.com" | levenshtein distance mydomain from_domain | search levenshtein_distance!=0 | stats values(levenshtein_distance) as levenshtein_distance by from_domain | xsGetWhereCIX levenshtein_distance from distances in levenshtein is below meh
+```
 
+![결과](./images/Screen-Shot-2016-12-18-at-11.08.56-AM-620x145.png)
 
 Next let’s try using xsFindBestConcept to see what terms match the domains we are interested in compared to their distances.
 
-
+```sql
 source="testdata.txt" sourcetype="demo" | rex field=from "(?P<from_user>[^@]+)@(?P<from_domain>[^$]+)" | search from_domain="g*" | eval mydomain="georgestarcher.com" | levenshtein distance mydomain from_domain | search levenshtein_distance!=0 | stats values(levenshtein_distance) as levenshtein_distance by from_domain | xsFindBestConcept levenshtein_distance from distances in levenshtein 
-1
-source="testdata.txt" sourcetype="demo" | rex field=from "(?P<from_user>[^@]+)@(?P<from_domain>[^$]+)" | search from_domain="g*" | eval mydomain="georgestarcher.com" | levenshtein distance mydomain from_domain | search levenshtein_distance!=0 | stats values(levenshtein_distance) as levenshtein_distance by from_domain | xsFindBestConcept levenshtein_distance from distances in levenshtein 
+```
 
+![결과](./images/Screen-Shot-2016-12-18-at-11.09.57-AM-620x137.png)
 
-Using our Context:
+### Using our Context
+
 We have an idea what we need to try based on our exploring the data. Still we will try a few different terms with xswhere to see what we get.
 
-Using: ”is interesting”
+#### Using: ”is interesting”
+
 We can see we miss the closest matches this way and get more matches that clearly are not look alikes to our domain.
 
-
+```sql
 source="testdata.txt" sourcetype="demo" | rex field=from "(?P<from_user>[^@]+)@(?P<from_domain>[^$]+)"  | rex field=to "(?P<to_user>[^@]+)@(?P<to_domain>[^$]+)" | eval mydomain="georgestarcher.com" | levenshtein distance mydomain from_domain | search levenshtein_distance!=0 | xswhere levenshtein_distance from distances in levenshtein is interesting | stats values(from_domain) as domains by levenshtein_distance | sort - levenshtein_distance
-1
-source="testdata.txt" sourcetype="demo" | rex field=from "(?P<from_user>[^@]+)@(?P<from_domain>[^$]+)"  | rex field=to "(?P<to_user>[^@]+)@(?P<to_domain>[^$]+)" | eval mydomain="georgestarcher.com" | levenshtein distance mydomain from_domain | search levenshtein_distance!=0 | xswhere levenshtein_distance from distances in levenshtein is interesting | stats values(from_domain) as domains by levenshtein_distance | sort - levenshtein_distance
+```
 
+#### Using: “is near interesting”
 
-Using: “is near interesting”
 Adding the hedge term “near” we can extend matching interesting into just a little into adjacent concept terms. We find all our terms even the closest ones. The problem is we also extended up into the higher distances too.
 
-
+```sql
 source="testdata.txt" sourcetype="demo" | rex field=from "(?P<from_user>[^@]+)@(?P<from_domain>[^$]+)"  | rex field=to "(?P<to_user>[^@]+)@(?P<to_domain>[^$]+)" | eval mydomain="georgestarcher.com" | levenshtein distance mydomain from_domain | search levenshtein_distance!=0 | xswhere levenshtein_distance from distances in levenshtein is near interesting | stats values(from_domain) as domains by levenshtein_distance | sort - levenshtein_distance
-1
-source="testdata.txt" sourcetype="demo" | rex field=from "(?P<from_user>[^@]+)@(?P<from_domain>[^$]+)"  | rex field=to "(?P<to_user>[^@]+)@(?P<to_domain>[^$]+)" | eval mydomain="georgestarcher.com" | levenshtein distance mydomain from_domain | search levenshtein_distance!=0 | xswhere levenshtein_distance from distances in levenshtein is near interesting | stats values(from_domain) as domains by levenshtein_distance | sort - levenshtein_distance
+```
 
+![결과](./images/Screen-Shot-2016-12-18-at-11.15.49-AM.png)
 
-Using: “is near uhoh”
+#### Using: “is near uhoh”
+
 Again, we use near to extend up from uhoh but we find it is not far enough to find the domain “g5orgestarhcer.net”
 
-
+```sql
 source="testdata.txt" sourcetype="demo" | rex field=from "(?P<from_user>[^@]+)@(?P<from_domain>[^$]+)"  | rex field=to "(?P<to_user>[^@]+)@(?P<to_domain>[^$]+)" | eval mydomain="georgestarcher.com" | levenshtein distance mydomain from_domain | search levenshtein_distance!=0 | xswhere levenshtein_distance from distances in levenshtein is near uhoh | stats values(from_domain) as domains by levenshtein_distance | sort - levenshtein_distance
-1
-source="testdata.txt" sourcetype="demo" | rex field=from "(?P<from_user>[^@]+)@(?P<from_domain>[^$]+)"  | rex field=to "(?P<to_user>[^@]+)@(?P<to_domain>[^$]+)" | eval mydomain="georgestarcher.com" | levenshtein distance mydomain from_domain | search levenshtein_distance!=0 | xswhere levenshtein_distance from distances in levenshtein is near uhoh | stats values(from_domain) as domains by levenshtein_distance | sort - levenshtein_distance
+```
 
+![결과](./images/Screen-Shot-2016-12-18-at-11.19.22-AM.png)
 
-Using: “is very below maybe”
+#### Using: “is very below maybe”
+
 This time we have some fun with the hedge terms and say very to pull in the edges and below to go downward from the maybe concept. This gives us the domains we are exactly trying to find. You may have noticed we dropped where the distance was zero in our searches. That is because we don’t care where it is from our own legitimate domain name.
 
-
+```sql
 source="testdata.txt" sourcetype="demo" | rex field=from "(?P<from_user>[^@]+)@(?P<from_domain>[^$]+)"  | rex field=to "(?P<to_user>[^@]+)@(?P<to_domain>[^$]+)" | eval mydomain="georgestarcher.com" | levenshtein distance mydomain from_domain | search levenshtein_distance!=0 | xswhere levenshtein_distance from distances in levenshtein is very below maybe | stats values(from_domain) as domains by levenshtein_distance | sort - levenshtein_distance
-1
-source="testdata.txt" sourcetype="demo" | rex field=from "(?P<from_user>[^@]+)@(?P<from_domain>[^$]+)"  | rex field=to "(?P<to_user>[^@]+)@(?P<to_domain>[^$]+)" | eval mydomain="georgestarcher.com" | levenshtein distance mydomain from_domain | search levenshtein_distance!=0 | xswhere levenshtein_distance from distances in levenshtein is very below maybe | stats values(from_domain) as domains by levenshtein_distance | sort - levenshtein_distance
+```
 
+### Last Comments
 
-Last Comments:
 Levenshtein can be real hard to use on shorter domain names. It becomes too easy to match full legitimate other domain names compared to small distances of your own. If you try and use this in making notables you might want to incorporate a lookup table to drop known good domains that are not look alike domains. Here is the same search that worked well for my domain but for google.com. You can see it matches way too much stuff, though it does still capture interesting near domain names.
 
-Example: google.com
+#### Example: google.com
 
+```sql
 source="testdata.txt" sourcetype="demo" | rex field=from "(?P<from_user>[^@]+)@(?P<from_domain>[^$]+)"  | rex field=to "(?P<to_user>[^@]+)@(?P<to_domain>[^$]+)" | eval mydomain="google.com" | levenshtein distance mydomain from_domain | search levenshtein_distance!=0 | xswhere levenshtein_distance from distances in levenshtein is very below maybe | stats values(from_domain) as domains by levenshtein_distance | sort - levenshtein_distance
-1
-source="testdata.txt" sourcetype="demo" | rex field=from "(?P<from_user>[^@]+)@(?P<from_domain>[^$]+)"  | rex field=to "(?P<to_user>[^@]+)@(?P<to_domain>[^$]+)" | eval mydomain="google.com" | levenshtein distance mydomain from_domain | search levenshtein_distance!=0 | xswhere levenshtein_distance from distances in levenshtein is very below maybe | stats values(from_domain) as domains by levenshtein_distance | sort - levenshtein_distance
+```
 
-
-TwitterLinkedInInstapaperPocketGoogle+FlipboardShare
-POSTED ON2016-12-15
+![결과](./images/Screen-Shot-2016-12-18-at-11.19.22-AM.png)
 
 ## Splunk Getting Extreme Part Eight
 
 Extreme Search has some other commands included with it. They have included the Haversine equation for calculating physical distance in the xsGetDistance command. We can couple that with the Splunk iplocation command to find user login attempts across distances too fast for realistic travel.
 
-Context Gen:
-Class: default
+### Context Gen(8)
+
+#### Class: default
+
 First we will create a default context with a maximum speed of 500mph. Note how we do not specify the class argument.
 
+```sql
 | xsCreateUDContext name=speed container=travel app=search scope=app terms="normal,fast,improbable,ludicrous” type=domain min=0 max=500 count=4 uom=mph
+```
 
-Class: all
+![결과화면](./images/Screen-Shot-2016-12-22-at-2.31.58-PM-620x251.png)
+
+#### Class: all
+
 Second we will create a context for the class all with the same maximum speed of 500mph. We could use a different maximum if we wanted here.
 
+```sql
 | xsCreateUDContext name=speed container=travel app=search scope=app terms="normal,fast,improbable,ludicrous” type=domain min=0 max=500 count=4 uom=mph class=all
+```
 
-Class: foot
+#### Class: foot
+
 Last we will create a context for the class foot with a maximum speed of 27.8mph. This is approximately the maximum foot speed of a human. This could be useful if measuring speed across a place like a college campus.
 
+```sql
 | xsCreateUDContext name=speed container=travel app=search scope=app terms="normal,fast,improbable,ludicrous” type=domain min=0 max=27.8 count=4 uom=mph class=foot
+```
 
+![결과화면](./images/Screen-Shot-2016-12-22-at-2.32.14-PM-620x236.png)
 
+### Search
 
-Search:
 We will pretend my ssh authentication failures are actually successes. This is just because it is the data I have easily available.
 
-Class: all
+#### Class: all(Search)
+
+```sql
 tag=authentication action=failure user=* src_ip=* user=* app=sshd | iplocation prefix=src_ src_ip | sort + _time | streamstats current=t window=2 earliest(src_lat) as prev_lat, earliest(src_lon) as prev_lon, earliest(_time) as prev_time, earliest(src_City) as prev_city, earliest(src_Country) as prev_country, earliest(src_Region) as prev_region, earliest(src) as prev_src, by user | eval timeDiff=(_time - prev_time) | xsGetDistance from prev_lat prev_lon to src_lat src_lon | eval speed=round((distance/(timeDiff/3600)),2) | table user, src, prev_src, src_Country, src_Region, src_City, prev_country, prev_region, prev_city, speed | eval travel_method="all" | xswhere speed from speed by travel_method in travel is above improbable | convert ctime(prev_time)
+```
 
-Class: foot
+![결과](./images/Screen-Shot-2016-12-22-at-2.20.14-PM-620x139.png)
+
+#### Class: foot(Search)
+
+```sql
 tag=authentication action=failure user=* src_ip=* user=* app=sshd | iplocation prefix=src_ src_ip | sort + _time | streamstats current=t window=2 earliest(src_lat) as prev_lat, earliest(src_lon) as prev_lon, earliest(_time) as prev_time, earliest(src_City) as prev_city, earliest(src_Country) as prev_country, earliest(src_Region) as prev_region, earliest(src) as prev_src, by user | eval timeDiff=(_time - prev_time) | xsGetDistance from prev_lat prev_lon to src_lat src_lon | eval speed=round((distance/(timeDiff/3600)),2) | table user, src, prev_src, src_Country, src_Region, src_City, prev_country, prev_region, prev_city, speed | eval travel_method="foot" | xswhere speed from speed by travel_method in travel is above improbable | convert ctime(prev_time)
+```
 
-Summary:
+![결과](./images/Screen-Shot-2016-12-22-at-2.20.40-PM-620x124.png)
+
+### Summary
+
 We combined a User Driven context with another XS command to provide ourselves an interesting tool. We also saw how we could use different classes within that UD context to answer the question on a different scale. Try adding another class like automobile with a max=100 to find speeds that are beyond safe local travel speeds.
 
 This would be real fun when checking webmail logs to find compromised user accounts. Especially if you combine with Levenshtein for look alike domains sent to users to build the list of whom to check.
 
-TwitterLinkedInInstapaperPocketGoogle+FlipboardShare
-POSTED ON2016-12-18
+## Splunk Getting Extreme Part Nine
 
-Splunk Getting Extreme Part Nine
 I ran a series on Splunk Enterprise’s Extreme Search over a year ago. It is time to add a discussion about alfacut. I had not realized the exact behavior of alfacut at the time of that blog series. 
 
-Alfacut:
+### Alfacut
+
 What is alfacut in XS? Extreme Search generates a score called WhereCIX that is the measurement ranging from 0.0 to 1.0 of how compatible what you are measuring is against the Extreme Search statement you made in the xswhere command. The xswhere command uses an alfacut (the limit on the WhereCIX score) of 0.2 by default.
 
 Here is where I rant. You CAN put alfacut>=0.7 in your xswhere command. This is like thinking you are cutting with shears and instead you are cutting with safety scissors. It doesn’t work like you would expect when you use compound xswhere commands: AND, OR.
 
 If you specify the alfacut in the xswhere command it applies the limit to BOTH sides of the compound individually . It does NOT apply to the combined score, which is what you would expect as a user if you were looking at the output after the xswhere command. The WhereCIX  displayed from the output of the xswhere is the score of the compatibility of the entire compound statement.  If we want to filter on the combined score we simply have to know this is how things work and add our filter in the next step in the SPL pipeline.
 
-XSWhere Compound Statements:
+### XSWhere Compound Statements
+
 How you define your interesting question for ES Notables matters. Let’s take Excessive Failures.
 
 The default Excessive Failures is not even Extreme Search based:
 
+```sql
+| from datamodel:"Authentication"."Failed_Authentication" | stats values(tag) as "tag",dc(user) as "user_count",dc(dest) as "dest_count",count by "app","src" | where 'count'>=6
+```
 
-| from datamodel:"Authentication"."Failed_Authentication" | stats values(tag) as "tag",dc(user) as "user_count",dc(dest) as "dest_count",count by "app","src" | where 'count'>=6
-1
-| from datamodel:"Authentication"."Failed_Authentication" | stats values(tag) as "tag",dc(user) as "user_count",dc(dest) as "dest_count",count by "app","src" | where 'count'>=6
-This says we find interesting to be a failure count greater or equal to 6 by src, app. 
+This says we find interesting to be a failure count greater or equal to 6 by src, app.
 
 That is going to be VERY noisy and have little context based on existing behavior. A static limit also gives bad actors a limbo bar to glide under.
 
@@ -595,26 +649,19 @@ The SA-AccessProtection app has an existing XS Context Generator named: Access �
 
 It looks like this:
 
+```sql
+| tstats `summariesonly` count as failures from datamodel=Authentication.Authentication where Authentication.action="failure" by Authentication.src,_time span=1h 
+| stats median(failures) as median, min(failures) as min, count as count 
+| eval max = median*2 
+| xsUpdateDDContext app="SA-AccessProtection" name=failures_by_src_count_1h container=authentication scope=app 
+| stats count
+```
 
-| tstats `summariesonly` count as failures from datamodel=Authentication.Authentication where Authentication.action="failure" by Authentication.src,_time span=1h 
-| stats median(failures) as median, min(failures) as min, count as count 
-| eval max = median*2 
-| xsUpdateDDContext app="SA-AccessProtection" name=failures_by_src_count_1h container=authentication scope=app 
-| stats count
-1
-2
-3
-4
-5
-| tstats `summariesonly` count as failures from datamodel=Authentication.Authentication where Authentication.action="failure" by Authentication.src,_time span=1h 
-| stats median(failures) as median, min(failures) as min, count as count 
-| eval max = median*2 
-| xsUpdateDDContext app="SA-AccessProtection" name=failures_by_src_count_1h container=authentication scope=app 
-| stats count
 The issue is that failures by src only is misleading because what if the failure pattern of the “app” such as ssh or mywebapp differ but from same source. You don’t want them hiding the other’s pattern.
 
-Magnitude Context Gen:
+### Magnitude Context Gen
 
+```sql
 | tstats `summariesonly` count as failure from datamodel=Authentication
     where (nodename="Authentication.Failed_Authentication" NOT
     Authentication.src_category="known_scanner" Authentication.app!=okta) by
@@ -629,42 +676,17 @@ Magnitude Context Gen:
 | xsCreateDDContext app="SA-AccessProtection"
     name=failures_by_src_app_count_1h class="src,app" container=authfails
     scope=app terms=`xs_default_magnitude_concepts` type=domain
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-| tstats `summariesonly` count as failure from datamodel=Authentication
-    where (nodename="Authentication.Failed_Authentication" NOT
-    Authentication.src_category="known_scanner" Authentication.app!=okta) by
-    Authentication.src, Authentication.app, _time span=1h 
-| stats median(failure) as median, avg(failure) as average, stdev(failure)
-    as stdev, min(failure) as min, max(failure) as max, count as count by
-    Authentication.src, Authentication.app 
-| `drop_dm_object_name("Authentication")` 
-| eval min=if(min=max,0,min) 
-| eval max=if(min=0,6,max) 
-| eval max=if(max-min<6,min+6,max) 
-| xsCreateDDContext app="SA-AccessProtection"
-    name=failures_by_src_app_count_1h class="src,app" container=authfails
-    scope=app terms=`xs_default_magnitude_concepts` type=domain
+```
+
 That gives us the stats for a source and the app it is abusing such as sshd specifically. I used xsCreateDDContext instead of xsUpdateDDContext, because the first time we run it we need to create  a new vs update an existing context file.
 
 We need more than this though. Because maybe there is a misbehaving script and we do not want ES Notable events for simply extreme failures but non normal extreme failure counts.
 
-To use Anomalous XS commands you need to have the extra XS visualization app installed from splunkbase: https://splunkbase.splunk.com/app/2855/
+To use Anomalous XS commands you need to have the extra XS visualization app installed from splunkbase: <https://splunkbase.splunk.com/app/2855/>
 
-Anomalous Context Gen:
+### Anomalous Context Gen:
 
+```sql
 | tstats `summariesonly` count as failure from datamodel=Authentication
     where (nodename="Authentication.Failed_Authentication") by Authentication.src,
     Authentication.app, _time span=1h 
@@ -676,53 +698,30 @@ Anomalous Context Gen:
 | xsCreateADContext name=anomalous_failures_by_src_app_count_1h
     container=anomalous_authfails scope=app app="SA-AccessProtection"
     terms="anomalous,normal,anomalous" class="src,app"
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-| tstats `summariesonly` count as failure from datamodel=Authentication
-    where (nodename="Authentication.Failed_Authentication") by Authentication.src,
-    Authentication.app, _time span=1h 
-| stats stdev(failure) as stddev, avg(failure) as average, count by
-    Authentication.src, Authentication.app 
-| `drop_dm_object_name("Authentication")` 
-| eval max=average+5*stddev+4, min=average-5*stddev-4,
-    anomalous_normal=average-3*stddev-2, normal_anomalous=average+3*stddev+2 
-| xsCreateADContext name=anomalous_failures_by_src_app_count_1h
-    container=anomalous_authfails scope=app app="SA-AccessProtection"
-    terms="anomalous,normal,anomalous" class="src,app"
-Combining Contexts:
+```
+
+### Combining Contexts:
+
 Our NEW xswhere:
 
+```sql
+| xswhere failure from failures_by_src_app_count_1h in authfails by
+    "src,app" is extreme AND failure from
+    anomalous_failures_by_src_app_count_1h in anomalous_authfails by "src,app"
+    is above normal
+```
 
-| xswhere failure from failures_by_src_app_count_1h in authfails by
-    "src,app" is extreme AND failure from
-    anomalous_failures_by_src_app_count_1h in anomalous_authfails by "src,app"
-    is above normal
-1
-2
-3
-4
-| xswhere failure from failures_by_src_app_count_1h in authfails by
-    "src,app" is extreme AND failure from
-    anomalous_failures_by_src_app_count_1h in anomalous_authfails by "src,app"
-    is above normal
 See we did not specify the alfacut in the xswhere command. Instead, we need to use a following where statement:
 
+```sql
 | where WhereCIX>=.9
+```
 
 That gives us a limit using the compatibility score of the entire compound statement. This will be much less noisy a result. If you have a compound statement and a WhereCIX of 0.5 you typically have a one sided match. Meaning it was perfectly compatible with one side of your statement but not the other at all. This is common when you combine anomalous and magnitude contexts like this. You have yup it was super noisy but that was totally normal for it so it was NOT above normal but WAS extreme. 
 
 One possible new Excessive Failed Logins search could look something like this:
 
-
+```sql
 | tstats `summariesonly` count as failure, dc(Authentication.src) as srcCount,
 | tstats `summariesonly` count as failure, dc(Authentication.src) as srcCount,
     values(Authentication.app) as app, values(Authentication.tag) as tag,
@@ -756,73 +755,4 @@ One possible new Excessive Failed Logins search could look something like this:
     src_lon=coalesce(src_lon, srcgeo_long) , src_lat=coalesce(src_lat,
     srcgeo_lat) 
 | eval orig_index=index, orig_sourcetype=sourcetype, tag=mvappend(tag,"authentication"), action="failure"
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-| tstats `summariesonly` count as failure, dc(Authentication.src) as srcCount,
-| tstats `summariesonly` count as failure, dc(Authentication.src) as srcCount,
-    values(Authentication.app) as app, values(Authentication.tag) as tag,
-    values(Authentication.signature) as signature,
-    values(Authentication.signature_id) as signature_id from
-    datamodel=Authentication where
-    (nodename=Authentication.Failed_Authentication
-    Authentication.user!="unknown"
-    Authentication.user!="-" Authentication.user!=*$
-    Authentication.src!="unknown" Authentication.src!="\\"
-    Authentication.src!="::" NOT Authentication.src_category="known_scanner" NOT
-    Authentication.user_category="known_scanner" ) by
-    Authentication.user, Authentication.src, Authentication.dest, _time, index,
-    sourcetype 
-| `drop_dm_object_name("Authentication")` 
-| stats dc(user) as "user_count",dc(dest) as
-    "dest_count",sum(failure) as failure, values(user) AS user, values(dest) as dest,
-    values(signature) as signature, values(signature_id) as signature_id,
-    values(index) as index, values(sourcetype) as sourcetype by "src","app" 
-| eval src=mvjoin(src,"|"), user=mvjoin(user,"|"), dest=mvjoin(dest,"|"), sourcetype=mvjoin(sourcetype,"|"), signature=mvjoin(signature,"|"), signature_id=mvjoin(signature_id,"|") 
-| xswhere failure from failures_by_src_app_count_1h in authfails by
-    "src,app" is extreme AND failure from
-    anomalous_failures_by_src_app_count_1h in anomalous_authfails by "src,app"
-    is above normal 
-| where WhereCIX>=0.9 
-| eval urgency=if(failure<10,"informational",null()), src=split(src,"|"), user=split(user,"|"), dest=split(dest,"|"), sourcetype=split(sourcetype,"|"), signature=split(signature,"|"), signature_id=split(signature_id,"|")
-| lookup dnslookup clientip AS src OUTPUTNEW clienthost AS src_dns
-| iplocation src prefix=srcgeo_ 
-| eval src_city=coalesce(src_city, srcgeo_City),
-    src_country=coalesce(src_country, srcgeo_Country),
-    src_lon=coalesce(src_lon, srcgeo_long) , src_lat=coalesce(src_lat,
-    srcgeo_lat) 
-| eval orig_index=index, orig_sourcetype=sourcetype, tag=mvappend(tag,"authentication"), action="failure"
- 
-
-TwitterLinkedInInstapaperPocketGoogle+FlipboardShare
-POSTED ON2016-12-23
+```
