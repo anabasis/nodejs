@@ -1,3 +1,0 @@
-# APP BUILDER
-
-## Python Sample
