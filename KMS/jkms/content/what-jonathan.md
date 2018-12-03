@@ -40,6 +40,7 @@ VSCODE App
     "markdown.preview.breaks": true,
     "git.enabled": true,
     "git.path": "E:/REPO/GIT/SERVER/bin/git.exe",
+    //"git.path": "/usr/bin/git",
     "explorer.confirmDelete": false,
 
     <!-- 절대주소 안됨.
@@ -60,13 +61,19 @@ VSCODE App
                 "tr",
                 "td",
                 "th",
-                "dr"
+                "thead",
+                "br"
             ]
         },
-        "MD007": { "indent": 4 }
+        "MD012": { "maximum": 0 },
+        "MD022": false,
+        "MD024": false,
+        "MD007": { "indent": 2 }
     },
     "workbench.startupEditor": "newUntitledFile",
-    "team.showWelcomeMessage": false
+    "team.showWelcomeMessage": false,
+    "markdown.preview.fontSize": 12,
+    "markdown.preview.lineHeight": 1.5
 }
 ```
 
