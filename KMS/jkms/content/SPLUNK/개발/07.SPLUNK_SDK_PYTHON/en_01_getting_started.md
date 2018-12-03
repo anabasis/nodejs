@@ -1,5 +1,29 @@
 # Getting Started
 
+## Getting Started with the Splunk SDK for Python
+
+So you've met the Splunk® SDK for Python, now what?
+
+### Get it
+
+The first thing you have to do is [get the SDK](http://dev.splunk.com/view/python-sdk/SP-CAAAEFB), get Splunk, and any other requirements. Then, install the SDK. That's it.
+
+From here on out, we're assuming you know a little about using Splunk already, have some data indexed, and maybe saved a search or two. But if you're not there yet and need some more Splunk education, we have you covered:
+
+- If you want a deeper description of Splunk's features, see the Splunk documentation.
+- Try the [Tutorial](http://docs.splunk.com/Documentation/Splunk/latest/SearchTutorial/WelcometotheSearchTutorial) in the Splunk documentation for a step-by-step walkthrough of using Splunk Web with some sample data.
+- Remember, the Splunk SDKs are built as a layer over the Splunk REST API. While you don't need to know the REST API to use this SDK, you might find it useful to read the [Splunk REST API basics](http://docs.splunk.com/Documentation/Splunk/latest/RESTREF/RESTusing) or browse the [Splunk REST API Reference](http://docs.splunk.com/Documentation/Splunk/latest/RESTREF/RESTcontents).
+
+### Poke it
+
+Find out what makes the SDK tick—try it out, [play with the examples](http://dev.splunk.com/view/python-sdk/SP-CAAAEFK), and [run the unit tests](http://dev.splunk.com/view/python-sdk/SP-CAAAEDH).
+
+You can make things easier by saving your login credentials in the [.splunkrc file](http://dev.splunk.com/view/python-sdk/SP-CAAAEFC) so you don't have to enter your login info each time you run an example. It's up to you.
+
+### Code it
+
+When you're ready to get your hands dirty, check out the [Python code examples](https://github.com/splunk/splunk-sdk-python/tree/master/examples) on GitHub for inspiration.
+
 ## Requirements for Splunk SDK for Python
 
 Here's what you need to get going with the Splunk SDK for Python:
