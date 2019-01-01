@@ -1,4 +1,5 @@
-How to create custom search commands using Splunk SDK for Python
+# How to create custom search commands using Splunk SDK for Python
+
 A custom search command is a Python script that reads input from stdin and writes output to stdout. Input comes in as CSV (with an optional header), and is in general meant to be read using Python's stdlib csv module (using csv.reader or csv.DictReader). Output is also expected to be in CSV, and is likewise meant to be used with csv.writer or csv.DictWriter.
 There are two subtypes of custom search commands:
 A streaming custom search command is one to which data is streamed. You can think of it as applying a "function"/"transformation" to each event and then writing out the result of that operation. It is a kind of mapper. An example of such a command might be a command that adds a field to each event.

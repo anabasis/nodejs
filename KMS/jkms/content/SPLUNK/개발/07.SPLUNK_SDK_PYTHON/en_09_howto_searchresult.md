@@ -1,4 +1,5 @@
-How to display search results using the Splunk SDK for Python
+# How to display search results using the Splunk SDK for Python
+
 After you run a search, you can retrieve different output from the search job: 
 Events: The untransformed events of the search. (There may not be any events if you have a transforming search and you did not specify any status buckets.)
 Results: The transformed results of the search after processing has been completed. If the search does not have transforming commands, the results are the same as the events. The result count will be less than the event count if there are transforming commands.
