@@ -1,14 +1,23 @@
-How to work with saved searches using the Splunk SDK for Python
+# How to work with saved searches using the Splunk SDK for Python
+
 The most fundamental feature in Splunk Enterprise is searching your data. But before diving into the details of how to use the SDK to search, let's clarify the terms:
-A search query is a set of commands and functions you use to retrieve events from an index or a real-time stream, for example: "search * | head 10".
-A saved search is a search query that has been saved to be used again and can be set up to run on a regular schedule. The results from the search are not saved with the query.
-A search job is an instance of a completed or still-running search operation, along with the results. A search ID is returned when you create a job, allowing you to access the results of the search when they become available. Search results are returned in JSON, JSON_ROWS, JSON_COLS, XML, or CSV format.
-This topic focuses on working with saved searches. For more about working with search jobs, see How to run searches and display results.
-The search APIs
+
+- A search query is a set of commands and functions you use to retrieve events from an index or a real-time stream, for example: "search * | head 10".
+- A saved search is a search query that has been saved to be used again and can be set up to run on a regular schedule. The results from the search are not saved with the query.
+- A search job is an instance of a completed or still-running search operation, along with the results. A search ID is returned when you create a job, allowing you to access the results of the search when they become available. Search results are returned in JSON, JSON_ROWS, JSON_COLS, XML, or CSV format.
+
+This topic focuses on working with saved searches. For more about working with search jobs, see [How to run searches and display results](http://dev.splunk.com/view/python-sdk/SP-CAAAEE5).
+
+## The search APIs
+
 The classes for working with saved searches are:
-The splunklib.client.SavedSearches class for the collection of saved searches.
-The splunklib.client.SavedSearch class for an individual saved search.
+
+- The splunklib.client.SavedSearches class for the collection of saved searches.
+- The splunklib.client.SavedSearch class for an individual saved search.
+
 Access these classes through an instance of the splunklib.client.Service class. Retrieve a collection, and from there you can access individual items in the collection and create new ones. For example, here's a simplified program for getting a collection of saved searches and creating a new one:
+
+```python
 # Connect to Splunk Enterprise
 service = client.connect(...)
 
@@ -17,26 +26,40 @@ savedsearches = service.saved_searches
 
 # Create a saved search
 mysearch = savedsearches.create(name, query)
-Code examples
-This section provides examples of how to use the search APIs, assuming you first connect to a Splunk Enterprise instance:
-To list saved searches
-To view the history of a saved search
-To create a saved search
-To view and modify the properties of a saved search
-To run a saved search and display search results
-To delete a saved search
+```
+
+## Code examples
+
+This section provides examples of how to use the search APIs, assuming you first [connect to a Splunk Enterprise instance](http://dev.splunk.com/view/python-sdk/SP-CAAAEE4):
+
+- To list saved searches
+- To view the history of a saved search
+- To create a saved search
+- To view and modify the properties of a saved search
+- To run a saved search and display search results
+- To delete a saved search
+
 Here is some more information about search parameters:
-Collection parameters
-Saved search parameters
-To list saved searches
-This example shows how to use the splunklib.client.SavedSearches class to retrieve and list the saved searches in the saved search collection for the current namespace.
+
+- Collection parameters
+- Saved search parameters
+
+### To list saved searches
+
+This example shows how to use the [splunklib.client.SavedSearches](http://docs.splunk.com/DocumentationStatic/PythonSDK/1.6.5/client.html#splunklib.client.SavedSearches) class to retrieve and list the saved searches in the saved search collection for the current namespace.
+
+```python
 # List the saved searches that are available to the current user
 savedsearches = service.saved_searches
 
 for savedsearch in savedsearches:
     print "  " + savedsearch.name
     print "      Query: " + savedsearch["search"]
+```
+
 To retrieve a collection for a specific namespace—for example, to list the saved searches available to a specific user—create a second Service instance, specifying the owner and app. This example lists the saved searches for the user "username":
+
+```python
 # Create a second Service instance
 HOST = "localhost"
 PORT = 8089
@@ -57,6 +80,10 @@ savedsearches2 = service2.saved_searches
 
 for savedsearch in savedsearches2:
     print "  " + savedsearch.name
+```
+
+
+
 To view the history of a saved search
 The history of a saved search contains the past and current instances (jobs) of the search. This example shows the history for all the saved searches in the current collection:
 # Print the job history of saved searches
