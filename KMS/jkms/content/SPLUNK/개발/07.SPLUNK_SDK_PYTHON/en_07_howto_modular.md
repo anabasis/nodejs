@@ -7,10 +7,10 @@
 
 Some examples of modular inputs include:
 
-- Real-time Windows performance monitoring: A perfmon input that runs a separate process for every input defined.
-- Splunk Add-on for Microsoft PowerShell: A modular input that runs PowerShell 3.0 scripts to collect data.
-- Twitter example: A modular input that streams JSON data from a Twitter source to Splunk Enterprise.
-- Amazon S3 example: A modular input that streams data from the Amazon S3 data storage service to Splunk Enterprise.
+- [Real-time Windows performance monitoring](http://docs.splunk.com/Documentation/Splunk/latest/Data/Real-timeWindowsperformancemonitoring) : A perfmon input that runs a separate process for every input defined.
+- [Splunk Add-on for Microsoft PowerShell](http://splunk-base.splunk.com/apps/82353/splunk-add-on-for-microsoft-powershell) : A modular input that runs PowerShell 3.0 scripts to collect data.
+- [Twitter example](http://docs.splunk.com/Documentation/Splunk/latest/AdvancedDev/ModInputsExample#Twitter_example) : A modular input that streams JSON data from a Twitter source to Splunk Enterprise.
+- [Amazon S3 example](http://docs.splunk.com/Documentation/Splunk/latest/AdvancedDev/ModInputsExample#S3_example) : A modular input that streams data from the Amazon S3 data storage service to Splunk Enterprise.
 
 The Splunk SDK for Python enables you to use Python to create new modular inputs for Splunk Enterprise. This section of the Splunk SDK for Python documentation will show you how to create modular inputs using Python, and then how to integrate them with your Splunk Enterprise app.
 
@@ -62,7 +62,7 @@ class MyScript(Script):
         # Validates input.
 
     def stream_events(self, inputs, ew):
-        # Splunk Enterprise calls the modular input, 
+        # Splunk Enterprise calls the modular input,
         # streams XML describing the inputs to stdin,
         # and waits for XML on stdout describing events.
 
@@ -102,16 +102,23 @@ First, create a new Scheme object, providing both a name and description for it:
 
 In this case, Splunk Enterprise will display "Random Numbers" to users for this input, with the given description.
 
-Next, specify whether you want to use external validation using the use_external_validation property. External validation is taken care of by overriding the validate_input method. If you set external validation without overriding the validate_input method, the script will accept anything as valid.
+Next, specify whether you want to `use external validation` using the use_external_validation property. External validation is taken care of by overriding the [validate_input](http://docs.splunk.com/DocumentationStatic/PythonSDK/1.6.5/modularinput.html#splunklib.modularinput.Script.validate_input) method. If you set external validation without overriding the validate_input method, the script will accept anything as valid.
 
+```properties
         scheme.use_external_validation = True
-If you set use_single_instance to True, the scheme will pass all the instances of the modular input to a single instance of the script. You're then responsible for handling all of the instances of the modular input.
+```
 
+If you set `use_single_instance` to True, the scheme will pass all the instances of the modular input to a single instance of the script. You're then responsible for handling all of the instances of the modular input.
+
+```properties
         scheme.use_single_instance = True
+```
+
 Generally you only need external validation if there are relationships you must maintain among the parameters, such as requiring one variable to be less than another, or checking whether some resource is reachable or valid. If you don't choose external validation, Splunk Enterprise lets you specify a validation string for each argument and runs validation internally using that string.
 
-In the example modular input, there are two variables, min and max, that represent the minimum and maximum values, respectively, for the generated random numbers. We'll add them to the scheme using the Argument class and its properties:
+In the example modular input, there are two variables, min and max, that represent the minimum and maximum values, respectively, for the generated random numbers. We'll add them to the scheme using the [Argument](http://docs.splunk.com/DocumentationStatic/PythonSDK/1.6.5/modularinput.html#splunklib.modularinput.Argument) class and its properties:
 
+```python
         min_argument = Argument("min")
         min_argument.data_type = Argument.data_type_number
         min_argument.description = "Minimum random number to be produced by this input."
@@ -125,25 +132,36 @@ In the example modular input, there are two variables, min and max, that represe
         max_argument.description = "Maximum random number to be produced by this input."
         max_argument.required_on_create = True
         scheme.add_argument(max_argument)
+```
+
 After adding any validation variables to the scheme, return the scheme:
 
+```python
         return scheme
-The validate_input method
-The validate_input method is where the configuration of an input is validated, and is only needed if you've set your modular input to use external validation. If validate_input does not throw an exception, the input is assumed to be valid. Otherwise it prints the exception as an error message when it tells splunkd that the configuration is not valid.
+```
 
-When you use external validation, after splunkd calls the modular input with the --scheme argument to get a scheme, it calls it again with the --validate-arguments option for each instance of the modular input in its configuration files, feeding XML on stdin to the modular input to get it to do validation. It calls it the same way again whenever a modular input's configuration is changed.
+### The validate_input method
 
-In our example, we're using external validation, since we want the max variable to always be greater than the min value. Our validate_input method contains basic logic that retrieves the two variables and then compares them to each other:
+The [validate_input](http://docs.splunk.com/DocumentationStatic/PythonSDK/1.6.5/modularinput.html#splunklib.modularinput.Script.validate_input) method is where the configuration of an input is validated, and is only needed if you've set your modular input to use external validation. If `validate_input` does not throw an exception, the input is assumed to be valid. Otherwise it prints the exception as an error message when it tells splunkd that the configuration is not valid.
 
+When you use external validation, after splunkd calls the modular input with the `--scheme` argument to get a scheme, it calls it again with the `--validate-arguments` option for each instance of the modular input in its configuration files, feeding XML on stdin to the modular input to get it to do validation. It calls it the same way again whenever a modular input's configuration is changed.
+
+In our example, we're using external validation, since we want the `max` variable to always be greater than the `min` value. Our `validate_input` method contains basic logic that retrieves the two variables and then compares them to each other:
+
+```python
     def validate_input(self, validation_definition):
         minimum = float(validation_definition.parameters["min"])
         maximum = float(validation_definition.parameters["max"])
 
         if minimum >= maximum:
             raise ValueError("min must be less than max; found min=%f, max=%f" % minimum, maximum)
-The stream_events method
-The stream_events method is where the event streaming happens. Events are streamed into stdout using an InputDefinition object as input that determines what events are streamed. In the case of the Random Numbers example, for each input, the values are first retrieved and cast as floats. Then, an Event object is created, its data fields are set, and then it's written using the EventWriter.
+```
 
+### The stream_events method
+
+The [stream_events](http://docs.splunk.com/DocumentationStatic/PythonSDK/1.6.5/modularinput.html#splunklib.modularinput.Script.stream_events) method is where the event streaming happens. Events are streamed into stdout using an InputDefinition object as input that determines what events are streamed. In the case of the Random Numbers example, for each input, the values are first retrieved and cast as floats. Then, an [Event](http://docs.splunk.com/DocumentationStatic/PythonSDK/1.6.5/modularinput.html#splunklib.modularinput.Event) object is created, its data fields are set, and then it's written using the [EventWriter](http://docs.splunk.com/DocumentationStatic/PythonSDK/1.6.5/modularinput.html#splunklib.modularinput.EventWriter).
+
+```python
     def stream_events(self, inputs, ew):
         for input_name, input_item in inputs.inputs.iteritems():
             minimum = float(input_item["min"])
@@ -154,28 +172,36 @@ The stream_events method is where the event streaming happens. Events are stream
             event.data = "number=\"%s\"" % str(random.uniform(minimum, maximum))
 
             ew.write_event(event)
-Optional: Set up logging
+```
+
+### Optional: Set up logging
+
 It's best practice for your modular input script to log diagnostic data to splunkd.log. Use an EventWriter's log method to write log messages, which include both a standard splunkd.log level (such as "DEBUG" or "ERROR") and a descriptive message.
 
-To add the modular input to Splunk Enterprise
+## To add the modular input to Splunk Enterprise
+
 With your modular input script completed, you're ready to integrate it into Splunk Enterprise. The basic steps are:
 
-Package the script along with the contents of the SDK library.
-Create an app.conf file.
-Create an inputs.conf.spec file.
-Move the modular input package into the $SPLUNK_HOME/etc/apps/ directory.
-Package the script and the SDK library
+1. Package the script along with the contents of the SDK library.
+2. Create an app.conf file.
+3. Create an inputs.conf.spec file.
+4. Move the modular input package into the $SPLUNK_HOME/etc/apps/ directory.
+
+### Package the script and the SDK library
+
 To add a modular input that you've created in Python to Splunk Enterprise, you'll need to first add the script as a Splunk Enterprise app.
 
-Create a directory that corresponds to the name of your modular input script—for instance, "random_numbers"—in a location such as your Documents directory. (You'll copy the directory over to your Splunk Enterprise directory at the end of this process.)
-Within the app directory, create the following three empty directories:
-bin
-default
-README
-From the root level of the Splunk SDK for Python, copy the splunklib directory into the bin directory you just created.
-Copy the modular input Python script (for instance, random_numbers.py) into the bin directory.
+1. Create a directory that corresponds to the name of your modular input script—for instance, "random_numbers"—in a location such as your Documents directory. (You'll copy the directory over to your Splunk Enterprise directory at the end of this process.)
+2. Within the app directory, create the following three empty directories:
+    - bin
+    - default
+    - README
+3. From the root level of the Splunk SDK for Python, copy the splunklib directory into the bin directory you just created.
+4. Copy the modular input Python script (for instance, random_numbers.py) into the bin directory.
+
 Your app directory structure now looks like this:
 
+```txt
 .../
   bin/
     app_name.py
@@ -184,9 +210,13 @@ Your app directory structure now looks like this:
       ...
   default/
   README/
-Create an app.conf file
-Within the default directory, create a file called app.conf. This file is used to maintain the state of an app or customize certain aspects of it in Splunk Enterprise. The contents of the app.conf file can be very simple:
+```
 
+### Create an app.conf file
+
+Within the default directory, create a file called [app.conf](http://docs.splunk.com/Documentation/Splunk/latest/Admin/Appconf). This file is used to maintain the state of an app or customize certain aspects of it in Splunk Enterprise. The contents of the `app.conf` file can be very simple:
+
+```properties
 [install]
 is_configured = 0
 
@@ -198,19 +228,26 @@ label = My App
 author = Splunk Inc
 description = My app is awesome.
 version = 1.0
+```
+
 For more examples of what to put in the app.conf file, see the corresponding files in the modular inputs examples.
 
-Create an inputs.conf.spec file
-You need to define the configuration for your modular input by editing the inputs.conf.spec file manually. See "Create a modular input spec file" in the main Splunk Enterprise documentation for instructions, or take a look at the SDK samples' inputs.conf.spec file, which is in the application's README directory. For instance, the following is the contents of the Random Numbers example's inputs.conf.spec file:
+### Create an inputs.conf.spec file
 
+You need to define the configuration for your modular input by editing the inputs.conf.spec file manually. See "[Create a modular input spec file](http://docs.splunk.com/Documentation/Splunk/latest/AdvancedDev/ModInputsSpec#Create_a_modular_input_spec_file)" in the main Splunk Enterprise documentation for instructions, or take a look at the SDK samples' inputs.conf.spec file, which is in the application's README directory. For instance, the following is the contents of the Random Numbers example's inputs.conf.spec file:
+
+```properties
 [random_numbers://<name>]
 *Generates events containing a random floating point number.
 
 min = <value>
 max = <value>
+```
+
 Move the modular input script into your Splunk Enterprise install
 Your directory structure now looks like this:
 
+```txt
 .../
   bin/
     app_name.py
@@ -221,7 +258,9 @@ Your directory structure now looks like this:
     app.conf
   README/
     inputs.conf.spec
-The final step to install the modular input is to copy the app directory to the following path: $SPLUNK_HOME/etc/apps/.
+```
+
+The final step to install the modular input is to copy the app directory to the following path: `$SPLUNK_HOME/etc/apps/`.
 
 Restart Splunk Enterprise, and on the App menu, click Manage apps. If you wrote your modular input script correctly, the name of the modular input—for instance, "Random Numbers"—will appear here. If not, go back and double-check your script.
 

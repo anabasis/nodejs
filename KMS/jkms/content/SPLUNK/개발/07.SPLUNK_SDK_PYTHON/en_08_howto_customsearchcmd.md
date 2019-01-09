@@ -1,36 +1,45 @@
 # How to create custom search commands using Splunk SDK for Python
 
 A custom search command is a Python script that reads input from stdin and writes output to stdout. Input comes in as CSV (with an optional header), and is in general meant to be read using Python's stdlib csv module (using csv.reader or csv.DictReader). Output is also expected to be in CSV, and is likewise meant to be used with csv.writer or csv.DictWriter.
+
 There are two subtypes of custom search commands:
-A streaming custom search command is one to which data is streamed. You can think of it as applying a "function"/"transformation" to each event and then writing out the result of that operation. It is a kind of mapper. An example of such a command might be a command that adds a field to each event.
-A non-streaming custom search command expects to have all the data before it operates on it. As such, it is usually "reducing" the data into the output by applying some sort of summary transformation on it. An example of a non-streaming command is the stats command, which will collect all the data before it can calculate the statistics.
+
+- A streaming custom search command is one to which data is streamed. You can think of it as applying a "function"/"transformation" to each event and then writing out the result of that operation. It is a kind of mapper. An example of such a command might be a command that adds a field to each event.
+- A non-streaming custom search command expects to have all the data before it operates on it. As such, it is usually "reducing" the data into the output by applying some sort of summary transformation on it. An example of a non-streaming command is the stats command, which will collect all the data before it can calculate the statistics.
+
 Neither of these cases precludes having previews of the data, and you can enable or disable preview functionality in the configuration.
-Until now, building your own custom search commands from scratch for Splunk Enterprise using Python has not been easy. The learning curve is steep, plus configuring commands properly and conforming to the search command style guide is difficult. There is also no built-in logging configuration mechanism. 
+
+Until now, building your own custom search commands from scratch for Splunk Enterprise using Python has not been easy. The learning curve is steep, plus configuring commands properly and conforming to the search command style guide is difficult. There is also no built-in logging configuration mechanism.
+
 To simplify the creation of custom search commands, the Splunk SDK for Python includes the splunklib.searchcommands module, which simplifies the creation of custom search commands and adds logging functionality. In addition, the Splunk SDK for Python includes several templates that you can use to easily build custom search commands with just a few modifications.
+
 This topic contains the following sections:
-Module structure
 
-EventingCommand class
-GeneratingCommand class
-ReportingCommand class
-StreamingCommand class
-Custom search command starter example
-Custom search command basic example
-Custom search command 'shape' example
-Custom search command template
-Control access to a custom search command
+- Module structure
+  - EventingCommand class
+  - GeneratingCommand class
+  - ReportingCommand class
+  - StreamingCommand class
+- Custom search command starter example
+- Custom search command basic example
+- Custom search command 'shape' example
+- Custom search command template
+- Control access to a custom search command
+  - What you can edit in Splunk Web
+  - What you can edit in .conf files
 
-What you can edit in Splunk Web
-What you can edit in .conf files
-Module structure
+## Module structure
+
 The core of the search commands module consists of four classes, each of which represents the first three custom search command types:
-EventingCommand: Applies a transformation to search results as they travel through the events pipeline. Examples of generating commands include sort_, dedup_, and cluster_.
-GeneratingCommand: Generates event records based on command arguments. Examples of generating commands include search (at the beginning of the pipeline), inputcsv, input lookup, and metadata.
-ReportingCommand: Processes search results and generates a reporting data structure. Examples of reporting commands include stats, top, and timechart.
-StreamingCommand: Applies a transformation to search results as they travel through the processing pipeline. Examples of streaming commands include search, eval, and where.
+
+- [EventingCommand](http://docs.splunk.com/DocumentationStatic/PythonSDK/1.6.5/searchcommands.html#splunklib.searchcommands.EventingCommand): Applies a transformation to search results as they travel through the events pipeline. Examples of generating commands include sort_, dedup_, and cluster_.
+- [GeneratingCommand](http://docs.splunk.com/DocumentationStatic/PythonSDK/1.6.5/searchcommands.html#splunklib.searchcommands.GeneratingCommand): Generates event records based on command arguments. Examples of generating commands include search (at the beginning of the pipeline), inputcsv, input lookup, and metadata.
+- [ReportingCommand](http://docs.splunk.com/DocumentationStatic/PythonSDK/1.6.5/searchcommands.html#splunklib.searchcommands.ReportingCommand) : Processes search results and generates a reporting data structure. Examples of reporting commands include stats, top, and timechart.
+- [StreamingCommand](http://docs.splunk.com/DocumentationStatic/PythonSDK/1.6.5/searchcommands.html#splunklib.searchcommands.StreamingCommand) : Applies a transformation to search results as they travel through the processing pipeline. Examples of streaming commands include search, eval, and where.
+
 In addition you can use the following helper classes:
 The Configuration class negates the need for you to manually configure the commands.conf file by enabling you to dynamically configure commands in your code. 
-The Option class eliminates the need for you to parse and validate search command arguments manually by enabling you to simply include them as a required or optional property. 
+The Option class eliminates the need for you to parse and validate search command arguments manually by enabling you to simply include them as a required or optional property.
 Finally, logging has been standardized with the searchcommands.logging module and framework error handling code.
 EventingCommand class
 The EventingCommand class is the base class for dataset processing commands that filter results arriving at a search head from one or more search peers as they travel through the events pipeline.
