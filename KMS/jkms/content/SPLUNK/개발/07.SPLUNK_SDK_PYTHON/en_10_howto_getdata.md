@@ -1,39 +1,59 @@
-How to get data into Splunk using the Splunk SDK for Python
+# How to get data into Splunk using the Splunk SDK for Python
+
 Getting data into Splunk® involves taking data from inputs, and then indexing that data by transforming it into individual events that contain searchable fields. Here's a brief overview of how it all works.
-Data inputs
+
+## Data inputs
+
 A data input is a source of incoming event data. Splunk can index data from the following types of inputs:
-Files and directories—the contents of files and directories of files. You can upload a file for one-time indexing (a oneshot input), monitor for new data, or monitor for file system changes (events are generated when the directory undergoes a change). Files and directories can be included using whitelists, and excluded using blacklists.
-Network events—data that is received over network Transmission Control Protocol (TCP) and User Datagram Protocol (UDP) ports, such as data that is sent from a Splunk forwarder from a remote computer. TCP inputs are separated into raw (unprocessed) and cooked (processed) inputs, with SSL as an option for either type.
-Windows data—data from Windows computers, which includes:
-Windows event log data
-Windows Registry data
-Windows Management Instrumentation (WMI) data
-Active Directory data
-Performance monitoring (perfmon) data
-Other data sources—data from custom apps, FIFO queues, scripts that get data from APIs, and other remote data interfaces and message queues.
-Your data inputs and their configurations are saved in the inputs.conf configuration file.
-Indexes
+
+- _Files and directories_ — the contents of files and directories of files. You can upload a file for one-time indexing (a oneshot input), monitor for new data, or monitor for file system changes (events are generated when the directory undergoes a change). Files and directories can be included using whitelists, and excluded using blacklists.
+- _Network events_ —data that is received over network Transmission Control Protocol (TCP) and User Datagram Protocol (UDP) ports, such as data that is sent from a Splunk forwarder from a remote computer. TCP inputs are separated into raw (unprocessed) and cooked (processed) inputs, with SSL as an option for either type.
+- _Windows data_ —data from Windows computers, which includes:
+  - Windows event log data
+  - Windows Registry data
+  - Windows Management Instrumentation (WMI) data
+  - Active Directory data
+  - Performance monitoring (perfmon) data
+- _Other data sources_ —data from custom apps, FIFO queues, scripts that get data from APIs, and other remote data interfaces and message queues.
+
+Your data inputs and their configurations are saved in the [inputs.conf](http://docs.splunk.com/Documentation/Splunk/latest/admin/Inputsconf) configuration file.
+
+## Indexes
+
 The index stores compressed, raw event data. When receiving data from your inputs, Splunk parses the data into events and then indexes them, as follows:
-During parsing, Splunk extracts default fields, configures character-set encoding, identifies line termination, identifies timestamps (creating them if they aren't there), masks sensitive or private data, and can apply custom metadata. Parsing can be done by heavy forwarders. Universal forwarders do minimal parsing.
-During indexing, Splunk breaks events into segments, builds the index data structures, and writes the raw data and index files to disk.
+
+- During parsing, Splunk extracts default fields, configures character-set encoding, identifies line termination, identifies timestamps (creating them if they aren't there), masks sensitive or private data, and can apply custom metadata. Parsing can be done by heavy forwarders. Universal forwarders do minimal parsing.
+- During indexing, Splunk breaks events into segments, builds the index data structures, and writes the raw data and index files to disk.
+
 Splunk can usually determine the data type and handle the data accordingly. But when setting up new inputs, you might consider sending data to a test index first to make sure everything is configured the way you want. You can delete the indexed data (clean the index) and start over as needed. Event processing rules are set in the props.conf configuration file, which you'll need to modify directly if you want to reconfigure how events are processed.
-Each index is stored as a collection of database directories (also known as buckets) in the file system, located in $SPLUNK_HOME/var/lib/splunk. Buckets are organized by age:
-Hot buckets are searchable, actively being written to, one per index. Hot buckets roll to warm at a certain size or when splunkd is restarted, then a new hot bucket is created.
-Warm buckets are searchable. Oldest warm buckets roll to cold when the number of warm buckets reaches a number limit.
-Cold buckets are searchable. After a set period of time, cold buckets roll to frozen.
-Frozen buckets are not searchable. These buckets are archived or deleted.
+
+Each index is stored as a collection of database directories (also known as buckets) in the file system, located in `$SPLUNK_HOME/var/lib/splunk`. Buckets are organized by age:
+
+- _Hot_ buckets are searchable, actively being written to, one per index. Hot buckets roll to warm at a certain size or when splunkd is restarted, then a new hot bucket is created.
+- _Warm_ buckets are searchable. Oldest warm buckets roll to cold when the number of warm buckets reaches a number limit.
+- _Cold_ buckets are searchable. After a set period of time, cold buckets roll to frozen.
+- _Frozen_ buckets are not searchable. These buckets are archived or deleted.
+
 You can configure aspects such as the path configuration for your buckets. For example, keep the hot and warm buckets on a local computer for quick access, and put the cold and frozen buckets on a separate disks for long-term storage. You can also set the storage size.
+
 By default, data is stored in the main index, but you can add more indexes for different data inputs. You might want multiple indexes to:
-Control user access. Users can search only in indexes they are allowed to by their assigned role.
-Accommodate varying retention policies. Set a different archive or retention policy by index.
-Speed searches in certain situations. Create dedicated indexes for each data source, search just in the index you want.
-The input and index APIs
+
+- _Control user access_ . Users can search only in indexes they are allowed to by their assigned role.
+- _Accommodate varying retention policies_ . Set a different archive or retention policy by index.
+- _Speed searches in certain situations_ . Create dedicated indexes for each data source, search just in the index you want.
+
+## The input and index APIs
+
 The classes for working with getting data into Splunk are:
-The splunklib.client.Inputs class for the collection of inputs.
-The splunklib.client.Input class for an individual input.
-The splunklib.client.Indexes class for the collection of indexes.
-The splunklib.client.Index class for an individual index.
-Access these classes through an instance of the splunklib.client.Service class. Retrieve a collection, and from there you can access individual items in the collection and create new ones. For example, here's a simplified program for getting a collection of inputs and creating a new one:
+
+- The [splunklib.client.Inputs](http://docs.splunk.com/DocumentationStatic/PythonSDK/1.6.5/client.html#splunklib.client.Inputs) class for the collection of inputs.
+- The [splunklib.client.Input](http://docs.splunk.com/DocumentationStatic/PythonSDK/1.6.5/client.html#splunklib.client.Input) class for an individual input.
+- The [splunklib.client.Indexes](http://docs.splunk.com/DocumentationStatic/PythonSDK/1.6.5/client.html#splunklib.client.Indexes) class for the collection of indexes.
+- The [splunklib.client.Index](http://docs.splunk.com/DocumentationStatic/PythonSDK/1.6.5/client.html#splunklib.client.Index) class for an individual index.
+
+Access these classes through an instance of the [splunklib.client.Service](http://docs.splunk.com/DocumentationStatic/PythonSDK/1.6.5/client.html#splunklib.client.Service) class. Retrieve a collection, and from there you can access individual items in the collection and create new ones. For example, here's a simplified program for getting a collection of inputs and creating a new one:
+
+```python
 # Connect to Splunk
 service = client.connect(...)
 
@@ -42,79 +62,80 @@ myinputs = service.inputs
 
 # Create an input
 mynewinput = myinputs.create(<i>name</i>, <i>inputkind</i>, <i>optional_arguments</i>)
-Code examples
-This section provides examples of how to use the index and input APIs, assuming you first connect to a Splunk instance:
-To list data inputs
-To create a new data input
-To view and modify the properties of a data input
-To list indexes
-To create a new index
-To add data directly to an index
-To view and modify the properties of an index
-To clean events from an index
-Here are the available parameters for inputs and indexes:
-Input kinds
-Collection parameters
-Input parameters
-Index parameters
-To list data inputs
-This example shows how to use the splunklib.client.Inputs class to retrieve the collection of data inputs that have been configured for Splunk and list them. For a list of available parameters to use when retrieving a collection, see Collection parameters.
-Note  To be able to list inputs, the user's role must include those capabilites. For a list of available capabilities, see Capabilities.
+```
 
+## Code examples
+
+This section provides examples of how to use the index and input APIs, assuming you first connect to a Splunk instance:
+
+- To list data inputs
+- To create a new data input
+- To view and modify the properties of a data input
+- To list indexes
+- To create a new index
+- To add data directly to an index
+- To view and modify the properties of an index
+- To clean events from an index
+
+Here are the available parameters for inputs and indexes:
+
+- Input kinds
+- Collection parameters
+- Input parameters
+- Index parameters
+
+### To list data inputs
+
+This example shows how to use the [splunklib.client.Inputs](http://docs.splunk.com/DocumentationStatic/PythonSDK/1.6.5/client.html#splunklib.client.Inputs) class to retrieve the collection of data inputs that have been configured for Splunk and list them. For a list of available parameters to use when retrieving a collection, see [Collection parameters](http://dev.splunk.com/view/python-sdk/SP-CAAAEE6#getcollparams).
+> Note  To be able to list inputs, the user's role must include those capabilites. For a list of available capabilities, see Capabilities.
+
+```python
 # Get the collection of data inputs
 inputs = service.inputs
 
 # List the inputs and kind
 for item in inputs:
     print "%s (%s)" % (item.name, item.kind)
-To create a new data input
-This example shows how to create a data input. You'll need to provide an input kind and a name. The values for these depend on the kind of input you are creating:
-Input
-kind parameter
-name parameter
-Active Directory
-"ad"
-The name of the configuration for a specific domain controller.
-Monitor
-"monitor"
-The file or directory path to monitor.
-Script
-"script"
-The name of the script.
-TCP cooked
-"splunktcp"
-The port number of the input.
-TCP raw
-"tcp"
-The port number of the input.
-UDP
-"udp"
-The port number of the input.
-Windows event log
-"win-event-log-collections"
-The name of the collection.
-Windows Perfmon
-"win-perfmon"
-The name of the collection.
-Windows Registry
-"registry"
-The name of the configuration stanza.
-WMI
-"win-wmi-collections"
-The name of the collection.
+```
 
-Note: Oneshot inputs are created differently (see To add data directly to an index).
+### To create a new data input
+
+This example shows how to create a data input. You'll need to provide an input kind and a name. The values for these depend on the kind of input you are creating:
+
+<table>
+<tr><td>Input</td><td>kind parameter</td><td>name parameter</td></tr>
+<tr><td>Active Directory</td><td>"ad"</td><td>The name of the configuration for a specific domain controller.</td></tr>
+<tr><td>Monitor</td><td>"monitor"</td><td>The file or directory path to monitor.</td></tr>
+<tr><td>Script</td><td>"script"</td><td>The name of the script.</td></tr>
+<tr><td>TCP cooked</td><td>"splunktcp"</td><td>The port number of the input.</td></tr>
+<tr><td>TCP raw</td><td>"tcp"</td><td>The port number of the input.</td></tr>
+<tr><td>UDP</td><td>"udp"</td><td>The port number of the input.</td></tr>
+<tr><td>Windows event log</td><td>"win-event-log-collections"</td><td>The name of the collection.</td></tr>
+<tr><td>Windows Perfmon</td><td>"win-perfmon"</td><td>The name of the collection.</td></tr>
+<tr><td>Windows Registry</td><td>"registry"</td><td>The name of the configuration stanza.</td></tr>
+<tr><td>WMI</td><td>"win-wmi-collections"</td><td>The name of the collection.</td></tr>
+</table>
+
+> Note: Oneshot inputs are created differently (see [To add data directly to an index](http://dev.splunk.com/view/python-sdk/SP-CAAAEE6#add2index)).
 This example shows how to create a tcp data input.
-Note: To be able to create and modify inputs, the user's role must include those capabilites. For a list of available capabilities, see Capabilities.
+> Note: To be able to create and modify inputs, the user's role must include those capabilites. For a list of available capabilities, see [Capabilities](http://dev.splunk.com/view/python-sdk/SP-CAAAEJ6#capabilities).
+
+```python
 # Get the collection of data inputs
 inputs = service.inputs
 
 # Create a new TCP data input
 tcpinput = inputs.create("9999", "tcp", host="sdk-test")
 print "New TCP input:", tcpinput.name
-To view and modify the properties of a data input
-This example continues from the previous example―it displays the properties of the new tcp input using the splunklib.client.Input class then modifies a few properties. To make these changes to the server, call the update method, then call the refresh method to update your local object (allow time for the update between server and client to show up). For more about the properties you can set for different types of data inputs, see Input parameters.
-Note: To be able to create and modify inputs, the user's role must include those capabilites. For a list of available capabilities, see Capabilities.
+```
+
+### To view and modify the properties of a data input
+
+This example continues from the previous example―it displays the properties of the new tcp input using the [splunklib.client.Input](http://docs.splunk.com/DocumentationStatic/PythonSDK/1.6.5/client.html#splunklib.client.Input) class then modifies a few properties. To make these changes to the server, call the [update](http://docs.splunk.com/DocumentationStatic/PythonSDK/1.6.5/client.html#splunklib.client.Entity.update) method, then call the [refresh](http://docs.splunk.com/DocumentationStatic/PythonSDK/1.6.5/client.html#splunklib.client.Entity.refresh) method to update your local object (allow time for the update between server and client to show up). For more about the properties you can set for different types of data inputs, see [Input parameters](http://dev.splunk.com/view/python-sdk/SP-CAAAEE6#inputparams).
+
+> Note: To be able to create and modify inputs, the user's role must include those capabilites. For a list of available capabilities, see Capabilities.
+
+```python
 # Continue the previous example with the new tcpinput
 
 # Retrieve the new TCP data input
@@ -136,8 +157,13 @@ tcpinput.update(**kwargs).refresh()
 
 # Display the new property and value
 print "\nhost:", tcpinput["host"]
-To list indexes
-This example shows how to use the splunklib.client.Indexes class to retrieve and list the indexes that have been configured for Splunk, along with the number of events contained in each. For a list of available parameters to use when retrieving a collection, see Collection parameters.
+```
+
+### To list indexes
+
+This example shows how to use the [splunklib.client.Indexes](http://docs.splunk.com/DocumentationStatic/PythonSDK/1.6.5/client.html#splunklib.client.Indexes) class to retrieve and list the indexes that have been configured for Splunk, along with the number of events contained in each. For a list of available parameters to use when retrieving a collection, see [Collection parameters](http://dev.splunk.com/view/python-sdk/SP-CAAAEE6#getcollparams).
+
+```python
 # Get the collection of indexes
 indexes = service.indexes
 
@@ -145,19 +171,34 @@ indexes = service.indexes
 for index in indexes:
     count = index["totalEventCount"]
     print "%s (events: %s)" % (index.name, count)
-To create a new index
-When you create an index, all you need to provide is a name. You can also specify additional properties at the same time by providing a dictionary of key-value pairs for the properties (the possible parameters are summarized in Index parameters). Or, modify properties after you have created the index.
-Note: To be able to create and modify an index, the user's role must include those capabilites. For a list of available capabilities, see Capabilities.
+```
+
+### To create a new index
+
+When you create an index, all you need to provide is a name. You can also specify additional properties at the same time by providing a dictionary of key-value pairs for the properties (the possible parameters are summarized in [Index parameters](http://dev.splunk.com/view/python-sdk/SP-CAAAEE6#indexparams)). Or, modify properties after you have created the index.
+
+> Note: To be able to create and modify an index, the user's role must include those capabilites. For a list of available capabilities, see [Capabilities](http://dev.splunk.com/view/python-sdk/SP-CAAAEJ6#capabilities).
+
 This example shows how to create a new index.
-Note: If you are using a version of Splunk earlier than 5.0, you can't delete indexes using the SDK or the REST API—something to be aware of before creating lots of test indexes.
+
+> Note: If you are using a version of Splunk earlier than 5.0, you can't delete indexes using the SDK or the REST API—something to be aware of before creating lots of test indexes.
+
+```python
 # Create a new index
 mynewindex = service.indexes.create("test_index")
-To add data directly to an index
-There are different ways to add data directly to an index, without configuring a data input. First, retrieve an index using the splunklib.client.Index class, and then use one of the following methods:
-Use the upload method to upload a single file as an event stream for one-time indexing, which corresponds to a oneshot data input. You'll need to specify the file and path to upload, too.
-Use the submit method to send an event over HTTP. You'll need to provide the event as a string, and specify values to apply to the event (host, source, and sourcetype).
-Use the attach method to send events over a writeable socket. You can also specify the values to apply to these events (host, source, and sourcetype).
+```
+
+### To add data directly to an index
+
+There are different ways to add data directly to an index, without configuring a data input. First, retrieve an index using the [splunklib.client.Index](http://dev.splunk.com/view/python-sdk/SP-CAAAEJ6#capabilities) class, and then use one of the following methods:
+
+- Use the [upload](http://docs.splunk.com/DocumentationStatic/PythonSDK/1.6.5/client.html#splunklib.client.Index.upload) method to upload a single file as an event stream for one-time indexing, which corresponds to a oneshot data input. You'll need to specify the file and path to upload, too.
+- Use the [submit](http://docs.splunk.com/DocumentationStatic/PythonSDK/1.6.5/client.html#splunklib.client.Index.submit) method to send an event over HTTP. You'll need to provide the event as a string, and specify values to apply to the event (host, source, and sourcetype).
+- Use the [attach](http://docs.splunk.com/DocumentationStatic/PythonSDK/1.6.5/client.html#splunklib.client.Index.attach) method to send events over a writeable socket. You can also specify the values to apply to these events (host, source, and sourcetype).
+
 Here is an example of uploading a single file:
+
+```python
 # Create a oneshot input
 
 # Retrieve the index for the data
@@ -168,7 +209,11 @@ uploadme = "/Applications/Splunk/README-splunk.txt"
 
 # Upload and index the file
 myindex.upload(uploadme);
+```
+
 Here is an example of submitting an event over HTTP:
+
+```python
 # Send an event over HTTP
 
 # Retrieve the index for the data
@@ -176,7 +221,11 @@ myindex = service.indexes["test_index"]
 
 # Submit an event over HTTP
 myindex.submit("This is my HTTP event", sourcetype="access_combined.log", host="local")
+```
+
 Here is an example of sending event to an open socket:
+
+```python
 # Send an event over an open socket
 
 # Retrieve the index for the data
@@ -190,9 +239,14 @@ mysocket.send("This is my socket event\r\n")
 
 # Close the socket
 mysocket.close()
-To view and modify the properties of an index
-This example shows how to view the properties of the index created in the previous example and modify its properties. For more about the available properties for indexes, see Index parameters.
-Note: To be able to create and modify an index, the user's role must include those capabilites. For a list of available capabilities, see Capabilities.
+```
+
+### To view and modify the properties of an index
+
+This example shows how to view the properties of the index created in the previous example and modify its properties. For more about the available properties for indexes, see [Index parameters](http://dev.splunk.com/view/python-sdk/SP-CAAAEJ2#indexparams).
+Note: To be able to create and modify an index, the user's role must include those capabilites. For a list of available capabilities, see [Capabilities](http://dev.splunk.com/view/python-sdk/SP-CAAAEJ6#capabilities).
+
+```python
 # Retrieve the new index and display some properties
 mynewindex = service.indexes["test_index"]
 
@@ -213,8 +267,13 @@ kwargs = {"maxHotBuckets": 4,
 
 # Update the server and refresh locally
 mynewindex.update(**kwargs).refresh()
-To clean events from an index
-This example shows how to clean an index using the Index.clean method, which removes the events from it. Note that this method can block up to the timeout period.
+```
+
+### To clean events from an index
+
+This example shows how to clean an index using the [Index.clean](http://docs.splunk.com/DocumentationStatic/PythonSDK/1.6.5/client.html#splunklib.client.Index.clean) method, which removes the events from it. Note that this method can block up to the timeout period.
+
+```python
 # Retrieve the index
 myindex = service.indexes["test_index"]
 
@@ -225,61 +284,57 @@ print "Current DB size:", myindex["currentDBSizeMB"], "MB"
 timeout = 60
 myindex.clean(timeout)
 print "Current DB size:", myindex["currentDBSizeMB"], "MB"
-Input kinds
+```
+
+### Input kinds
+
 The Splunk SDK for Python takes a kind parameter to several methods to specify the type of input, for example when you create a data input. Here are the values for kind:
-Input kind
-Description
-ad
-Active Directory
-monitor
-Files and directories
-registry
-Windows Registry
-script
-Scripts
-splunktcp
-TCP, processed
-tcp
-TCP, unprocessed
-udp
-UDP
-win-event-log-collections
-Windows event log
-win-perfmon
-Performance monitoring
-win-wmi-collections
-WMI
-Collection parameters
+
+<table>
+<tr><td>Input kind</td><td>Description</td></tr>
+<tr><td>ad</td><td>Active Directory</td></tr>
+<tr><td>monitor</td><td>Files and directories</td></tr>
+<tr><td>registry</td><td>Windows Registry</td></tr>
+<tr><td>script</td><td>Scripts</td></tr>
+<tr><td>splunktcp</td><td>TCP, processed</td></tr>
+<tr><td>tcp</td><td>TCP, unprocessed</td></tr>
+<tr><td>udp</td><td>UDP</td></tr>
+<tr><td>win-event-log-collections</td><td>Windows event log</td></tr>
+<tr><td>win-perfmon</td><td>Performance monitoring</td></tr>
+<tr><td>win-wmi-collections</td><td>WMI</td></tr>
+</table>
+
+### Collection parameters
+
 By default, all entities are returned when you retrieve a collection. But by using the parameters below, you can also specify the number of entities to return and how to sort them. These parameters are available whenever you retrieve a collection:
 
-Parameter
-Description
-count
-A number that indicates the maximum number of entities to return.
-offset
-A number that specifies the index of the first entity to return.
-search
-A string that specifies a search expression to filter the response with, matching field values against the search expression. For example, "search=foo" matches any object that has "foo" as a substring in a field, and "search=field_name%3Dfield_value" restricts the match to a single field.
-sort_dir
-An enum value that specifies how to sort entities. Valid values are "asc" (ascending order) and "desc" (descending order).
-sort_key
-A string that specifies the field to sort by.
-sort_mode
-An enum value that specifies how to sort entities. Valid values are "auto", "alpha" (alphabetically), "alpha_case" (alphabetically, case sensitive), or "num" (numerically).
-Input parameters
+<table>
+<tr><td>Parameter</td><td>Description</td></tr>
+<tr><td>count</td><td>A number that indicates the maximum number of entities to return.</td></tr>
+<tr><td>offset</td><td>A number that specifies the index of the first entity to return.</td></tr>
+<tr><td>search</td><td>A string that specifies a search expression to filter the response with, matching field values against the search expression. For example, "search=foo" matches any object that has "foo" as a substring in a field, and "search=field_name%3Dfield_value" restricts the match to a single field.</td></tr>
+<tr><td>sort_dir</td><td>An enum value that specifies how to sort entities. Valid values are "asc" (ascending order) and "desc" (descending order).</td></tr>
+<tr><td>sort_key</td><td>A string that specifies the field to sort by.</td></tr>
+<tr><td>sort_mode</td><td>An enum value that specifies how to sort entities. Valid values are "auto", "alpha" (alphabetically), "alpha_case" (alphabetically, case sensitive), or "num" (numerically).</td></tr>
+</table>
+
+### Input parameters
+
 The properties that are available for each type of data input corresponds to the parameters for the following REST API endpoints:
-Active Directory: POST data/inputs/ad endpoint
-files and directories (monitor): POST data/inputs/monitor endpoint
-files and directories (oneshot): POST data/inputs/oneshot endpoint
-scripts: POST data/inputs/script endpoint
-TCP, cooked: POST data/inputs/tcp/cooked endpoint
-TCP, raw: POST data/inputs/tcp/raw endpoint
-TCP, SSL: POST data/inputs/tcp/ssl endpoint
-UDP: POST data/inputs/udp endpoint
-Windows event log: POST data/inputs/win-event-log-collections endpoint
-Windows performance monitor: POST data/inputs/win-perfmon endpoint
-Windows Registry: POST data/inputs/registry endpoint
-WMI: POST data/inputs/win-wmi-collections endpoint
+
+- _Active Directory_ : POST data/inputs/ad endpoint
+- _files and directories (monitor)_ : POST data/inputs/monitor endpoint
+- _files and directories (oneshot)_ : POST data/inputs/oneshot endpoint
+- _scripts_ : POST data/inputs/script endpoint
+- _TCP, cooked_ : POST data/inputs/tcp/cooked endpoint
+- _TCP, raw_ : POST data/inputs/tcp/raw endpoint
+- _TCP, SSL_ : POST data/inputs/tcp/ssl endpoint
+- _UDP_ : POST data/inputs/udp endpoint
+- _Windows event log_ : POST data/inputs/win-event-log-collections endpoint
+- _Windows performance monitor_ : POST data/inputs/win-perfmon endpoint
+- _Windows Registry_ : POST data/inputs/registry endpoint
+- _WMI_ : POST data/inputs/win-wmi-collections endpoint
+
 This table summarizes the available parameters for different types of inputs:
 Parameter
 Description
@@ -384,7 +439,7 @@ monitorSubtree
 A Boolean that indicates whether to monitor the subtrees of a given directory tree path (1 means yes, 0 means no).
 AD
 name
-A string that specifies the name of the input based on the type: 
+A string that specifies the name of the input based on the type:
 Active Directory: The name of the configuration for a specific domain controller.
 Monitor: The file or directory path to monitor.
 Oneshot: The path to the file to index.

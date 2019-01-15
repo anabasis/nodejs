@@ -1,38 +1,59 @@
 # How to display search results using the Splunk SDK for Python
 
-After you run a search, you can retrieve different output from the search job: 
-Events: The untransformed events of the search. (There may not be any events if you have a transforming search and you did not specify any status buckets.)
-Results: The transformed results of the search after processing has been completed. If the search does not have transforming commands, the results are the same as the events. The result count will be less than the event count if there are transforming commands.
-Results preview: A preview of a search that is still in progress, or results from a real-time search. When the search is complete, the preview results are the same as the results. You must enable previews for non-real-time searches (previews are enabled automatically for real-time searches).
-Summary: Summary information about the fields of a search from the results that have been read thus far. Set "status_buckets" on the search job to a positive value to access this data.
-Timeline: The event distribution over time of the untransformed events that have been read thus far. Set "status_buckets" on the search job to a positive value to access this data.
-This output is returned as a stream in XML, JSON, JSON_COLS, JSON_ROWS, CSV, ATOM, or RAW format. For examples, see Sample output in different formats below.
-You can display the direct results without a parser or make your own parser. For convenience, the SDK includes a results reader for XML that properly parses and formats the results for you. For a comparison of XML output displayed without a reader versus the SDK's XML results reader, see Results reader comparison, below.
-The search results APIs
-Retrieve a search job using the Job class. From the search job, you can retrieve events, results, preview results, the summary, and timeline information:
-The Job.events method returns a streaming handle to the job's events. You can specify additional parameters to the method; see GET search/jobs/{search_id}/events in the REST API documentation for a list of valid parameters.
-The Job.results method returns a streaming handle to the job's search results. You can specify additional parameters to the method; see GET search/jobs/{search_id}/results in the REST API documentation for a list of valid parameters.
-The Job.preview method returns a streaming handle to the job's preview search results. You can specify additional parameters to the method; see GET search/jobs/{search_id}/results_preview in the REST API documentation for a list of valid parameters.
-The Job.summary method returns a streaming handle to the job's summary. You can specify additional parameters to the method; see GET search/jobs/{search_id}/summary in the REST API documentation for a list of valid parameters.
-The Job.timeline method returns a streaming handle to the job's timeline results. You can specify additional parameters to the method; see GET search/jobs/{search_id}/timeline in the REST API documentation for a list of valid parameters.
+After you run a search, you can retrieve different output from the search job:
+
+- Events : The untransformed events of the search. (There may not be any events if you have a transforming search and you did not specify any status buckets.)
+- Results : The transformed results of the search after processing has been completed. If the search does not have transforming commands, the results are the same as the events. The result count will be less than the event count if there are transforming commands.
+- Results preview : A preview of a search that is still in progress, or results from a real-time search. When the search is complete, the preview results are the same as the results. You must enable previews for non-real-time searches (previews are enabled automatically for real-time searches).
+- Summary : Summary information about the fields of a search from the results that have been read thus far. Set "status_buckets" on the search job to a positive value to access this data.
+- Timeline : The event distribution over time of the untransformed events that have been read thus far. Set "status_buckets" on the search job to a positive value to access this data.
+
+This output is returned as a stream in XML, JSON, JSON_COLS, JSON_ROWS, CSV, ATOM, or RAW format. For examples, see [Sample output in different formats](http://dev.splunk.com/view/python-sdk/SP-CAAAER5#output) below.
+
+You can display the direct results without a parser or make your own parser. For convenience, the SDK includes a results reader for XML that properly parses and formats the results for you. For a comparison of XML output displayed without a reader versus the SDK's XML results reader, see [Results reader comparison](http://dev.splunk.com/view/python-sdk/SP-CAAAER5#outputcompare), below.
+
+## The search results APIs
+
+Retrieve a search [job](http://docs.splunk.com/DocumentationStatic/PythonSDK/1.6.5/client.html#splunklib.client.Job) using the Job class. From the search job, you can retrieve events, results, preview results, the summary, and timeline information:
+
+- The [Job.events](http://docs.splunk.com/DocumentationStatic/PythonSDK/1.6.5/client.html#splunklib.client.Job.events) method returns a streaming handle to the job's events. You can specify additional parameters to the method; see [GET search/jobs/{search_id}/events](http://docs.splunk.com/Documentation/Splunk/latest/RESTREF/RESTsearch#GET_search.2Fjobs.2F.7Bsearch_id.7D.2Fevents) in the REST API documentation for a list of valid parameters.
+- The [Job.results](http://docs.splunk.com/DocumentationStatic/PythonSDK/1.6.5/client.html#splunklib.client.Job.results) method returns a streaming handle to the job's search results. You can specify additional parameters to the method; see [GET search/jobs/{search_id}/results](http://docs.splunk.com/Documentation/Splunk/latest/RESTREF/RESTsearch#GET_search.2Fjobs.2F.7Bsearch_id.7D.2Fresults) in the REST API documentation for a list of valid parameters.
+- The [Job.preview](http://docs.splunk.com/DocumentationStatic/PythonSDK/1.6.5/client.html#splunklib.client.Job.preview) method returns a streaming handle to the job's preview search results. You can specify additional parameters to the method; see [GET search/jobs/{search_id}/results_preview](http://docs.splunk.com/Documentation/Splunk/latest/RESTREF/RESTsearch#GET_search.2Fjobs.2F.7Bsearch_id.7D.2Fresults_preview) in the REST API documentation for a list of valid parameters.
+- The [Job.summary](http://docs.splunk.com/DocumentationStatic/PythonSDK/1.6.5/client.html#splunklib.client.Job.summary) method returns a streaming handle to the job's summary. You can specify additional parameters to the method; see [GET search/jobs/{search_id}/summary](http://docs.splunk.com/Documentation/Splunk/latest/RESTREF/RESTsearch#GET_search.2Fjobs.2F.7Bsearch_id.7D.2Fsummary) in the REST API documentation for a list of valid parameters.
+- The [Job.timeline](http://docs.splunk.com/DocumentationStatic/PythonSDK/1.6.5/client.html#splunklib.client.Job.timeline) method returns a streaming handle to the job's timeline results. You can specify additional parameters to the method; see [GET search/jobs/{search_id}/timeline](http://docs.splunk.com/Documentation/Splunk/latest/RESTREF/RESTsearch#GET_search.2Fjobs.2F.7Bsearch_id.7D.2Ftimeline) in the REST API documentation for a list of valid parameters.
+
 Splunk search results can be returned in a variety of formats including XML, JSON, and CSV. To make it easier to stream search results in XML format, they are returned as a stream of XML fragments, not as a single XML document. The results module supports incrementally reading one result record at a time from such a results stream. This module also provides a friendly iterator-based interface for accessing search results while avoiding buffering the result set, which can be very large.
-To use the reader, instantiate ResultsReader on a search result stream as follows:
+
+To use the reader, instantiate [ResultsReader](http://docs.splunk.com/DocumentationStatic/PythonSDK/1.6.5/results.html#splunklib.results.ResultsReader) on a search result stream as follows:
+
+```python
 reader = ResultsReader(result_stream)
 for item in reader:
     print(item)
 print "Results are a preview: %s" % reader.is_preview
-The ResultsReader class returns dictionaries and Splunk messages from an XML results stream. If its field, is_preview, is set to True, the results are a preview from a running search; otherwise the results are from a completed search. The Message class represents the informational messages that Splunk interleaves in the results stream. A Message object is comprised of two arguments--a string that gives the message (for instance, "DEBUG"), and a string that gives the message itself.
-Code examples
-This section provides examples of how to use the job APIs, assuming you first connect to a Splunk instance:
-To display results without a reader
-To display results using a results reader
-To paginate through a large set of results
-To display preview results
-To work with results from an export search
+```
+
+The [ResultsReader](http://docs.splunk.com/DocumentationStatic/PythonSDK/1.6.5/results.html#splunklib.results.ResultsReader) class returns dictionaries and Splunk messages from an XML results stream. If its field, is_preview, is set to True, the results are a preview from a running search; otherwise the results are from a completed search. The [Message](http://docs.splunk.com/DocumentationStatic/PythonSDK/1.6.5/results.html#splunklib.results.Message) class represents the informational messages that Splunk interleaves in the results stream. A Message object is comprised of two arguments--a string that gives the message (for instance, "DEBUG"), and a string that gives the message itself.
+
+## Code examples
+
+This section provides examples of how to use the job APIs, assuming you first [connect to a Splunk instance](http://dev.splunk.com/view/python-sdk/SP-CAAAECX):
+
+- [To display results without a reader](http://dev.splunk.com/view/python-sdk/SP-CAAAER5#basic)
+- [To display results using a results reader](http://dev.splunk.com/view/python-sdk/SP-CAAAER5#reader)
+- [To paginate through a large set of results](http://dev.splunk.com/view/python-sdk/SP-CAAAER5#paginating)
+- [To display preview results](http://dev.splunk.com/view/python-sdk/SP-CAAAER5#preview)
+- [To work with results from an export search](http://dev.splunk.com/view/python-sdk/SP-CAAAER5#export)
+
 The following parameters are available:
-Event, results, and results preview parameters
-To display results without a reader
+
+- [Event, results, and results preview parameters](http://dev.splunk.com/view/python-sdk/SP-CAAAER5#resultsargsparams)
+
+### To display results without a reader
+
 You could just read the results as a stream of XML with no parsing, but you would need to create an XML parser for the data from scratch:
+
+```python
 # A blocking search
 job = jobs.create("search * | head 100", **{"exec_mode": "blocking"})
 print "...done!\n"
@@ -42,9 +63,15 @@ print "Search results:\n"
 # Prints raw XML stream to the console
 result_stream = job.results()
 print result_stream.read()
+```
+
 If you don't want to create your own parser, a better method is described in the next section.
-To display results using a results reader
-The Splunk SDK for Python contains its own results reader that parses and formats results for you. Use the ResultsReader class for XML, which is the default format. 
+
+### To display results using a results reader
+
+The Splunk SDK for Python contains its own results reader that parses and formats results for you. Use the [ResultsReader](http://docs.splunk.com/DocumentationStatic/PythonSDK/1.6.5/results.html#splunklib.results.ResultsReader) class for XML, which is the default format.
+
+```python
 # A blocking search
 job = jobs.create("search * | head 100", **{"exec_mode": "blocking"})
 print "...done!\n"
@@ -57,13 +84,22 @@ reader = results.ResultsReader(result_stream)
 for item in reader:
     print(item)
 print "Results are a preview: %s" % reader.is_preview
-To paginate through a large set of results
+```
+
+### To paginate through a large set of results
+
 The maximum number of results you can retrieve at a time from your search results is determined by the maxresultrows field, which is specified in a Splunk configuration file. We don't recommend changing the default value of 50,000. If your job has more results than this limit, just retrieve your results in sets (0-49999, then 50000-99999, and so on), using the "count" and "offset" parameters to define how many results to retrieve at a time. Set the count (the number of results in a set) to maxresultrows (or a smaller value), and increment the offset by this same value to page through each set.
 The following example shows how to determine the maximum number of results your system is configured to return:
+
+```python
 # Find out how many results your system is configured to return
 maxresultrows = service.confs["limits"]["restapi"]["maxresultrows"]
 print "Your system is configured to return a maximum of %s results" % maxresultrows
+```
+
 The following example continues the previous "blocking" search example and shows how to retrieve search results in sets, using a count of 10 for this example, and then displays the results in XML using the ResultsReader class:
+
+```python
 import splunklib.results as results
 
 ...
@@ -90,19 +126,32 @@ while (offset < int(resultCount)):
 
     # Increase the offset to get the next set of results
     offset += count
-To display preview results
-You can display preview results—a preview of the results of an in-progress search—by using the Job.preview method. Job.preview returns, in a raw form, any results that have been generated so far from the server. You can then use a ResultsReader to read the results, converting them into objects over which you can iterate.
+```
+
+### To display preview results
+
+You can display preview results—a preview of the results of an in-progress search—by using the [Job.preview](http://docs.splunk.com/DocumentationStatic/PythonSDK/1.6.5/client.html#splunklib.client.Job.preview) method. Job.preview returns, in a raw form, any results that have been generated so far from the server. You can then use a [ResultsReader](http://docs.splunk.com/DocumentationStatic/PythonSDK/1.6.5/results.html#splunklib.results.ResultsReader) to read the results, converting them into objects over which you can iterate.
 
 For instance, the following code creates a new job with preview results enabled:
+
+```python
 import splunklib.client as client
 import splunklib.results as results
 
 service = client.connect(...)
 
 job = service.jobs.create("search * | head 2", preview=True)
+```
+
 To determine whether preview has been successfully enabled, check for the following:
+
+```python
 job['isPreviewEnabled'] == '1'
-To access the preview results, pass the handle returned by Job.preview to a new ResultsReader, and then iterate through the reader:
+```
+
+To access the preview results, pass the handle returned by `Job.preview` to a new `ResultsReader`, and then iterate through the reader:
+
+```python
 rr = results.ResultsReader(job.preview())
 for result in rr:
     if isinstance(result, results.Message):
@@ -115,18 +164,28 @@ if rr.is_preview:
     print "Preview of a running search job."
 else:
     print "Job is finished. Results are final."
-You can also enable preview on an existing job by calling Job.enable_preview. Because enable_preview can take some time to propagate in the system, you might want to wait for it using something like the following:
+```
+
+You can also enable preview on an existing job by calling [Job.enable_preview](http://docs.splunk.com/DocumentationStatic/PythonSDK/1.6.5/client.html#splunklib.client.Job.enable_preview). Because enable_preview can take some time to propagate in the system, you might want to wait for it using something like the following:
+
+```python
 job.enable_preview()
 while job['isPreviewEnabled'] == 0:
     sleep(0.2)
+```
 
-To work with results from an export search
+### To work with results from an export search
+
 Working with search results from export searches is a little different than that of regular searches:
-A reporting (transforming) search returns a set of previews followed by the final events, each as separate elements.
-A non-reporting (non-transforming) search returns events as they are read from the index, each as separate elements.
-A real-time search returns multiple sets of previews, each preview as a separate element.
-For JSON output, each result set is not returned as a single JSON object, but rather each row is an individual object, where rows are separated by a new line and the last row of the set is indicated by "lastrow":true. 
+
+- A reporting (transforming) search returns a set of previews followed by the final events, each as separate elements.
+- A non-reporting (non-transforming) search returns events as they are read from the index, each as separate elements.
+- A real-time search returns multiple sets of previews, each preview as a separate element.
+- For JSON output, each result set is not returned as a single JSON object, but rather each row is an individual object, where rows are separated by a new line and the last row of the set is indicated by "lastrow":true.
+
 Here's sample JSON output that shows two results sets, each with five rows:
+
+```json
 {"preview":true,"offset":0,"result":{"sourcetype":"eventgen-2","count":"58509"}}
 {"preview":true,"offset":1,"result":{"sourcetype":"splunk_web_service","count":"119"}}
 {"preview":true,"offset":2,"result":{"sourcetype":"splunkd","count":"4153"}}
@@ -137,11 +196,19 @@ Here's sample JSON output that shows two results sets, each with five rows:
 {"preview":true,"offset":2,"result":{"sourcetype":"splunkd","count":"4280"}}
 {"preview":true,"offset":3,"result":{"sourcetype":"splunkd_access","count":"12"}}
 {"preview":true,"offset":4,"lastrow":true,"result":{"sourcetype":"splunkd_stderr","count":"2"}}
-This format allows results to be sent as a continuous stream of JSON data that is still easy to parse. 
-Note: The Splunk SDK for Python does not include a JSON parser. To parse a JSON data stream, you will need to create your own parser.
-Splunk recommends using the SDK's XML results reader to parse the output--we've already done some of the heavy lifting here, and the results reader handles the output appropriately. Return the results stream in XML (the default format), and use the ResultsReader class to parse and format the results.
-Sample output in different formats
-The following is sample output in different formats for the search "search index=_internal | head 1":
+```
+
+This format allows results to be sent as a continuous stream of JSON data that is still easy to parse.
+
+> Note: The Splunk SDK for Python does not include a JSON parser. To parse a JSON data stream, you will need to create your own parser.
+
+Splunk recommends using the SDK's XML results reader to parse the output--we've already done some of the heavy lifting here, and the results reader handles the output appropriately. Return the results stream in XML (the default format), and use the [ResultsReader](http://docs.splunk.com/DocumentationStatic/PythonSDK/1.6.5/results.html#splunklib.results.ResultsReader) class to parse and format the results.
+
+## Sample output in different formats
+
+The following is sample output in different formats for the search `"search index=_internal | head 1"`:
+
+```xml
 ***** ATOM *****
 
 <?xml version="1.0" encoding="UTF-8"?>
@@ -273,11 +340,15 @@ _internal",splunkd,".463","2013-09-11T16:03:33.463-07:00","TESTBOX-mbp15.local",
         <field k='splunk_server'>
             <value><text>TESTBOX-mbp15.local</text></value>
         </field>
-    </result>     
+    </result>
 </results>
+```
 
-Results reader comparison
+## Results reader comparison
+
 Here's a single search result. For comparison, the output is displayed in its raw output form, and then SDK's XML results reader:
+
+```xml
 ***** Output from printing raw results *****
 
 <?xml version='1.0' encoding='UTF-8'?>
@@ -346,9 +417,8 @@ Here's a single search result. For comparison, the output is displayed in its ra
         <field k='splunk_server'>
             <value><text>TESTBOX-mbp15.local</text></value>
         </field>
-    </result>     
+    </result>
 </results>
-
 
 ***** Output from the XML results reader *****
 
@@ -366,52 +436,31 @@ Here's a single search result. For comparison, the output is displayed in its ra
    source -> /opt/log/BigDBBook-www1/access.log
    sourcetype -> access_combined_wcookie
    splunk_server -> TESTBOX-mbp15.local
+```
 
-Event, results, and results preview parameters
+## Event, results, and results preview parameters
+
 Set these parameters when calling the following methods:
-Job.events
-Job.results
-Job.preview
-For more, see the POST search/jobs endpoint.
-Parameter 
-Description 
-Applies to 
-count
-A number that indicates the maximum number of results to return.
-events, results, results preview
-earliest_time
-A time string that specifies the earliest time in the time range to search. The time string can be a UTC time (with fractional seconds), a relative time specifier (to now), or a formatted time string. For a real-time search, specify "rt".
-events
-f
-A string that contains the field to return for the event set.
-events, results, results preview
-field_list
-A string that contains a comma-separated list of fields to return for the event set.
-events, results, results preview
-latest_time
-A time string that specifies the earliest time in the time range to search. The time string can be a UTC time (with fractional seconds), a relative time specifier (to now), or a formatted time string. For a real-time search, specify "rt".
-events
-max_lines
-The maximum number of lines that any single event's "_raw" field should contain.
-events
-offset
-A number of the index of the first result (inclusive) from which to begin returning data. This value is 0-indexed.
-events, results, results preview
-output_mode
-Specifies the output format of the results (XML, JSON, JSON_COLS, JSON_ROWS, CSV, ATOM, or RAW).
-events, results, results preview
-output_time_format
-A string that contains a UTC time format.
-events
-search 
-A string that contains the post-processing search to apply to results.
-events, results, results preview
-segmentation
-A string that contains the type of segmentation to perform on the data.
-events
-time_format
-A string that contains the expression to convert a formatted time string from {start,end}_time into UTC seconds.
-events
-truncation_mode
-A string that specifies how "max_lines" should be achieved ("abstract" or "truncate").
-events
+
+- [Job.events](http://docs.splunk.com/DocumentationStatic/PythonSDK/1.6.5/client.html#splunklib.client.Job.events)
+- [Job.results](http://docs.splunk.com/DocumentationStatic/PythonSDK/1.6.5/client.html#splunklib.client.Job.results)
+- [Job.preview](http://docs.splunk.com/DocumentationStatic/PythonSDK/1.6.5/client.html#splunklib.client.Job.preview)
+
+For more, see the [POST search/jobs](http://docs.splunk.com/Documentation/Splunk/latest/RESTREF/RESTsearch#POST_search.2Fjobs) endpoint.
+
+<table>
+<tr><td>Parameter</td><td>Description</td><td>Applies to</td></tr>
+<tr><td>count</td><td>A number that indicates the maximum number of results to return.</td><td>events, results, results preview</td></tr>
+<tr><td>earliest_time</td><td>A time string that specifies the earliest time in the time range to search. The time string can be a UTC time (with fractional seconds), a relative time specifier (to now), or a formatted time string. For a real-time search, specify "rt".</td><td>events</td></tr>
+<tr><td>f</td><td>A string that contains the field to return for the event set.</td><td>events, results, results preview</td></tr>
+<tr><td>field_list</td><td>A string that contains a comma-separated list of fields to return for the event set.</td><td>events, results, results preview</td></tr>
+<tr><td>latest_time</td><td>A time string that specifies the earliest time in the time range to search. The time string can be a UTC time (with fractional seconds), a relative time specifier (to now), or a formatted time string. For a real-time search, specify "rt".</td><td>events</td></tr>
+<tr><td>max_lines</td><td>The maximum number of lines that any single event's "_raw" field should contain.</td><td>events</td></tr>
+<tr><td>offset</td><td>A number of the index of the first result (inclusive) from which to begin returning data. This value is 0-indexed.</td><td>events, results, results preview</td></tr>
+<tr><td>output_mode</td><td>Specifies the output format of the results (XML, JSON, JSON_COLS, JSON_ROWS, CSV, ATOM, or RAW).</td><td>events, results, results preview</td></tr>
+<tr><td>output_time_format</td><td>A string that contains a UTC time format.</td><td>events</td></tr>
+<tr><td>search</td><td>A string that contains the post-processing search to apply to results.</td><td>events, results, results preview</td></tr>
+<tr><td>segmentation</td><td>A string that contains the type of segmentation to perform on the data.</td><td>events</td></tr>
+<tr><td>time_format</td><td>A string that contains the expression to convert a formatted time string from {start,end}_time into UTC seconds.</td><td>events</td></tr>
+<tr><td>truncation_mode</td><td>A string that specifies how "max_lines" should be achieved ("abstract" or "truncate").</td><td>events</td></tr>
+</table>
