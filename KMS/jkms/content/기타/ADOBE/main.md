@@ -1,5 +1,7 @@
 # Adobe download
 
+[DOWNLOAD](https://helpx.adobe.com/kr/creative-suite/kb/cs2-product-downloads.html?promoid=19SCDRQK)
+
 <table>
 <tr><td>Product</td><td>Platform</td><td>Downloads</td><td>Serial number</td></tr>
 <tr><td rowspan=12>Creative Suite 2</td><td rowspan=6>Mac</td><td><a href="http://download.adobe.com/pub/adobe/magic/creativesuite/CS2_EOL/MLTI/CS2_install_Mac.pdf">CS2_install_Mac.pdf</a></td><td rowspan=6>1130-0412-8377-1896-9751-5759</td></tr>
