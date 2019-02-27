@@ -42,3 +42,9 @@
 ## Shared VMs
 
 <https://bimmermac.com/2747>
+
+
+## 복제(Clone)
+
+1. 관리 > CLONE
+2. 사용자삭제 
