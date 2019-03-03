@@ -38,7 +38,10 @@
 
 <https://webdir.tistory.com/206>
 
-
 ## Shared VMs
 
 <https://bimmermac.com/2747>
+
+## NAT ubuntu 설정
+
+<https://all-record.tistory.com/179>
