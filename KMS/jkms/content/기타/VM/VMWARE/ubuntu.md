@@ -50,3 +50,25 @@
 
 1. 관리 > CLONE
 2. 사용자삭제
+
+## uBuntu SSH 설치
+
+### SSH 서버 설치
+
+```bash
+# 서버만 설치
+sudo apt-get install openssh-server
+# 서버/클라이언트 설치
+sudo apt-get install ssh
+```
+
+### SSH 서버 설정파일
+
+/etc/ssh/sshd_config
+
+```properties
+Port 22
+#ListenAddress 0.0.0.0
+Protocol 2
+#Protocol 1,2
+```
