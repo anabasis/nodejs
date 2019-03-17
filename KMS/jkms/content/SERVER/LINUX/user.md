@@ -1,6 +1,6 @@
 # 사용자 관리
 
-참고자료 : 
+참고자료 :
 <https://freehoon.tistory.com/39>
 
 ## /etc/passwd
@@ -27,6 +27,7 @@ awk -F':' '{if($3>=500)print $1}' /etc/passwd
 
 - useradd : 계정ID 만 생성 (홈디렉토리 등 설정 X)
 - adduser : 계정ID 및 홈디렉토리, 계정정보 및 비밀번호 셋팅 기본으로 설정
+
 > CentOS7 에서 테스트 한 결과 useradd와 adduser 의 결과는 같았
 
 ```bash
@@ -56,12 +57,12 @@ useradd -d /home/user05 -u 600 -s /bin/csh user05
 ## 계정 삭제
 
 - userdel 의 경우
-   - 계정만 삭제 # userdel 계정명
-   - 계정과 홈디렉토리 삭제 # userdel -r 계정명
+  - 계정만 삭제 # userdel 계정명
+  - 계정과 홈디렉토리 삭제 # userdel -r 계정명
 - deluser의 경우
-   - 계정만 삭제 # deluser 계정명
-   - 계정과 홈디렉토리 삭제 # deluser --remove 계정명
-   - 계정과 홈디렉토리, 계정명으로된 모든 파일 삭제 # deluser --remove-all-files
+  - 계정만 삭제 # deluser 계정명
+  - 계정과 홈디렉토리 삭제 # deluser --remove 계정명
+  - 계정과 홈디렉토리, 계정명으로된 모든 파일 삭제 # deluser --remove-all-files
 
 > CentOS7 에서는 deluser 명령이 없음 : -bash: deluser: command not found
 
@@ -79,35 +80,40 @@ useradd -d /home/user05 -u 600 -s /bin/csh user05
 
 ## 그룹생성 및 삭제, 관리
 
+시스템용 그룹(GID 499 이하)
+
 /etc/group
+
+```bash
+groups
 
 groupadd -g 1000 user01
 groupadd -r user02
 
 groupdel user01
+```
 
--a
+gpasswd 옵션
 
- 특정 그룹웨 새로운 계정을 등록. 
+<table>
+<tr><td>옵션</td><td>옵션설명</td></tr>
+<tr><td>-a</td><td>특정 그룹웨 새로운 계정을 등록.</td></tr>
+<tr><td>-d</td><td>특정 그룹웨서 지정한 계정을 삭제.</td></tr>
+<tr><td>-r</td><td>특정 그룹 패스워드를 제거.</td></tr>
+<tr><td>-R</td><td>특정 그룹웨 접근을 제한.</td></tr>
+<tr><td>-A</td><td>특정 그룹의 관리자를 설정</td></tr>
+<tr><td>-M</td><td>특정 그룹의 계정을 새로 설정 ( 이 경우 기존 계정은 무시함)</td></tr>
+</table>
 
-  -d 
+```bash
+gpasswd -A nestgoer wheel
 
- 특정 그룹웨서 지정한 계정을 삭제.
+grep wheel /etc/gshadow
+wheel::nestgoer:nestgoer,zezz
 
-  -r
+grep wheel /etc/gshadow
+wheel::nestgoer:nestgoer,zezz
 
- 특정 그룹 패스워드를 제거.
-
-  -R
-
- 특정 그룹웨 접근을 제한.
-
-  -A
-
- 특정 그룹의 관리자를 설정
-
-  -M
-
- 특정 그룹의 계정을 새로 설정 ( 이 경우 기존 계정은 무시함)
-
-
+grep wheel /etc/gshadow
+wheel::nestgoer:nestgoer,zezz
+```

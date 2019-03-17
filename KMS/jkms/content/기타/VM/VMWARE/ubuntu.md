@@ -73,20 +73,16 @@ Protocol 2
 #Protocol 1,2
 ```
 
-
-
 ## trouble shooting
 
 문제발생
+
 - VMware Workstation 10 으로 Ubuntu 12.04를 설치하려고 가상머신을 시작하는데 다음 에러메세지 출력.
-
 - "Could not get vmci driver version: The handle is invalid.  You have an incorrect version of driver "vmci.sys". 
-
    Try reinstalling VMware workstation.
 
 문제해결
+
 - 현재 설치하려는 가상운영체제의 설치폴더로 이동(VMware를 통해서 지정한 폴더)
-
 - [(내가지정한)가상머신이름].vmx 파일을 메모장으로 열기(예: Ubuntu - 64bit.vmx)
-
 - vmci0.present 항목을 찾아서 값을 FALSE로 변경
