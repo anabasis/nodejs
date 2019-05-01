@@ -14,10 +14,10 @@ $ pip install ansible
 ```sh
 $ pip install git+git://github.com/ansible/ansible.git@devel
 ```
+
 라고 개발자 버전을 설치합니다. (현재 문서는 대부분 2.2의 내용을 언급하므로 위와 같이 설치하시기를 권고해 드립니다.)
 
 > **역자노트:** 위에 내용은 시스템 파이썬이 아니라 VirtualEnv 환경에서의 설치입니다. 시스템 파이썬에 설치할 경우에는 `sudo pip ...` 라고 명령을 수행하십시오.
-
 
 ## 시작하기
 
@@ -1477,7 +1477,8 @@ Ansible에서 플레이북의 명령이 수행될 때 조건식을 이용할 수
       waitfor:
           - "result[0].interfaces.Ethernet4.interfaceStatus eq connected"
 ```
-위의 예제에서 `show interface Ethernet4 | json` 명령이 원격 장치에서 수행되고 나서 그 결과를 확인하는데, 만약 `(result[0].interfaces.Ethernet4.interfaceStatus)` 가 **connected** 가 될 때까지 이전 명령을 반복합니다. 이 과정은 재시도 횟수 만큼 반복합니다. (디폴트로 1초 간격으로 10번 재시도를 합니다)
+
+위의 예제에서 `show interface Ethernet4 | json` 명령이 원격 장치에서 수행되고 나서 그 결과를 확인하는데, 만약 `(result[0].interfaces.Ethernet4.interfaceStatus)` 가 **connected** 가 될 때까지 이전 명령을 반복합니다. 이 과정은 재시도 횟수 만큼 반복합니다. (디폴트로 1초 간격으로 10번 재시도를 합니다)
 
 command 모듈은 여러번 나올 수도 있습니다.
 
