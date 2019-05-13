@@ -1,6 +1,34 @@
 
 # Raneto Changelog
 
+2018.04.21 / v0.16.0
+====================
+
+  * **[New]** Better Multi-Language Support!
+    - contributed by **@Orhideous**
+  * **[New]** Raneto can be served from non-root path (URI Prefix)
+    - contributed by **@gugu**
+  * **[Misc]** Upgrade to lunr v2.x
+    - contributed by **@Orhideous**
+  * **[Misc]** Code Refactor
+    - contributed by **@Orhideous**
+  * **[Misc]** Dependency upgrades
+
+2018.03.29 / v0.15.0
+====================
+
+  * **[New]** Language Translations!
+    - Romanian contributed by **@mariuspana**
+  * **[Fixed]** #192 Any metadata will now cause metadata to render
+    - **@mralexgray**
+  * **[Fixed]** Login page loading of jQuery Backstretch plugin
+    - **@Zezzty**
+  * **[Fixed]** #247 Search result page no longer shows excerpt as link text
+    - **@Zezzty**
+  * **[Fixed]** #251 #194 Documentation in README for local install
+    - **@shui**
+  * **[Misc]** Dependency upgrades
+
 2018.01.09 / v0.14.0
 ====================
 

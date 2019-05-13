@@ -378,6 +378,3 @@ After logging in, you should see something like this:
 ![](http://i.imgur.com/1YcdTou.png)
 
 Hope this helps someone!
-<!--stackedit_data:
-eyJoaXN0b3J5IjpbNTEwMzYzODEzXX0=
--->

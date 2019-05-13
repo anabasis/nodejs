@@ -9,6 +9,3 @@ You can run Raneto easily in the background on your local or production machines
 2. Edit the configuration file in your global NPM `node_modules/` directory (locate with `which raneto` on *NIX)
 3. Run Raneto with `raneto start` and access logs with `raneto logs`
 4. When finished, run `raneto stop`
-<!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwODQ0MTgyOTVdfQ==
--->
