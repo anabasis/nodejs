@@ -2,7 +2,8 @@
 
 <https://b.luavis.kr/server/linux-performance-analysis>
 
-넷플릭스의 Linux performance analysis in 60,000ms에 대해서 부분적으로 번역한 글입니다.
+넷
+플릭스의 Linux performance analysis in 60,000ms에 대해서 부분적으로 번역한 글입니다.
 
 리눅스 서버에 성능 이슈로 인해서 로그인했을 때 우리가 가장 먼저 체크해봐야할 사항은 어떤것들일까?
 
