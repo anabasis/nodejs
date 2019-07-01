@@ -2,6 +2,9 @@
 	"folders": [
 		{
 			"path": "content"
+		},
+		{
+			"path": "C:\\Program Files\\Splunk\\etc\\apps\\BigNI"
 		}
 	],
 	"settings": {}
