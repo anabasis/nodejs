@@ -14,6 +14,12 @@
 		},
 		{
 			"path": "/Users/chojunseung/Workings/Modules/splunk_bigni/etc/apps/BigNI"
+		},
+		{
+			"path": "/Users/chojunseung/Workings/Modules/splunk_bigni/etc/apps/OSSLookup"
+		},
+		{
+			"path": "/Users/chojunseung/Workings/Modules/splunk_bigni/etc/apps/WebTerminal"
 		}
 	]
 }
