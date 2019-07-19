@@ -7,7 +7,10 @@
 			"path": "C:\\Program Files\\Splunk\\etc\\apps\\BigNI"
 		},
 		{
-			"path": "C:\\Program Files\\Splunk\\etc\\apps\\OSSLookup"
+			"path": "C:\\Program Files\\Splunk\\etc\\apps\\ConfigExplorer"
+		},
+		{
+			"path": "C:\\Program Files\\Splunk\\etc\\apps\\LookupBoard"
 		},
 		{
 			"path": "C:\\Program Files\\Splunk\\etc\\apps\\WebTerminal"
