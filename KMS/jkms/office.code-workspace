@@ -4,9 +4,6 @@
 			"path": "content"
 		},
 		{
-			"path": "C:\\Program Files\\Splunk\\etc\\apps\\BigNI"
-		},
-		{
 			"path": "C:\\Program Files\\Splunk\\etc\\apps\\ConfigExplorer"
 		},
 		{
@@ -14,12 +11,13 @@
 		},
 		{
 			"path": "C:\\Program Files\\Splunk\\etc\\apps\\WebTerminal"
+		},
+		{
+			"path": "C:\\Program Files\\Splunk\\etc\\apps\\BigNI"
+		},
+		{
+			"path": "C:\\Program Files\\Splunk\\etc\\apps\\Monitoring"
 		}
 	],
-	"settings": {
-		"python.pythonPath": "C:/Program Files/Splunk/bin/python.exe",
-    	"python.autoComplete.extraPaths": [
-    	"C:/Program Files/Splunk/Python-2.7/Lib",
-    	"C:/Program Files/Splunk/Python-2.7/Lib/site-packages"]
-	}
+	"settings": {}
 }
