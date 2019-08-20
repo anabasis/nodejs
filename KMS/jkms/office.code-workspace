@@ -19,10 +19,10 @@
 			"path": "C:\\Program Files\\Splunk\\etc\\apps\\Monitoring"
 		},
 		{
-			"path": "E:\\DEV\\splunk-js"
+			"path": "E:\\DEV\\splunk-sdk-js"
 		},
 		{
-			"path": "E:\\DEV\\SPLUNK_APP\\SPLUNK_DEV"
+			"path": "E:\\DEV\\splunk-dev-js"
 		}
 	],
 	"settings": {}
