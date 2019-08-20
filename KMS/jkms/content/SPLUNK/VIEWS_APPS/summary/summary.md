@@ -414,8 +414,10 @@ display.visualizations.custom.viz_tutorial_app.radial_meter.maxValue
 
 방사형 미터 앱은 다이얼 색상 및 최대 값에 대한 속성이 필요합니다. viz_tutorial_app / README / savedsearches.conf.spec에 다음 특성 이름 및 유형을 추가하십시오.
 
+```properties
 display.visualizations.custom.viz_tutorial_app.radial_meter.mainColor = <string>
 display.visualizations.custom.viz_tutorial_app.radial_meter.maxValue = <float>
+```
 
 그런 다음 viz_tutorial_app / default / savedsearches.conf에 다음 컨텐츠를 추가하여 특성 기본값을 지정하십시오.
 
