@@ -4,28 +4,7 @@
 			"path": "content"
 		},
 		{
-			"path": "C:\\Program Files\\Splunk\\etc\\apps\\ConfigExplorer"
-		},
-		{
-			"path": "C:\\Program Files\\Splunk\\etc\\apps\\LookupBoard"
-		},
-		{
-			"path": "C:\\Program Files\\Splunk\\etc\\apps\\WebTerminal"
-		},
-		{
 			"path": "C:\\Program Files\\Splunk\\etc\\apps\\BigNI"
-		},
-		{
-			"path": "C:\\Program Files\\Splunk\\etc\\apps\\Monitoring"
-		},
-		{
-			"path": "E:\\DEV\\splunk-sdk-js"
-		},
-		{
-			"path": "E:\\DEV\\splunk-dev-js"
-		},
-		{
-			"path": "E:\\REPO\\GIT_REPO\\docker"
 		},
 		{
 			"path": "C:\\Program Files\\Splunk\\etc\\apps\\SIEM_DIDC1_APP"
@@ -44,6 +23,36 @@
 		},
 		{
 			"path": "E:\\REPO\\GIT_REPO\\ARMY\\_SH_CONF_APP"
+		},
+		{
+			"path": "E:\\REPO\\GIT_REPO\\ARMY\\_SIEM_CONF"
+		},
+		{
+			"path": "C:\\Program Files\\Splunk\\etc\\apps\\SIEM_ADD_APP"
+		},
+		{
+			"path": "C:\\Program Files\\Splunk\\etc\\apps\\SIEM_DAPA_APP"
+		},
+		{
+			"path": "C:\\Program Files\\Splunk\\etc\\apps\\SIEM_DCC_APP"
+		},
+		{
+			"path": "C:\\Program Files\\Splunk\\etc\\apps\\SIEM_DIDC2_APP"
+		},
+		{
+			"path": "C:\\Program Files\\Splunk\\etc\\apps\\SIEM_DTAQ_APP"
+		},
+		{
+			"path": "C:\\Program Files\\Splunk\\etc\\apps\\SIEM_ROKAF_APP"
+		},
+		{
+			"path": "C:\\Program Files\\Splunk\\etc\\apps\\SIEM_ROKCC_APP"
+		},
+		{
+			"path": "C:\\Program Files\\Splunk\\etc\\apps\\SIEM_ROKMC_APP"
+		},
+		{
+			"path": "C:\\Program Files\\Splunk\\etc\\apps\\SIEM_ROKN_APP"
 		}
 	],
 	"settings": {}
