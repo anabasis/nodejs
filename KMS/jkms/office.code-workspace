@@ -2,57 +2,6 @@
 	"folders": [
 		{
 			"path": "content"
-		},
-		{
-			"path": "C:\\Program Files\\Splunk\\etc\\apps\\BigNI"
-		},
-		{
-			"path": "C:\\Program Files\\Splunk\\etc\\apps\\SIEM_DIDC1_APP"
-		},
-		{
-			"path": "C:\\Program Files\\Splunk\\etc\\apps\\SIEM_ROKA_APP"
-		},
-		{
-			"path": "E:\\REPO\\GIT_REPO\\ARMY\\_DPLY_CONF_APP"
-		},
-		{
-			"path": "E:\\REPO\\GIT_REPO\\ARMY\\_DPMT_CONF_APP"
-		},
-		{
-			"path": "E:\\REPO\\GIT_REPO\\ARMY\\_MST_CONF_APP"
-		},
-		{
-			"path": "E:\\REPO\\GIT_REPO\\ARMY\\_SH_CONF_APP"
-		},
-		{
-			"path": "E:\\REPO\\GIT_REPO\\ARMY\\_SIEM_CONF"
-		},
-		{
-			"path": "C:\\Program Files\\Splunk\\etc\\apps\\SIEM_ADD_APP"
-		},
-		{
-			"path": "C:\\Program Files\\Splunk\\etc\\apps\\SIEM_DAPA_APP"
-		},
-		{
-			"path": "C:\\Program Files\\Splunk\\etc\\apps\\SIEM_DCC_APP"
-		},
-		{
-			"path": "C:\\Program Files\\Splunk\\etc\\apps\\SIEM_DIDC2_APP"
-		},
-		{
-			"path": "C:\\Program Files\\Splunk\\etc\\apps\\SIEM_DTAQ_APP"
-		},
-		{
-			"path": "C:\\Program Files\\Splunk\\etc\\apps\\SIEM_ROKAF_APP"
-		},
-		{
-			"path": "C:\\Program Files\\Splunk\\etc\\apps\\SIEM_ROKCC_APP"
-		},
-		{
-			"path": "C:\\Program Files\\Splunk\\etc\\apps\\SIEM_ROKMC_APP"
-		},
-		{
-			"path": "C:\\Program Files\\Splunk\\etc\\apps\\SIEM_ROKN_APP"
 		}
 	],
 	"settings": {}
