@@ -8,51 +8,367 @@
 
 ## Basic Elements
 
-Chart Element
-Table Element
-Single Value Element
-Map Element
-Events Viewer Element
-HTML Element
+### Chart Element
+
+```xml
+<chart>
+    <title>Internal sourcetypes over the last 24h</title>
+    <search>
+        <query>index=_internal | timechart count by sourcetype</query>
+        <earliest>-24h</earliest>
+    </search>
+    <option name="charting.chart.stackMode">stacked</option>
+</chart>
+```
+
+### Table Element
+
+The option parameters specific to the Table view group:
+
+- wrap : Set wrap to true to wrap the content.
+- rowNumbers : Include a line number with each table row. You can see row numbers in the left-most column, if rowNumbers is set to true.
+- dataOverlayMode : Choose a heatmap, highlow, or no overlay on the displayed results. This example uses no overlay, none.
+- drilldown : Choose whether or not you can drilldown for more information when you click a particular table cell. You can specify no drilldown functionality, none; drilldown by clicking anywhere on the table, all; or drilldown by clicking a table, cell. This example permits cell drilldown, which is not currently implemented.
+- count : Specify the number of rows to display per page. This example displays the default, 10, which is ten rows per page.
+
+```xml
+<table>
+    <title>Top Sourcetypes (Last 24 hours)</title>
+    <search>
+        <query>index=_internal | top limit=100 sourcetype | eval percent = round(percent,2)</query>
+        <earliest>-24h@h</earliest>
+        <latest>now</latest>
+    </search>
+    <option name="wrap">true</option>
+    <option name="rowNumbers">true</option>
+    <option name="dataOverlayMode">none</option>
+    <option name="drilldown">cell</option>
+    <option name="count">10</option>
+</table>
+```
+
+### Single Value Element
+
+```xml
+<single>
+    <title>No decorations</title>
+    <search>
+        <query>index=_internal | timechart count</query>
+        <earliest>-24h@h</earliest>
+        <latest>now</latest>
+    </search>
+    <option name="colorBy">value</option>
+    <option name="colorMode">none</option>
+    <option name="numberPrecision">0</option>
+    <option name="showTrendIndicator">0</option>
+    <option name="showSparkline">0</option>
+    <option name="useColors">0</option>
+    <option name="useThousandSeparators">1</option>
+    <option name="drilldown">none</option>
+</single>
+```
+
+```xml
+<single>
+    <title>With Trend Indicator</title>
+    <search>
+        <query>index=_internal | timechart count</query>
+        <earliest>-24h@h</earliest>
+        <latest>now</latest>
+    </search>
+    <!-- TrendIndicator -->
+    <option name="showTrendIndicator">1</option>
+    <!-- TrendIndicator -->
+    <!-- Trend -->
+    <option name="trendColorInterpretation">standard</option>
+    <option name="trendDisplayMode">absolute</option>
+    <option name="trendInterval">-1h</option>
+    <!-- Trend -->
+    <option name="colorBy">value</option>
+    <option name="colorMode">none</option>
+    <option name="numberPrecision">0</option>
+    <option name="showSparkline">0</option>
+    <option name="useColors">0</option>
+    <!-- Thousand Separators & UnderLabel -->
+    <option name="useThousandSeparators">1</option>
+    <option name="underLabel">Compared to an hour before</option>
+    <!-- Thousand Separators & UnderLabel -->
+    <option name="drilldown">none</option>
+</single>
+```
+
+```xml
+<single>
+    <title>With Sparkline</title>
+    <search>
+        <query>index=_internal | timechart count</query>
+        <earliest>-24h@h</earliest>
+        <latest>now</latest>
+    </search>
+    <option name="colorBy">value</option>
+    <option name="colorMode">none</option>
+    <option name="numberPrecision">0</option>
+    <option name="showTrendIndicator">0</option>
+    <!-- Sparkline -->
+    <option name="showSparkline">1</option>
+    <!-- Sparkline -->
+    <option name="useColors">0</option>
+    <option name="useThousandSeparators">1</option>
+    <option name="drilldown">none</option>
+</single>
+```
+
+```xml
+<single>
+    <title>With Sparkline and Trend Indicator</title>
+    <search>
+        <query>index=_internal | timechart count</query>
+        <earliest>-24h@h</earliest>
+        <latest>now</latest>
+    </search>
+    <!-- Trend -->
+    <option name="showTrendIndicator">1</option>
+    <option name="trendColorInterpretation">standard</option>
+    <option name="trendDisplayMode">absolute</option>
+    <option name="trendInterval">-1h</option>
+    <!-- Trend -->
+    <option name="colorBy">value</option>
+    <option name="colorMode">none</option>
+    <option name="numberPrecision">0</option>
+    <!-- Sparkline -->
+    <option name="showSparkline">1</option>
+    <!-- Sparkline -->
+    <option name="useColors">0</option>
+    <!-- Thousand Separators & UnderLabel & Drilldown all -->
+    <option name="useThousandSeparators">1</option>
+    <option name="underLabel">Compared to an hour before</option>
+    <option name="drilldown">none</option>
+    <!-- Thousand Separators & UnderLabel & Drilldown all -->
+</single>
+```
+
+### Map Element
+
+```xml
+<map>
+    <title>Common Map Options</title>
+    <search>
+        <query>
+            | inputlookup geomaps_data.csv
+            | iplocation device_ip
+            | geostats latfield=lat longfield=lon count by method
+        </query>
+    </search>
+    <option name="height">500</option>
+    <!-- use custom colors -->
+    <option name="mapping.seriesColors">
+        [0x5379af,0x9ac23c,0xf7902b,0x956d95,0x6ab7c7,0xd85d3c,0xfac51c,0xdd86af]
+    </option>
+    <!-- adjust marker opacity and size range -->
+    <option name="mapping.markerLayer.markerOpacity">0.8</option>
+    <option name="mapping.markerLayer.markerMinSize">10</option>
+    <option name="mapping.markerLayer.markerMaxSize">60</option>
+    <!-- set initial map center and zoom level -->
+    <option name="mapping.map.center">(30.810646,-10.556976)</option>
+    <option name="mapping.map.zoom">2</option>
+</map>
+```
+
+
+```xml
+ <map>
+    <title>Custom Tiles</title>
+    <search>
+        <query>
+            | inputlookup geomaps_data.csv
+            | iplocation device_ip
+            | lookup geo_countries latitude AS lat longitude AS lon OUTPUT featureId AS country
+            | stats count by country
+            | geom geo_countries featureIdField=country
+        </query>
+        <earliest>0</earliest>
+    </search>
+    <!-- configure custom tile layer -->
+    <option name="mapping.tileLayer.url">http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png</option>
+    <option name="mapping.tileLayer.attribution">&amp;copy; &lt;a
+        href="http://www.openstreetmap.org/copyright"&gt;OpenStreetMap&lt;/a&gt; contributors, &amp;copy;
+        &lt;a href="http://cartodb.com/attributions"&gt;CartoDB&lt;/a&gt;</option>
+    <option name="mapping.tileLayer.minZoom">0</option>
+    <option name="mapping.tileLayer.maxZoom">18</option>
+    <!-- choropleth layer -->
+    <option name="mapping.type">choropleth</option>
+    <option name="mapping.choroplethLayer.colorMode">sequential</option>
+    <option name="mapping.choroplethLayer.minimumColor">0xEF6B62</option>
+    <option name="mapping.choroplethLayer.colorBins">5</option>
+    <option name="mapping.choroplethLayer.maximumColor">0xAF1D12</option>
+    <option name="mapping.choroplethLayer.minimumColor">0xEF6B62</option>
+    <option name="mapping.choroplethLayer.shapeOpacity">0.6</option>
+    <option name="mapping.choroplethLayer.showBorder">0</option>
+    <!-- set initial map center and zoom level -->
+    <option name="mapping.map.center">(30.810646,-10.556976)</option>
+    <option name="mapping.map.zoom">2</option>
+</map>
+```
+
+### Events Viewer Element
+
+```xml
+<event>
+    <title>Internal Sourcetype Metrics</title>
+    <search>
+        <query>index=_internal sourcetype=splunkd group=per_sourcetype_thruput</query>
+        <earliest>-7d@d</earliest>
+        <latest>now</latest>
+    </search>
+</event>
+```
+
+```xml
+<event>
+    <title>Internal Sourcetype Metrics</title>
+    <search>
+        <query>
+        index=_internal sourcetype=splunkd group=per_sourcetype_thruput
+        | fields + series, ev, eps, kb, kbps
+        </query>
+        <earliest>-7d@d</earliest>
+        <latest>now</latest>
+    </search>
+    <fields>series, ev, eps, kb, kbps</fields>
+    <option name="type">table</option>
+</event>
+```
+
+### HTML Element
+
+```xml
+<html>
+    <h1>
+        HTML Panels
+    </h1>
+    <p>Easily add content to clarify use of a dashboard.</p>
+</html>
+<html src="html/html_tags.html">
+</html>
+```
 
 ## Chart Elements
 
-Chart Element
-Chart Overay
-Trellis Visualization Layout
-Chart Enhancements
-Event Annotations
-Splunk Gauges
-Chart Color Options
-Bar Chart
-Bubble Chart
-Scatter Chart
+### Chart Element
+
+#### Basic Elements > Chart Elements
+
+### Chart Overay
+
+```xml
+<chart>
+    <title>Chart Overlay w/ Single Axis</title>
+    <search>
+        <query>
+            index=_internal
+            | timechart count
+            | eventstats avg(count) as average
+            | eval average=round(average,0)
+        </query>
+        <earliest>$time.earliest$</earliest>
+        <latest>$time.latest$</latest>
+    </search>
+    <option name="charting.chart">column</option>
+    <option name="charting.legend.placement">bottom</option>
+    <option name="charting.legend.masterLegend">null</option>
+    <option name="height">300</option>
+    <!-- OverayFields -->
+    <option name="charting.chart.overlayFields">average</option>
+    <option name="charting.fieldColors">{"count": 0x639BF1, "average":0xFF5A09}</option>
+    <!-- OverayFields -->
+</chart>
+```
+
+```xml
+<chart>
+    <title>Chart Overlay w/ Dual Axis</title>
+    <search>
+        <query>index=_internal | timechart count as total count(eval(sourcetype="splunkd")) as "splunkd"
+        </query>
+        <earliest>$time.earliest$</earliest>
+        <latest>$time.latest$</latest>
+    </search>
+    <option name="charting.axisTitleX.visibility">collapsed</option>
+    <option name="charting.axisTitleY.visibility">collapsed</option>
+    <option name="charting.axisTitleY2.visibility">visible</option>
+    <option name="charting.axisX.scale">linear</option>
+    <option name="charting.axisY.scale">linear</option>
+    <option name="charting.axisY2.enabled">false</option>
+    <option name="charting.axisY2.scale">inherit</option>
+    <option name="charting.chart">column</option>
+    <option name="charting.legend.placement">bottom</option>
+    <option name="charting.legend.masterLegend">null</option>
+    <option name="height">300</option>
+    <!-- OverayFields -->
+    <option name="charting.chart.overlayFields">splunkd</option>
+    <option name="charting.axisY2.enabled">true</option>
+    <option name="charting.axisY2.scale">inherit</option>
+    <option name="charting.axisY2.fields">splunkd</option>
+    <option name="charting.fieldColors">{"total": 0x639BF1, "splunkd":0xFF5A09}</option>
+    <!-- OverayFields -->
+</chart>
+```
+
+### Trellis Visualization Layout
+
+### Chart Enhancements
+
+### Event Annotations
+
+### Splunk Gauges
+
+### Chart Color Options
+
+### Bar Chart
+
+### Bubble Chart
+
+### Scatter Chart
 
 ## Table Elements
 
-Table Element
-Table Element with Data Overlay
-Table Formats
-Table Element with Sparklines
-Table Element with Hidden Fields
-Table Icon Set(Rangemap)
-Table Icon Set(Inline)
-Table Row Highlighting
-Table Cell Highlighting
-Table with Data Bars
-Table Row Expansion
-Table Custom Column Width
+### Table Element
+
+### Table Element with Data Overlay
+
+### Table Formats
+
+### Table Element with Sparklines
+
+### Table Element with Hidden Fields
+
+### Table Icon Set(Rangemap)
+
+### Table Icon Set(Inline)
+
+### Table Row Highlighting
+
+### Table Cell Highlighting
+
+### Table with Data Bars
+
+### Table Row Expansion
+
+### Table Custom Column Width
 
 ## Single Value Elements
 
-Single Value Element
-Single Value With Color
+### Single Value Element
+
+### Single Value With Color
 
 ## Map Elements
 
-Map Element
-Choropleth Map
-Choropleth Map Color Modes
+### Map Element
+
+### Choropleth Map
+
+### Choropleth Map Color Modes
 
 ## Search Types
 
@@ -456,10 +772,69 @@ refreshType = `[delay|interval]`
 
 ## Form Input Elements
 
+### Text Form Input Element
+
+Set search terms by populating a form with textbox input.
+
+### Dropdown Form Input Element
+
+Set search terms by populating a form with one or more dropdown options.
+
+### Radio Form Input Element
+### Multiselect Input
+### Checkbox Input
+### Time Picker Input
+### Cascading Form Input
+### Form Input - Advanced Controls
+### Link Switcher
+### Input Multi-token Setter
+
 ## Drilldown Elements
+
+### Disable Drilldown Action
+### Drilldown to Search
+### Drilldown Link Dashboard
+### Drilldown Link Report
+### Drilldown Link to Custom URL
+### In-page Drilldown with Perma-Linking
+### Drilldown URL Field Value
+### Pan and Zoom Chart Controls
 
 ## Layout Elements
 
+### Multiple Panels to a Row
+### Panel Grouping with Single Values
+### Panel Grouping with Charts
+### Custom Layout : Dark
+### Image Overlay With Single Values
+### Layout Customization : Panel Width
+### Form Elements Within Panels
+### Time Range Picker Within Panels
+### Display Controls
+
 ## Custom Visualizations
 
+### Tag Cloud
+### Tag Cloud with Base Search
+### Tag Cloud with Tokens
+### Punchcard
+### Horseshoe Meter
+### Status Indicator
+### Treemap
+### Location Tracker
+### Parallel Coordinates
+### Timeline
+### Bullet Graph
+### Horizon Chart
+### Sankey Diagram
+### Calendar Heat Map
+### Custom Decorations
+
 ## Token Customization
+
+### Custom token definitions
+### Dynamic Token Viewer based on User Events
+### Token Viewer
+### Custom token links
+### Set Tokens on Page Load
+### Default Environment Tokens
