@@ -1,10 +1,14 @@
 # Splunk Dashboard Examples
 
+<https://docs.splunk.com/Documentation/Splunk/latest/Viz/PanelreferenceforSimplifiedXML#Overview>
+
 [Simple XML Reference](https://docs.splunk.com/Documentation/Splunk/8.0.0/Viz/PanelreferenceforSimplifiedXML)
 [Chart configuration reference](https://docs.splunk.com/Documentation/Splunk/8.0.0/Viz/PanelreferenceforSimplifiedXML)
 [Event Handler Reference](https://docs.splunk.com/Documentation/Splunk/8.0.0/Viz/EventHandlerReference)
 [Token reference](https://docs.splunk.com/Documentation/Splunk/8.0.0/Viz/TokenReference)
 [Customize Simple XML](https://docs.splunk.com/Documentation/Splunk/8.0.0/Viz/CustomizeSimpleXML)
+
+
 
 ## Basic Elements
 
@@ -316,17 +320,229 @@ The option parameters specific to the Table view group:
 
 ### Trellis Visualization Layout
 
+```xml
+<chart>
+    <title>Categorical Split By</title>
+    <search>
+        <query>| inputlookup creditcard_transactions.csv 
+    | chart avg(amount) count by response_code, card_provider</query>
+        <earliest>-24h@h</earliest>
+        <latest>now</latest>
+        <sampleRatio>1</sampleRatio>
+    </search>
+    <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+    <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+    <option name="charting.axisTitleX.visibility">collapsed</option>
+    <option name="charting.axisTitleY.visibility">collapsed</option>
+    <option name="charting.axisTitleY2.visibility">collapsed</option>
+    <option name="charting.axisX.scale">linear</option>
+    <option name="charting.axisY.scale">linear</option>
+    <option name="charting.axisY2.enabled">1</option>
+    <option name="charting.axisY2.scale">inherit</option>
+    <option name="charting.chart">column</option>
+    <option name="charting.chart.bubbleMaximumSize">50</option>
+    <option name="charting.chart.bubbleMinimumSize">10</option>
+    <option name="charting.chart.bubbleSizeBy">area</option>
+    <option name="charting.chart.nullValueMode">gaps</option>
+    <option name="charting.chart.overlayFields">count</option>
+    <option name="charting.chart.showDataLabels">none</option>
+    <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+    <option name="charting.chart.stackMode">stacked</option>
+    <option name="charting.chart.style">shiny</option>
+    <option name="charting.drilldown">none</option>
+    <option name="charting.layout.splitSeries">0</option>
+    <option name="charting.layout.splitSeries.allowIndependentYRanges">0</option>
+    <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+    <option name="charting.legend.placement">none</option>
+    <option name="height">480</option>
+    <!-- Trellis -->
+    <option name="trellis.enabled">1</option>
+    <option name="trellis.scales.shared">1</option>
+    <option name="trellis.size">medium</option>
+    <option name="trellis.splitBy">state</option>
+    <!-- Trellis -->
+</chart>
+```
+
+```xml
+<map>
+    <title>Geographical Split By</title>
+    <search>
+        <query>| inputlookup creditcard_transactions.csv 
+    | stats avg(amount) by card_provider state
+    | geom geo_us_states featureIdField=state</query>
+        <earliest>0</earliest>
+        <latest></latest>
+    </search>
+    <option name="drilldown">none</option>
+    <option name="height">264</option>
+    <option name="mapping.choroplethLayer.colorBins">7</option>
+    <option name="mapping.choroplethLayer.maximumColor">0x006299</option>
+    <option name="mapping.legend.placement">none</option>
+    <option name="mapping.map.center">(39.57,-99.4)</option>
+    <option name="mapping.map.zoom">3</option>
+    <option name="mapping.type">choropleth</option>
+    <!-- Trellis -->
+    <option name="trellis.enabled">1</option>
+    <option name="trellis.scales.shared">1</option>
+    <option name="trellis.size">medium</option>
+    <option name="trellis.splitBy">card_provider</option>
+    <!-- Trellis -->
+</map>
+```
+
 ### Chart Enhancements
+
+```xml
+<chart>
+    <search>
+        <query>index=_internal | timechart count</query>
+        <earliest>-4h</earliest>
+    </search>
+    <option name="charting.chart">line</option>
+    <option name="charting.drilldown">none</option>
+    <option name="charting.legend.placement">none</option>
+
+    <option name="charting.lineWidth">1|2|3</option>
+
+    <option name="charting.legend.mode">standard|seriesCompare</option>
+
+    <option name="charting.fieldDashStyles">{"fields1":"dash|dashDot|dot|longDash|longDashDot|longDashDotDot|shortDash|shortDot|shortDashDot|shortDashDotDot|solid", "fields2":"dash|dashDot|dot|longDash|longDashDot|longDashDotDot|shortDash|shortDot|shortDashDot|shortDashDotDot|solid"}</option>
+    <option name="charting.legend.placement">bottom</option>
+    <option name="charting.axisY.scale">log</option>
+</chart>
+```
 
 ### Event Annotations
 
+```xml
+<!-- Events with WARN/ERROR/INFO event annotations and color red for error, orange for warn, green for info -->
+<chart>
+<search type="annotation">
+    <query>
+            index=_internal (log_level="WARN" OR log_level="ERROR" OR log_level="INFO") | eval annotation_label = message | eval annotation_category = log_level | table _time annotation_label annotation_category
+        </query>
+    <earliest>-24h@h</earliest>
+    <latest>now</latest>
+</search>
+<search>
+    <query>index=_internal | timechart count</query>
+    <earliest>-24h@h</earliest>
+    <latest>now</latest>
+</search>
+<!-- Base search that drives the visualization  -->
+<!-- Secondary search that drives the annotations -->
+<option name="charting.chart">area</option>
+<option name="charting.drilldown">none</option>
+<option name="charting.legend.placement">none</option>
+<!-- Customize the event annotation colors based on category name -->
+<option name="charting.annotation.categoryColors">{"ERROR":"0xff3300","WARN":"0xff9900","INFO":"0x36b536"}</option>
+</chart>
+```
+
+```xml
+<!-- Events with color blue -->
+<chart>
+    <search type="annotation">
+        <query>
+                index=_internal status=404 | eval annotation_color = "#0099cc"
+            </query>
+        <earliest>-15m</earliest>
+        <latest>now</latest>
+    </search>
+    <search>
+        <query>index=_internal | timechart count</query>
+        <earliest>-15m</earliest>
+        <latest>now</latest>
+    </search>
+    <!-- Base search that drives the visualization  -->
+    <!-- Secondary search that drives the annotations -->
+    <option name="charting.chart">column</option>
+    <option name="charting.drilldown">none</option>
+    <option name="charting.legend.placement">none</option>
+    <option name="refresh.display">progressbar</option>
+</chart>
+```
+
 ### Splunk Gauges
+
+```xml
+<chart>
+    <title>Filler Gauge</title>
+    <search>
+        <query>index=_internal sourcetype=splunk_web_access | stats count</query>
+    </search>
+    <option name="charting.chart">fillerGauge|radialGauge|markerGauge</option>
+    <!-- Marker -->
+    <option name="charting.chart.rangeValues">[0,"333333","666666","1000000"]</option>
+    <option name="charting.chart.style">shiny</option>
+    <option name="charting.gaugeColors">[0x6cb8ca,0x956e96,0x324969]</option>
+    <!-- Marker -->
+</chart>
+```
 
 ### Chart Color Options
 
+```xml
+<chart>
+    <title>Top Sourcetypes</title>
+    <search>
+        <query>index=_internal | top sourcetype</query>
+        <earliest>-60m@m</earliest>
+        <latest>now</latest>
+    </search>
+    <option name="charting.chart">bar</option>
+    <!-- Set background color -->
+    <option name="charting.backgroundColor">#475565</option>
+    <!-- Set foreground color -->
+    <option name="charting.foregroundColor">#EBF5FF</option>
+    <!-- Set font color (axis labels, legends) -->
+    <option name="charting.fontColor">#99CCFF</option>
+    <!-- Set seriesColors (color palette to be used in this order) -->
+    <option name="charting.seriesColors">[0xEBF0F5,0xC2D1E0,0x99B2CC,0x7094B8,0x4775A3,0x2E5C8A,0x24476B,0x1A334C,0x0F1F2E,0x050A0F]</option>
+    <option name="charting.legend.placement">none</option>
+</chart>
+```
+
 ### Bar Chart
 
+```xml
+<chart>
+    <search>
+        <query>index=_internal | chart count over useragent by method</query>
+        <earliest>$time_token.earliest$</earliest>
+        <latest>$time_token.latest$</latest>
+    </search>
+    <option name="charting.chart">bar</option>
+    <option name="charting.axisY.scale">log</option>
+    <option name="charting.chart.stackMode">default</option>
+    <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+    <option name="charting.legend.placement">right</option>
+</chart>
+```
+
 ### Bubble Chart
+
+```xml
+<chart>
+    <search>
+        <query>
+            index = _internal sourcetype=splunkd_access
+            | stats count sum(bytes) as "Total Bytes" by status, date_hour
+            | table status date_hour count "Total Bytes"
+        </query>
+        <earliest>-7d</earliest>
+        <latest>now</latest>
+    </search>
+    <option name="charting.axisY.scale">log</option>
+    <option name="charting.chart">bubble</option>
+    <option name="charting.chart.bubbleMaximumSize">50</option>
+    <option name="charting.chart.bubbleMinimumSize">10</option>
+    <option name="charting.chart.bubbleSizeBy">area</option>
+    <option name="charting.axisTitleY.text">Requests</option>
+    <option name="charting.axisTitleX.text">Hour</option>
+</chart>
+```
 
 ### Scatter Chart
 
@@ -776,29 +992,596 @@ refreshType = `[delay|interval]`
 
 Set search terms by populating a form with textbox input.
 
+```xml
+<fieldset autoRun="true" submitButton="false">
+    <input type="text" token="limit" searchWhenChanged="true">
+        <label>Enter an integer N:</label>
+        <default>5</default>
+    </input>
+</fieldset>
+```
+
 ### Dropdown Form Input Element
 
 Set search terms by populating a form with one or more dropdown options.
 
+```xml
+<fieldset autoRun="true" submitButton="false">
+<input type="dropdown" token="username" searchWhenChanged="true">
+    <label>Select a User:</label>
+    <default>*</default>
+    <choice value="*">All</choice>
+    <choice value="-">-</choice>
+    <choice value="admin">Admin</choice>
+    <choice value="nobody">Nobody</choice>
+    <choice value="splunk-system-user">Splunk System User</choice>
+</input>
+<input type="dropdown" token="source" searchWhenChanged="true">
+    <label>Select a Sourcetype:</label>
+    <prefix>sourcetype="</prefix>
+    <suffix>"</suffix>
+    <default>*</default>
+    <choice value="*">All</choice>
+    <fieldForLabel>sourcetype</fieldForLabel>
+    <fieldForValue>sourcetype</fieldForValue>
+    <search>
+        <query>index=_internal | stats count by sourcetype</query>
+        <earliest>-24h</earliest>
+        <latest>now</latest>
+    </search>
+</input>
+</fieldset>
+```
+
 ### Radio Form Input Element
+
+```xml
+<fieldset autoRun="true" submitButton="false">
+    <input type="radio" token="username" searchWhenChanged="true">
+        <label>Select a User:</label>
+        <default>*</default>
+        <choice value="*">All</choice>
+        <choice value="-">-</choice>
+        <choice value="admin">Admin</choice>
+        <choice value="nobody">Nobody</choice>
+        <choice value="splunk-system-user">Splunk System User</choice>
+    </input>
+    <input type="radio" token="source" searchWhenChanged="true">
+        <label>Select a Sourcetype:</label>
+        <prefix>sourcetype="</prefix>
+        <suffix>"</suffix>
+        <default>*</default>
+        <choice value="*">All</choice>
+        <fieldForLabel>sourcetype</fieldForLabel>
+        <fieldForValue>sourcetype</fieldForValue>
+        <search>
+            <query>index=_internal | stats count by sourcetype</query>
+            <earliest>-24h</earliest>
+            <latest>now</latest>
+        </search>
+    </input>
+</fieldset>
+```
+
 ### Multiselect Input
+
+```xml
+<!-- New in Splunk 6.1 use the multiselect input -->
+<input type="multiselect" token="sourcetype_token" searchWhenChanged="true">
+    <default>splunkd, splunk_web_service, splunkd_access</default>
+    <!-- The final value will be surrounded by prefix and suffix -->
+    <prefix>(</prefix>
+    <suffix>)</suffix>
+    <!-- Each value will be surrounded by the valuePrefix and valueSuffix -->
+    <valuePrefix>sourcetype="</valuePrefix>
+    <valueSuffix>"</valueSuffix>
+    <!-- All the values and their valuePrefix and valueSuffix will be concatenated together with the delimiter between them -->
+    <delimiter> OR </delimiter>
+    <choice value="*">ALL</choice>
+    <fieldForLabel>sourcetype</fieldForLabel>
+    <fieldForValue>sourcetype</fieldForValue>
+    <search>
+        <query>index=_internal | stats count by sourcetype</query>
+        <earliest>0</earliest>
+    </search>
+</input>
+```
+
 ### Checkbox Input
+
+```xml
+ <input type="checkbox" token="sourcetype_token" searchWhenChanged="true">
+    <choice value="*">ANY</choice>
+    <default>*</default>
+    <!-- The final value will be surrounded by prefix and suffix -->
+    <prefix>(</prefix>
+    <suffix>)</suffix>
+    <!-- Each value will be surrounded by the valuePrefix and valueSuffix -->
+    <valuePrefix>sourcetype="</valuePrefix>
+    <valueSuffix>"</valueSuffix>
+    <!-- All the values and their valuePrefix and valueSuffix will be concatenated together with the delimiter between them -->
+    <delimiter> OR </delimiter>
+    <fieldForLabel>sourcetype</fieldForLabel>
+    <fieldForValue>sourcetype</fieldForValue>
+    <search>
+        <query>index=_internal | stats count by sourcetype</query>
+        <earliest>-60m@m</earliest>
+        <latest>now</latest>
+    </search>
+</input>
+```
+
 ### Time Picker Input
+
+```xml
+<fieldset autoRun="true" submitButton="false">
+    <input type="time" searchWhenChanged="true">
+        <label>Select a time:</label>
+        <default>Last 24 hours</default>
+    </input>
+</fieldset>
+```
+
 ### Cascading Form Input
+
+```xml
+<fieldset autoRun="true">
+    <input type="dropdown" token="username">
+        <default>*</default>
+        <choice value="*">All</choice>
+        <fieldForLabel>user</fieldForLabel>
+        <fieldForValue>user</fieldForValue>
+        <search>
+            <query>index=_internal | stats count by user</query>
+            <earliest>-24h</earliest>
+            <latest>now</latest>
+        </search>
+    </input>
+    <input type="radio" token="source">
+        <default>*</default>
+        <choice value="*">All</choice>
+        <fieldForLabel>sourcetype</fieldForLabel>
+        <fieldForValue>sourcetype</fieldForValue>
+        <search>
+            <query>index=_internal user=$username$| stats count by sourcetype</query>
+            <earliest>-24h</earliest>
+            <latest>now</latest>
+        </search>
+    </input>
+</fieldset>
+```
+
 ### Form Input - Advanced Controls
+
+Form inputs can be further customized using various advanced controls.
+
+Auto-Run : `<fieldset autorun="True">`
+Runs the search when the page loads.
+
+Submit Button : `<fieldset submitButton="False">`
+Hides the submit button from form inputs.
+
+Search When Changed : `<input searchWhenChanged="True">`
+Runs the search when form input selection is changed.
+
+Dynamically Populate Form Input Options  `<populatingSearch fieldForValue="user" fieldForLabel="user" earliest="-24h" latest="now"><![CDATA[index=_internal | stats count by user]]></populatingSearch>`
+Populates the form input's options using results of the populating search.
+
+```xml
+<fieldset autoRun="True" submitButton="False">
+    <input type="dropdown" token="username" searchWhenChanged="True">
+        <default>*</default>
+        <choice value="*">All</choice>
+        <fieldForLabel>user</fieldForLabel>
+        <fieldForValue>user</fieldForValue>
+        <search>
+            <query>index=_internal | stats count by user</query>
+            <earliest>-24h</earliest>
+            <latest>now</latest>
+        </search>
+    </input>
+</fieldset>
+```
+
 ### Link Switcher
+
+```xml
+<fieldset submitButton="false">
+    <input type="link" token="unused">
+        <label>Choose a view</label>
+        <choice value="table">Table</choice>
+        <choice value="chart">Chart</choice>
+        <choice value="map">Map</choice>
+        <default>Table</default>
+        <change>
+            <condition value="table">
+                <set token="showTable">true</set>
+                <unset token="showChart"></unset>
+                <unset token="showMap"></unset>
+            </condition>
+            <condition value="chart">
+                <set token="showChart">true</set>
+                <unset token="showTable"></unset>
+                <unset token="showMap"></unset>
+            </condition>
+            <condition value="map">
+                <set token="showMap">true</set>
+                <unset token="showChart"></unset>
+                <unset token="showTable"></unset>
+            </condition>
+        </change>
+    </input>
+</fieldset>
+...
+<table depends="$showTable$">
+    <title>Table</title>
+    <search>
+        <query>index=_internal | stats count by sourcetype</query>
+        <earliest>-24h</earliest>
+        <latest>now</latest>
+    </search>
+</table>
+<chart depends="$showChart$">
+    <title>Chart</title>
+    <search>
+        <query>index=_internal | stats count by sourcetype</query>
+        <earliest>-24h</earliest>
+        <latest>now</latest>
+    </search>
+</chart>
+<map depends="$showMap$">
+    <title>Map</title>
+    <search>
+        <query>| inputlookup geomaps_data.csv | iplocation device_ip | geostats latfield=lat longfield=lon count by method</query>
+        <earliest>0</earliest>
+        <latest>now</latest>
+    </search>
+    <option name="mapping.map.center">(30.810646,-10.556976)</option>
+    <option name="mapping.map.zoom">2</option>
+</map>
+```
+
 ### Input Multi-token Setter
+
+```xml
+<input type="dropdown" token="level">
+    <label>Log Level:</label>
+    <choice value="ANY">ANY</choice>
+    <choice value="ERROR">ERROR</choice>
+    <choice value="WARNING">WARNING</choice>
+    <choice value="INFO">INFO</choice>
+    <default>ANY</default>
+    <change>
+        <condition value="ANY">
+        <set token="s_level"> </set>
+        </condition>
+        <condition value="*">
+        <set token="s_level">log_level=$value|s$</set>
+        </condition>
+    </change>
+</input>
+<table>
+    <title>Events List (if log_level is "ANY", also return events without log_level field)</title>
+    <search>
+        <query>index=_internal $s_level$ | table _time log_level _raw</query>
+        <earliest>-60m@m</earliest>
+        <latest>now</latest>
+    </search>
+    <option name="wrap">true</option>
+    <option name="rowNumbers">true</option>
+    <option name="dataOverlayMode">none</option>
+    <option name="drilldown">cell</option>
+    <option name="count">5</option>
+</table>
+```
 
 ## Drilldown Elements
 
 ### Disable Drilldown Action
+
+```xml
+<table>
+    <search>
+        <query>index=_internal | head 100 | stats count by sourcetype</query>
+        <earliest>-15m</earliest>
+        <latest>now</latest>
+    </search>
+    <!--  -->
+    <option name="drilldown">none</option>
+</table>
+```
+
 ### Drilldown to Search
+
+```xml
+<single>
+    <title>Drilldown to Default Search</title>
+    <search>
+        <query>index=_internal | stats count</query>
+        <earliest>-1h</earliest>
+        <latest>now</latest>
+    </search>
+    <option name="unit">events</option>
+    <option name="unitPosition">after</option>
+    <option name="underLabel">splunkd events in the past hour</option>
+    <option name="field">count</option>
+    <option name="drilldown">all</option>
+</single>
+```
+
+```xml
+<single>
+    <title>Drilldown to Custom Search</title>
+    <search>
+        <query>index=_internal earliest=-h | stats count</query>
+    </search>
+    <option name="unit">events</option>
+    <option name="unitPosition">after</option>
+    <option name="underLabel">splunkd events in the past hour</option>
+    <option name="field">count</option>
+    <drilldown>
+        <link target="_blank">search?q=index=_internal earliest=-h | timechart count&amp;earliest=-24h@h&amp;latest=now</link>
+    </drilldown>
+</single>
+```
+
 ### Drilldown Link Dashboard
+
+```xml
+<chart>
+    <search>
+        <query>index=_internal | head 100 | chart count by sourcetype</query>
+    </search>
+    <option name="charting.chart">line</option>
+    <option name="charting.drilldown">all</option>
+    <drilldown>
+        <link target="_blank">/app/simple_xml_examples/simple_form_text?form.limit=$click.value2$</link>
+    </drilldown>
+</chart>
+```
+
 ### Drilldown Link Report
+
+```xml
+<chart>
+    <search>
+        <query>index=_internal | head 100 | timechart count by sourcetype</query>
+        <earliest>-5m</earliest>
+        <latest>now</latest>
+    </search>
+    <option name="charting.chart">line</option>
+    <option name="charting.drilldown">all</option>
+    <drilldown>
+        <link target="_blank">/app/simple_xml_examples/report?s=realtime_search</link>
+    </drilldown>
+</chart>
+```
+
 ### Drilldown Link to Custom URL
+
+```xml
+<table>
+    <search>
+        <query>index=_internal | head 100 | stats count by sourcetype</query>
+        <earliest>-5m</earliest>
+        <latest>now</latest>
+    </search>
+    <option name="drilldown">cell</option>
+    <drilldown>
+        <link target="_blank">http://answers.splunk.com/search.html?q=$click.value$</link>
+    </drilldown>
+</table>
+```
+
+```xml
+<table>
+    <search>
+        <query>index=_internal | head 100 | stats count by sourcetype</query>
+        <earliest>-5m</earliest>
+        <latest>now</latest>
+    </search>
+    <option name="drilldown">cell</option>
+    <drilldown>
+        <link target="_blank">/manager/search/systemsettings</link>
+    </drilldown>
+</table>
+```
+
 ### In-page Drilldown with Perma-Linking
+
+```xml
+<panel>
+    <title>Main panel</title>
+    <table id="master">
+    <search>
+        <query>index=_internal | head 1000 | stats count by sourcetype</query>
+        <earliest>-60m@m</earliest>
+        <latest>now</latest>
+    </search>
+    <option name="drilldown">cell</option>
+    <drilldown>
+        <set token="form.sourcetype">$row.sourcetype$</set>
+    </drilldown>
+    </table>
+</panel>
+<panel>
+    <chart id="detail" depends="$sourcetype$">
+    <title>Detail: $sourcetype$</title>
+    <search>
+        <query>index=_internal sourcetype=$sourcetype$ | head 1000 | timechart count</query>
+        <earliest>-60m@m</earliest>
+        <latest>now</latest>
+    </search>
+    </chart>
+</panel>
+```
+
 ### Drilldown URL Field Value
+
+licking on a cell in the above table results in the following drilldown behavior:
+
+referer: redirect to an event's URL value
+user: google search an event's user name
+_time: drilldown to an event in Splunk search
+
+```xml
+<table>
+    <search>
+        <query>index=_internal http:// | head 50 | table _time user referer</query>
+        <earliest>-24h</earliest>
+        <latest>now</latest>
+    </search>
+    <option name="count">10</option>
+    <option name="dataOverlayMode">none</option>
+    <option name="drilldown">cell</option>
+    <option name="rowNumbers">false</option>
+    <option name="wrap">true</option>
+    <drilldown>
+        <condition field="referer">
+            <link>$click.value2|n$</link>
+        </condition>
+        <condition field="user">
+            <link>https://www.google.com/#q=$click.value2$</link>
+        </condition>
+    </drilldown>
+</table>
+```
+
 ### Pan and Zoom Chart Controls
+
+```xml
+<chart>
+    <title>Event Trend (select time window to zoom)</title>
+    <search>
+        <query>index=_internal | timechart count</query>
+        <earliest>-60m@m</earliest>
+        <latest>now</latest>
+    </search>
+    <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+    <option name="charting.axisLabelsX.majorLabelStyle.rotation">-45</option>
+    <option name="charting.axisTitleX.visibility">collapsed</option>
+    <option name="charting.axisTitleY.visibility">collapsed</option>
+    <option name="charting.axisTitleY2.visibility">visible</option>
+    <option name="charting.axisX.scale">linear</option>
+    <option name="charting.axisY.scale">linear</option>
+    <option name="charting.axisY2.enabled">false</option>
+    <option name="charting.axisY2.scale">inherit</option>
+    <option name="charting.chart">column</option>
+    <option name="charting.chart.nullValueMode">gaps</option>
+    <option name="charting.chart.rangeValues">[]</option>
+    <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+    <option name="charting.chart.stackMode">default</option>
+    <option name="charting.chart.style">shiny</option>
+    <option name="charting.drilldown">all</option>
+    <option name="charting.layout.splitSeries">0</option>
+    <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+    <option name="charting.legend.placement">none</option>
+    <option name="charting.legend.masterLegend">null</option>
+    <option name="charting.seriesColors">[0x639BF1, 0xFF5A09]</option>
+    <option name="height">200</option>
+</chart>
+<chart>
+    <search>
+        <query>index=_internal | timechart count</query>
+        <earliest>-60m@m</earliest>
+        <latest>now</latest>
+    </search>
+    <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+    <option name="charting.axisLabelsX.majorLabelStyle.rotation">-45</option>
+    <option name="charting.axisTitleX.visibility">collapsed</option>
+    <option name="charting.axisTitleY.visibility">collapsed</option>
+    <option name="charting.axisTitleY2.visibility">visible</option>
+    <option name="charting.axisX.scale">linear</option>
+    <option name="charting.axisY.scale">linear</option>
+    <option name="charting.axisY2.enabled">false</option>
+    <option name="charting.axisY2.scale">inherit</option>
+    <option name="charting.chart">line</option>
+    <option name="charting.chart.nullValueMode">gaps</option>
+    <option name="charting.chart.rangeValues">[]</option>
+    <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+    <option name="charting.chart.stackMode">default</option>
+    <option name="charting.chart.style">shiny</option>
+    <option name="charting.drilldown">all</option>
+    <option name="charting.layout.splitSeries">0</option>
+    <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+    <option name="charting.legend.placement">none</option>
+    <option name="charting.legend.masterLegend">null</option>
+    <option name="charting.seriesColors">[0x639BF1, 0xFF5A09]</option>
+    <option name="height">200</option>
+</chart>
+<chart>
+    <search>
+        <query>index=_internal | timechart count</query>
+        <earliest>-60m@m</earliest>
+        <latest>now</latest>
+    </search>
+    <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+    <option name="charting.axisLabelsX.majorLabelStyle.rotation">-45</option>
+    <option name="charting.axisTitleX.visibility">collapsed</option>
+    <option name="charting.axisTitleY.visibility">collapsed</option>
+    <option name="charting.axisTitleY2.visibility">visible</option>
+    <option name="charting.axisX.scale">linear</option>
+    <option name="charting.axisY.scale">linear</option>
+    <option name="charting.axisY2.enabled">false</option>
+    <option name="charting.axisY2.scale">inherit</option>
+    <option name="charting.chart">area</option>
+    <option name="charting.chart.nullValueMode">gaps</option>
+    <option name="charting.chart.rangeValues">[]</option>
+    <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+    <option name="charting.chart.stackMode">default</option>
+    <option name="charting.chart.style">shiny</option>
+    <option name="charting.drilldown">all</option>
+    <option name="charting.layout.splitSeries">0</option>
+    <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+    <option name="charting.legend.placement">none</option>
+    <option name="charting.legend.masterLegend">null</option>
+    <option name="charting.seriesColors">[0x639BF1, 0xFF5A09]</option>
+    <option name="height">200</option>
+</chart>
+```
+
+```xml
+<chart>
+    <title>Use Pan and Zoom to Select Time Ranges Used By Other Visualizations</title>
+    <search>
+        <query>index=_internal | timechart count</query>
+        <earliest>-4h@h</earliest>
+        <latest>now</latest>
+    </search>
+    <option name="charting.chart">line</option>
+    <option name="charting.legend.placement">none</option>
+    <option name="charting.legend.masterLegend">null</option>
+    <option name="charting.seriesColors">[0x1D2F3E]</option>
+    <option name="charting.axisTitleX.visibility">collapsed</option>
+    <option name="charting.axisTitleY.visibility">collapsed</option>
+    <option name="charting.axisTitleY2.visibility">visible</option>
+    <option name="height">200</option>
+    <selection>
+        <set token="selection.earliest">$start$</set>
+        <set token="selection.latest">$end$</set>
+        <set token="start.count">$start.count$</set>
+        <set token="end.count">$end.count$</set>
+    </selection>
+</chart>
+<html>
+    <p>Token Values:</p>
+    <code>New Selected Time Range: $selection.earliest$ - $selection.latest$</code>
+    <br/>
+    <code>Count Value Range: $start.count$ - $end.count$</code>
+</html>
+<chart>
+    <search>
+        <query>index=_internal | top sourcetype</query>
+        <earliest>$selection.earliest$</earliest>
+        <latest>$selection.latest$</latest>
+    </search>
+    <option name="charting.chart">bar</option>
+    <option name="charting.legend.placement">none</option>
+    <option name="charting.legend.masterLegend">null</option>
+    <option name="charting.seriesColors">[0xC9E1C1]</option>
+    <option name="height">300</option>
+</chart>
+```
 
 ## Layout Elements
 
@@ -833,8 +1616,381 @@ Set search terms by populating a form with one or more dropdown options.
 ## Token Customization
 
 ### Custom token definitions
+
+```xml
+<dashboard script="set_app_token.js,set_user_token.js">
+...
+<html>
+    <h1>Hello, $currentUser$!</h1>
+</html>
+<table>
+    <title>Drilldown from $view$ in $app$</title>
+    <search>
+        <query>
+            index=_internal | stats count by sourcetype
+        </query>
+        <earliest>-24h</earliest>
+    </search>
+    <drilldown>
+        <link field="count">/app/$app$/otherview?foo=$row.count$&amp;sourceView=$view$</link>
+        <link field="*">/app/$app$/otherview?foo=$row.sourcetype$&amp;sourceView=$view$</link>
+    </drilldown>
+</table>
+</dashboard>
+```
+
+```js
+require([
+    'splunkjs/mvc',
+    'splunkjs/mvc/utils',
+    'splunkjs/mvc/simplexml/ready!'
+], function(mvc, utils){
+    var unsubmittedTokens = mvc.Components.getInstance('default');
+    var submittedTokens = mvc.Components.getInstance('submitted');
+    // Set the token $app$ to the name of the current app
+    unsubmittedTokens.set('app', utils.getCurrentApp());
+    // Set the token $view$ to the name of the current view
+    unsubmittedTokens.set('view', utils.getPageInfo().page);
+
+    // Submit the new tokens
+    submittedTokens.set(unsubmittedTokens.toJSON());
+});
+```
+
+```js
+require([
+    'splunkjs/mvc',
+    'splunk.config',
+    'splunkjs/mvc/simplexml/ready!'
+], function(mvc, SplunkConfig) {
+    var unsubmittedTokens = mvc.Components.getInstance('default');
+    var submittedTokens = mvc.Components.getInstance('submitted');
+    // Set the token $currentUser$ to the name of the currently logged in user
+    var username = SplunkConfig['USERNAME'];
+    unsubmittedTokens.set('currentUser', username);
+    submittedTokens.set('currentUser', username);
+});
+```
+
 ### Dynamic Token Viewer based on User Events
 ### Token Viewer
+
+```xml
+ <fieldset autoRun="true" submitbutton="true">
+    <input type="dropdown" token="username">
+        <default>*</default>
+        <choice value="*">All</choice>
+        <fieldForLabel>user</fieldForLabel>
+        <fieldForValue>user</fieldForValue>
+        <search>
+            <query>index=_internal | stats count by user</query>
+            <earliest>-24h</earliest>
+            <latest>now</latest>
+        </search>
+    </input>
+    <input type="radio" token="source">
+        <default>*</default>
+        <choice value="*">All</choice>
+        <fieldForLabel>sourcetype</fieldForLabel>
+        <fieldForValue>sourcetype</fieldForValue>
+        <search>
+            <query>index=_internal user=$username$| stats count by sourcetype</query>
+            <earliest>-24h</earliest>
+            <latest>now</latest>
+        </search>
+    </input>
+</fieldset>
+```
+
+```js
+require.config({
+    paths: {
+        app: '../app',
+        theme_utils: '../app/simple_xml_examples/theme_utils'
+    }
+});
+require([
+  'theme_utils',
+  'splunkjs/mvc/simplexml/ready!',
+  'css!app/simple_xml_examples/showtokens.css'
+  ],
+function(themeUtils) {
+    var _ = require('underscore');
+    var $ = require('jquery');
+    var Backbone = require('backbone');
+    var mvc = require('splunkjs/mvc');
+    var defaultTokenModel = mvc.Components.get('default');
+    var submittedTokenModel = mvc.Components.get('submitted');
+    var urlTokenModel = mvc.Components.get('url');
+    var models = [defaultTokenModel, submittedTokenModel, urlTokenModel];
+    var isDarkTheme = themeUtils.getCurrentTheme && themeUtils.getCurrentTheme() === 'dark';
+    var TokenDebugView = Backbone.View.extend({
+        className: 'show-tokens',
+        initialize: function() {
+            this.model = new Backbone.Model({ includeFormTokens: false });
+            if ('localStorage' in window && window.localStorage) {
+                try {
+                    var STORAGE_KEY = 'splunk-show-tokens';
+                    var localSettings = window.localStorage.getItem(STORAGE_KEY);
+                    if (localSettings) {
+                        this.model.set(JSON.parse(localSettings));
+                    }
+                    this.model.on('change', function(model) {
+                        try {
+                            window.localStorage.setItem(STORAGE_KEY, JSON.stringify(model.toJSON()));
+                        } catch (e) {
+                        }
+                    });
+                } catch (e) {
+                }
+            }
+            this.listenTo(this.model, 'change', this.render);
+            this.listenTo(defaultTokenModel, 'change', this.render);
+            this.listenTo(submittedTokenModel, 'change', this.render);
+            this.listenTo(urlTokenModel, 'change', this.render);
+        },
+        events: {
+            'click .checkbox a': function(e) {
+                e.preventDefault();
+                this.model.set('includeFormTokens', !this.model.get('includeFormTokens'));
+            }
+        },
+        render: function() {
+            this.$el.addClass('show-tokens');
+            if (isDarkTheme){
+                this.$el.addClass('dark');
+            }
+            if (this.$el.is(':empty')) {
+                this.$el.html(this.template);
+            }
+            var includeFormTokens = this.model.get('includeFormTokens');
+            this.$('.checkbox>a>i')[includeFormTokens ? 'show' : 'hide']();
+            var tbody = this.$('tbody');
+            tbody.empty();
+            var keys = _.union.apply(_, _(models).invoke('keys'));
+            if (!includeFormTokens) {
+                keys = _(keys).filter(function(k) { return k.indexOf('form.') !== 0; });
+            }
+            keys.sort();
+            _(keys).each(function(token) {
+                var tr = $('<tr></tr>');
+                $('<td class="token-name"></td>').text('$' + token + '$').appendTo(tr);
+                _(models).each(function(ns) {
+                    var td = $('<td class="token-value"></td>').appendTo(tr);
+                    var val = ns.get(token);
+                    if (val === undefined) {
+                        td.addClass('undefined').text('undefined');
+                    } else {
+                        if (_.isString(val)) {
+                            td.text(val);
+                        } else {
+                            $('<code title="Non-string value"></code>').text(JSON.stringify(val)).appendTo(td);
+                        }
+                    }
+                });
+                tr.appendTo(tbody);
+            });
+            return this;
+        },
+        template: '<div class="form-switch">' +
+            '<label class="checkbox">' +
+            '<a href="#" class="btn"><i class="icon-check" style="display:none"></i></a>' +
+            ' Show <code>form.</code> tokens' +
+            '</label>' +
+            '</div>' +
+            '<h3>Token Debug Info</h3>' +
+            '<table class="table table-striped table-chrome table-hover">' +
+            '<thead>' +
+            '<tr>' +
+            '   <th>Token</th>' +
+            '   <th>Default</th>' +
+            '   <th>Submitted</th>' +
+            '   <th>URL</th>' +
+            '</tr>' +
+            '</thead>' +
+            '<tbody></tbody>' +
+            '</table>'
+    });
+    var ct = $('#show-tokens');
+    if (!ct.length) {
+        ct = $('<div id="show-tokens"></div>').insertAfter($('.dashboard-body'));
+    }
+    window.tokenDebug = new TokenDebugView({ el: ct }).render();
+});
+```
+
 ### Custom token links
+
+This example shows how you can set tokens using data attributes in HTML elements. The extension script showtokens.js enables this behavior.
+
+Data attributes on clickable HTML elements (such as links or buttons) allow you to set or unset tokens for the dashboard. Available data attributes are:
+
+data-set-token in combination with data-value to set a token to a particular value
+<a href="#" data-set-token="mytoken" data-value="the new token value">Click me</a>
+data-unset-token to unset a token
+<a href="#" data-unset-token="mytoken">Click me</a>
+data-token-json to set or unset multiple tokens by supplying a JSON object (null values are used to unset tokens)
+<a href="#" data-token-json='{ "token1": "new value", "token2": "other value", "token3": null }'>Click me</a>
+
+```xml
+<search id="base1">
+    <query>index=_internal | timechart count by sourcetype</query>
+    <earliest>-24h</earliest>
+    <latest>now</latest>
+</search>
+<search id="base2">
+    <query>index=_internal | timechart count by sourcetype</query>
+    <earliest>-24h</earliest>
+    <latest>now</latest>
+</search>
+
+<row>
+    <panel>
+        <title>Link Switcher Example</title>
+        <html>
+            <!-- Set the $show_chart$ token when the link is clicked, also unset the $show_table$ token -->
+            <a href="#" class="btn-pill" data-set-token="show_chart" data-value="show" data-unset-token="show_table">
+                Show Chart
+            </a>
+            <!-- Set the $show_table$ token when the link is clicked, also unset the $show_chart$ token -->
+            <a href="#" class="btn-pill" data-set-token="show_table" data-value="show" data-unset-token="show_chart">
+                Show Table
+            </a>
+            <!-- Unset both the $show_chart$ and $show_table$ token when the link is clicked -->
+            <a href="#" class="btn-pill" data-token-json='{"show_table": null, "show_chart": null}'>Hide All</a>
+        </html>
+        <chart depends="$show_chart$">
+            <search base="base1"/>
+        </chart>
+        <table depends="$show_table$">
+            <search base="base1"/>
+        </table>
+        <html rejects="$show_chart$, $show_table$">
+            <p>Click on one of the links above to select which visualization to show.</p>
+        </html>
+    </panel>
+</row>
+
+<row>
+    <panel>
+        <title>Button Switcher Example</title>
+        <chart>
+            <search base="base2"/>
+        </chart>
+        <html>
+            <button class="btn" data-set-token="show_details" data-value="show">Show Details</button>
+        </html>
+    </panel>
+
+    <!-- The panel is only shown once the user clicks on the button and the $show_details$ token is set -->
+    <panel depends="$show_details$">
+        <table>
+            <title>Details</title>
+            <search base="base2"/>
+        </table>
+        <html>
+            <h2>Sample Description</h2>
+            <p>This is some sample description that only shows up if you click on the "Show Details" button.</p>
+            <button class="btn" data-unset-token="show_details">Hide Details</button>
+        </html>
+    </panel>
+</row>
+```
+
+```js
+require(['jquery', 'underscore', 'splunkjs/mvc', 'util/console'], function($, _, mvc, console) {
+    function setToken(name, value) {
+        console.log('Setting Token %o=%o', name, value);
+        var defaultTokenModel = mvc.Components.get('default');
+        if (defaultTokenModel) {
+            defaultTokenModel.set(name, value);
+        }
+        var submittedTokenModel = mvc.Components.get('submitted');
+        if (submittedTokenModel) {
+            submittedTokenModel.set(name, value);
+        }
+    }
+    $('.dashboard-body').on('click', '[data-set-token],[data-unset-token],[data-token-json]', function(e) {
+        e.preventDefault();
+        var target = $(e.currentTarget);
+        var setTokenName = target.data('set-token');
+        if (setTokenName) {
+            setToken(setTokenName, target.data('value'));
+        }
+        var unsetTokenName = target.data('unset-token');
+        if (unsetTokenName) {
+            setToken(unsetTokenName, undefined);
+        }
+        var tokenJson = target.data('token-json');
+        if (tokenJson) {
+            try {
+                if (_.isObject(tokenJson)) {
+                    _(tokenJson).each(function(value, key) {
+                        if (value == null) {
+                            // Unset the token
+                            setToken(key, undefined);
+                        } else {
+                            setToken(key, value);
+                        }
+                    });
+                }
+            } catch (e) {
+                console.warn('Cannot parse token JSON: ', e);
+            }
+        }
+    });
+});
+```
+
 ### Set Tokens on Page Load
+
+```xml
+<init>
+    <set token="type">sourcetype</set>
+    <!-- set token to show a row/panel -->
+    <set token="single">show</set>
+</init>
+```
+
+```xml
+
+```
+
 ### Default Environment Tokens
+
+Available Environment Tokens:
+
+$env:user$ = currently logged in user
+$env:user_realname$ = full name of logged in user
+$env:user_email$ = email address of logged in user
+$env:app$ = Splunk app name
+$env:locale$ = current locale UI internationalization
+$env:page$ = current page name
+$env:view_label$ = current view label
+$env:product$ = Splunk Core products
+$env:version$ = Splunk version number
+$env:instance_type$ = Splunk instance types
+$env:is_cloud$ = only set if cloud environment
+$env:is_enterprise$ = only set if the product is Splunk Enterprise
+$env:is_hunk$ = only set if the product is Hunk
+$env:is_lite$ = only set if the product is Splunk Light
+$env:is_lite_free$ = only set if the product is the free version of Splunk Light
+$env:is_free$ = only set if the product is the free version of Splunk Enterprise
+
+```xml
+<html>
+    <h1>Hello, $env:user_realname$!</h1>
+</html>
+<table>
+    <title>Login Attempts in the Last 24 Hours (for user="$env:user$")</title>
+    <search>
+        <query>index=_audit action="login attempt" user=$env:user|s$ | table _time user action info</query>
+        <earliest>-24h</earliest>
+        <latest>now</latest>
+    </search>
+</table>
+<html depends="$env:is_enterprise$">
+    <i class="icon icon-info"/>
+    <span>This is only visible in Splunk Enterprise and hidden in Splunk Lite, Splunk Free, etc.</span>
+</html>
+```
