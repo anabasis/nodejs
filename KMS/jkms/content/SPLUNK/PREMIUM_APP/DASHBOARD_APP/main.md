@@ -282,6 +282,7 @@ The option parameters specific to the Table view group:
     <option name="charting.fieldColors">{"count": 0x639BF1, "average":0xFF5A09}</option>
     <!-- OverayFields -->
 </chart>
+
 ```
 
 ```xml
