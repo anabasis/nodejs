@@ -23,6 +23,9 @@
 		},
 		{
 			"path": "E:\\ATOM_WORK\\splunk_sdk_javascript"
+		},
+		{
+			"path": "C:\\Program Files\\Splunk\\etc\\apps\\Monitoring"
 		}
 	],
 	"settings": {}
