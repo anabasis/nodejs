@@ -26,6 +26,9 @@
 		},
 		{
 			"path": "C:\\Program Files\\Splunk\\etc\\apps\\Monitoring"
+		},
+		{
+			"path": "C:\\Program Files\\Splunk\\etc\\apps\\splunk_app_db_connect"
 		}
 	],
 	"settings": {}
