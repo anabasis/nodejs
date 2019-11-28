@@ -8,6 +8,9 @@
 		},
 		{
 			"path": "C:\\Program Files\\Splunk\\etc\\apps\\BigNI"
+		},
+		{
+			"path": "C:\\Program Files\\Splunk\\etc\\apps\\splunk_app_db_connect"
 		}
 	],
 	"settings": {}
