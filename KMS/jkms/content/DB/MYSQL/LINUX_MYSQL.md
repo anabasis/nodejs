@@ -67,7 +67,7 @@
     - 초기 암호를 획득
 
         ```bash
-        $ grep 'password' /var/log/mysqld.log
+        $grep 'password' /var/log/mysqld.log
         ```
 
 ## Ubuntu에 설치
@@ -188,12 +188,174 @@ mysql> show variables like 'char%';
     ALTER DATABASE homestead CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
     ```
 
-
-
 ## MySQL root password reset 하기
+
+### 초기화 SQL작성
+
+```sql
+// /var/lib/mysql/mysql-pwd-init.sql
+// 5.7이후
+UPDATE mysql.user
+    set authentication_string=PASSWORD("MyNewPass"),
+    password_expired='N',
+    plugin='mysql_native_password'
+where User='root';
+
+flush privileges;
+
+// 5.7이전
+UPDATE mysql.user
+    SET Password=PASSWORD('MyNewPass')
+WHERE User='root';
+FLUSH PRIVILEGES;
+```
+
+```bash
+mysqld_safe --init-file=/var/lib/mysql/mysql-pwd-init.sql
+mysqld_safe --init-file=/var/lib/mysql/mysql-pwd-init.sql  &
+
+systemctl restart mysqld
+```
 
 ## MySQL systemctl 사용법
 
+<https://www.lesstif.com/pages/viewpage.action?pageId=24445064>
+
 ## MySQL 사용자 계정 생성하기
 
+### uft8
 
+```sql
+CREATE DATABASE homestead CHARACTER SET utf8 COLLATE utf8_bin;
+CREATE USER 'homestead'@'localhost' IDENTIFIED BY 'secret' PASSWORD EXPIRE NEVER;
+GRANT ALL PRIVILEGES ON homestead.* TO 'homestead'@'localhost';
+flush privileges;
+
+CREATE DATABASE homestead CHARACTER SET utf8 COLLATE utf8_bin;
+GRANT ALL PRIVILEGES ON homestead.* TO 'homestead'@'localhost' IDENTIFIED BY 'secret';
+flush privileges;
+```
+
+### uft8(CHARATER SET 과 COLLATE 추가)
+
+```sql
+CREATE DATABASE homestead CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
+CREATE USER 'homestead'@'localhost' IDENTIFIED BY 'secret' PASSWORD EXPIRE NEVER;
+GRANT ALL PRIVILEGES ON homestead.* TO 'homestead'@'localhost';
+flush privileges;
+```
+
+### 암호변경
+
+#### SET PASSWORD 사용
+
+```sql
+SET PASSWORD [FOR user] = password_option
+
+password_option: {
+    'auth_string'
+  | PASSWORD('auth_string')
+}
+SET PASSWORD FOR 'homestead'@'localhost' = 'secret';
+```
+
+#### Alter user 사용
+
+```sql
+alter USER 'homestead'@'localhost' IDENTIFIED BY 'secret' PASSWORD EXPIRE NEVER;
+설치후 최초 root 암호를 변경할 경우 아래 구문 사용
+
+ALTER USER 'root'@'localhost'  IDENTIFIED BY 'secret123';
+```
+
+#### Password Policy 변경
+
+다음과 같이 암호 규칙에 맞지 않는다는 에러가 나며 암호 변경이 되지 않을 경우 해결책
+ERROR 1819 (HY000): Your password does not satisfy the current policy requirements
+
+- validate password plugin 삭제(권장하지 않음)
+- 암호 규칙을 낮게 설정
+    my.cnf에 다음과 같이 설정하고 mysql 재구동
+
+    ```properties
+    [mysqld]
+    validate_password_policy=LOW
+    default_password_lifetime=0
+    ```
+
+기본 설정은 1(MEDIUM) 이며 각각의 의미는 아래와 같음
+
+|Policy|Tests Performed|
+|:--:|:--|
+|0 or LOW|Length|
+|1 or MEDIUM|Length; numeric, lowercase/uppercase, and special characters|
+|2 or STRONG|Length; numeric, lowercase/uppercase, and special characters; dictionary file|
+
+## MySQL 원격 접속 허용
+
+- MySQL을 설치하면 기본적으로 로컬(localhost)에서만 접속이 가능하고 외부에서는 접속이 불가 `Host '135.79.246.80' is not allowed to connect to this MySQL server`
+
+### 확인
+
+### 모든IP 허용
+
+- `%` 모든 아이피를 포함하지만, localhost는 포함되지 않음
+
+```sql
+// 방법1 GRANT
+GRANT ALL PRIVILEGES ON *.* TO '아이디'@'%' IDENTIFIED BY '패스워드';
+
+// 방법2 INSERT+GRANT+FLUSH
+INSERT INTO mysql.user (host,user,authentication_string,ssl_cipher, x509_issuer, x509_subject) VALUES ('%','아이디',password('패스워드'),'','','');
+GRANT ALL PRIVILEGES ON *.* TO '아이디'@'%';
+FLUSH PRIVILEGES;
+```
+
+### IP 대역 허용
+
+```sql
+// 방법1 GRANT
+GRANT ALL PRIVILEGES ON *.* TO '아이디'@'111.222.%' IDENTIFIED BY '패스워드';
+
+// 방법2 INSERT+GRANT+FLUSH
+INSERT INTO mysql.user (host,user,authentication_string,ssl_cipher, x509_issuer, x509_subject) VALUES ('111.222.%','아이디',password('패스워드'),'','','');
+GRANT ALL PRIVILEGES ON *.* TO '아이디'@'111.222.%';
+FLUSH PRIVILEGES;
+```
+
+### 특정IP 1개 허용
+
+```sql
+// 방법1 GRANT
+GRANT ALL PRIVILEGES ON *.* TO '아이디'@'111.222.33.44' IDENTIFIED BY '패스워드';
+
+// 방법2 INSERT+GRANT+FLUSH
+INSERT INTO mysql.user (host,user,authentication_string,ssl_cipher, x509_issuer, x509_subject) VALUES ('111.222.33.44','아이디',password('패스워드'),'','','');
+GRANT ALL PRIVILEGES ON *.* TO '아이디'@'111.222.33.44';
+FLUSH PRIVILEGES;
+```
+
+### 원래 상태로 복구
+
+```sql
+DELETE FROM mysql.user WHERE Host='%' AND User='아이디';
+FLUSH PRIVILEGES;
+```
+
+### Listen IP 대역변경
+
+```bash
+root@zetawiki:~# netstat -ntlp | grep mysqld
+tcp        0      0 127.0.0.1:3306          0.0.0.0:*               LISTEN      7931/mysqld
+
+root@zetawiki:~# vi /etc/mysql/my.cnf
+
+#bind-address            = 127.0.0.1
+bind-address            = 0.0.0.0
+
+root@zetawiki:~# service mysql restart
+mysql stop/waiting
+mysql start/running, process 8190
+root@zetawiki:~# netstat -ntlp | grep mysqld
+tcp        0      0 0.0.0.0:3306            0.0.0.0:*               LISTEN      8190/mysqld
+```
