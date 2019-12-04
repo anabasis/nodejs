@@ -13,7 +13,7 @@
 			"path": "C:\\Program Files\\Splunk\\etc\\apps\\splunk_app_db_connect"
 		},
 		{
-			"path": "E:\\REPO\\GIT_REPO\\SiemDBAgent"
+			"path": "E:\\DEV\\SiemDBAgent"
 		}
 	],
 	"settings": {}
