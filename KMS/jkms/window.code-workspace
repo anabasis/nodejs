@@ -29,6 +29,9 @@
 		},
 		{
 			"path": "C:\\Program Files\\Splunk\\etc\\apps\\splunk_app_db_connect"
+		},
+		{
+			"path": "E:\\WORK\\workspace\\SiemDBAgent"
 		}
 	],
 	"settings": {}

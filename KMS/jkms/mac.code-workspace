@@ -26,6 +26,9 @@
 		},
 		{
 			"path": "/Users/chojunseung/Workings/Modules/splunk_bigni/etc/apps/Monitoring"
+		},
+		{
+			"path": "/Users/chojunseung/Workings/Repos/git/SiemDBAgent"
 		}
 	],
 	"settings": {}
