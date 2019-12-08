@@ -28,7 +28,7 @@
 			"path": "/Users/chojunseung/Workings/Modules/splunk_bigni/etc/apps/Monitoring"
 		},
 		{
-			"path": "/Users/chojunseung/Workings/Repos/git/SiemDBAgent"
+			"path": "/Users/chojunseung/eclipse-workspace/java/SiemDBAgent"
 		}
 	],
 	"settings": {}
