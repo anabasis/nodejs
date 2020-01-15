@@ -2,12 +2,6 @@
 	"folders": [
 		{
 			"path": "content"
-		},
-		{
-			"path": "C:\\Program Files\\Splunk\\etc\\apps\\BigNI"
-		},
-		{
-			"path": "E:\\WORKSPACE\\SiemDBAgent"
 		}
 	],
 	"settings": {}
