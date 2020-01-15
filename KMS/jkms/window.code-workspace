@@ -4,9 +4,6 @@
 			"path": "content"
 		},
 		{
-			"path": "D:\\GITHUB_REPO\\jupyter\\JUPYTER"
-		},
-		{
 			"path": "C:\\Program Files\\Splunk\\etc\\apps\\BigNI"
 		},
 		{
@@ -17,12 +14,6 @@
 		},
 		{
 			"path": "C:\\Program Files\\Splunk\\etc\\apps\\ConfigExplorer"
-		},
-		{
-			"path": "E:\\ATOM_WORK\\splunk_dev_javascript"
-		},
-		{
-			"path": "E:\\ATOM_WORK\\splunk_sdk_javascript"
 		},
 		{
 			"path": "C:\\Program Files\\Splunk\\etc\\apps\\Monitoring"
