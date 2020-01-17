@@ -2,6 +2,9 @@
 	"folders": [
 		{
 			"path": "content"
+		},
+		{
+			"path": "E:\\WORKSPACE\\SiemDBAgent"
 		}
 	],
 	"settings": {}
