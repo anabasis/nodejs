@@ -7,9 +7,6 @@
 			"path": "E:\\REPO\\GIT\\REPOSITORIES\\agora"
 		},
 		{
-			"path": "D:\\GITHUB_REPO\\nodejs"
-		},
-		{
 			"path": "C:\\Program Files\\Splunk\\etc\\apps\\InfoRect-APM"
 		},
 		{
@@ -19,7 +16,10 @@
 			"path": "C:\\Program Files\\Splunk\\etc\\apps\\InfoRect-SIEM"
 		},
 		{
-			"path": "C:\\Program Files\\Splunk\\etc\\apps\\BidMonitor"
+			"path": "C:\\Program Files\\Splunk\\etc\\apps\\Monitoring"
+		},
+		{
+			"path": "C:\\Program Files\\Splunk\\etc\\apps\\sh_collectd"
 		}
 	],
 	"settings": {}
