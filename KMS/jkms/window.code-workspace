@@ -20,6 +20,9 @@
 		},
 		{
 			"path": "C:\\Program Files\\Splunk\\etc\\apps\\sh_collectd"
+		},
+		{
+			"path": "E:\\REPO\\GIT\\REPOSITORIES\\MitreAttack"
 		}
 	],
 	"settings": {}
