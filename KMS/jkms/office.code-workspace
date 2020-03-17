@@ -14,6 +14,12 @@
 		},
 		{
 			"path": "E:\\REPO\\GIT_REPO\\MITREATTACK"
+		},
+		{
+			"path": "C:\\Program Files\\Splunk\\etc\\apps\\BidMonitor"
+		},
+		{
+			"path": "C:\\Program Files\\Splunk\\etc\\apps\\InfoRect-GROUP"
 		}
 	],
 	"settings": {}
