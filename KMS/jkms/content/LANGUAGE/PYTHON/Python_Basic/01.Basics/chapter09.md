@@ -1,5 +1,9 @@
 # Decorators
 
+참고사이트
+
+- <http://www.hanbit.co.kr/media/channel/view.html?cms_code=CMS5689111564>
+
 ## Closure
 
 데코레이터의 본질은 클로저입니다. 이미 알고 계시다면 과감하게 더 이상 읽지 않으셔도 됩니다!
@@ -182,7 +186,7 @@ def huge_add(a, b):
 # huge_add 와 같은 일을 하는 코드가 반복됩니당
 def huge_subtract(a, b):
     start = time.time()
-    result = a + b
+    result = a - b
     time.sleep(1)
     print(f'subtract Elapsed time: {round((time.time() - start), 4)} seconds')
     return result
@@ -232,7 +236,7 @@ def huge_add(a, b):
 
 @timer
 def huge_subtract(a, b):
-    result = a + b
+    result = a - b
     time.sleep(1)
     return result
 
@@ -305,3 +309,180 @@ if __name__ == '__main__':
 1. 가독성이 떨어짐
 2. 특정 메소드/함수 한정적인 데코레이터는 재사용성 떨어짐
 3. 디버깅이 어려움
+
+## 사용예제
+
+```python
+import datetime
+
+def datetime_decorator(func):
+    def decorated():
+        print datetime.datetime.now()
+        func()
+        print datetime.datetime.now()
+        return decorated
+
+@datetime_decorator
+def main_function_1():
+    print "MAIN FUNCTION 1 START"
+
+@datetime_decorator
+def main_function_2():
+    print "MAIN FUNCTION 2 START"
+
+@datetime_decorator
+def main_function_3():
+    print "MAIN FUNCTION 3 START"
+```
+
+```python
+import datetime
+
+class DatetimeDecorator:
+    def __init__(self, f):
+        self.func = f
+
+    def __call__(self, *args, **kwargs):
+        print datetime.datetime.now()
+        self.func(*args, **kwargs)
+        print datetime.datetime.now()
+
+class MainClass:
+
+    @DatetimeDecorator
+    def main_function_1():
+        print "MAIN FUNCTION 1 START"
+
+    @DatetimeDecorator
+    def main_function_2():
+        print "MAIN FUNCTION 2 START"
+
+    @DatetimeDecorator
+    def main_function_3():
+        print "MAIN FUNCTION 3 START"
+
+my = MainClass()
+my.main_function_1()
+my.main_function_2()
+my.main_function_3()
+```
+
+## 데코레이터 구조
+
+- ‘데코레이터(Decorator)는 호출할 함수를 다른 함수에 매개변수로 전달한 후에 호출할 함수를 감싸는 함수(wrapper)에서 전달받은 함수를 이용하여 추가 작업을 한 후에 반환한다.’
+
+### 함수형 데코레이터(데코레이터에 인수전달이 없는 경우)
+
+```python
+def product_buying(function): # 1
+    def wrapper(arg):
+        arg = arg-5000
+        return function(arg) # 5
+    return wrapper # 6
+
+@product_buying # 2-1
+def money_eating_machine(money): # 2
+    money_you_have = money
+    return '거스름 돈 : {}'.format(money_you_have)
+
+print money_eating_machine(10000) # 3
+
+# -----
+결과 : 거스름 돈 : 5000 # 4
+```
+
+### 함수형 데코레이터(데코레이터에 인수전달이 있는 경우)
+
+```python
+def product_buying(coffee, bread): # 3
+    def machine(function): # 4
+        def wrapper(money, list): # 5
+            buy_list = []
+            if list:
+            for lt in list:
+                if lt == '커피':
+                    money = money - coffee
+                    buy_list.append('커피')
+                    if lt == '빵':
+                        money = money - bread
+                        buy_list.append('빵')
+                    else:
+                        buy_list = None
+
+                return function(money, buy_list) # 6
+            return wrapper
+        return machine
+
+@product_buying(coffee=6000, bread=4500) # 1
+def money_eating_machine(money, select): # 2
+    money_you_have = money
+    return '구매목록 : {}, 거스름 돈 : {}'.format(','.join(select), money_you_have)
+
+print money_eating_machine(15000, ['커피','빵']) # 7
+
+# -----
+결과 : 구매목록 : 커피,빵, 거스름 돈 : 4500
+```
+
+### Class형 decorator(데코레이터에 인수가 없는 경우)
+
+```python
+class readingTheBook:
+
+    def __init__(self, function):
+        self.function = function
+        self.total_page = 513
+        self.amount_read = []
+        self.add_read = 3
+
+    def __call__(self, reading, days):
+        if self.total_page > 0: # 3
+            self.total_page = self.total_page - reading
+            days += 1 # 하루가 지났네..
+            self.amount_read.append([reading, days]) # 얼마나 읽었는지 기록해놔야지..
+            reading += self.add_read  # 오늘 이렇게나 읽었다!
+            self.add_read += 3  # 더욱 열심히 읽어보자.
+            self.__call__(reading, days)
+        else:
+        return self.function(self.amount_read, days)
+
+@readingTheBook # 2
+def read_books(page, days):
+    for page_read, day in page:
+        print '{}일째 {} 만큼 읽었네'.format(day, page_read)
+    print '걸린 날짜 : {}일'.format(days)
+    return True
+
+read_books(37, 0) # 1
+
+# -----
+결과 :
+1일째 37 만큼 읽었네
+2일째 40 만큼 읽었네
+3일째 46 만큼 읽었네
+4일째 55 만큼 읽었네
+5일째 67 만큼 읽었네
+6일째 82 만큼 읽었네
+7일째 100 만큼 읽었네
+8일째 121 만큼 읽었네
+걸린 날짜 : 8일
+```
+
+### Class형 decorator(데코레이터에 인수가 있는 경우)
+
+```python
+class fruit_counting:
+    def __init__(self, operator):
+        self.formula = operator
+
+    def __call__(self, function):
+        def wrapper(fruit1, fruit2):
+            return function([fruit1, fruit2], eval(str(fruit1) + self.formula + str(fruit2)))
+        return wrapper
+
+@fruit_counting('+')
+def fruit_basket(fruit, result):
+    return '총 {0}개가 있네~'.format(result)
+
+print fruit_basket(2,3)
+```
