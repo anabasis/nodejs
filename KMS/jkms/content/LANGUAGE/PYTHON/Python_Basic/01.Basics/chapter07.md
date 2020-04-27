@@ -12,12 +12,12 @@
 def square(x):
     return x * x
 
-print square(5)
+print(str(square(5)))
 
 f = square
 
-print square
-print f
+print(str(square))
+print(str(f))
 ```
 
 ```bash
@@ -30,7 +30,7 @@ $ python first_class_function.py
 - 인자로 넘기 함수 호출
 
 ```python
-first_class_function.py
+# first_class_function.py
 # -*- coding: utf-8 -*-
 def square(x):
     return x * x
@@ -45,7 +45,7 @@ num_list = [1, 2, 3, 4, 5]
 
 squares = my_map(square, num_list)
 
-print squares
+print(str(squares))
 ```
 
 ```bash
@@ -56,7 +56,7 @@ $ python first_class_function.py
 - 함수를 변수에 할당,인자로 전달, 함수 리턴값으로 사용
 
 ```python
-first_class_function.py
+# first_class_function.py
 # -*- coding: utf-8 -*-
 def square(x):
     return x * x
@@ -71,7 +71,7 @@ def simple_square(arg_list):
 
 simple_squares = simple_square(num_list)
 
-print simple_squares
+print(str(simple_squares))
 ```
 
 ```bash
@@ -105,9 +105,9 @@ squares = my_map(square, num_list)
 cubes = my_map(cube, num_list)
 quads = my_map(quad, num_list)
 
-print squares
-print cubes
-print quads
+print(squares)
+print(cubes)
+print(quads)
 ```
 
 ```bash
@@ -120,17 +120,17 @@ $ python first_class_function.py
 - 함수의 결과값으로 또 다른 함수를 리턴하는 방법
 
 ```python
-first_class_function.py
+# first_class_function2.py
 # -*- coding: utf-8 -*-
 def logger(msg):
 
     def log_message(): #1
-        print 'Log: ', msg
+        print('Log: '+ msg)
 
     return log_message
 
 log_hi = logger('Hi')
-print log_hi # log_message 오브젝트가 출력됩니다.
+print(log_hi) # log_message 오브젝트가 출력됩니다.
 log_hi() # "Log: Hi"가 출력됩니다.
 ```
 
@@ -143,32 +143,32 @@ Log:  Hi
 - log_message가 정말 기억을 하고 있는지 msg 변수를 지역변수로 가지고 있는 logger 함수를 글로벌 네임스페이스에서 완전히 지운 후, log_message를 호출
 
 ```python
-first_class_function.py
+# first_class_function2.py
 # -*- coding: utf-8 -*-
 def logger(msg):
 
     def log_message(): #1
-        print 'Log: ', msg
+        print('Log: ' + msg)
 
     return log_message
 
 log_hi = logger('Hi')
-print log_hi # log_message 오브젝트가 출력됩니다.
+print(log_hi) # log_message 오브젝트가 출력됩니다.
 log_hi() # "Log: Hi"가 출력됩니다.
 
 del logger # 글로벌 네임스페이스에서 logger 오브젝트를 지웁니다.
 
 # logger 오브젝트가 지워진 것을 확인합니다.
 try:
-    print logger
+    print(logger)
 except NameError:
-    print 'NameError: logger는 존재하지 않습니다.'
+    print('NameError: logger는 존재하지 않습니다.')
 
 log_hi() # logger가 지워진 뒤에도 Log: Hi"가 출력됩니다.
 ```
 
 ```bash
-$ python first_class_function.py
+$ python first_class_function2.py
 <function log_message at 0x1007ca1b8>
 Log:  Hi
 logger는 존재하지 않습니다.
@@ -178,7 +178,7 @@ Log:  Hi
 - 활용
 
 ```python
-##first_class_function.py
+# first_class_function3.py
 # -*- coding: utf-8 -*-
 # 단순한 일반 함수
 def simple_html_tag(tag, msg):
