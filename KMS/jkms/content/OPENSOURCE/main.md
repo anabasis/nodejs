@@ -1,5 +1,8 @@
 # OPENSOURCE
 
+아키텍처
+<https://medium.com/@giljae/back-end-for-front-end-pattern-bff-4b73f29858d6>
+
 BigBlueButton
 http://blog.daum.net/sunwookim77/161
 
@@ -49,8 +52,8 @@ Credit: Nextcloud
 파일 보안 측면에서 보면 2단계 인증을 지원하며 맥 OS X, 리눅스, 윈도우, 안드로이드를 비롯한 다양한 운영체제에서 실행된다. 로컬 및 원격 저장소에 대한 데이터를 암호화 할 수 있는 암호화 앱을 다운로드 할 수 있다.
 
 원문보기: 
-http://www.ciokorea.com/news/38734#csidx26362242bae31aaa867a978cbbc0222 
+<http://www.ciokorea.com/news/38734#csidx26362242bae31aaa867a978cbbc0222>
 
 
 
-http://docs.bigbluebutton.org
+<http://docs.bigbluebutton.org>
