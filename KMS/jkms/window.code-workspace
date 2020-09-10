@@ -23,9 +23,6 @@
 		},
 		{
 			"path": "C:\\Program Files\\Splunk\\etc\\apps\\InfoRect-GROUP"
-		},
-		{
-			"path": "C:\\Program Files\\Splunk\\etc\\apps\\lookup_editor"
 		}
 	],
 	"settings": {}

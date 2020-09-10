@@ -31,4 +31,3 @@ conda update --all
 ```properties
 c.NotebookApp.notebook_dir = 'D:/GOOGLE_DRIVE/09.SOURCE/JUPYTER'
 ```
-
