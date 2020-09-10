@@ -26,37 +26,37 @@ There are python packages available to work with Excel files that will run on an
 ### openpyxl
 
 The recommended package for reading and writing Excel 2010 files (ie: .xlsx)
-Download | Documentation | Bitbucket
+[Download](http://pypi.python.org/pypi/openpyxl) | [Documentation](https://openpyxl.readthedocs.org/) | [Bitbucket](https://bitbucket.org/openpyxl/openpyxl)
 
 ### xlsxwriter
 
 An alternative package for writing data, formatting information and, in particular, charts in the Excel 2010 format (ie: .xlsx)
 
-Download | Documentation | GitHub
+[Download](https://pypi.python.org/pypi/XlsxWriter) | [Documentation](https://xlsxwriter.readthedocs.org/) | [GitHub](https://github.com/jmcnamara/XlsxWriter)
 
 ### pyxlsb
 
 This package allows you to read Excel files in the xlsb format.
 
-Download | GitHub
+[Download](https://pypi.org/project/pyxlsb) | [GitHub](https://github.com/willtrnr/pyxlsb)
 
 ### pylightxl
 
 This package allows you to read xlsx and xlsm files and write xlsx files.
 
-Download | Documentation | GitHub
+[Download](https://pypi.org/project/pylightxl) | [Documentation](https://pylightxl.readthedocs.io/en/latest/) | [GitHub](https://github.com/PydPiper/pylightxl)
 
 ### xlrd
 
 This package is for reading data and formatting information from older Excel files (ie: .xls)
 
-Download | Documentation | GitHub
+[Download](http://pypi.python.org/pypi/xlrd) | [Documentation](http://xlrd.readthedocs.io/en/latest/) | [GitHub](https://github.com/python-excel/xlrd)
 
 ### xlwt
 
 This package is for writing data and formatting information to older Excel files (ie: .xls)
 
-Download | Documentation | Examples | GitHub
+[Download](http://pypi.python.org/pypi/xlwt) | [Documentation](http://xlwt.readthedocs.io/en/latest/) | [Examples](https://github.com/python-excel/xlwt/tree/master/examples) | [GitHub](https://github.com/python-excel/xlwt)
 
 ### xlutils
 
@@ -64,7 +64,7 @@ This package collects utilities that require both xlrd and xlwt, including the a
 
 NB: In general, these use cases are now covered by openpyxl!
 
-Download | Documentation | GitHub
+[Download](http://pypi.python.org/pypi/xlutils) | [Documentation](http://xlutils.readthedocs.io/en/latest/) | [GitHub](https://github.com/python-excel/xlutils)
 
 ## Writing Excel Add-Ins
 
@@ -74,13 +74,13 @@ The following products can be used to write Excel add-ins in Python. Unlike the 
 
 PyXLL is a commercial product that enables writing Excel add-ins in Python with no VBA. Python functions can be exposed as worksheet functions (UDFs), macros, menus and ribbon tool bars.
 
-Homepage | Features | Documentation | Download
+[Homepage](https://www.pyxll.com/) | [Features](https://www.pyxll.com/features.html) | [Documentation](https://www.pyxll.com/docs/index.html) | [Download](https://www.pyxll.com/download.html)
 
 ### xlwings
 
 xlwings is an open-source library to automate Excel with Python instead of VBA and works on Windows and macOS: you can call Python from Excel and vice versa and write UDFs in Python (Windows only). xlwings PRO is a commercial add-on with additional functionality.
 
-Homepage | Documentation | GitHub | Download
+[Homepage](https://www.xlwings.org/) | [Documentation](https://docs.xlwings.org/en/stable/) | [GitHub](https://github.com/xlwings/xlwings) | [Download](https://pypi.org/project/xlwings/)
 
 ## The Mailing List / Discussion Group
 
