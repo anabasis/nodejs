@@ -25,5 +25,7 @@
 			"path": "..\\..\\..\\python"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"powershell.codeFormatting.addWhitespaceAroundPipe": true
+	}
 }

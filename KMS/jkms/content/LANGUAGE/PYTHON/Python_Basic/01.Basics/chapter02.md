@@ -2,6 +2,9 @@
 
 ## CHAPTER02
 
+- 함수의 매개변수 : <https://ychae-leah.tistory.com/65>
+- 함수 인자 : <https://wikidocs.net/16053>
+
 ### 함수의 범위
 
 ```python
