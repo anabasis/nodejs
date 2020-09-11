@@ -23,9 +23,6 @@
 		},
 		{
 			"path": "..\\..\\..\\python"
-		},
-		{
-			"path": "C:\\Program Files\\Splunk\\etc\\apps\\SA-Eventgen"
 		}
 	],
 	"settings": {}
