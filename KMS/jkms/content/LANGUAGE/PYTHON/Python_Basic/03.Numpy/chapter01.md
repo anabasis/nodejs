@@ -1,38 +1,153 @@
 # Numpy
 
+<https://aruie.github.io/2019/06/19/numpy.html>
 <http://pythonstudy.xyz/python/article/402-numpy-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0>
 <https://ponyozzang.tistory.com/499>
 <https://engkimbs.tistory.com/664>
 
-. numpy 패키지
-numpy는 과학 계산을 위한 라이브러리로서 다차원 배열을 처리하는데 필요한 여러 유용한 기능을 제공하고 있다.
+```bash
+# 설치
+pip install numpy
+```
 
-numpy는 pip을 사용하여 아래와 같이 간단히 설치할 수 있다.
+## numpy 배열
 
-$ pip install numpy
-2. numpy 배열
-numpy에서 배열은 동일한 타입의 값들을 가지며, 배열의 차원을 rank 라 하고, 각 차원의 크기를 튜플로 표시하는 것을 shape 라 한다. 예를 들어, 행이 2이고 열이 3인 2차원 배열에서 rank는 2 이고, shape는 (2, 3) 이 된다.
+행 2, 열3 -> rank 2 shape (2,3)
 
-numpy 배열을 생성하는 방법은 파이썬 리스트를 사용하는 방법과 numpy에서 제공하는 함수를 사용하는 방법이 있다. 아래 예제에서 list1은 4개의 요소를 갖는 리스트인데, 이를 array() 함수에 넣어 numpy 배열을 생성하는데, 이 배열의 rank는 1이 되고, shape는 (4, ) 가 된다. 튜플에 하나의 요소만 있으면 문법상 콤마를 뒤에 붙인다. 두번째 배열 b는 2x3 배열로서 shape는 (2, 3)이 되는데, 한가지 주의할 점은 array() 안에 하나의 리스트만 들어가므로 리스트의 리스트를 넣어야 한다.
+## 생성 함수
 
-1
-2
-3
-4
-5
-6
-7
-8
-9
+- np.array()
+
+```python
+li = [1, 2, 3, 4, 5, 6]  # li 리스트
+arr = np.array(li)     # ndarray로 변환
+display(arr)
+array([1, 2, 3, 4, 5, 6])
+```
+
+- np.arange()
+
+```python
+> np.arange(1,7)  
+array([1, 2, 3, 4, 5, 6])
+```
+
+- np.zeros(), np.full(), np.eye()
+
+```python
+np.zeros((2,3))
+array([[0., 0.],
+       [0., 0.],
+       [0., 0.]])
+
+np.full((2,3), 55)  # 자매품 0대신 다른값 넣는 함수
+array([[55, 55, 55],
+       [55, 55, 55]])
+
+np.eye(2)   # 단위행렬(주대각성분이 1이고 나머진 0) 생성 함수
+array([[1., 0.],
+        0., 1.])
+```
+
+```python
 import numpy as np
- 
+
 list1 = [1, 2, 3, 4]
 a = np.array(list1)
 print(a.shape) # (4, )
- 
+
 b = np.array([[1,2,3],[4,5,6]])
 print(b.shape) # (2, 3)
-print(b[0,0])  # 1    
+print(b[0,0])  # 1
+```
+
+## 연산 함수
+
+- np.add(), np.substract(), np.mulyiply(), np.divide()
+사칙연산입니다. 각 해당하는 위치의 원소끼리 연산
+
+- np.dot()
+내적을 연산하는 것이라지만, 행렬곱
+
+- np.sum(), np.prod()
+원소의 합, 혹은 곱을 반환
+
+- np.max(), np.min()
+최대와 최소값 반환하는 함수
+
+- np.argmax(), np.argmin()
+최대와 최소값을 가진 위치를 반환하는 함수
+np.argmax(data) 가 2라면 2번째 위치에 최대값이 존재한단 뜻
+
+## 형상 관련 함수
+
+- ndarray.shape
+
+```python
+data = np.arange(1,7)
+data.shape
+(6,)
+```
+
+- np.reshape()
+
+행렬의 차원 바꾸는데 사용, -1을 넣어 쭉 피는 용도로도 자주 사용
+여러 차원을 넣을땐 꼭 ()로 묶어줘야합니다
+
+```python
+> data = np.arange(1,7)
+> data.reshape((2,3))   # 2,3 행렬로 변경
+> # np.reshape(data, (2,3))   이렇게도 가능
+array([[1, 2, 3],
+       [4, 5, 6]])
+
+> data.reshape(-1)      # 쭉 필때
+array([1, 2, 3, 4, 5, 6])
+
+> data.reshape((3,-1))    # 3행으로(열은 알아서)
+array([[1, 2],
+       [3, 4],
+       [5, 6]])
+```
+
+- np.transpose()
+행렬의 전치행렬을 구하는 것
+
+```python
+data = np.arange(1,7)
+data = data.reshape((2,3,1))
+print(data.shape)
+data = data.transpose((0,2,1)) # 두번째와 세번째의 순서 변경
+print(data.shape)
+(2, 3, 1)
+(2, 1, 3)
+```
+
+## 난수 발생 함수들
+
+- np.random.seed()
+기본 시드지정함수로 랜덤이 들어간 함수에서 항상 같은 결과를 표출하기 위해 사용
+
+```python
+np.random.seed(42)
+np.random.randn()
+# 표준 정규분포에 따른 n 개의 무작위 숫자 생성
+
+np.random.randn(5) # 5개의 숫자 생성
+array([ 0.69406812, -1.15425813,  0.98864607,  0.73682549, -0.57181785])
+```
+
+- np.random.randint()
+랜덤한 정수를 생성해줍니다. min 과 sup 지정도 가능
+
+```python
+np.random.randint(0, 10, 5)  # 0 이상 10 미만의 숫자 5개 랜덤 생성
+array([7, 0, 7, 7, 2])
+```
+
+
+
+
 numpy에서 제공하는 함수를 사용하여 numpy 배열을 만드는 방법을 살펴보자. 이러한 기능을 제공하는 함수로는 zeros(), ones(), full(), eye() 등이 있는데, zeros()는 해당 배열에 모두 0을 집어 넣고, ones()는 모두 1을 집어 넣는다. full()은 배열에 사용자가 지정한 값을 넣는데 사용하고, eye()는 대각선으로는 1이고 나머지는 0인 2차원 배열을 생성한다.
 아래 예제는 이들 함수들을 사용하여 numpy 배열을 생성한 예이다. 그리고 마지막 예는 0부터 n-1 까지의 숫자를 생성하는 range(n) 함수와 배열을 다차원으로 변형하는 reshape()를 통해 간단하게 샘플 배열을 생성해 본 것이다.
 
