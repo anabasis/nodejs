@@ -66,7 +66,7 @@
     "socicon": "3.0.5",
     "socket.io": "^2.3.0",
     "socket.io-client": "^2.3.0",
-    "tinymce": ">=5.1.6",
+    "tinymce": ">=4.9.11",
     "typeface-exo": "0.0.61",
     "web-animations-js": "2.3.2",
     "zone.js": "0.10.2"
