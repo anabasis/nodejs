@@ -28,7 +28,7 @@
     "font-awesome": "4.7.0",
     "highcharts": "8.0.0",
     "jasmine-spec-reporter": "4.2.1",
-    "jquery": "3.4.1",
+    "jquery": "3.5.0",
     "karma-coverage-istanbul-reporter": "2.1.1",
     "karma-jasmine-html-reporter": "1.5.1",
     "moment": "2.24.0",
