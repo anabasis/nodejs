@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script><!-- 개발버전, 도움되는 콘솔 경고를 포함. -->
+    <!--<script src="https://cdn.jsdelivr.net/npm/vue"></script>--><!-- 상용버전, 속도와 용량이 최적화됨. -->
+  </head>
+  <body>
+      <div id="app">
+          {{person.name}}  {{person.age}}<br/>
+          {{ nextYear('안녕하세요.') }}<br/>
+          {{ nextYear2('안녕.') }}<br/>
+          <input v-bind:type="type" v-bind:value="inputData"><br/>
+          <input :type="type2" :value="inputData"><!-- v-bind 생략 가능 --><br/>
+          <a :href='link'> InfoRect-Portal</a>
+          <a :href="getKossi('kossiecoder')"> InfoRect-Portal</a>
+          <button v-on:click="alert" >Click Me</button><br/>
+          {{year}}<br/>
+          <button v-on:click="plus" >더하기</button><br/>
+          <button v-on:click="minus" >빼기</button><br/>
+
+          <!-- 이벤트 수식어 https://kr.vuejs.org/v2/guide/events.html#%EC%9D%B4%EB%B2%A4%ED%8A%B8-%EC%88%98%EC%8B%9D%EC%96%B4 -->
+          <form v-on:submit.prevent="submit">
+              <input type="text" ><br/>
+              <button type="submit">버튼</button>
+          </form>
+      </div>
+      <script>
+      new Vue({
+          el:'#app',
+          data:{
+              person : {
+                  name : 'InfoRect-Portal',
+                  age : 1
+              },
+              inputData: 'hello',
+              type:'text',
+              type2:'number',
+              link:'https://www.youtube.com/',
+              year : 2018
+          },
+          methods : {
+              plus(){
+                  this.year++;
+              },
+              minus(){
+                  this.year--;
+              },
+              alert(){
+                 alert("TEST TEST");
+              },
+              getKossi(channel){
+                  return this.link + channel;
+              },
+              nextYear: function(greeting){
+                  return greeting + '! ' +this.person.name + '는 내년에 ' + (this.person.age + 1) + '입니다. ';
+              },
+              otherMethod: function(){
+                  this.nextYear();
+              },
+              nextYear2(greeting){
+                  return greeting + '! ' +this.person.name + '는 내년에 ' + (this.person.age + 1) + '입니다. ';
+              },
+              submit(){
+                  alert("submitted!!");
+                  console.log("hello");
+              }
+          }
+      })
+      </script>
+  </body>
+</html>
