@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    .red {
+        color: red;
+    }
+    .bold {
+        font-weight: bold;
+    }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script><!-- 개발버전, 도움되는 콘솔 경고를 포함. -->
+    <!--<script src="https://cdn.jsdelivr.net/npm/vue"></script>--><!-- 상용버전, 속도와 용량이 최적화됨. -->
+  </head>
+  <body>
+      <div id="app">
+          <div v-if="show">Yes</div>
+          <div v-else>No</div>
+          <br/>
+          <button @click="toggleShow">Target</button>
+          <br/>
+          <br/>
+          <template v-if="number === 1">
+              <div >1</div>
+              <div >2</div>
+              <div >3</div>
+          </template>
+          <div v-else-if="number === 2">HI</div>
+          <div v-else>No</div>
+          <button @click="increaseNumber">Target</button> {{ number}}
+          <br/>
+          <div v-show="show2">Yes</div><br/><br/>
+          <button @click="toggle">Toggle</button>
+          <!-- 조건부 렌더링 -->
+          <!--
+          이에 비해 v-show는 훨씬 더 간단합니다. 요소는 CSS 기반 토글로 초기 조건에 관계없이 항상 렌더링됩니다.
+          일반적으로 v-if는 토글 비용이 더 높고 v-show는 초기 렌더링 비용이 더 높습니다.
+          따라서 무언가를 자주 토글해야하는 경우 v-show를 선호하고 런타임에 조건이 변경되지 않을 경우 v-if를 선호합니다.
+          -->
+      </div>
+      <script>
+      new Vue({
+          el:'#app',
+          data:{
+              show : true,
+              show2 : false,
+              number : 1
+          },
+          methods : {
+              toggleShow(){
+                  this.show = !this.show;
+              },
+              increaseNumber(){
+                  this.number ++;
+              },
+              toggle(){
+                  this.show2 = !this.show2;
+              }
+          }
+      })
+      </script>
+  </body>
+</html>

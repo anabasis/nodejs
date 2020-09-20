@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script><!-- 개발버전, 도움되는 콘솔 경고를 포함. -->
+    <!--<script src="https://cdn.jsdelivr.net/npm/vue"></script>--><!-- 상용버전, 속도와 용량이 최적화됨. -->
+  </head>
+  <body>
+      <div id="app">
+          {{ number + 1}} <br/>
+          {{ message.split('').reverse().join('') }} <br/>
+          {{ reverseMessage }} <br/>
+          {{ reverseMessage }} <br/><!-- 중복처리 효과 -->
+          {{ reverseMessageFunc() }} <br/>
+          {{ reverseMessageFunc() }} <br/>
+          <!-- https://kr.vuejs.org/v2/guide/computed.html#computed-%EC%86%8D%EC%84%B1%EC%9D%98-%EC%BA%90%EC%8B%B1-vs-%EB%A9%94%EC%86%8C%EB%93%9C -->
+
+          <button @click="changeMessage">Click</button>
+
+      </div>
+      <script>
+      new Vue({
+          el:'#app',
+          data:{
+              number: 1,
+              message : '안녕하세요.'
+          },
+          methods : {
+              reverseMessageFunc(){
+                  return this.message.split('').reverse().join('');
+              },
+              changeMessage(){
+                  this.message = '코지로더';
+              }
+          },
+          computed : {
+              reverseMessage(){
+                  return this.message.split('').reverse().join('');
+              }
+          }
+      })
+      </script>
+  </body>
+</html>

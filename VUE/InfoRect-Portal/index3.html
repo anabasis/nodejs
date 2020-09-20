@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    .red {
+        color: red;
+    }
+    .bold {
+        font-weight: bold;
+    }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script><!-- 개발버전, 도움되는 콘솔 경고를 포함. -->
+    <!--<script src="https://cdn.jsdelivr.net/npm/vue"></script>--><!-- 상용버전, 속도와 용량이 최적화됨. -->
+  </head>
+  <body>
+      <div id="app">
+          <div class="red bold">Hello</div>
+          {{ message }}<br/>
+          <button @click="changeMessage">Click</button>
+          {{ updated }}<br/>
+          <br/>
+          <!-- https://kr.vuejs.org/v2/guide/class-and-style.html --><!-- 클래스와 스타일 바인딩 -->
+          <div :class="{red : isRed, bold : isBold}">Hello2</div><br/>
+          <button @click="updateColor">Click</button>
+
+          <!--<div v-bind:style="{ color : red, fontSize : size}" >Hello3</div><br/>-->
+          <div :style="{ color : red, fontSize : size}" >Hello3</div><br/>
+
+          <div :style="styleObject" >Hello4</div><br/>
+
+      </div>
+      <script>
+      new Vue({
+          el:'#app',
+          data:{
+              message : '안녕하세요.',
+              updated : '아니요',
+              isRed : false,
+              isBold : false,
+              red : 'red',
+              size : '30px',
+              styleObject : {
+                  color : 'red',
+                  fontSize : '20px'
+              }
+          },
+          methods : {
+              changeMessage(){
+                  this.message = '코지로더';
+              },
+              updateColor(){
+                  this.isRed = !this.isRed;
+                  this.isBold = !this.isBold;
+              },
+
+          },
+          computed : {
+              reverseMessage(){
+                  return this.message.split('').reverse().join('');
+              }
+          },
+          watch : {
+              message(newVal, oldVal){
+                  console.log(newVal,oldVal);
+                  this.updated = '네';
+              }
+            // https://kr.vuejs.org/v2/guide/computed.html#computed-%EC%86%8D%EC%84%B1-vs-watch-%EC%86%8D%EC%84%B1
+            // computed속성 vs watch 속성
+
+          }
+
+      })
+      </script>
+  </body>
+</html>

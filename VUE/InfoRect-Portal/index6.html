@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    .red {
+        color: red;
+    }
+    .bold {
+        font-weight: bold;
+    }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script><!-- 개발버전, 도움되는 콘솔 경고를 포함. -->
+    <!--<script src="https://cdn.jsdelivr.net/npm/vue"></script>--><!-- 상용버전, 속도와 용량이 최적화됨. -->
+  </head>
+  <body>
+      <div id="app">
+          <div>
+              {{name}}
+          </div>
+          <button @click="changeText">Click</button>
+          <button @click="changeOtherText">Click</button>
+      </div>
+      <div id="app-1">
+          <div>
+              {{name}}
+          </div>
+          <button @click="changeText">Click</button>
+          <button @click="changeOtherText">Click</button>
+      </div>
+      <script>
+      const app = new Vue({
+          el:'#app',
+          data:{
+              name : 'anabasis'
+          },
+          methods : {
+              changeText(){
+                  this.name = "Anabasis Update";
+              },
+              changeOtherText(){
+                  app1.name = "Anabasis Update";
+              }
+          }
+      })
+      const app1 = new Vue({
+          el:'#app-1',
+          data:{
+              name : 'anabasis1'
+          },
+          methods : {
+              changeText(){
+                  this.name = "Anabasis111 Update";
+              },
+              changeOtherText(){
+                  app.name = "Anabasis111 Update";
+              }
+          }
+      })
+      </script>
+  </body>
+</html>

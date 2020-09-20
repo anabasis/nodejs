@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .red {
+            color: red;
+        }
+
+        .bold {
+            font-weight: bold;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script><!-- 개발버전, 도움되는 콘솔 경고를 포함. -->
+    <!--<script src="https://cdn.jsdelivr.net/npm/vue"></script>-->
+    <!-- 상용버전, 속도와 용량이 최적화됨. -->
+</head>
+
+<body>
+    <!-- 컴포넌트 사용하기 https://kr.vuejs.org/v2/guide/components.html -->
+    <div id="app">
+        <inforect-button></inforect-button>
+    </div>
+    <div id="app-1">
+        <inforect-button></inforect-button>
+    </div>
+    <script>
+
+        // 지역 컴포넌트
+        const HelloWorld = {
+            template: `<div>
+            hello world
+            </div>`
+        }
+        const InforectButton = {
+            components : {
+                'hello-world' : HelloWorld
+            },
+            template: `
+            <div>
+            <hello-world></hello-world>
+          <div>
+              {{name}}
+          </div>
+          <button @click="changeText">Click</button>
+          <button @click="changeOtherText">Click</button>
+          </div>
+          `,
+            data() {
+                return {
+                    name: 'anabasis'
+                }
+            },
+            methods: {
+                changeText() {
+                    this.name = "Anabasis Update";
+                },
+                changeOtherText() {
+                    this.name = "Anabasis Update";
+                }
+            }
+        }
+
+        const app = new Vue({
+            el: '#app',
+            components : {
+                'inforect-button' : InforectButton
+            }
+        });
+
+        const app1 = new Vue({
+            el: '#app-1',
+            components : {
+                'inforect-button' : InforectButton
+            }
+        });
+    </script>
+</body>
+
+</html>

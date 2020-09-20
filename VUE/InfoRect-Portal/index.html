@@ -24,7 +24,9 @@
 
           <!-- 이벤트 수식어 https://kr.vuejs.org/v2/guide/events.html#%EC%9D%B4%EB%B2%A4%ED%8A%B8-%EC%88%98%EC%8B%9D%EC%96%B4 -->
           <form v-on:submit.prevent="submit">
-              <input type="text" ><br/>
+              <!--<input type="text" :value="text" @keyup="updateText" ><br/>-->
+              <input type="text" v-model="text" ><br/>
+              {{ text }} <br/>
               <button type="submit">버튼</button>
           </form>
       </div>
@@ -39,6 +41,7 @@
               inputData: 'hello',
               type:'text',
               type2:'number',
+              text:'text',
               link:'https://www.youtube.com/',
               year : 2018
           },
@@ -49,6 +52,10 @@
               minus(){
                   this.year--;
               },
+              // updateText(event) {
+              //   //console.log(event)
+              //   this.text = event.target.value;
+              // },
               alert(){
                  alert("TEST TEST");
               },
