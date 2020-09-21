@@ -1,2 +1,0 @@
-# MYSQL DOCKER 설치
-

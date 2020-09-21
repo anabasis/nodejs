@@ -1,5 +1,0 @@
-package.json
-npm install
-npm update
-
-C:\Users\hp\AppData\Local\atom
