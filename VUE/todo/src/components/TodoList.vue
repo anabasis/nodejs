@@ -10,6 +10,9 @@
 
 <script>
 export default {
+    props : {
+        todo :
+    }
 }
 </script>
 
