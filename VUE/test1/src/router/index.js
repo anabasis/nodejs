@@ -9,7 +9,31 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home
-  },
+  } ,
+{
+    path: '/emit',
+    name: 'Emit',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/Emit.vue')
+},
+{
+    path: '/slot',
+    name: 'Slot',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/Slot.vue')
+},
+{
+    path: '/lifecycle',
+    name: 'LifeCycle',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/LifeCycle.vue')
+},
   {
     path: '/about',
     name: 'About',
