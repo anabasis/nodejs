@@ -11,9 +11,10 @@
 </template>
 
 <script>
+// @ ROOT부터 페키지 검색
 import CompletedTodo from '@/components/CompletedTodo';
-import TodoList from '@/components/TodoList';
 import AddTodo from '@/components/AddTodo';
+import TodoList from '@/components/TodoList';
 import UserList from '@/components/UserList';
 
 export default {

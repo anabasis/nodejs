@@ -48,7 +48,7 @@ export default new Vuex.Store({
       console.log(value);
       setTimeout(function(){
         commit('ADD_TODO',value);
-      }, 2000);
+    }, 500);
     },
     toggleTodoAction({commit} , payload){
       setTimeout(function(){
@@ -59,8 +59,18 @@ export default new Vuex.Store({
       setTimeout(function(){
         commit('DELETE_TODO',todoId);
       }, 500);
+    },
+    getUsersAction({commit}){
+        axios.get('https://jsonplaceholder.typicode.com/users').then(res => {
+                commit('SET_USER', res.data);
+              //console.log(res);
+              //this.users = res.data;
+          });
     }
   },
-  modules: {
+  getters:{
+      numberOfCompletedTodo: state => {
+          return state.todos.filter(todo =>todo.checked).length;
+      }
   }
 })

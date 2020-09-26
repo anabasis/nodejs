@@ -31,7 +31,8 @@ export default {
     },
     computed: {
         numberOfCompletedTodo() {
-            return this.$store.getters.numberOfCompletedTodo;
+            //return this.$store.getters.numberOfCompletedTodo;
+            return this.$store.getters['todo/numberOfCompletedTodo'];
         }
     },
     methods : {
@@ -40,14 +41,14 @@ export default {
             //    id : this.todo.id,
             //    checked : e.target.checked
             // });  // mutations
-            this.$store.dispatch('toggleTodoAction', {
+            this.$store.dispatch('todo/toggleTodoAction', {
                  id : this.todo.id,
                  checked : e.target.checked
             })
         },
         clickDelete(){
             // this.$store.commit('DELETE_TODO', this.todo.id);
-            this.$store.dispatch('deleteTodoAction', this.todo.id);
+            this.$store.dispatch('todo/deleteTodoAction', this.todo.id);
         }
     }
 }

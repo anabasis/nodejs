@@ -9,11 +9,11 @@
 export default {
     computed : {
         numberOfCompletedTodo() {
-            return this.$store.getters.numberOfCompletedTodo;
+            //alert(this.$store.getters['todo/numberOfCompletedTodo']);
+            return this.$store.getters['todo/numberOfCompletedTodo'];
         }
     }
 }
 </script>
-
 <style lang="css" scoped>
 </style>

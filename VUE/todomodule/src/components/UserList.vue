@@ -17,10 +17,9 @@ export default {
       this.getUsers();
     },
     computed: {
-
         ...mapState({
-            todos: state => state.todos,
-            users: state => state.users
+            todos: state => state.todo.todos,
+            users: state => state.user.users
         })
         // users(){
         //         return this.$store.state.users;
@@ -30,9 +29,15 @@ export default {
         // }
     },
     methods: {
-        ...mapActions({
-            getUsers: 'getUsersAction' // map `this.add()` to `this.$store.dispatch('increment')`
-        })
+       //  methods: {
+       //     ...mapActions([ 'method1', 'method2' ]),
+       //     ...mapActions('module1', [ 'method1', 'method2' ]),
+       //     ...mapActions('module2', { mod2method1: 'method1', mod2method2: 'method2' })
+       // }
+        ...mapActions('user',{ getUsers : 'getUsersAction' })
+        // ...mapActions({
+        //     getUsers: 'getUsersAction' // map `this.add()` to `this.$store.dispatch('increment')`
+        // });
         // getUsers(){
         //     this.$store.dispatch('getUsersAction');
         // }
