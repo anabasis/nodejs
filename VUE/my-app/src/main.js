@@ -9,6 +9,8 @@ import '@mdi/font/css/materialdesignicons.css'
 
 Vue.config.productionTip = false
 
+// https://v2.vuetifyjs.com/en/getting-started/pre-made-layouts/
+
 new Vue({
   router,
   store,
