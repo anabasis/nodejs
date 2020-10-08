@@ -1,67 +1,28 @@
-<template>
-<div>
-    <div id="app">
-
-      <v-app id="inspire">
-        <v-app id="inspire">
-          <Navigation></Navigation>
-          <Appbar></Appbar>
-          <v-main>
-            <v-container
-              class="fill-height"
-              fluid
-            >
-              <v-row
-                align="center"
-                justify="center"
-              >
-                <v-col class="text-center">
-                  <v-tooltip left>
-                    <template v-slot:activator="{ on }">
-                      <v-btn
-                        :href="source"
-                        icon
-                        large
-                        target="_blank"
-                        v-on="on"
-                      >
-                        <v-icon large>mdi-code-tags</v-icon>
-                      </v-btn>
-                    </template>
-                    <span>Source</span>
-                  </v-tooltip>
-                </v-col>
-              </v-row>
-            </v-container>
-          </v-main>
-
-          <!-- Footer -->
-          <Footer>
-          </Footer>
-        </v-app>
-      </v-app>
+<template lang="html">
+    <div id="app" class="container">
+        <h1 class="text-center">Guestbook App</h1>
+        <CompletedCnt />
+        <AddGuestbook/>
+        <hr />
+        <GuestbookList/>
+        {{ guestbooks }}
     </div>
-</div>
 </template>
 
 <script>
-//import HelloWorld from './components/HelloWorld';
-import Footer from './components/Footer';
-import Navigation from './components/Navigation';
-import Appbar from './components/Appbar';
+// @ ROOT부터 페키지 검색
+import CompletedCnt from '@/components/CompletedCnt';
+import AddGuestbook from '@/components/AddGuestbook';
+import GuestbookList from '@/components/GuestbookList';
 
 export default {
-  name: 'App',
-
-
-  components: {
-     Navigation,
-     Appbar,
-     Footer
-  },
-
-  data: () => ({
-    //
-  }),
-};
+    components: {
+        CompletedCnt,
+        AddGuestbook,
+        GuestbookList
+    }
+}
 </script>
+
+<style lang="css" scoped>
+</style>
