@@ -5,28 +5,28 @@ export default {
 
     state : {
         guestbooks : [
-            {id : 1, text : 'Buy a Car', checked : true},
-            {id : 2, text : 'Play Game', checked : false},
-            {id : 3, text : 'TEST TEST', checked : true}
+            {id : 1, title : 'Guestbook 1', content : 'Guestbook Content 1', userid : 'admin', createdate : '', updatedate : '',  checked : true},
+            {id : 2, title : 'Guestbook 2', content : 'Guestbook Content 2', userid : 'user', createdate : '', updatedate : '', checked : false},
+            {id : 3, title : 'Guestbook 3', content : 'Guestbook Content 3', userid : 'user2', createdate : '', updatedate : '', checked : true}
         ]
     },
 
     mutations : {
-        ADD_Guestbook(state, value){
-          state.guestbooks.push({
-              id: Math.random(),
-              text: value,
-              checked:false
-          });
-        },
-        TOGGLE_Guestbook(state, {id, checked}){
+        // ADD_GUESTBOOK(state, value){
+        //   state.guestbooks.push({
+        //       id: Math.random(),
+        //       text: value,
+        //       checked:false
+        //   });
+        // },
+        TOGGLE_GUESTBOOK(state, {id, checked}){
           //console.log(id, checked);
           const index = state.guestbooks.findIndex( Guestbook => {
               return Guestbook.id === id ;
           });
           state.guestbooks[index].checked = checked;
         },
-        DELETE_Guestbook(state, GuestbookId){
+        DELETE_GUESTBOOK(state, GuestbookId){
           const index = state.guestbooks.findIndex( Guestbook => {
               return Guestbook.id === GuestbookId ;
           });
@@ -40,21 +40,24 @@ export default {
         // addGuestbookAction(context, value){
         //   console.log(value);
         // }
-        addGuestbookAction({ commit }, value){
-          console.log(value);
-          setTimeout(function(){
-            commit('ADD_Guestbook',value);
-            }, 500);
-        },
+        // addGuestbookAction({ commit }, value){
+        //   //console.log(value);
+        //   commit('ADD_GUESTBOOK',value);
+        //   // setTimeout(function(){
+        //   //   commit('ADD_GUESTBOOK',value);
+        //   //   }, 500);
+        // },
         toggleGuestbookAction({commit} , payload){
-          setTimeout(function(){
-            commit('TOGGLE_Guestbook',payload);
-          }, 500);
+          commit('TOGGLE_GUESTBOOK',payload);
+          // setTimeout(function(){
+          //   commit('TOGGLE_GUESTBOOK',payload);
+          // }, 500);
         },
         deleteGuestbookAction({commit}, GuestbookId){
-          setTimeout(function(){
-            commit('DELETE_Guestbook',GuestbookId);
-          }, 500);
+          commit('DELETE_GUESTBOOK',GuestbookId);
+          // setTimeout(function(){
+          //   commit('DELETE_GUESTBOOK',GuestbookId);
+          // }, 500);
         }
     },
 

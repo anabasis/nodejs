@@ -11,7 +11,7 @@
         :class="guestbook.checked ? 'text-muted' : '' "
         :style="guestbook.checked ? 'text-decoration:line-through' : '' "
         >
-            {{guestbook.text}}
+            {{guestbook.title}}
         </span>
         <button
             class="btn btn-danger btn-sm"

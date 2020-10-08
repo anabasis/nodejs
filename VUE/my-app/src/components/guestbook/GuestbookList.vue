@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import Guestbook from '@/components/Guestbook.vue';
+import Guestbook from '@/components/guestbook/Guestbook.vue';
 
 export default {
     components: {
