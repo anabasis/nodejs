@@ -12,13 +12,17 @@ export default {
     },
 
     mutations : {
-        // ADD_GUESTBOOK(state, value){
-        //   state.guestbooks.push({
-        //       id: Math.random(),
-        //       text: value,
-        //       checked:false
-        //   });
-        // },
+        ADD_GUESTBOOK(state, guestbook){
+          state.guestbooks.push({
+              id: Math.random(),
+              title : guestbook.title ,
+              content : guestbook.content ,
+              userid : guestbook.userid ,
+              createdate : guestbook.createdate ,
+              updatedate : guestbook.updatedate ,
+              checked:false
+          });
+        },
         TOGGLE_GUESTBOOK(state, {id, checked}){
           //console.log(id, checked);
           const index = state.guestbooks.findIndex( Guestbook => {
@@ -40,13 +44,12 @@ export default {
         // addGuestbookAction(context, value){
         //   console.log(value);
         // }
-        // addGuestbookAction({ commit }, value){
-        //   //console.log(value);
-        //   commit('ADD_GUESTBOOK',value);
-        //   // setTimeout(function(){
-        //   //   commit('ADD_GUESTBOOK',value);
-        //   //   }, 500);
-        // },
+        addGuestbookAction({ commit }, payload){
+          commit('ADD_GUESTBOOK', payload);
+          // setTimeout(function(){
+          //   commit('ADD_GUESTBOOK',payload);
+          //   }, 500);
+        },
         toggleGuestbookAction({commit} , payload){
           commit('TOGGLE_GUESTBOOK',payload);
           // setTimeout(function(){

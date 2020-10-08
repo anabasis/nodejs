@@ -4,9 +4,8 @@
       <CompletedCnt />
       <hr />
       <GuestbookList/>
-
+      <hr />
       <GuestbookManage/>
-
   </div>
 
 </template>
