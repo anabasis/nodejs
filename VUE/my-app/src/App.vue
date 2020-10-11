@@ -20,4 +20,7 @@ export default {
 </script>
 
 <style lang="css" scoped>
+#app {
+    
+}
 </style>
