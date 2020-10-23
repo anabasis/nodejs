@@ -20,8 +20,8 @@ export default {
         title : {
             type:String,
             default:"DDDDD TILE"
-        }
-        ,title2 : {
+        },
+        title2 : {
             type : String,
             required: true,
             default:'Default title'
