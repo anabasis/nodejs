@@ -1,16 +1,14 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from 'vue';
+import Vuex from 'vuex';
+import todo from './modules/guestbook.js';
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
   modules: {
-    guestbook
+      // todo : todo,
+      // user : user
+      // 선언변수 : Import 가 같은 경우 하나만 입력 가능
+      guestbook
   }
 })

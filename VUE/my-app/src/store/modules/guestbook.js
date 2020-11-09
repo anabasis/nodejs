@@ -5,70 +5,62 @@ export default {
 
     state : {
         guestbooks : [
-            {id : 1, title : 'Title 1', content : 'TEST TEST TEST TEST' , createdate : '', udpatedate : '', checked : true},
-            {id : 2, title : 'Title 2', content : 'TEST TEST TEST TEST' , createdate : '', udpatedate : '', checked : false}
+            {id : 1, text : 'Buy a Car', checked : true},
+            {id : 2, text : 'Play Game', checked : false},
+            {id : 3, text : 'TEST TEST', checked : true}
         ]
     },
 
     mutations : {
-      /*
-        ADD_GUESTBOOK(state, value){
+        ADD_Guestbook(state, value){
           state.guestbooks.push({
               id: Math.random(),
-              title : value,
-              title : value,
-              title : value,
-              title : value,
+              text: value,
               checked:false
           });
         },
-        TOGGLE_TODO(state, {id, checked}){
+        TOGGLE_Guestbook(state, {id, checked}){
           //console.log(id, checked);
-          const index = state.todos.findIndex( todo => {
-              return todo.id === id ;
+          const index = state.guestbooks.findIndex( Guestbook => {
+              return Guestbook.id === id ;
           });
-          state.todos[index].checked = checked;
+          state.guestbooks[index].checked = checked;
         },
-        DELETE_TODO(state, todoId){
-          const index = state.todos.findIndex( todo => {
-              return todo.id === todoId ;
+        DELETE_Guestbook(state, GuestbookId){
+          const index = state.guestbooks.findIndex( Guestbook => {
+              return Guestbook.id === GuestbookId ;
           });
-          state.todos.splice(index,1);
-          //this.todos = this.todos.filter(todo => todo.id != id);
+          state.guestbooks.splice(index,1);
+          //this.guestbooks = this.guestbooks.filter(Guestbook => Guestbook.id != id);
         }
-        */
     },
 
     actions : { // 비동기
         // 표준 양식
-        // addTodoAction(context, value){
+        // addGuestbookAction(context, value){
         //   console.log(value);
         // }
-        /*
-        addTodoAction({ commit }, value){
+        addGuestbookAction({ commit }, value){
           console.log(value);
           setTimeout(function(){
-            commit('ADD_TODO',value);
+            commit('ADD_Guestbook',value);
             }, 500);
         },
-        toggleTodoAction({commit} , payload){
+        toggleGuestbookAction({commit} , payload){
           setTimeout(function(){
-            commit('TOGGLE_TODO',payload);
+            commit('TOGGLE_Guestbook',payload);
           }, 500);
         },
-        deleteTodoAction({commit}, todoId){
+        deleteGuestbookAction({commit}, GuestbookId){
           setTimeout(function(){
-            commit('DELETE_TODO',todoId);
+            commit('DELETE_Guestbook',GuestbookId);
           }, 500);
         }
-        */
     },
 
     getters:{
-      /*
-        numberOfCompletedTodo: state => {
-            return state.todos.filter(todo =>todo.checked).length;
+        numberOfCompletedGuestbook: state => {
+            return state.guestbooks.filter(Guestbook =>Guestbook.checked).length;
         }
     }
-    */
 }
