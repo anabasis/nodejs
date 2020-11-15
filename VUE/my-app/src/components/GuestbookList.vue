@@ -10,7 +10,6 @@
 
 <script>
 import Guestbook from '@/components/Guestbook.vue';
-
 export default {
     components: {
             Guestbook
