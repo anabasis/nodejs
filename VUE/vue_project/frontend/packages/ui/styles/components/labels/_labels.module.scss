@@ -1,0 +1,420 @@
+@import '../../common/variables';
+.label {
+  &_chips {
+    & + .label_chips {
+      margin-left: 10px;
+    }
+    div {
+      display: inline-flex;
+      align-items: center;
+      justify-content: flex-start;
+      font-family: 'Pretendard';
+      font-size: 1.4rem;
+      font-weight: 400;
+      line-height: 1.8rem;
+      letter-spacing: -0.4px;
+      color: var(--typo500);
+      padding: 6px 12px;
+      border-radius: 16px;
+      background-color: var(--bg-f);
+      &.small {
+        padding: 4px 10px 4px 16px;
+        font-size: 1.2rem;
+        img {
+          display: block;
+          width: 12px;
+          height: 12px;
+          margin-left: 8px;
+        }
+        button {
+          margin-left: 8px;
+          img {
+            display: block;
+            width: 12px;
+            height: 12px;
+            margin: 0;
+          }
+        }
+      }
+      em {
+        font-weight: 600;
+        margin-right: 6px;
+      }
+      img {
+        display: block;
+        width: 16px;
+        height: 16px;
+        margin-left: 8px;
+      }
+      button {
+        margin-left: 8px;
+        img {
+          display: block;
+          width: 16px;
+          height: 16px;
+          margin: 0;
+        }
+      }
+    }
+    &.primary {
+      div {
+        color: var(--navy800);
+        background-color: var(--blue50);
+      }
+    }
+    &.left {
+      div {
+        img {
+          margin-left: 0;
+          margin-right: 8px;
+        }
+        button {
+          margin-left: 0;
+          margin-right: 8px;
+          img {
+            margin: 0;
+          }
+        }
+      }
+    }
+    &.rectangle {
+      div {
+        padding: 10px 12px;
+        border-radius: 4px;
+        border: 1px solid var(--navy400);
+        font-size: 1.2rem;
+        color: var(--typo800);
+        img {
+          margin-left: 6px;
+        }
+        button {
+          margin-left: 6px;
+        }
+      }
+      &.left {
+        img {
+          margin-left: 0;
+          margin-right: 6px;
+        }
+        button {
+          margin-left: 0;
+          margin-right: 6px;
+        }
+      }
+      &.disabled {
+        div {
+          color: var(--navy200);
+          border-color: var(--navy100);
+        }
+      }
+      &.primary {
+        div {
+          color: var(--blue400);
+          border-color: var(--blue400);
+        }
+        &.disabled {
+          span {
+            color: var(--blue100);
+            border-color: var(--blue100);
+            background-color: var(--blue50);
+          }
+        }
+      }
+    }
+  }
+  &_bage {
+    &_count {
+      font-family: 'Pretendard';
+      display: inline-flex;
+      min-width: 20px;
+      height: 24px;
+      align-items: center;
+      justify-content: center;
+      padding: 4px;
+      background-color: var(--bg-f);
+      font-size: 1.2rem;
+      color: var(--typo500); // uhee : --typography-color-600 삭제로 인한 임시 컬러 처리(수정필요)
+      border-radius: 10px;
+      letter-spacing: -0.1px;
+      //margin-left: 10px;
+      &.primary {
+        min-width: 24px;
+        padding: 6px;
+        border-radius: 12px;
+        color: var(--blue400);
+        font-weight: 600;
+        background-color: var(--blue50);
+      }
+    }
+    &_status {
+      font-family: 'Pretendard';
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      color: var(--navy800);
+      font-size: 1.2rem;
+      font-weight: 400;
+      line-height: 1.6rem;
+      &::before {
+        content: '';
+        width: 8px;
+        height: 8px;
+        background-color: var(--blue10);
+        border-radius: 4px;
+        margin-right: 8px;
+      }
+      &.done {
+        &::before {
+          background-color: var(--done);
+        }
+      }
+      &.ongoing {
+        &::before {
+          background-color: var(--ongoing);
+        }
+      }
+      &.pause {
+        &::before {
+          background-color: var(--pause);
+        }
+      }
+    }
+  }
+}
+
+//공통
+.label {
+  display: inline-flex;
+}
+
+//배지타입 규정
+.badge {
+  //공통 규정
+  &.disabled {
+    opacity: 0.5;
+  }
+  //타입 규정
+  &.square {
+    padding: 4px 12px;
+    text-align: center;
+    border-radius: 4px;
+    //스타일 규정
+    &.line {
+      &.primary {
+        @include body2(var(--blue300));
+        border: 1px solid var(--blue200);
+      }
+      &.magenta {
+        @include capH(#c060e2);
+        border: 1px solid #ce8ee4;
+      }
+      &.blue {
+        @include capH(var(--blue300));
+        border: 1px solid var(--blue200);
+      }
+    }
+    &.solid {
+      &.primary {
+        @include capH(var(--blue300));
+        border: 1px solid var(--blue200);
+      }
+      &.secondary {
+        background-color: var(--navy50);
+        color: var(--navy800);
+      }
+      &.navy {
+        &200 {
+          background-color: var(--navy200);
+          color: var(--bg-f);
+        }
+      }
+      &.blue {
+        &50 {
+          background-color: var(--blue50);
+          @include capH(var(--blue400));
+        }
+        &100 {
+          background-color: var(--blue100);
+          @include capH(var(--blue400));
+          color: var(--bg-f);
+        }
+        &200 {
+          background-color: var(--blue200);
+          color: var(--bg-f);
+        }
+        &300 {
+          background-color: var(--blue300);
+          color: var(--bg-f);
+        }
+        &400 {
+          background-color: var(--blue400);
+          color: var(--bg-f);
+        }
+      }
+
+      // &.navy {
+      //   &50 {
+      //     background-color: var(--navy50);
+      //     @include capH(var(--navy800));
+      //   }
+      // }
+    }
+  }
+  &.round {
+    padding: 6px 12px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100px;
+
+    &.solid {
+      background-color: var(--blue50);
+      @include capH(var(--navy800));
+      &.secondary {
+        background-color: var(--navy50);
+        color: var(--navy800);
+      }
+      &.blue {
+        &100 {
+          background-color: var(--blue100);
+          color: var(--bg-f);
+        }
+        &200 {
+          background-color: var(--blue200);
+          color: var(--bg-f);
+        }
+        &300 {
+          background-color: var(--blue300);
+          color: var(--bg-f);
+        }
+        &400 {
+          background-color: var(--blue400);
+          color: var(--bg-f);
+        }
+      }
+    }
+    //라운드에만 있는 사이즈 규정
+    &.lg {
+      @include body1;
+    }
+    &.md {
+      padding: 4px 12px;
+      @include capH;
+    }
+    &.sm {
+      padding: 1px 10px;
+      @include cap;
+    }
+  }
+
+  &_desc {
+    //뱃지 디스크립션 디자인
+    display: inline-block;
+    @include body1(var(--navy800));
+    &.disabled {
+      color: var(--navy300);
+    }
+    & + .badge {
+      margin-left: 10px;
+    }
+  }
+  + .badge_desc {
+    margin-left: 10px;
+  }
+}
+
+//배지타입 규정
+.label_bullet {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  //플랫폼 상태 매핑된거..
+  &.status {
+    color: var(--navy800);
+    font-size: 1.2rem;
+    font-weight: 400;
+    .bullet {
+      background-color: var(--blue10);
+      &.done {
+        background-color: var(--done);
+      }
+
+      &.ongoing {
+        background-color: var(--ongoing);
+      }
+
+      &.pause {
+        background-color: var(--pause);
+      }
+    }
+  }
+  // 확장성 고려해서 글로벌 컬러 매핑
+  .bullet {
+    width: 8px;
+    height: 8px;
+    border-radius: 4px;
+    margin-right: 8px;
+
+    &.square {
+      width: 12px;
+      height: 12px;
+      border-radius: 2px;
+    }
+
+    // &.blue {
+    //   &50 {
+    //     background-color: var(--blue50);
+    //   }
+    //   &100 {
+    //     background-color: var(--blue100);
+    //   }
+    //   &200 {
+    //     background-color: var(--blue200);
+    //   }
+    //   &300 {
+    //     background-color: var(--blue300);
+    //   }
+    //   &400 {
+    //     background-color: var(--blue400);
+    //   }
+    // }
+
+    // &.error {
+    //   background-color: var(--error);
+    // }
+
+    // &.black {
+    //   background-color: var(--typo0);
+    // }
+  }
+}
+
+//태그타입 규정
+.tag {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-family: 'Pretendard';
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 2rem;
+  letter-spacing: -0.4px;
+  color: var(--typo83);
+  em {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-right: 10px;
+    color: var(--navy800);
+    background-color: var(--blue50);
+    border-radius: 16px;
+  }
+  // 김수연 :: 마이페이지 회원가입 스타일 추가
+  &.secondary {
+    em {
+      color: var(--navy800);
+      background-color: var(--navy50);
+    }
+  }
+  &.black {
+    color: var(--typo900);
+  }
+}

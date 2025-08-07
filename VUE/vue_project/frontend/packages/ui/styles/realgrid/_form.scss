@@ -1,0 +1,269 @@
+//
+input[type='checkbox'] {
+  -webkit-appearance: auto;
+  background-color: transparent;
+}
+
+/* 전체 폼 스타일 */
+.rg-form-root {
+  font-family: 'Malgun Gothic', '맑은 고딕', AppleSDGothicNeo-Light, sans-serif;
+  font-size: 16px;
+  color: #000000;
+  background: #ffffff;
+  -webkit-appearance: none;
+  outline: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* 흐르는 효과 배경 */
+.rg-form-marquee {
+  background: rgba(0, 0, 0, 0.01);
+}
+
+/* 전체 폼 */
+.rg-form {
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden;
+}
+
+/* 전체 폼 테이블 및 행 */
+.rg-form-root .rg-form-table,
+.rg-form-table tr {
+  position: relative;
+  margin: 0 !important;
+  padding: 0 !important;
+  border-spacing: 0 !important;
+  border-collapse: separate !important;
+}
+
+/* 전체 폼 셀 */
+.rg-form-table td {
+  position: relative;
+  margin: 0 !important;
+  padding: 6px 2px;
+  border-spacing: 0 !important;
+  border-collapse: separate !important;
+  box-sizing: border-box !important;
+  line-height: 1.5em;
+}
+
+/* 모달 스타일 */
+.rg-form-modal {
+  border: 1px solid gray;
+  box-shadow: 4px 7px 7px darkgray;
+}
+
+/* 폼 셀 스타일 */
+.rg-form-cell {
+  overflow: hidden;
+  border-top: none;
+  border-right: 1px solid #d2d5da;
+  border-bottom: 1px solid #d2d5da;
+  border-left: none;
+}
+
+/* 오른쪽 폼 셀 스타일 */
+.rg-form-cell-right {
+  border-right: none;
+}
+
+/* 스크롤바 스타일 */
+.rg-form-scrollbar {
+  opacity: 0.3;
+  background: #000000;
+  border-radius: 5px;
+}
+
+/* 헤더와 푸터 스타일 */
+.rg-form-header,
+.rg-form-footer {
+  background: #e4e7eb;
+}
+
+/* 헤더 셀 스타일 */
+.rg-form-header-cell {
+  height: 50%;
+  transform: translate(0px, 50%);
+  text-align: center;
+}
+
+/* 폼 바디 스타일 */
+.rg-form-body {
+  background-color: #ffffff !important;
+}
+
+/* 라벨 셀 스타일 */
+.rg-form-label-cell {
+  border-top: none;
+  border-right: 1px solid #d2d5da;
+  border-bottom: 1px solid #d2d5da;
+  border-left: none;
+  word-wrap: break-word;
+  font-weight: bold;
+  background: #eaecef;
+  text-align: center;
+}
+
+/* 라벨 포커스 시 스타일 */
+.rg-form-label-focused {
+  background-color: #d2d5da;
+}
+
+/* 값 셀 스타일 */
+.rg-form-value-cell {
+  border-top: none;
+  border-right: none;
+  border-bottom: 1px solid #d2d5da;
+  border-left: none;
+  height: 0px;
+}
+
+/* 위치 정보 스타일 */
+.rg-form-position {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #373c43;
+}
+
+/* 위치 정보 슬래시 스타일 */
+.rg-form-position-slash {
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+/* 푸터 헤더 좌측 스타일 */
+.rg-footer-form-head,
+.rg-footer-form-foot {
+  margin-left: 6px;
+  margin-right: 6px;
+}
+
+/* 메뉴 아이콘 스타일 */
+.rg-form-menu,
+.rg-form-check,
+.rg-form-close,
+.rg-form-cancel,
+.rg-form-commit,
+.rg-form-delete,
+.rg-form-edit,
+.rg-form-add,
+.rg-form-first,
+.rg-form-last,
+.rg-form-prev,
+.rg-form-next,
+.rg-form-swipe-left,
+.rg-form-swipe-right,
+.rg-form-end-left,
+.rg-form-end-right {
+  width: 14px;
+  height: 14px;
+  background-size: contain;
+}
+
+/* 메뉴 아이콘 배경 스타일 */
+.rg-form-menu {
+  background: $rg-form-menu no-repeat center;
+}
+
+/* 취소 아이콘 배경 스타일 */
+.rg-form-cancel {
+  background: $rg-form-close no-repeat center;
+}
+
+/* 확인 아이콘 배경 스타일 */
+.rg-form-commit {
+  background: $rg-form-commit no-repeat center;
+}
+
+/* 삭제 아이콘 배경 스타일 */
+.rg-form-delete {
+  background: $rg-form-delete no-repeat center;
+}
+
+/* 수정 아이콘 배경 스타일 */
+.rg-form-edit {
+  background: $rg-form-edit no-repeat center;
+}
+
+/* 추가 아이콘 배경 스타일 */
+.rg-form-add {
+  background: $rg-form-add no-repeat center;
+}
+
+/* 처음 아이콘 배경 스타일 */
+.rg-form-first {
+  background: $rg-form-first no-repeat center;
+}
+
+/* 마지막 아이콘 배경 스타일 */
+.rg-form-last {
+  background: $rg-form-last no-repeat center;
+}
+
+/* 이전 아이콘 배경 스타일 */
+.rg-form-prev {
+  background: $rg-form-prev no-repeat center;
+}
+
+/* 다음 아이콘 배경 스타일 */
+.rg-form-next {
+  background: $rg-form-next no-repeat center;
+}
+
+/* 라벨 스타일 */
+.rg-form-label {
+  white-space: nowrap;
+  word-wrap: none;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1.6;
+  color: #000000;
+}
+
+/* 왼쪽으로 스와이프 아이콘 스타일 */
+.rg-form-swipe-left {
+  opacity: 0.3;
+  background: $rg-form-swipe-left no-repeat center;
+}
+
+/* 오른쪽으로 스와이프 아이콘 스타일 */
+.rg-form-swipe-right {
+  opacity: 0.3;
+  background: no-repeat center;
+  background-size: $rg-form-swipe-right contain;
+}
+
+/* 왼쪽 끝 아이콘 스타일 */
+.rg-form-end-left,
+.rg-form-end-right {
+  opacity: 0.2;
+  background-size: cover;
+}
+
+/* 왼쪽 끝 아이콘 배경 스타일 */
+.rg-form-end-left {
+  background: $rg-form-end-left no-repeat center;
+}
+
+/* 오른쪽 끝 아이콘 배경 스타일 */
+.rg-form-end-right {
+  background: $rg-form-end-right no-repeat center;
+}
+
+.rg-filter-selector {
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none !important;
+    margin: 0 !important;
+  }
+}
+
+.multiline-editor {
+  // white-space: pre;
+  white-space: pre-line !important;
+}

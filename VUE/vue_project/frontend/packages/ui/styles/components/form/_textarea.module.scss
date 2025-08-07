@@ -1,0 +1,122 @@
+@import '../../common/variables';
+
+$height: calc(74px - 20px);
+.textarea {
+  border-radius: 4px;
+  border: 1px solid var(--navy100);
+  background: #fff;
+  @include cap(var(--typo900));
+  padding: 10px 10px 10px 16px;
+  width: 100%;
+  &:focus-within {
+    border: 1px solid var(--blue400);
+  }
+
+  &:has(:disabled) {
+    background-color: var(--bg);
+    border-color: var(--navy100);
+  }
+
+  &.readonly {
+    border: 0;
+  }
+
+  // mutantSeq textarea 용
+  &.flexable {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    textarea {
+      min-height: auto;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .length {
+      padding-top: 0;
+
+      @include cap(var(--navy200));
+    }
+  }
+
+  textarea {
+    font-family: 'Pretendard';
+    border: none;
+    width: 100%;
+    min-height: $height;
+    font-size: 1.2rem;
+    overflow-y: auto;
+
+    &:focus {
+      outline: none;
+    }
+    &::placeholder {
+      color: var(--navy200);
+    }
+
+    &:disabled {
+      background-color: var(--bg);
+      color: var(--navy200) !important;
+    }
+  }
+  .length {
+    padding-top: 10px;
+    text-align: right;
+    @include body4(var(--navy200));
+  }
+
+  &.lg {
+    width: 368px;
+  }
+
+  // 플랫폼 > 통합문의 댓글용
+  &.no_border {
+    border: 0;
+    padding: 0;
+    @include body2(var(--typo900));
+    &:focus-within {
+      border: 0;
+    }
+
+    textarea {
+    }
+  }
+
+  &.change {
+    textarea {
+      color: var(--change400);
+    }
+  }
+
+  &.error {
+    border: 1px solid var(--error);
+    //color: var(--error);
+    textarea {
+      caret-color: var(--error);
+    }
+  }
+
+  // textarea 높이타입 규정
+  // &.h74 {
+  //   textarea {
+  //     min-height: 74px;
+  //   }
+  // }
+  // &.h148 {
+  //   textarea {
+  //     min-height: 100px;
+  //   }
+  // }
+  // &.h200 {
+  //   textarea {
+  //     min-height: 200px;
+  //   }
+  // }
+
+  @for $i from 1 through 500 {
+    &.h#{$i} {
+      textarea {
+        height: calc(#{$i}px - 20px); // 20px는 padding
+      }
+    }
+  }
+}

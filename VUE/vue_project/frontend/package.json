@@ -1,0 +1,25 @@
+{
+  "private": true,
+  "name": "wisdom",
+  "packageManager": "pnpm@8.6.6",
+  "scripts": {
+    "build": "dotenv -e .env.dev turbo run build",
+    "build:stg": "dotenv -e .env.stg turbo run build",
+    "build:prd": "dotenv -e .env.prd turbo run build",
+    "dev": "dotenv -e .env.dev turbo run dev --continue",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "clean": "turbo run clean && rm -rf node_modules",
+    "gf": "git fetch -p && git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -d",
+    "gfl": "git branch | grep -v '^*' | xargs git branch -D",
+    "clear": "find . -name 'node_modules' -type d -prune -exec rm -rf '{}' +"
+  },
+  "devDependencies": {
+    "@turbo/gen": "^1.10.15",
+    "dotenv-cli": "^7.3.0",
+    "eslint": "^8.51.0",
+    "eslint-config-custom": "workspace:*",
+    "prettier": "^2.8.8",
+    "turbo": "^1.10.15"
+  }
+}

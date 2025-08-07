@@ -1,0 +1,9 @@
+//border-radius 정의
+
+@for $i from 0 through 100 {
+  // 1 단위로 증가
+  $value: $i * 1;
+  .round#{$value} {
+    border-radius: #{$value} + 'px' !important;
+  }
+}

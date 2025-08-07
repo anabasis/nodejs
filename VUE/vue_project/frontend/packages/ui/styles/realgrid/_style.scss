@@ -1,0 +1,1194 @@
+@charset "UTF-8";
+
+@import '../common/variables';
+@import '../common/reset.scss';
+@import './images'; //svg 변수
+@import './scroll'; // scroll
+
+// button,
+// .MuiButton-root,
+// .MuiButtonBase-root {
+//   // font-family: 'Pretendard' !important;
+//   // background-color: #3b2f14;
+// }
+
+/**
+THEME : Realgrid light(Default)
+**/
+.rg-root {
+  font-family: 'Pretendard', 'Malgun Gothic', '맑은 고딕', AppleSDGothicNeo-Light, sans-serif;
+  font-size: 12px;
+
+  color: #000000;
+  background: #ffffff;
+  appearance: none;
+  outline: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  touch-action: none;
+  -ms-touch-action: none;
+
+  .rg-table {
+    position: relative;
+    margin: 0 !important;
+
+    /* 0과 다르면 자동 행 계산 시 틀어진다! content div 전에서 설정할 것!*/
+    padding: 0 !important;
+
+    /* 0과 다르면 자동 행 계산 시 틀어진다! content div 전에서 설정할 것! */
+    border-spacing: 0 !important;
+    border-collapse: separate !important;
+    box-sizing: border-box !important;
+    line-height: 1.5em;
+    outline: none;
+
+    td {
+      position: relative;
+      margin: 0 !important;
+
+      /* 0과 다르면 자동 행 계산 시 틀어진다! content div 전에서 설정할 것!*/
+      padding: 0 !important;
+      /* 0과 다르면 자동 행 계산 시 틀어진다! content div 전에서 설정할 것! */
+
+      border-spacing: 0 !important;
+      border-collapse: separate !important;
+      box-sizing: border-box !important;
+      line-height: 1.5em;
+      outline: none;
+    }
+  }
+
+  input::-ms-clear {
+    display: none;
+  }
+}
+.rg-grid {
+  /*border: 1px solid #6e7786;*/
+  border: none;
+}
+.rg-empty-grid {
+  display: table;
+  padding: 0px 10%;
+  background: #ffffff;
+  color: #000000;
+  font-size: 32px;
+  text-align: center;
+
+  span {
+    @include body1(var(--navy300));
+    display: table-cell;
+    vertical-align: middle;
+    position: relative;
+    &:before {
+      display: block;
+      width: 140px;
+      height: 140px;
+      opacity: 0.5;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="141" height="125" viewBox="0 0 141 125" fill="none"><g opacity="0.8"><rect width="86" height="114" rx="2.27828" transform="matrix(-1 0 0 1 86 10)" fill="%23C0CFEB"/><g filter="url(%23filter0_b_15956_195130)"><path fill-rule="evenodd" clip-rule="evenodd" d="M95.9992 2.21698C95.9997 2.23735 96 2.25779 96 2.27829V111.722C96 112.98 94.98 114 93.7217 114H12.2783C11.02 114 10 112.98 10 111.722V2.27828C10 1.02002 11.02 0 12.2783 0H93.7217C93.7443 0 93.7667 0.000327194 93.7891 0.00097709L78 0.00097847L95.9992 18V2.21698Z" fill="%23F0F5FA"/></g><path d="M89 102L78.9706 91.9706M78.9706 91.9706C83.3137 87.6274 86 81.6274 86 75C86 61.7452 75.2548 51 62 51C48.7452 51 38 61.7452 38 75C38 88.2548 48.7452 99 62 99C68.6274 99 74.6274 96.3137 78.9706 91.9706Z" stroke="%23C0CFEB" stroke-width="6"/><path fill-rule="evenodd" clip-rule="evenodd" d="M105.024 123.679L85.6975 105.018C84.7698 104.123 84.7698 102.636 85.6975 101.74L89.0248 98.5279C89.9076 97.6755 91.307 97.6755 92.1898 98.5279L111.632 117.299C113.456 119.061 113.456 121.917 111.632 123.679C109.807 125.44 106.849 125.44 105.024 123.679Z" fill="%239FB2D8"/><path d="M53 66L71 84M71 66L62 75L53 84" stroke="%239FB2D8" stroke-width="6" stroke-linecap="round"/><path d="M38 16H22" stroke="%23C0CFEB" stroke-width="3" stroke-linecap="round"/><path d="M70 28L22 28" stroke="%23C0CFEB" stroke-width="3" stroke-linecap="round"/><path d="M54 35H22" stroke="%23C0CFEB" stroke-width="3" stroke-linecap="round"/><path d="M22 42H62" stroke="%23C0CFEB" stroke-width="3" stroke-linecap="round"/><path d="M96 17.999L78.0008 0V15.7207C78.0008 16.979 79.0208 17.999 80.2791 17.999H96Z" fill="%23C0CFEB"/><path d="M118 49L111 56" stroke="%23C0CFEB" stroke-width="4" stroke-linecap="round"/><path d="M119 93L111 85" stroke="%23C0CFEB" stroke-width="4.55656" stroke-linecap="round"/><path d="M127 71L115 71" stroke="%23C0CFEB" stroke-width="4" stroke-linecap="round"/></g><defs><filter id="filter0_b_15956_195130" x="9.43043" y="-0.569568" width="87.1391" height="115.139" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feGaussianBlur in="BackgroundImageFix" stdDeviation="0.284784"/><feComposite in2="SourceAlpha" operator="in" result="effect1_backgroundBlur_15956_195130"/><feBlend mode="normal" in="SourceGraphic" in2="effect1_backgroundBlur_15956_195130" result="shape"/></filter></defs></svg>')
+        no-repeat center;
+      margin: 0 auto 20px;
+      content: '';
+    }
+  }
+}
+
+// Header Styles
+.rg-header {
+  text-align: center;
+  font-weight: 600;
+  color: #8a9dbe;
+  background: #e4e7eb;
+
+  .rg-rowindicator-head,
+  .rg-table {
+    tr td {
+      border-top: none;
+      border-bottom: 1px solid var(--bg200);
+      border-left: none;
+      overflow: hidden;
+      color: #8a9dbe;
+      font-weight: 600;
+      font-size: 1.2rem;
+      background-color: #f4f8fc;
+
+      //hover :: 배경제거
+      // &:hover {
+      //   background: #cdd2d9;
+      // }
+
+      &.rg-header-group-cell {
+        span {
+          padding: 0 8px 0 10px;
+        }
+        &.seperate {
+          border-right: 1px solid var(--navy100);
+        }
+      }
+
+      &.rg-header-cell {
+        &.seperate {
+          border-right: 1px solid var(--navy100);
+        }
+
+        // 리얼그리드용 필수값 표시
+        &.rg-required {
+          span {
+            &:after {
+              display: inline-flex;
+              color: var(--error);
+              margin-left: 4px;
+              content: '*';
+            }
+          }
+        }
+
+        // 비적합 리스트같은 테이블에서 첫번째 셀 패딩값 30 필요 (글로벌 클래스 우선순위 밀림)
+        &.first_cell {
+          .rg-header-renderer {
+            padding-left: 30px;
+          }
+
+          .rg-tree-renderer {
+          }
+        }
+
+        &:hover {
+          background-color: var(--bg200);
+        }
+      }
+    }
+  }
+}
+
+.rg-header-cell,
+.rg-header-group-cell {
+  text-align: center;
+}
+
+.rg-header-group-cell {
+  background: #d9dce2;
+}
+
+//editor check박스 공중 부양 배경 추가
+.rg-rowbarcontainer {
+  background-color: #fff;
+}
+
+.rg-header-renderer,
+.rg-header-focus,
+.rg-header-select,
+.rg-header-sort-ascending,
+.rg-header-sort-descending,
+.rg-header-sort-none,
+.rg-header-filtering {
+  padding: 0 12px;
+  vertical-align: middle;
+  position: unset !important;
+  background: no-repeat center; /* Add this line for background images */
+}
+
+.rg-header-sort-ascending,
+.rg-header-sort-descending {
+  font-size: 8px;
+}
+
+.rg-header-filtering,
+.rg-header-filtering.filter-activated {
+  vertical-align: middle;
+  background: $rg-header-filtering no-repeat center; /* Add this line for background images */
+
+  &.filter-activated {
+    /* Set the actual image path for activated filtering */
+    background: $rg-header-filtering-activated no-repeat center;
+  }
+}
+
+.rg-header-check {
+  margin: 2px !important;
+}
+
+.rg-header-summary {
+  text-align: center;
+  color: #3b2f14;
+  background: #f3ebdb;
+
+  .rg-table tr td {
+    border-bottom: none;
+    border-right: 1px solid #bcc0c8;
+    border-left: none;
+  }
+}
+
+.rg-head-cell {
+  &.rg-checkbar-head {
+    border-bottom: 1px solid var(--bg200);
+  }
+}
+
+.rg-checkbar-cell {
+  background-color: #fff;
+  border-bottom: 1px solid var(--bg200);
+  &.check_hide {
+    > div {
+      display: none;
+    }
+  }
+}
+
+.rg-checkbar-cell,
+.rg-header-summary-cell {
+  text-align: center;
+}
+
+.rg-header-summary-renderer,
+.rg-fixed-header-summary {
+  background: #f3ebdb;
+
+  .rg-table tr td {
+    border-top: none;
+    border-right: 1px solid #bcc0c8;
+    border-bottom: 1px solid #bcc0c8;
+    border-left: none;
+  }
+}
+
+//header
+
+//footer
+// Footer Styles
+.rg-footer {
+  color: var(--navy800);
+  background: var(--bg200);
+  .rg-table tr td {
+    border-bottom: none;
+    border-right: 1px solid #bcc0c8;
+    border-top: 1px solid #bcc0c8;
+    border-left: none;
+    @include cap(--navy800);
+  }
+}
+
+.rg-fixed-footer {
+  background: #e4e7eb;
+
+  .rg-table tr td {
+    border-bottom: none;
+    border-right: 1px solid #bcc0c8;
+    border-top: 1px solid #bcc0c8;
+    border-left: none;
+  }
+}
+
+.rg-footer .rg-table tr td {
+  border: none;
+}
+
+.rg-footer-renderer {
+  padding: 0px 12px;
+}
+.rg-sum {
+  text-align: center;
+  background: #f3ebdb;
+
+  .rg-table tr td {
+    border-top: none;
+    border-right: 1px solid #bcc0c8;
+    border-bottom: 1px solid #bcc0c8;
+    border-left: none;
+  }
+}
+
+.rg-foot {
+  text-align: center;
+  background: #f6f6f8;
+
+  .rg-table tr td {
+    border-bottom: none;
+    border-right: 1px solid #bcc0c8;
+    border-top: 1px solid #bcc0c8;
+    border-left: none;
+  }
+}
+
+//body, data, fixed
+
+// Body Styles
+
+.rg-body,
+.rg-fixed-body {
+  background-color: #ffffff;
+}
+
+.rg-body .rg-table tr td,
+.rg-fixed-body .rg-table tr td {
+  border-top: none;
+  border-bottom: 1px solid var(--bg200);
+  border-left: none;
+  height: 0px;
+}
+
+.rg-body .rg-table tr:hover,
+.rg-fixed-body .rg-table tr:hover {
+  background-color: #fafbfe; //[qa 24141]
+}
+
+// td 호버 [qa 24141]
+// .rg-body .rg-table tr td:hover,
+// .rg-fixed-body .rg-table tr td:hover {
+//   background: #fafbfe;
+// }
+
+.rg-data-row {
+  background: none;
+  @include body2; // cell color값 row로 변경
+}
+
+.rg-fixed-row {
+  background-color: #ededed;
+
+  td {
+    border-top: none;
+    border-right: 1px solid #bdbdbd;
+    border-bottom: 1px solid #bdbdbd;
+    border-left: none;
+    height: 0;
+  }
+}
+
+.rg-fixed-body {
+  .rg-data-row,
+  .rg-alternate-row {
+    background-color: #ffffff;
+  }
+}
+
+.rg-body-cell {
+  text-align: center;
+}
+
+.rg-data-cell {
+  white-space: nowrap;
+  text-align: center;
+
+  // &.error {
+  //   color: var(--error);
+  // }
+
+  &.rg-data-empty-cell {
+    color: var(--navy200);
+  }
+
+  &.disabled {
+    background-color: var(--bg);
+  }
+
+  // 비적합 리스트같은 테이블에서 첫번째 셀 패딩값 30 필요 (글로벌 클래스 우선순위 밀림)
+  &.first_cell {
+    .rg-renderer {
+      padding-left: 30px;
+    }
+    .rg-tree-renderer {
+    }
+  }
+}
+
+// .rg-data-empty-cell {
+//   color: #bfbfbf;
+// }
+
+// Checkbox and Radio Styles
+
+.rg-checkbox,
+.rg-radio {
+  vertical-align: middle;
+  margin: 0;
+  margin-top: 0 !important;
+  padding: 0;
+}
+
+// 체크박스 스타일 추가
+input[type='checkbox'].rg-checkbox {
+  -webkit-appearance: none;
+  background-color: red;
+  width: 16px;
+  height: 16px;
+  background: url('data:image/svg+xml,<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.799316 2.40273C0.799316 1.51908 1.51566 0.802734 2.39932 0.802734H13.5993C14.483 0.802734 15.1993 1.51908 15.1993 2.40273V13.6027C15.1993 14.4864 14.483 15.2027 13.5993 15.2027H2.39932C1.51566 15.2027 0.799316 14.4864 0.799316 13.6027V2.40273Z" fill="white"/><path fill-rule="evenodd" clip-rule="evenodd" d="M0 2.4C0 1.07452 1.07452 0 2.4 0H13.6C14.9255 0 16 1.07452 16 2.4V13.6C16 14.9255 14.9255 16 13.6 16H2.4C1.07452 16 0 14.9255 0 13.6V2.4ZM2.4 1.6C1.95817 1.6 1.6 1.95817 1.6 2.4V13.6C1.6 14.0418 1.95817 14.4 2.4 14.4H13.6C14.0418 14.4 14.4 14.0418 14.4 13.6V2.4C14.4 1.95817 14.0418 1.6 13.6 1.6H2.4Z" fill="%23354165"/></svg>')
+    center center no-repeat;
+  &:checked {
+    background: url('data:image/svg+xml,<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 1.77778C0 0.795938 0.795938 0 1.77778 0H14.2222C15.2041 0 16 0.795938 16 1.77778V14.2222C16 15.2041 15.2041 16 14.2222 16H1.77778C0.795938 16 0 15.2041 0 14.2222V1.77778Z" fill="%233357FF"/><path fill-rule="evenodd" clip-rule="evenodd" d="M13.0748 5.07348L6.22402 11.9242L2.48438 8.1846L3.74145 6.92752L6.22402 9.41009L11.8177 3.81641L13.0748 5.07348Z" fill="white"/></svg>')
+      center center no-repeat;
+  }
+}
+
+// Button Action Styles
+.rg-button-action {
+  background: $rg-button-action no-repeat center;
+
+  &:hover {
+    background: $rg-button-action-hover no-repeat center;
+
+    &:active {
+      background: $rg-button-action-active no-repeat center;
+    }
+  }
+}
+
+// Button List Styles
+.rg-button-list {
+  background: $rg-button-list no-repeat center left;
+
+  &:hover {
+    background: $rg-button-list-hover no-repeat center left;
+
+    &:active {
+      background: $rg-button-list-active no-repeat center left;
+    }
+  }
+}
+
+// Button Calendar Styles
+.rg-button-calendar {
+  background: $rg-button-calendar no-repeat center left;
+
+  &:hover {
+    background: $rg-button-calendar-hover no-repeat center left;
+
+    &:active {
+      background: $rg-button-calendar-active no-repeat center left;
+    }
+  }
+}
+
+// Button Step Styles
+.rg-button-step-up,
+.rg-button-step-down {
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #cccccc;
+  }
+}
+// Fixed Row Bar Styles
+.rg-fixed-row-bar,
+.rg-fixed-row-bar-cell {
+  background: #44547e !important;
+  border-bottom: 1px solid #d2d5da !important;
+}
+
+// Fixed and Right Column Bar Styles
+.rg-fixed-column-bar,
+.rg-right-column-bar {
+  background: #44547e;
+  border-right: 1px solid #d2d5da;
+}
+
+// Expander Styles
+.rg-expander-expanded,
+.rg-expander-collapsed {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: none;
+  vertical-align: middle;
+}
+
+.rg-expander-expanded {
+  background: no-repeat $rg-expander-expanded center center;
+}
+
+.rg-expander-collapsed {
+  background: no-repeat $rg-expander-collapsed center center;
+}
+
+.rg-expanded-cell,
+.rg-collapsed-cell {
+  margin-left: 18px;
+}
+
+// Column Expanded and Collapsed Styles
+.rg-column-expanded,
+.rg-column-collapsed {
+  border: none;
+  background: no-repeat center center;
+  vertical-align: middle;
+}
+.rg-column-expanded {
+  background-image: $rg-column-expanded;
+}
+.rg-column-collapsed {
+  background-image: $rg-column-collapsed;
+}
+
+.rg-focus {
+  border: 1px solid var(--blue400);
+  background: rgba(51, 87, 255, 0.03);
+}
+
+// .rg-group-focus {
+//   border: 2px solid black;
+// }
+
+// .rg-deactive-focus {
+//   border: 2px solid rgba(242, 161, 110, 0.8);
+// }
+
+.rg-focus-line {
+  border: 2px solid rgba(242, 161, 110, 0.8);
+  width: 2px;
+  height: 2px;
+}
+
+// Edit Mode Styles
+.rg-focus-editing {
+  border: 2px solid #44547e;
+}
+
+.rg-focus-inner,
+.rg-focus-inner-line {
+  border: 1px dotted rgba(61, 61, 61, 0.8);
+  width: 1px;
+  height: 1px;
+}
+
+.rg-rowhover,
+.rg-rowfocus,
+.rg-rowblock {
+  background: rgba(205, 210, 217, 0.1) !important;
+}
+
+// Column Resizer Styles
+._rg-col-resizer_,
+._rg-header-cell-mover_ {
+  background: rgba(210, 213, 218, 0.5);
+  border: none;
+}
+
+// Header Cell Feedback Styles
+._rg-header-cell-feedback_ {
+  opacity: 0.8;
+  border: 1px solid #cdd2d9;
+}
+
+// Row Mover Proxy Styles
+._rg-row-mover-proxy_ {
+  background: #ededed $rg-row-mover-proxy 2% 50% no-repeat;
+  border: 1px solid #adadad;
+  opacity: 0.7;
+  padding: 4px 16px 4px 32px;
+  font-size: 13px;
+  color: #1a1a1a;
+}
+
+._rg-row-mover-proxy-disabled_ {
+  background: #ededed $rg-row-mover-proxy-disabled 2% 50% no-repeat;
+}
+
+// Row Mover Line Styles
+._rg-row-mover-line_,
+._rg-row-mover-block_,
+._rg-row-mover-group_ {
+  background: rgba(31, 31, 31, 0.7);
+  border: none;
+}
+
+// Selection Cell Styles
+// .rg-selection-cell {
+//   background: #44547e !important;
+//   color: inherit;
+// }
+
+// Selection Styles
+.rg-selection {
+  background-color: rgba(51, 88, 255, 0.1);
+  border: 1px solid var(--blue400);
+}
+
+//--
+
+.rg-waiting {
+  text-align: center;
+  width: 60px;
+  height: 60px;
+  background: $rg-waiting no-repeat center center;
+  background-size: contain;
+
+  &.type-1 {
+    background-image: $rg-waiting-type-1;
+  }
+  &.type-2 {
+    background-image: $rg-waiting-type-2;
+  }
+  &.type-3 {
+    background-image: $rg-waiting-type-3;
+  }
+  &.type-4 {
+    background-image: $rg-waiting-type-4;
+  }
+  &.type-5 {
+    background-image: $rg-waiting-type-5;
+  }
+  &.type-6 {
+    background-image: $rg-waiting-type-6;
+  }
+  &.type-7 {
+    background-image: $rg-waiting-type-7;
+  }
+  &.type-8 {
+    background-image: $rg-waiting-type-8;
+  }
+}
+
+.rg-toast {
+  background: rgba(234, 236, 239, 0.9);
+  color: #656d7b;
+  border: 1px solid #6e7786;
+  border-radius: 4px;
+  box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.3);
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  font-size: 32px;
+  padding: 2px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+.rg-calendar {
+  font-size: 12px;
+  background: #ffffff;
+  border: 1px solid #d2d5da;
+  box-shadow: 1px 1px 4px 0px rgba(0, 0, 0, 0.3);
+
+  .rg-cal-header {
+    height: 24px;
+    background: #dcdfe4 !important;
+
+    .rg-cal-prev-month {
+      width: 20px;
+      height: 20px;
+      top: 2px !important;
+      left: 2px !important;
+      background-image: $rg-cal-prev-month;
+
+      &:hover {
+        background-image: $rg-cal-prev-month-hover;
+      }
+
+      &:active {
+        background-image: $rg-cal-prev-month-active;
+      }
+    }
+
+    .rg-cal-next-month {
+      width: 20px;
+      height: 20px;
+      top: 2px !important;
+      right: 2px !important;
+      background-image: $rg-cal-next-month;
+      &:hover {
+        background-image: $rg-cal-next-month-hover;
+      }
+
+      &:active {
+        background-image: $rg-cal-next-month-active;
+      }
+    }
+
+    .rg-cal-today-button {
+      padding: 0 4px;
+      font-size: 12px;
+      border: 1px solid #d2d5da;
+      color: #656d7b;
+      border-radius: 3px;
+      cursor: pointer;
+      box-sizing: border-box;
+      top: 3px !important;
+      right: 24px !important;
+
+      &:hover {
+        border: 1px solid #44547e;
+        background: #44547e;
+        color: #ffffff;
+      }
+    }
+
+    .rg-cal-yearmonth {
+      .rg-cal-year {
+        color: #656d7b;
+        cursor: default;
+        top: 5px;
+      }
+
+      .rg-cal-month {
+        color: #656d7b;
+        cursor: pointer;
+        top: 5px;
+      }
+    }
+  }
+
+  .rg-cal-days-table {
+    background: #ffffff;
+
+    .rg-cal-weeks {
+      color: #656d7b;
+      font-size: 12px;
+      cursor: default;
+    }
+
+    .rg-cal-days {
+      font-size: 12px;
+      text-align: center;
+
+      .rg-cal-week-year-week {
+        font-size: 10px;
+        border-radius: 50%;
+
+        &.rg-week-selectable {
+          cursor: pointer;
+
+          &:hover {
+            border: 1px solid #b0b8c3;
+          }
+        }
+      }
+
+      .rg-cal-day {
+        cursor: pointer;
+        width: 24px;
+        height: 24px;
+        font-size: 12px;
+        border-radius: 50%;
+        color: #656d7b;
+
+        &:hover {
+          border: 1px solid #b0b8c3;
+          box-sizing: border-box;
+        }
+
+        &.rg-cal-week-sun {
+          color: #eb394f;
+        }
+
+        &.rg-cal-week-sat {
+          color: #1772b0;
+        }
+
+        &.rg-cal-prev-day {
+          color: #c4c8ce;
+          background: #ffffff;
+          border: none;
+        }
+
+        &.rg-cal-next-day {
+          color: #c4c8ce;
+          background: #ffffff;
+          border: none;
+
+          &:hover {
+            border: 1px solid #e4e7eb;
+            box-sizing: border-box;
+          }
+        }
+
+        &.rg-cal-today {
+          background: #d9c18e;
+        }
+
+        &.rg-cal-focusday {
+          background: #44547e;
+          color: #ffffff;
+        }
+      }
+    }
+  }
+
+  .rg-cal-buttons {
+    height: 31px;
+
+    .rg-cal-delete-button {
+      padding: 2px;
+      font-size: 12px;
+      border: 1px solid transparent;
+      border-radius: 3px;
+      line-height: 18px;
+      padding-left: 18px;
+      background: $rg-cal-delete-button no-repeat 2px center;
+      background-size: 14px;
+      cursor: pointer;
+
+      &:hover {
+        border: 1px solid #aaa;
+        background-color: #fff;
+        text-decoration: underline;
+      }
+    }
+
+    .rg-cal-cancel-button {
+      padding: 2px;
+      font-size: 12px;
+      border: 1px solid transparent;
+      border-radius: 3px;
+      line-height: 18px;
+      cursor: pointer;
+      padding-left: 18px;
+      background: $rg-cal-cancel-button no-repeat 2px center;
+      background-size: 14px;
+
+      &:hover {
+        border: 1px solid #aaa;
+        background-color: #fff;
+        text-decoration: underline;
+      }
+    }
+
+    .rg-cal-save-button {
+      padding: 2px;
+      font-size: 12px;
+      border: 1px solid transparent;
+      border-radius: 3px;
+      line-height: 18px;
+      cursor: pointer;
+      padding-left: 18px;
+      background: $rg-cal-save-button no-repeat 2px center;
+      background-size: 14px;
+
+      &:hover {
+        border: 1px solid #aaa;
+        background-color: #fff;
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+.rg-cal-next-year {
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-image: $rg-cal-next-year;
+
+  &:hover {
+    background-image: $rg-cal-next-year-hover;
+  }
+
+  &:active {
+    background-image: $rg-cal-next-year-active;
+  }
+}
+
+.rg-cal-prev-year {
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-image: $rg-cal-prev-year;
+
+  &:hover {
+    background-image: $rg-cal-prev-year-hover;
+  }
+
+  &:active {
+    background-image: $rg-cal-prev-year-active;
+  }
+}
+
+.rg-cal-month-picker {
+  margin: 0;
+  cursor: pointer;
+  background: #ffffff;
+  border: 1px solid #d2d5da;
+  box-shadow: 1px 1px 4px 0px rgba(0, 0, 0, 0.3);
+  font-size: 12px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+
+  .rg-cal-month-picker-item {
+    padding: 3px 6px;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+
+    //호버 :: 배경제거
+    // &:hover {
+    //   background: #cdd2d9;
+    // }
+  }
+}
+
+.rg-cal-disable-day {
+  background: #e6e6e6 !important;
+  color: #c4c8ce;
+  border: none !important;
+}
+
+.rg-multicheck {
+  background: #ffffff;
+  border: 1px solid #9aa1ac;
+  box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.3);
+  padding: 0;
+  margin: 0;
+  font-size: 10pt;
+}
+
+.rg-multicheck-button {
+  text-align: center;
+}
+
+.rg-multicheck-accept,
+.rg-multicheck-cancel {
+  display: inline-block;
+  border: 1px solid #9aa1ac;
+  border-radius: 2px;
+  padding: 2px 4px !important;
+  color: #656d7b;
+  background-color: #dcdfe4;
+
+  &:hover {
+    background-color: #bfc5ce;
+  }
+}
+
+.rg-multicheck-select {
+  background: #44547e !important;
+  color: #ffffff;
+}
+
+.rg-multicheck-item {
+  background: none;
+  color: none;
+
+  &:hover {
+    background: rgba(229, 102, 21, 0.3) !important;
+    color: none;
+  }
+}
+
+.rg-multicheck-selectitem {
+  background: rgba(229, 102, 21, 0.6);
+  color: #7e8795;
+}
+
+.rg-changed-marker {
+  width: 0;
+  height: 0;
+  border-left: 3px solid #eb394f;
+  border-top: 3px solid #eb394f;
+  border-bottom: 3px solid transparent;
+  border-right: 3px solid transparent;
+}
+
+.rg-edgemarker-lefttop {
+  width: 0;
+  height: 0;
+  border-left: 3px solid #eb394f;
+  border-top: 3px solid #eb394f;
+  border-bottom: 3px solid transparent;
+  border-right: 3px solid transparent;
+  top: 0px;
+  display: block;
+  position: absolute;
+}
+
+.rg-edgemarker-leftbottom {
+  width: 0;
+  height: 0;
+  border-left: 3px solid #eb394f;
+  border-top: 3px solid transparent;
+  border-bottom: 3px solid #eb394f;
+  border-right: 3px solid transparent;
+  bottom: 0px;
+  display: block;
+  position: absolute;
+}
+
+.rg-edgemarker-righttop {
+  width: 0;
+  height: 0;
+  border-left: 3px solid transparent;
+  border-top: 3px solid #eb394f;
+  border-bottom: 3px solid transparent;
+  border-right: 3px solid #eb394f;
+  right: 0px;
+  top: 0px;
+  display: block;
+  position: absolute;
+}
+
+.rg-edgemarker-rightbottom {
+  width: 0;
+  height: 0;
+  border-left: 3px solid transparent;
+  border-top: 3px solid transparent;
+  border-bottom: 3px solid #eb394f;
+  border-right: 3px solid #eb394f;
+  bottom: 0px;
+  right: 0px;
+  display: block;
+  position: absolute;
+}
+
+.rg-editor-container {
+  box-sizing: border-box;
+  overflow: hidden;
+  resize: none;
+  border: 1px solid var(--blue400);
+  box-shadow: rgba(0, 0, 0, 0.2) 1px 2px 5px;
+
+  > {
+    input,
+    textarea {
+      line-height: normal;
+      text-align: left;
+      color: var(--typo900);
+      font: inherit;
+      ime-mode: auto;
+      padding: 0 12px !important;
+      cursor: text;
+    }
+  }
+
+  .rg-number-editor {
+    text-align: right;
+  }
+}
+
+.rg-progress {
+  background-color: #f2f2f2;
+  border: 1px solid #cccccc;
+}
+
+.rg-progress-bar {
+  background: linear-gradient(#a1a1a1, #e6e6e6);
+  border: 1px solid #4d4d4d;
+}
+
+.rg-progress-progress {
+  background: linear-gradient(#ffffff, #dbdbdb);
+  border-right: 1px solid #4d4d4d;
+}
+
+.rg-progress-message {
+  font-size: 11px;
+  font-weight: bold;
+}
+
+.rg-load-indicator {
+  display: inline-block;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: $rg-load-indicator no-repeat center center;
+  background-size: 100px;
+  background-color: rgba(234, 236, 239, 0.5);
+}
+
+.rg-validation-error {
+  width: 16px;
+  height: 16px;
+  border: none;
+  background: $rg-validation-error no-repeat center;
+  vertical-align: middle;
+}
+
+.rg-validation-warning {
+  width: 16px;
+  height: 16px;
+  border: none;
+  background: $rg-validation-warning no-repeat center;
+  vertical-align: middle;
+}
+
+.rg-validation-info {
+  width: 16px;
+  height: 16px;
+  border: none;
+  background: $rg-validation-info no-repeat center;
+  vertical-align: middle;
+}
+
+.rg-selection-handleleft-handle {
+  background: #44547e !important;
+}
+
+.realgrid-pre-wrap {
+  white-space: pre-wrap;
+}
+
+.rg-focused-row {
+  background: var(--blue10);
+}
+
+// 박스형 그리드 내 스타일
+.realgrid_container {
+  //.rg-header .rg-rowindicator-head tr td,
+  .rg-header .rg-table tr td {
+    font-size: 1.2rem !important; // load oligo popup 내 detail table과 우선순위 밀려서 적용
+  }
+  .rg-root {
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+  }
+
+  .rg-body {
+    td[role='gridcell'] {
+      border-right: 1px solid var(--bg200);
+      &.seperate {
+        border-right: 1px solid var(--navy100);
+      }
+    }
+  }
+
+  .rg-head {
+    td[role='gridcell'] {
+      border-bottom: 1px solid var(--bg200);
+    }
+  }
+
+  .rg-rowbarcontainer {
+    background-color: #fff;
+    td[role='gridcell'] {
+      border-right: 1px solid var(--bg200);
+      border-bottom: 1px solid var(--bg200);
+    }
+  }
+
+  // no data sm 사이즈 (search taxon, search host 내에 사용)
+  .rg-empty-grid {
+    span {
+      &:before {
+        width: 100px;
+        height: 100px;
+        background-size: 100px 100px;
+      }
+    }
+  }
+
+  // [qa 24141] td 호버 추가 (tr 호버 배경제거)
+  .rg-body .rg-table tr:hover,
+  .rg-fixed-body .rg-table tr:hover {
+    background-color: transparent;
+  }
+
+  .rg-body .rg-table tr td:hover,
+  .rg-fixed-body .rg-table tr td:hover {
+    background: #fafbfe;
+  }
+}
+
+@import './rowgroup'; // rowgroup
+@import './filter'; // filter
+@import './form'; // filter
+@import './tooltip'; // tooltip
+@import './dropdown'; // dropdown
+@import './popup'; // tooltip
+@import './renderer'; //renderer
+@import './tree'; // tree

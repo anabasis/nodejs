@@ -1,0 +1,143 @@
+/* 헤더 팝업 스타일 */
+.rg-header-popup {
+  background: $rg-header-popup no-repeat center;
+
+  &:active:hover {
+    background: $rg-header-popup-active-hover no-repeat center;
+  }
+
+  &:hover {
+    background: $rg-header-popup-hover no-repeat center;
+  }
+}
+
+/* 팝업 버튼 스타일 */
+.rg-button-popup {
+  background: $rg-button-popup no-repeat center;
+
+  &:hover {
+    background: $rg-button-popup-hover no-repeat center;
+
+    &:active {
+      background: $rg-button-popup-active no-repeat center;
+    }
+  }
+}
+
+/* 팝업 메뉴 스타일 */
+.rg-popup-menu {
+  padding: 10px 0;
+  border-radius: 8px;
+  border: 1px solid var(--navy50);
+  background: #fff;
+  box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.2);
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  font-size: 10pt;
+  margin: 0;
+  color: #000000;
+  min-width: 120px;
+  max-width: 400px;
+}
+
+/* 팝업 메뉴 항목 스타일 */
+.rg-popup-item {
+  position: relative;
+  float: none;
+  width: 100%;
+  white-space: pre;
+  cursor: pointer;
+  min-width: 100%;
+  box-sizing: border-box;
+  padding: 8px 20px;
+  @include body2(var(--typo900));
+}
+
+/* 비활성화된 팝업 메뉴 항목 스타일 */
+.rg-popup-item-disable {
+  color: #a2abb8;
+}
+
+/* 팝업 메뉴 항목 호버 및 포커스 스타일 */
+.rg-popup-item:hover,
+.rg-popup-item-focused,
+tr.rg-popup-item-focused:hover {
+  color: #000000;
+  background-color: var(--bg) !important;
+  // background-color: #f2f2ff;
+}
+
+/* 비활성화된 팝업 메뉴 항목 호버 스타일 */
+.rg-popup-item-disable:hover {
+  color: #a2abb8;
+}
+
+/* 팝업 메뉴 구분선 스타일 */
+.rg-popup-separator {
+  position: relative;
+  float: none;
+  width: 100%;
+  height: 5px;
+  border: 0;
+  padding: 0 20px;
+  margin: 2px;
+  color: #d2d5da;
+}
+
+/* 팝업 메뉴 수평 구분선 스타일 */
+.rg-popup-separator-hr {
+  margin-top: 5px;
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid var(--navy50);
+  padding: 0;
+}
+
+/* 팝업 콘텐츠 스타일 */
+.rg-popup-content {
+  pointer-events: none;
+  position: relative;
+  display: block;
+  color: var(--typography-black-900, #1a1f23);
+
+  /* Body 2 */
+  font-family: Pretendard;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px;
+  letter-spacing: -0.1px;
+}
+
+/* 팝업 확장 버튼 스타일 */
+.rg-popup-expander:after {
+  content: '';
+  display: block;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 1px;
+  background: $rg-popup-expander no-repeat right center;
+}
+
+/* 팝업 체크 아이콘 스타일 */
+.rg-popup-check {
+  background: $rg-popup-check no-repeat 5px (center / 12px);
+}
+
+/* 선택된 팝업 체크 아이콘 스타일 */
+.rg-popup-check-checked {
+  background: $rg-popup-check-checked no-repeat 5px (center / 12px);
+}
+
+/* 선택된 팝업 라디오 아이콘 스타일 */
+.rg-popup-radio-checked {
+  background: $rg-checkbar-radio-checked no-repeat 5px (center / 12px);
+}
+
+/* 팝업 그룹1 스타일 */
+.rg-popup-group1 {
+  background: #dcdfe4;
+}

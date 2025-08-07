@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>error</title>
+  </head>
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+    :root {
+      overflow-wrap: break-word;
+      word-break: keep-all;
+      -webkit-font-smoothing: antialiased;
+    }
+    body,
+    div,
+    dl,
+    dt,
+    dd,
+    ul,
+    ol,
+    li,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    pre,
+    code,
+    form,
+    fieldset,
+    legend,
+    textarea,
+    p,
+    blockquote,
+    th,
+    td,
+    input,
+    select,
+    textarea,
+    button {
+      margin: 0;
+      padding: 0;
+    }
+    dl,
+    ul,
+    ol,
+    menu,
+    li {
+      list-style: none;
+    }
+    address,
+    caption,
+    cite,
+    code,
+    dfn,
+    em,
+    var,
+    i {
+      font-style: normal;
+    }
+    img,
+    fieldset,
+    iframe {
+      border: 0 none;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+    audio,
+    canvas,
+    iframe,
+    img,
+    svg,
+    video {
+      vertical-align: middle;
+    }
+    input,
+    select,
+    textarea,
+    button {
+      vertical-align: middle;
+    }
+    textarea {
+      resize: none;
+    }
+    input::-ms-clear {
+      display: none;
+    }
+    button {
+      border: 0 none;
+      background-color: transparent;
+      cursor: pointer;
+    }
+    button,
+    input[type='button'],
+    input[type='submit'],
+    input[type='reset'],
+    input[type='file'] {
+      border-radius: 0;
+      -webkit-appearance: button;
+    }
+    input[type='image'],
+    input[type='text'],
+    input[type='submit'],
+    input[type='password'],
+    input[type='search'] {
+      border-radius: 0;
+      -webkit-appearance: none;
+    }
+    input:checked[type='checkbox'] {
+      -webkit-appearance: checkbox;
+      background-color: transparent;
+    }
+    input[type='search']::-webkit-search-cancel-button {
+      -webkit-appearance: none;
+    }
+    table {
+      border-collapse: collapse;
+      border-spacing: 0;
+      empty-cells: show;
+    }
+    caption,
+    legend {
+      position: absolute;
+      top: -9999px;
+      left: -9999px;
+      font-size: 0px;
+      line-height: 0;
+    }
+    a {
+      text-decoration: none;
+    }
+    a:active {
+      background-color: transparent;
+    }
+    textarea,
+    input {
+      -webkit-apperence: none;
+    }
+    article,
+    aside,
+    details,
+    figcaption,
+    figure,
+    footer,
+    header,
+    hgroup,
+    nav,
+    section,
+    main,
+    menu {
+      display: block;
+    }
+    blockquote,
+    q {
+      quotes: none;
+    }
+    blockquote:before,
+    blockquote:after,
+    q:before,
+    q:after {
+      content: '';
+      content: none;
+    }
+    sup,
+    sub {
+      line-height: 0;
+    }
+
+    ul:after,
+    ol:after {
+      content: '';
+      clear: both;
+      display: block;
+    }
+
+    summary::marker {
+      font-size: 0;
+      display: none;
+    }
+
+    html,
+    body {
+      width: 100%;
+      font-size: 10px;
+      line-height: 1;
+      font-family: 'Pretendard', -apple-system, 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, 'Noto Sans', sans-serif,
+        'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+      font-weight: 400;
+      background-color: #f1f4f7;
+    }
+    body {
+      font-size: 1.2rem;
+      letter-spacing: -0.1px;
+      min-width: 1440px;
+    }
+    .error_box {
+      height: 100vh;
+      padding: 120px 180px;
+    }
+    .error_cont {
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 30px 24px;
+      height: calc(100vh - 240px);
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex: 1;
+    }
+    .error_title {
+      width: 100%;
+      text-align: center;
+      margin: 30px 0;
+    }
+    .headline3 {
+      font-size: 28px;
+      line-height: 1;
+      letter-spacing: -0.8px;
+      font-weight: 600;
+      color: #1a1f23;
+      margin-bottom: 10px;
+    }
+    .body1 {
+      font-size: 15px;
+      line-height: 1.375;
+      font-weight: 500;
+      letter-spacing: -0.4px;
+      color: #959ba0;
+    }
+  </style>
+  <body>
+    <section class="error_box">
+      <div class="error_cont">
+        <div>
+          <img src="/images/error.svg" alt="점검중이미지" />
+          <div class="error_title">
+            <p class="headline3 mb_10">시스템 점검 중</p>
+            <p class="body1 typo500">죄송합니다. 시스템 점검으로 인해 이용할 수 없습니다.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

@@ -1,0 +1,110 @@
+@import 'variables';
+
+.content {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 30px 24px;
+  min-height: calc(100vh - 295px);
+  width: 100%;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  flex: 1;
+
+  &.auto {
+    min-height: auto;
+    flex: initial;
+  }
+
+  &.dashboard {
+    flex: initial;
+    min-height: auto;
+    &_home {
+      flex: 1;
+      min-height: auto;
+      // height: calc(100vh - 462px);
+      // min-height: 560px;
+    }
+  }
+
+  .inner {
+    width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  h1 {
+    @include h1;
+    // margin-bottom: 10px;
+    & + dl {
+      margin-top: 10px;
+    }
+  }
+  .cont_title {
+    color: red;
+  }
+
+  & + .content {
+    margin-top: 20px;
+  }
+
+  &.top_content {
+    padding: 24px 24px;
+    display: flex;
+    flex-direction: row;
+    position: sticky;
+    // padding-bottom: 20px;
+    align-items: flex-start;
+    justify-content: space-between;
+    min-height: auto;
+    transition: all 0.5s;
+    margin-bottom: 20px;
+    > div {
+      display: block;
+    }
+
+    .inner {
+      width: auto;
+      flex: none;
+    }
+  }
+
+  &.sticky {
+    position: sticky;
+    top: 74px;
+    padding-right: 20px;
+    padding-left: 20px;
+    max-height: calc(100vh - 94px);
+    min-height: calc(100vh - 94px);
+    overflow: auto;
+  }
+}
+
+.content_wrap {
+  // margin-top: 20px;
+  padding-bottom: 0px;
+  max-width: 100%;
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  &.login {
+    min-height: 600px;
+    margin-top: 20px;
+    .content {
+      height: 100%;
+      min-height: auto;
+      max-height: none;
+    }
+  }
+}
+
+.folding {
+  position: absolute;
+  right: 25px;
+  z-index: 2;
+}
+
+// calc(100vh - 90px)

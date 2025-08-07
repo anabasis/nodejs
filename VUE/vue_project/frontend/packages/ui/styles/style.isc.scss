@@ -1,0 +1,23 @@
+@import './realgrid/_style.scss'; //리얼그리드 기본스타일(색상 전체변경 내용있음)
+@import './realgrid/_customize.scss'; //리얼그리드 커스텀 내역
+@import './isc/_global.scss'; // 인실리코 global
+
+//컨테트 패딩 플랫폼과 다름.
+.isc {
+  &:not(.top_content) {
+    &:has(.line_tab),
+    &:has(.sticky_tab) {
+      padding: 16px 24px 30px 24px !important;
+    }
+  }
+}
+
+//데이터가 정상적으로 들어오지 않는경우가 있어 방어 code 추가
+.sticky_wrap:has(.desc_list) + .rtl {
+  .line_tab,
+  .sticky_tab {
+    top: calc(var(--contentbox-height) + 32px);
+  }
+}
+
+// 262px

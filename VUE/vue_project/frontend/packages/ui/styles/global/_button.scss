@@ -1,0 +1,430 @@
+// 공통 버튼 스타일을 정의합니다
+// mui 가 아닌 클래스 버튼입니다. mui 버튼 사용 안하게 될 때를 대비하여 만들어놓은 임시 소스입니다.
+
+.btn {
+  font-family: 'Pretendard';
+  border: 0;
+  margin: 0;
+  text-transform: none;
+  line-height: 1;
+  letter-spacing: -0.1px;
+  box-shadow: none;
+  border-radius: 8px;
+  padding: 10px;
+  box-sizing: border-box;
+  & + & {
+    margin-left: 10px;
+  }
+  + .button {
+    margin-left: 10px;
+  }
+  &:hover {
+    box-shadow: none;
+  }
+  span {
+    line-height: 1;
+  }
+  svg {
+    width: auto;
+  }
+  span + svg {
+    margin-left: 8px;
+  }
+  svg + span {
+    margin-left: 8px;
+  }
+
+  // size
+  &.xs {
+    min-width: 32px;
+    font-size: 1.2rem;
+    font-weight: 400;
+    padding: 6px;
+    svg + span {
+      margin-left: 0;
+    }
+  }
+
+  &.sm {
+    min-width: 56px;
+    font-size: 1.2rem;
+    font-weight: 400;
+    height: 32px;
+    svg {
+      width: 1.3rem;
+      height: auto;
+    }
+  }
+
+  &.md {
+    min-width: 65px;
+    height: 36px;
+    font-size: 1.4rem;
+    font-weight: 400;
+    svg {
+      height: 1.6rem;
+    }
+  }
+
+  &.lg {
+    height: 40px;
+    min-width: 100px;
+    padding: 10px 20px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    svg {
+      height: 2rem;
+    }
+  }
+
+  &.full {
+    width: 100%;
+    min-width: 140px;
+    padding: 10px 20px;
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+
+  &.xl {
+    height: 50px;
+    min-width: 160px;
+    padding: 13px 20px;
+    font-size: 1.8rem;
+    font-weight: 600;
+  }
+
+  // solid type
+  &.primary {
+    background-color: var(--blue400);
+    color: #fff;
+    &:hover {
+      background-color: var(--blue400-hover);
+    }
+    &.active {
+      background-color: var(--blue400-active);
+    }
+    //disabled 추가
+    &:disabled,
+    &.disabled {
+      background-color: var(--navy100);
+    }
+  }
+  &.secondary {
+    background-color: var(--blue50);
+    color: var(--blue400);
+    &:hover {
+      background-color: var(--blue50-hover);
+    }
+    &:disabled,
+    &.disabled {
+      background-color: var(--navy50);
+      color: var(--navy200);
+    }
+    &.active {
+      background-color: var(--blue400-active);
+    }
+  }
+  &.black {
+    background-color: var(--typo800);
+    color: #fff;
+    &:disabled,
+    &.disabled {
+      opacity: 0.5;
+    }
+  }
+  &.dim {
+    background-color: var(--navy50);
+    color: var(--navy200);
+  }
+
+  //
+  &.line {
+    &.gray {
+      color: var(--navy100);
+      border: 1px solid var(--navy100);
+      &:hover {
+        background-color: var(--blue10);
+      }
+      &:disabled {
+        background-color: var(--blue100);
+        background-color: var(--blue10-200);
+      }
+      &.active {
+        // background-color: var(--blue50);
+        border: 1px solid var(--blue400);
+      }
+    }
+    &.primary {
+      border: 1px solid var(--blue400);
+      background-color: #fff;
+      color: var(--blue400);
+      &:hover {
+        background-color: var(--blue10);
+      }
+      &:disabled {
+        background-color: var(--blue100);
+        background-color: var(--blue10-200);
+      }
+      &.active {
+        background-color: var(--blue50);
+      }
+    }
+    &.secondary {
+      background-color: #fff;
+      border: 1px solid var(--navy800);
+      color: var(--navy800);
+      &:hover {
+        background-color: var(--blue10);
+      }
+      &:disabled {
+        border: 1px solid var(--blue100);
+        color: var(--blue100);
+      }
+      &.active {
+        background-color: var(--blue50);
+      }
+    }
+    &.error {
+      color: var(--error);
+      border: 1px solid var(--error);
+    }
+  }
+
+  // 인실리코 status 와 ui 는 동일하지만 플랫폼에서 따로 쓰는 버튼임 ㅎ.. -> 12/27 :: 정정 플랫폼에서도 사용
+  // 타입 정의할 수 없이 광범위하여 글로벌로 제어함
+  &.status {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid var(--navy100) !important;
+    padding: 0 8px;
+    height: 32px;
+    border-radius: 6px !important;
+    //min-width: 90px;
+    transition: all 0.2s;
+    position: relative;
+    span {
+      margin-left: 6px;
+      @include body2(var(--typo900));
+    }
+
+    svg + span {
+      margin-left: 4px;
+    }
+
+    &:hover {
+      background-color: var(--blue10);
+    }
+    &:active {
+      border-color: var(--blue400);
+    }
+    &:disabled {
+      background-color: var(--navy50) !important;
+      .status_txt,
+      span {
+        color: var(--typo500) !important;
+      }
+    }
+
+    // on bullet 상태 추가
+    &.on_bullet {
+      position: relative;
+      &:after {
+        position: absolute;
+        top: -4px;
+        right: -4px;
+        background-color: var(--error);
+        border: 2px solid #fff;
+        border-radius: 50%;
+        width: 12px;
+        height: 12px;
+        display: block;
+        content: '';
+      }
+    }
+  }
+
+  //배경 선 없음
+  &.noline {
+    min-width: auto;
+    padding: 4px;
+    &.small {
+      min-width: auto;
+      font-size: 1.2rem;
+      font-weight: 400;
+      height: auto;
+      svg {
+        width: auto;
+        height: auto;
+        & + span {
+          margin-left: 2px;
+          & + span {
+            display: none;
+          }
+        }
+      }
+
+      &:hover {
+        background-color: transparent;
+        color: var(--blue400);
+      }
+    }
+  }
+
+  //예외규정 스타일
+  &.floating {
+    z-index: 2;
+    height: 20px;
+    width: 60px;
+    height: 60px;
+    // /padding: 18px;
+    box-sizing: border-box;
+    border-radius: 50%;
+    background-color: var(--blue400);
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease-in-out;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &:hover {
+      background-color: var(--blue400-hover);
+    }
+    &:active {
+      background-color: var(--blue400-active);
+    }
+  }
+}
+
+.floating_btn_box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  .btn {
+    & + .btn {
+      margin-top: 10px;
+      margin-left: 0;
+    }
+  }
+}
+
+.floating {
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+  &.comment {
+    bottom: 120px;
+    z-index: 2;
+  }
+}
+
+.onlyIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  font-size: 0;
+  position: relative;
+  margin-right: 10px !important;
+  svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.folding {
+  margin-left: 10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  border: 1px solid var(--navy800);
+  position: absolute;
+  .ico_angle {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 10px;
+    left: 10px;
+    display: inline-block;
+    &.up {
+      transform: rotate(-90deg);
+    }
+    &.down {
+      transform: rotate(90deg);
+    }
+  }
+}
+.ico_angle {
+  display: inline-block;
+  &.up {
+    transform: rotate(-90deg);
+  }
+  &.down {
+    transform: rotate(90deg);
+  }
+}
+
+// 인실리코 Go To Step 버튼 hover 스타일로 인해 생성
+.txt_btn {
+  @include body3(var(--navy800));
+  &:hover {
+    @include body3(var(--blue400));
+  }
+
+  &.ico_angle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    &:after {
+      width: 20px;
+      height: 20px;
+      display: inline-flex;
+      background: url('data:image/svg+xml,<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.5 15.5L12.5 10.5L7.5 5.5" stroke="%23354165" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>')
+        center center no-repeat;
+      background-size: 20px 20px;
+      content: '';
+    }
+
+    &:hover {
+      &:after {
+        background: url('data:image/svg+xml,<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.5 15.5L12.5 10.5L7.5 5.5" stroke="%233357FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>')
+          center center no-repeat;
+      }
+    }
+  }
+}
+
+//메뉴 관리 예외 버튼ㅗ
+.drag_btn {
+  display: flex;
+  padding: 8px;
+  width: 36px;
+  height: 36px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  border: 1px solid var(--navy100);
+  background: #fff;
+  &.move {
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    cursor: grab;
+  }
+  &:disabled {
+    border: 1px solid var(--navy50);
+    background: var(--second100);
+  }
+}
+
+.ico_loading {
+  position: absolute;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--blue400);
+  width: 100%;
+  height: 100%;
+}

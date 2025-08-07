@@ -1,0 +1,433 @@
+@import 'variables';
+
+.logo_area {
+  z-index: 21;
+  position: absolute;
+  // width: 235px;
+  height: 70px;
+  left: 20px;
+  padding: 22px 24px;
+
+  .toggle_btn {
+    display: none;
+  }
+  &.preview {
+    padding-left: 40px;
+    background-color: var(--bg);
+    &::after {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: 0;
+      z-index: 10;
+      width: 100%;
+      height: 20px;
+      background-color: var(--bg);
+    }
+  }
+}
+
+.aside {
+  position: relative;
+  width: 250px;
+  height: calc(100vh - 56px);
+  margin-top: 56px;
+  box-sizing: border-box;
+}
+
+.drawer {
+  &_inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 20px 0;
+    width: 230px;
+    height: 100%;
+    padding-top: 8px;
+    border-radius: 8px;
+    box-sizing: border-box;
+    background-color: #fff;
+  }
+
+  .nav {
+    flex: 1;
+    padding-top: 20px;
+    overflow: auto;
+  }
+}
+
+.toggle_drawer {
+  .nav {
+    flex: 1;
+    min-height: 0; // 동적사이즈 작업해야할때 이것이 필요!!!!!!
+    padding-top: 20px;
+    overflow: auto;
+  }
+}
+
+.list {
+  .items {
+    display: block;
+    width: 100%;
+    padding-right: 14px;
+
+    .item {
+      display: flex;
+      max-width: 100%;
+      justify-content: inherit;
+      a {
+        padding: 10px 0 10px 24px;
+        display: flex;
+        box-sizing: border-box;
+        flex: 1;
+        min-width: 0;
+        max-width: 100%;
+        align-items: center;
+        cursor: pointer;
+        @include body2(var(--navy400));
+      }
+      .icon {
+        overflow: hidden;
+        position: relative;
+        display: inline-block;
+        min-width: 20px;
+        max-width: 20px;
+        height: 20px;
+        margin-right: 10px;
+        img {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          object-fit: cover;
+          transform: translate(-50%, -50%);
+          z-index: 1;
+        }
+      }
+      span {
+        min-width: 0;
+        max-width: auto;
+        flex: 1;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      &:hover {
+        //color: var(--navy800);
+        // 2depth hover 일괄적용 현상 수정
+        > a {
+          color: var(--navy800);
+        }
+        .icon {
+          .hover {
+            z-index: 3;
+          }
+        }
+      }
+
+      &.active,
+      &.open {
+        display: block;
+        > a {
+          min-width: 100%;
+          @include body3(var(--blue400));
+          justify-content: inherit;
+        }
+        .icon {
+          .active {
+            z-index: 4;
+          }
+        }
+      }
+
+      &.open > .items {
+        display: block;
+      }
+    }
+
+    .items {
+      display: none;
+      padding-left: 24px;
+
+      // 2depth align
+      .item {
+        padding-right: 0;
+        a {
+          padding-left: 30px;
+        }
+      }
+    }
+  }
+}
+
+.nav_btn {
+  svg {
+    height: 1.8rem;
+    width: auto;
+  }
+}
+
+.nav_box {
+  //max-height: 200px;
+  overflow: hidden;
+  padding: 12px 12px 24px;
+
+  button,
+  .btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 8px 10px;
+    border-radius: 8px;
+    box-sizing: border-box;
+
+    @include body2(var(--navy800));
+
+    i.ico {
+      display: inline-block;
+      width: 20px;
+      margin-right: 8px;
+
+      svg {
+        width: 100%;
+      }
+    }
+
+    + button,
+    + .btn {
+      margin-top: 10px;
+      background-color: #f8f8f8;
+    }
+
+    &.active {
+      @include body3(var(--blue400));
+    }
+    &.mypage {
+      &:hover {
+        background-color: var(--blue10);
+      }
+    }
+  }
+}
+
+.wrapper {
+  overflow: visible;
+  min-width: 256px;
+  border-radius: 8px;
+  background-color: #fff;
+  padding: 20px 10px 20px 16px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+}
+
+.tools {
+  height: 290px;
+  box-sizing: border-box;
+  overflow-y: auto;
+  li {
+    a {
+      display: flex;
+      padding-right: 16px;
+    }
+
+    + li {
+      margin-top: 10px;
+    }
+
+    .tools_img {
+      border-radius: 9px;
+      width: 46px;
+      height: 46px;
+    }
+
+    .info {
+      padding-left: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      flex-wrap: wrap;
+
+      .title {
+        font-weight: 600;
+        line-height: 1.3;
+        font-size: 1.4rem;
+        color: var(--navy800);
+      }
+
+      .desc {
+        max-width: 166px;
+        font-size: 1rem;
+        line-height: 1.3;
+        color: var(--navy400);
+      }
+    }
+  }
+}
+.nodata {
+  display: flex;
+  flex-direction: column;
+  min-height: 290px;
+  justify-content: center;
+  align-items: center;
+  p {
+    @include body1(--navy200);
+  }
+}
+
+.my_info {
+  display: flex;
+  margin-bottom: 20px;
+  align-items: center;
+
+  .info_txt {
+    padding-left: 16px;
+
+    .name {
+      @include title1;
+    }
+
+    .group,
+    .id {
+      @include cap(var(--navy400));
+    }
+    .group {
+      margin-top: 4px;
+    }
+  }
+
+  button,
+  .btn {
+    width: 100%;
+  }
+}
+
+.divider {
+  margin: 20px 0 10px 0;
+}
+
+.btn {
+  border-radius: 8px;
+  height: 40px;
+  width: 100%;
+  @include body3;
+
+  &.logout {
+    background-color: #fdf5f7;
+    text-align: center;
+    color: var(--error);
+  }
+
+  &.mypage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--navy100);
+    background-color: #fff;
+    span {
+      line-height: 1;
+    }
+  }
+
+  svg {
+    margin-right: 8px;
+  }
+}
+
+a.btn {
+  display: inline-block;
+  line-height: 40px;
+  text-align: center;
+}
+
+//프리뷰용
+aside.preview {
+  position: relative;
+  top: 80px;
+  margin-top: 0 !important;
+  height: auto !important;
+  max-height: 100% !important;
+  padding-left: 0 !important;
+  // padding-bottom: 40px;
+  .nav {
+    min-height: 64vh !important;
+  }
+  .preview {
+    min-height: 600px !important;
+  }
+
+  .item {
+    display: flex;
+    max-width: 100%;
+    justify-content: inherit;
+    p {
+      padding: 10px 0 10px 24px;
+      display: flex;
+      box-sizing: border-box;
+      flex: 1;
+      min-width: 0;
+      max-width: 100%;
+      align-items: center;
+      cursor: pointer;
+      @include body2(var(--navy400));
+    }
+    &:hover {
+      p {
+        color: var(--navy800);
+      }
+    }
+
+    &.active,
+    &.open {
+      display: block;
+      > p {
+        min-width: calc(100%);
+        @include body3(var(--blue400));
+        justify-content: inherit;
+      }
+    }
+
+    &.open > .items {
+      display: block;
+    }
+  }
+}
+
+@media screen and (max-width: 1439px) {
+  .aside {
+    position: absolute;
+    &.preview {
+      position: inherit;
+    }
+  }
+
+  .logo_area {
+    display: flex;
+    .toggle_btn {
+      display: block;
+    }
+
+    .logo {
+      display: none;
+    }
+  }
+
+  .logo_area.preview {
+    .toggle_btn {
+      display: none;
+    }
+    .logo {
+      display: block;
+    }
+  }
+
+  .preview {
+    position: inherit !important;
+    .logo_area {
+      .toggle_btn {
+        display: none;
+      }
+
+      .logo {
+        display: block;
+      }
+    }
+  }
+}

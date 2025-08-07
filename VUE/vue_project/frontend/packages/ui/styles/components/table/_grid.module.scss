@@ -1,0 +1,55 @@
+@import '../../common/variables';
+
+.grid_table_container {
+  // position: relative;
+  width: 100%;
+  //max-height: 396px;
+  //height: auto !important;
+  border: 1px solid var(--navy100);
+  border-radius: 4px;
+  overflow: hidden;
+  //background: #fff;
+  //overflow: auto;
+
+  &.reverse {
+    .grid_table_header {
+      background-color: #fff;
+    }
+  }
+  .inner {
+    // uhee ::  그리드 영역의 스크롤 없앰 (리얼그리드 스크롤 사용)
+    // overflow: auto;
+    height: 100%;
+    &.scroll {
+      position: relative;
+      overflow: auto;
+    }
+  }
+  .grid_header_group {
+    position: sticky;
+    overflow: hidden;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    top: 0;
+    z-index: 1;
+    background-color: #fff;
+    border-bottom: 1px solid var(--bg200);
+  }
+  .grid_table_header {
+    background-color: #f4f8fc;
+    @include capH(var(--navy00));
+    & + .grid_table_header {
+      border-top: 1px solid var(--bg200);
+    }
+    & > div {
+      display: flex;
+      max-height: 40px;
+      min-height: 40px;
+      padding: 5px 12px;
+
+      &.full {
+        padding: 0;
+      }
+    }
+  }
+}

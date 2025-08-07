@@ -1,0 +1,39 @@
+@import '../common/variables';
+
+div + footer.align {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--navy50);
+}
+
+footer.align {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+//footer 예외
+.terms_ls {
+  display: flex;
+  padding-left: 20px;
+  li {
+    @include body2(var(--typo500));
+    cursor: pointer;
+    & + li {
+      margin-left: 10px;
+      &::before {
+        position: relative;
+        top: -3px;
+        content: '';
+        display: inline-block;
+        width: 2px;
+        height: 2px;
+        border-radius: 1px;
+        background-color: var(--typo500);
+        margin-right: 10px;
+      }
+    }
+  }
+}

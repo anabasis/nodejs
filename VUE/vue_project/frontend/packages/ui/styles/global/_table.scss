@@ -1,0 +1,259 @@
+// 테이블 내의 모든 요소들에 대한 스타일을 정의합니다.
+
+// 기본 align :: left
+table {
+  th,
+  td {
+    text-align: left;
+
+    // 왼쪽 정렬
+    &.tl {
+      text-align: left;
+    }
+
+    // 오른쪽 정렬
+    &.tr {
+      text-align: right;
+    }
+
+    // 가운데 정렬
+    &.tc {
+      text-align: center;
+    }
+    // 위로 정렬
+    &.vt {
+      vertical-align: top;
+      padding-top: 12px !important; // 슬쩍 바꿔봅니다....
+    }
+    // 아래로 정렬
+    &.vb {
+      vertical-align: bottom;
+    }
+  }
+
+  .nodata_group {
+    display: flex;
+    padding: 40px;
+    min-height: 150px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  tr {
+    &.disabled {
+      td {
+        cursor: default !important;
+        color: var(--navy100) !important;
+      }
+    }
+  }
+}
+
+// 라벨 + 테이블 스타일 -> DetailTable로 변경
+// .no_border_tbl {
+//   table {
+//     width: 100%;
+//   }
+//   th {
+//     padding: 13px 0;
+//     @include body3(var(--typo900));
+//   }
+//   td {
+//     padding: 13px 0 13px 30px;
+//     @include body2(var(--typo900));
+//   }
+// }
+
+.tbl_text {
+  text-align: left;
+  display: inline-flex;
+  align-items: center;
+}
+
+// 프로젝트 > 히스토리 스탭
+.badge {
+  position: relative;
+  display: inline-block;
+  border-radius: 4px;
+  padding: 4px 12px;
+  width: 80px;
+  text-align: center;
+  background-color: #fff;
+  border: 1px solid var(--blue200);
+  z-index: 2;
+  @include capH(var(--blue400));
+  &.on {
+    border-color: var(--blue50);
+    background-color: var(--blue50);
+  }
+}
+
+.history_cell {
+  text-align: center !important;
+  & + .history_cell {
+    .dashed_inner {
+      position: relative;
+      &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        z-index: 1;
+        top: 50%;
+        left: -50%;
+        width: 100%;
+        height: 1px;
+        background: url('data:image/svg+xml,<svg width="20" height="2" viewBox="0 0 20 2" fill="none" xmlns="http://www.w3.org/2000/svg"><line y1="1" x2="20" y2="1" stroke="%23C6CDDA" stroke-dasharray="2 2"/></svg>')
+          repeat-x;
+      }
+    }
+  }
+}
+
+.bg_box {
+  .no_border_tbl {
+    th {
+      vertical-align: top;
+      @include body2(var(--navy300));
+    }
+    td {
+      @include body1(var(--navy600));
+    }
+  }
+}
+
+.va {
+  &_top {
+    vertical-align: top;
+  }
+  &_md {
+    vertical-align: top;
+  }
+  &_bt {
+    vertical-align: top;
+  }
+}
+
+// 어드민 메뉴관리 div테이블 scss
+.divtable {
+  .column_title_wrapper {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 40px;
+    background-color: var(--second50);
+    .column_title {
+      @include capH(#8a9dbe);
+      background-color: var(--second50);
+      padding: 0 12px;
+      &:first-child {
+        text-align: center;
+      }
+    }
+  }
+  .table_content {
+    margin-top: 6px;
+  }
+  .row {
+    border-radius: 8px;
+    border: 1px solid var(--bg200);
+    overflow: hidden;
+    & + .row {
+      margin-top: 8px;
+    }
+    &.selected {
+      background-color: var(--blue10) !important;
+      border: 1px solid var(--blue100) !important;
+    }
+    &_cell {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      background-color: #fff;
+      border-radius: 8px 8px 0 0;
+      height: 66px;
+      .cell {
+        padding: 0 12px;
+        @include body2;
+        &:first-child {
+          text-align: center;
+        }
+      }
+      &.selected {
+        background-color: var(--blue10);
+      }
+    }
+  }
+  .cell {
+    &:first-child {
+      text-align: center;
+    }
+    &.authority {
+      span {
+        display: inline-flex;
+        align-items: center;
+        line-height: 1.2;
+        strong {
+          margin-right: 10px;
+          font-weight: 600;
+        }
+        & + span {
+          margin-left: 20px;
+          padding-left: 20px;
+          position: relative;
+          &:after {
+            content: '';
+            width: 1px;
+            height: 12px;
+            background-color: var(--navy100);
+            position: absolute;
+            left: 0;
+            top: 2px;
+          }
+        }
+      }
+    }
+  }
+}
+
+// table_content > row
+.children_container {
+  width: 100%;
+  background-color: #fff;
+  background-color: var(--bg);
+  overflow: hidden;
+  border-top: 1px solid var(--bg200);
+  padding: 6px;
+  flex-direction: column;
+  .row {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background-color: #fff;
+    height: 66px;
+    border: 0;
+    border-radius: 0;
+    border-left: 1px solid var(--bg200);
+    border-right: 1px solid var(--bg200);
+    & + .row {
+      border-top: 1px solid var(--bg200);
+      margin-top: 0;
+      border-radius: 0;
+    }
+    &:first-child {
+      border-top-right-radius: 8px;
+      border-top-left-radius: 8px;
+      border-top: 1px solid var(--bg200);
+    }
+    &:last-child {
+      border-bottom: 1px solid var(--bg200);
+      border-bottom-left-radius: 8px;
+      border-bottom-right-radius: 8px;
+    }
+
+    .cell {
+      padding: 0 0 0 18px;
+      @include body2;
+    }
+  }
+}

@@ -1,0 +1,60 @@
+@import '../../common/variables';
+
+.dropdown {
+  &_wrap {
+    min-width: 200px;
+    padding: 8px;
+    border: 1px solid #c6cdda;
+    border-radius: 4px;
+    background-color: #fff;
+  }
+
+  &_title {
+    position: sticky;
+    top: -8px;
+    border-bottom: 1px solid #e9ebf0;
+    padding: 7px 8px 7px;
+    background-color: #fff;
+    z-index: 10;
+  }
+
+  &_group {
+    padding: 8px 0;
+    border-bottom: 1px solid #e9ebf0;
+
+    &:first-child {
+      padding-top: 0;
+    }
+  }
+
+  &_item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    min-height: 30px;
+    padding: 5px 8px;
+    border-radius: 4px;
+    @include cap(var(--typo900));
+
+    .dropdown_wrap {
+      // display: none;
+    }
+
+    &:hover {
+      border-radius: 4px;
+      background-color: #f1f4f7;
+    }
+
+    &.hover {
+      .dropdown_wrap {
+        display: block;
+      }
+    }
+
+    &.active {
+      @include capH(var(--blue400));
+    }
+  }
+}

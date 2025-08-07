@@ -1,0 +1,36 @@
+// .rg-tooltip {
+//   background: rgba(234, 236, 239, 0.9);
+//   color: #656d7b;
+//   border: 1px solid #6e7786;
+//   border-radius: 2px;
+//   box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.3);
+//   font-style: normal;
+//   font-variant: normal;
+//   font-weight: normal;
+//   font-size: 10pt;
+//   visibility: hidden;
+//   // white-space: nowrap;
+//   padding: 3px 6px;
+// }
+
+//커스텀
+.rg-tooltip {
+  background-color: var(--typo800);
+  padding: 8px 12px;
+  max-height: 200px;
+  max-width: 600px;
+  border-radius: 4px;
+  overflow: visible !important;
+  @include cap(var(--bg-f));
+  &::after {
+    content: '';
+    display: block;
+    width: 20px;
+    height: 14px;
+    position: absolute;
+    top: var(--rg-tooltip-top);
+    left: 0px;
+    bottom: var(--rg-tooltip-bottom);
+    background: var(--rg-tooltip-bg);
+  }
+}

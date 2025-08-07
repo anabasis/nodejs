@@ -1,0 +1,145 @@
+// 행 그룹 스타일
+
+// 헤드(head), 풋(foot), 바(bar), 헤더(header) 및 푸터(footer)의 그룹 스타일
+.rg-rowgroup-head,
+.rg-rowgroup-foot,
+.rg-rowgroup-bar,
+.rg-rowgroup-header,
+.rg-rowgroup-footer {
+  border-right: 1px solid #bcc0c8;
+  border-left: none;
+}
+
+// 행 그룹의 헤드와 풋 스타일
+.rg-rowgroup-head,
+.rg-rowgroup-foot {
+  text-align: center;
+  background: #e4e7eb;
+
+  .rg-table tr td {
+    border-bottom: none;
+    border-top: 1px solid #bcc0c8;
+    background-color: var(--bg-100);
+  }
+}
+
+// 행 그룹의 풋 스타일
+.rg-rowgroup-foot {
+  .rg-table tr td {
+    border-top: none;
+    border-bottom: 1px solid #bcc0c8;
+  }
+}
+
+// 행 그룹의 바(bar)와 푸터 스타일
+.rg-rowgroup-bar,
+.rg-rowgroup-footer {
+  text-align: center;
+  background: whitesmoke;
+
+  .rg-table tr td {
+    border-top: none;
+    border-bottom: 1px solid #bcc0c8;
+    vertical-align: top;
+  }
+}
+
+// 행 그룹의 헤더와 푸터 스타일
+.rg-rowgroup-header,
+.rg-rowgroup-footer {
+  background: whitesmoke;
+  border-top: none;
+  border-bottom: 1px solid #bcc0c8;
+  padding-left: 4px;
+  white-space: nowrap;
+}
+
+// 행 그룹의 푸터 셀 스타일
+.rg-rowgroup-footer-cell {
+  text-align: right;
+
+  .rg-rowgroup-footer-renderer {
+    padding: 0 4px;
+  }
+}
+
+// 행 그룹의 확장기(expander) 아이콘 스타일
+.rg-rowgroup-expander {
+  display: inline-block;
+  vertical-align: middle;
+  width: 13px;
+  height: 13px;
+}
+
+// 행 그룹의 확장된(expanded) 및 축소된(collapsed) 확장기 아이콘 스타일
+.rg-rowgroup-expander-expanded,
+.rg-rowgroup-expander-collapsed {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: none;
+  vertical-align: middle;
+}
+
+.rg-rowgroup-expander-expanded {
+  background: no-repeat $rg-expander-expanded center center;
+}
+
+.rg-rowgroup-expander-collapsed {
+  background: no-repeat $rg-expander-collapsed center center;
+}
+
+// 그룹 패널 스타일
+
+// 그룹 패널 컨테이너 스타일
+.rg-group-panel {
+  box-sizing: border-box;
+  background: #eaecef;
+  border-bottom: 1px solid #bcc0c8;
+  text-align: left;
+
+  // 그룹 패널의 메시지 및 아이템 텍스트 스타일
+  &-message,
+  &-item-text {
+    display: block;
+    position: absolute;
+    white-space: nowrap;
+  }
+
+  // 그룹 패널의 메시지 스타일
+  &-message {
+    font-size: 14px;
+    color: #4e545f;
+  }
+
+  // 그룹 패널의 아이템 및 표시되지 않는 마크 없는 아이템 스타일
+  &-item,
+  &-no-mark {
+    display: block;
+    border: 1px solid #d2d5da;
+    background: #ffffff;
+
+    // 그룹 패널 아이템의 닫기 아이콘 스타일
+    &-close {
+      display: inline-block;
+      position: absolute;
+      background-image: $rg-group-panel-item-close;
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  // 그룹 패널의 셀 피드백 스타일
+  &-cell-feedback {
+    opacity: 0.8;
+  }
+
+  // 마크 없는 그룹 패널 아이템의 스타일
+  &-no-mark {
+    background: $rg-group-panel-no-mark rgba(234, 236, 239, 0.5) no-repeat center center;
+    background-size: 100% 100%;
+    margin-top: -1px;
+    width: 100%;
+    height: 100%;
+  }
+}

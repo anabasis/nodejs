@@ -1,0 +1,251 @@
+@import '../../common/variables';
+
+//탭에 스크롤이 필요한경우 사용할 클래스 :: 공통이므로 컴포넌트에서 관리!!
+.tab_container {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.tab_lst {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  // 사용안합니다!
+  // overflow-y: auto;
+  // &.sticky {
+  //   display: flex;
+  //   width: 100%;
+  //   background-color: var(--bg);
+  //   z-index: 21;
+  //   position: sticky;
+  //   top: calc(var(--contentbox-height) + 96px);
+  //   &::after {
+  //     position: absolute;
+  //     content: '';
+  //     width: 100%;
+  //     height: 1px;
+  //     background-color: var(--bg);
+  //     top: -1px;
+  //   }
+  // }
+  li {
+    min-width: 160px;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    transition: all 0.3s;
+    cursor: pointer;
+    @include body2;
+    color: var(--typo500);
+    &.active {
+      @include body3;
+      color: var(--blue400);
+      background-color: #fff;
+      border-top-left-radius: 6px;
+      border-top-right-radius: 6px;
+    }
+  }
+  &.sm {
+    li {
+      flex: 1;
+      min-width: auto;
+      // padding: 0 22px;
+    }
+  }
+}
+
+.line_tab_lst {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  border-bottom: 1px solid var(--navy100);
+  margin-bottom: 30px;
+
+  &.sticky {
+    display: flex;
+    background-color: var(--bg-f);
+    z-index: 10;
+    position: sticky;
+    top: var(--contentbox-height);
+    &::after {
+      position: absolute;
+      content: '';
+      width: 100%;
+      height: 20px;
+      background-color: var(--bg-f);
+      // background-color: red;
+      top: -18px;
+    }
+  }
+  li {
+    //min-width: 160px;
+    padding: 0 30px;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s;
+    @include title1;
+    color: var(--typo500);
+    &:after {
+      content: '';
+      width: 100%;
+      height: 2px;
+      position: absolute;
+      bottom: -1.5px;
+      background-color: transparent;
+      display: inline-block;
+      transition: all 0.3s;
+    }
+    &.active {
+      color: var(--navy800);
+      &:after {
+        background-color: var(--navy800);
+      }
+    }
+    &.disabled {
+      cursor: not-allowed;
+      color: var(--typo200);
+    }
+  }
+  &.sm {
+    li {
+      height: 42px;
+    }
+  }
+  &.tag {
+    li {
+      padding: 0;
+      text-align: left;
+      justify-content: flex-start;
+      min-width: 220px;
+      color: var(--navy200);
+      & + li {
+        margin-left: 30px;
+      }
+      .tag {
+        margin-right: 10px;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background-color: var(--navy200);
+        color: #fff;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        font-weight: 700;
+        transition: all 0.3s;
+        display: inline-flex;
+      }
+      &:hover {
+        color: var(--navy400);
+        .tag {
+          background-color: var(--navy400);
+        }
+      }
+      &.active {
+        color: var(--navy800);
+        .tag {
+          background-color: var(--navy800);
+        }
+      }
+      &.disabled {
+        color: var(--navy50);
+        .tag {
+          background-color: var(--navy50);
+        }
+      }
+    }
+  }
+}
+
+.round_tab_lst {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  li {
+    @include cap(var(--navy600));
+    padding: 10px 20px;
+    transition: background-color 0.3s;
+    border: 1px solid var(--navy100);
+    background-color: #fff;
+    border-radius: 20px;
+    cursor: pointer;
+    & + li {
+      margin-left: 10px;
+    }
+    &.active {
+      @include capH;
+      font-weight: bold;
+      border-color: var(--blue50);
+      background-color: var(--blue50);
+      color: var(--blue400);
+    }
+
+    &:hover {
+      border-color: var(--blue400);
+    }
+  }
+
+  &.sm {
+    li {
+      padding: 6px 15px;
+      border-color: var(--navy100);
+      color: var(--navy600);
+      &.active {
+        background-color: var(--typo200);
+        border-color: var(--typo200);
+        color: var(--typo800);
+      }
+
+      &:hover {
+        border-color: var(--navy800);
+      }
+    }
+  }
+}
+
+//미디어쿼리
+@mixin media-query($type, $size) {
+  @if $type==min {
+    @media screen and (min-width: $size) {
+      @content;
+    }
+  } @else if $type==max {
+    @media screen and (max-width: $size) {
+      @content;
+    }
+  } @else if $type==only {
+    @media screen and (max-width: $size) and (min-width: $size) {
+      @content;
+    }
+  }
+}
+
+//:: 1440px 이하
+@include media-query(max, 1440px) {
+  .tab_lst {
+    li {
+      min-width: 120px;
+    }
+  }
+  .line_tab_lst {
+    li {
+      min-width: 120px;
+    }
+  }
+  .round_tab_lst {
+    li {
+      padding: 10px 15px;
+    }
+  }
+}

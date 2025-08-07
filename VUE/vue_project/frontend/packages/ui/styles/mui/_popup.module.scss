@@ -1,0 +1,296 @@
+@import '../common/variables';
+
+//alert
+.dialog {
+  // position: relative;
+  * {
+    font-family: 'Pretendard';
+  }
+  &.sm {
+    .dialog_box {
+      min-width: 570px;
+    }
+  }
+  &.md {
+    .dialog_box {
+      min-width: 700px;
+    }
+  }
+  &_box {
+    width: auto;
+    min-width: 460px; // xs:: default
+    border-radius: 16px;
+    padding: 50px;
+  }
+  &_close {
+    // width: 24px;
+    // height: 24px;
+    position: absolute !important;
+    top: 16px !important;
+    right: 16px !important;
+    padding: 4px;
+  }
+  &_icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 24px;
+  }
+  h2 {
+    padding: 0;
+    @include h3(var(--typo900));
+    text-align: center;
+    margin-bottom: 12px;
+    white-space: pre-line;
+  }
+  &_cont {
+    padding: 0 0;
+    overflow: unset;
+  }
+  p {
+    &.text_title {
+      text-align: center;
+      @include body1(var(--typo500));
+      white-space: pre-line;
+    }
+  }
+  .text_title {
+    @include body1(var(--typo500));
+    white-space: pre-line;
+    text-align: center;
+  }
+
+  // 글로벌 scss 로 변경
+  // &_btn_box {
+  //   display: flex;
+  //   justify-content: center;
+  //   padding: 0;
+  //   margin-top: 30px;
+  // }
+}
+
+.toast {
+  background-color: rgba(255, 255, 255, 0.7);
+  // background-color: var(--bg-f);
+  overflow: hidden; //Dim 위에 toast 가 나오는 경우가 있어서 추가
+  border-radius: 8px; //Dim 위에 toast 가 나오는 경우가 있어서 추가
+
+  &_position {
+    top: 84px;
+  }
+  &_alert {
+    min-width: 800px;
+    height: 60px;
+    display: flex;
+    border-radius: 8px;
+    align-items: center;
+    padding: 14px 30px;
+
+    background-color: rgba($color: #00b29b, $alpha: 0.2);
+    border: 1px solid rgba($color: #00b29b, $alpha: 0.5);
+    box-shadow: none;
+    &.warning {
+      background-color: rgba($color: #ff5934, $alpha: 0.2);
+      border: 1px solid rgba($color: #ff5934, $alpha: 0.5);
+    }
+    &.error {
+      background-color: rgba($color: #e1315a, $alpha: 0.2);
+      border: 1px solid rgba($color: #e1315a, $alpha: 0.5);
+    }
+  }
+  &_message {
+    font-family: 'Pretendard';
+    color: var(--typo900);
+    font-size: 1.6rem;
+    line-height: 2.2rem;
+    font-weight: 600;
+    letter-spacing: -0.6px;
+  }
+  &_icon {
+    margin-right: 10px;
+  }
+}
+
+//popup_modal
+.modal {
+  // position: relative;
+  * {
+    font-family: 'Pretendard';
+  }
+  &_box {
+    width: auto;
+    min-width: 770px; // default :: lg
+    border-radius: 16px;
+  }
+  &.xs {
+    .modal_box {
+      min-width: 460px;
+    }
+  }
+  &.sm {
+    .modal_box {
+      min-width: 570px;
+    }
+  }
+  // uhee:: 디자인상 md 사이즈는 dialog 에 포함되었으나..
+  // modal ui 와 목적이 맞아서 modal 에 포함시킴
+  &.md {
+    .modal_box {
+      min-width: 700px;
+    }
+    .modal_cont {
+      padding: 50px;
+    }
+    h2 {
+      padding: 50px 0 20px;
+      margin: 0 50px;
+      & + .modal_cont {
+        padding-top: 10px;
+      }
+    }
+  }
+  // &.lg {
+  //   .modal_box {
+  //     min-width: 770px;
+  //   }
+  // }
+  &.xl {
+    .modal_box {
+      min-width: 1100px;
+    }
+  }
+  &.hero {
+    .modal_box {
+      width: 90vw;
+      max-width: 1750px;
+    }
+  }
+  &_back {
+    padding: 0;
+    margin-right: 6px;
+    svg {
+      transform: rotate(180deg);
+    }
+  }
+  &_close {
+    // 아이콘 사이즈에 맞춰서 버튼 크기 조정
+    // width: 24px;
+    // height: 24px;
+    position: absolute !important;
+    top: 16px !important;
+    right: 16px !important;
+    padding: 4px;
+  }
+  &_icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 24px;
+  }
+  h2 {
+    padding: 40px 0 20px;
+    margin: 0 40px;
+    font-family: 'Pretendard';
+    font-weight: 600;
+    font-size: 2.8rem;
+    line-height: 3.2rem;
+    letter-spacing: -0.8px;
+    text-align: left;
+    color: var(--typo900);
+    & + .modal_cont {
+      padding-top: 10px;
+    }
+    &.line {
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--navy100);
+      & + .modal_cont {
+        padding-top: 30px;
+      }
+    }
+    .text_title {
+      display: block;
+      @include body1(var(--typo500));
+      margin-top: 10px;
+      white-space: pre-line;
+    }
+  }
+  &_cont {
+    padding: 40px;
+    overflow: unset;
+    max-height: calc(100vh - 170px);
+    overflow-y: auto;
+    &.preview {
+      background-color: var(--bg);
+    }
+  }
+
+  &_bottom {
+    &_sticky {
+      position: sticky;
+      bottom: 0;
+      background-color: #fff;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 100%;
+        display: block;
+        width: 100%;
+        height: 40px;
+        background-color: #fff;
+      }
+    }
+  }
+
+  &_request_copy {
+    position: relative;
+
+    .modal_sticky {
+      position: sticky;
+      z-index: 1;
+
+      &_step {
+        &::before {
+          content: '';
+          position: absolute;
+          top: -10px;
+          display: block;
+          width: 100%;
+          height: 10px;
+          background-color: #fff;
+        }
+      }
+
+      &_thead {
+        &::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          right: -40px;
+          bottom: 0;
+          left: -40px;
+          display: block;
+          background-color: #f4f8fc;
+        }
+
+        tr {
+          position: relative;
+        }
+      }
+    }
+  }
+
+  // global 로 변경
+  // &_btn_box {
+  //   display: flex;
+  //   justify-content: center;
+  //   padding: 0;
+  //   margin-top: 30px;
+  //   button {
+  //     flex: 1;
+  //     margin: 0;
+  //     height: 50px;
+
+  //   }
+  // }
+}

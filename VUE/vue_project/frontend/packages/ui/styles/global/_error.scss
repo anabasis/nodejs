@@ -1,0 +1,25 @@
+.error {
+  &_box {
+    height: 100vh;
+    padding: 120px 180px;
+  }
+  &_cont {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 30px 24px;
+    height: calc(100vh - 240px);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+  }
+  &_title {
+    width: 100%;
+    text-align: center;
+  }
+  &_btn {
+    width: 100%;
+    text-align: center;
+  }
+}

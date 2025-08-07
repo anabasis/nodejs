@@ -1,0 +1,68 @@
+//grid sysytem width 정의
+//그리드 갯수는 26개로 정의(~1560px)
+//기준 width는 60px로 정의
+$width: 60px;
+$max_j: 10; // 최대 j 값 설정
+
+@for $i from 1 through 26 {
+  .grid#{$i} {
+    width: calc(#{$width} * #{$i}) !important;
+
+    @for $j from 1 through $max_j {
+      &_#{$j} {
+        width: calc(#{$width} * #{$i} + #{6 * $j}px) !important; // 너비 계산
+      }
+    }
+  }
+}
+// percentage width 정의
+// 1% ~ 100%까지 정의
+@for $i from 1 through 100 {
+  // 1% 단위로 증가
+  $value: $i * 1;
+  .w#{$value} {
+    width: #{$value} + '%';
+  }
+  .per_h#{$value} {
+    min-height: #{$value} + '%';
+  }
+}
+
+@for $i from 1 through 100 {
+  // 1% 단위로 증가
+  $value: $i * 1;
+  .flex#{$value} {
+    flex: #{$value};
+  }
+}
+
+// height 정의
+@for $i from 1 through 1000 {
+  .h#{$i} {
+    height: $i + px;
+  }
+  .min_h#{$i} {
+    min-height: $i + px;
+  }
+
+  .min_w#{$i} {
+    min-width: $i + px;
+  }
+
+  .max_h#{$i} {
+    max-height: $i + px;
+  }
+  .max_w#{$i} {
+    max-width: $i + px;
+  }
+  .max_vh#{$i} {
+    max-height: $i + vh;
+  }
+  .min_vh#{$i} {
+    min-height: $i + vh;
+  }
+}
+
+.min_w0 {
+  min-width: 0;
+}

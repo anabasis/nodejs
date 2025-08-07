@@ -1,0 +1,589 @@
+@import '../../common/variables';
+
+// 싱글 인풋 스타일
+
+input {
+  &.ipt_field {
+    width: 100%;
+    border-radius: 4px;
+    padding: 10px 16px;
+    height: 36px;
+    @include cap;
+    border: 1px solid var(--navy100);
+    * {
+      font-family: 'Pretendard';
+    }
+    &::placeholder {
+      color: var(--navy200);
+    }
+    &:focus {
+      color: var(--typo900);
+      border: 1px solid var(--blue400);
+      outline: none;
+      caret-color: var(--blue400);
+    }
+    &:disabled {
+      background-color: var(--bg);
+      color: var(--navy200) !important;
+      border-color: var(--navy100);
+    }
+    &.error {
+      border: 1px solid var(--error);
+      // color: var(--error);
+      // caret-color: var(--error);
+    }
+
+    &.pure_input {
+      padding-left: 12px;
+      padding-right: 12px;
+      border: 0;
+      background-color: transparent;
+    }
+
+    // 사이즈 규정 임시
+
+    &.xlg {
+      width: 400px;
+    }
+    &.lg {
+      width: 368px;
+    }
+    &.md {
+      //width: 200px;
+      width: 168px; // 울고싶다.. 사이즈 규정 필요..
+    }
+    &.sm {
+      width: 100px;
+    }
+    &.xs {
+      height: 28px;
+      padding: 0 8px;
+    }
+
+    // isc 상태별 컬러 정의
+    // &.normal {
+    //   color: var(--typo200);
+    // }
+    &.done {
+      color: var(--isc-done);
+    }
+    &.ongoing {
+      color: var(--ongoing);
+    }
+    &.pause {
+      color: var(--pause);
+    }
+    // &.error {
+    //   color: var(--error);
+    // }
+    &.change {
+      color: var(--change400);
+    }
+    &.acc {
+      color: var(--change400);
+    }
+    &.delete {
+      color: var(--delete400);
+    }
+    &.cancel {
+      color: var(--cancel400);
+    }
+    &.ready {
+      color: var(--isc-ready);
+    }
+    &.running {
+      color: var(--isc-running);
+    }
+    &.stopped {
+      color: var(--isc-stopped);
+    }
+    &.fail {
+      color: var(--isc-fail);
+    }
+    &.copying {
+      color: var(--isc-copying);
+    }
+    &.waiting {
+      color: var(--isc-waiting);
+    }
+    &.onhold {
+      color: var(--isc-onhold);
+    }
+    &.black {
+      color: var(--typo900);
+    }
+    &.blue {
+      color: var(--blue100);
+      &200 {
+        color: var(--blue200);
+      }
+      &300 {
+        color: var(--blue300);
+      }
+      &400 {
+        color: var(--blue400);
+      }
+    }
+  }
+}
+
+.ipt_box {
+  &_inner {
+    &.full {
+      width: 100%;
+    }
+  }
+  .ipt_box_inner {
+    display: flex;
+    align-items: center;
+    button {
+      display: inline-flex;
+      flex-shrink: 0;
+      margin: 0;
+      height: 38px;
+      margin-left: 8px;
+    }
+    & + button {
+      margin-left: 8px;
+    }
+    &.flex {
+      flex: 1;
+    }
+  }
+  &.inline {
+    display: inline-flex;
+    align-items: center;
+    vertical-align: middle;
+    justify-content: center;
+    & + .ipt_box {
+      margin-left: 20px;
+    }
+    .ipt_label {
+      margin-right: 10px;
+      margin-bottom: 0;
+      width: auto;
+      span {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+// type, sign input 요소
+.multi_ipt {
+  position: relative;
+  display: inline-flex;
+  justify-items: center;
+  align-items: center;
+  border-radius: 4px;
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid var(--navy100);
+  * {
+    font-family: 'Pretendard';
+  }
+  &.error {
+    border: 1px solid var(--error);
+    .ipt_field {
+      border: none;
+      color: var(--typo900);
+      // color: var(--error);
+      // caret-color: var(--error);
+    }
+    &:focus-within {
+      border: 1px solid var(--error);
+    }
+  }
+
+  &:has(.ipt_field:disabled) {
+    background-color: var(--bg);
+    color: var(--navy200);
+    border-color: var(--navy100);
+  }
+
+  &.change400 {
+    .ipt_field {
+      color: var(--change400);
+      caret-color: var(--change400);
+    }
+  }
+
+  &:disabled {
+    background-color: var(--bg);
+    color: var(--navy200) !important;
+    border-color: var(--navy100);
+  }
+
+  &:focus-within {
+    border: 1px solid var(--blue400);
+    .multi_ipt_inner {
+      border-right: 1px solid var(--blue400);
+    }
+  }
+
+  &_inner {
+    border-right: 1px solid var(--navy100);
+  }
+
+  .ipt_field {
+    padding: 10px 16px 10px 16px;
+    border: none;
+    display: inline-flex;
+    flex: 1;
+    &:focus {
+      border: none;
+    }
+  }
+
+  .count {
+    font-size: 12px;
+    padding-right: 16px;
+  }
+
+  .ipt_mark {
+    font-size: 12px;
+    padding-right: 16px;
+  }
+
+  .ipt_util {
+    padding: 0 16px 0 0;
+  }
+
+  //size 임시
+  &.xlg {
+    width: 400px;
+  }
+  &.lg {
+    width: 368px;
+  }
+  &.md {
+    //width: 200px;
+    width: 168px; // 울고싶다
+  }
+  &.sm {
+    width: 100px;
+  }
+  &.xs {
+    .ipt_field {
+      height: 28px;
+      padding: 0 8px;
+    }
+  }
+
+  &.search_combo {
+    border: none;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    //width: 100%;
+  }
+
+  // sign input 에서 마크와 인풋 reverse
+  &.reverse {
+    flex-direction: row-reverse;
+
+    .ipt_util {
+      padding: 0 0 0 16px;
+    }
+  }
+
+  &.tr {
+    .ipt_field {
+      text-align: right;
+      &::placeholder {
+        //text-align: left;
+      }
+    }
+  }
+
+  &.no_line {
+    border: 0;
+    border-radius: 0;
+  }
+
+  // 상태별 컬러 규정
+  // &.normal {
+  //   .ipt_field {
+  //     color: var(--typo200);
+  //   }
+  // }
+
+  &.done {
+    .ipt_field {
+      color: var(--isc-done);
+    }
+  }
+
+  &.ongoing {
+    .ipt_field {
+      color: var(--ongoing);
+    }
+  }
+
+  &.pause {
+    .ipt_field {
+      color: var(--pause);
+    }
+  }
+
+  // &.error {
+  //   .ipt_field {
+  //     color: var(--error);
+  //   }
+  // }
+
+  &.change {
+    .ipt_field {
+      color: var(--change400);
+    }
+  }
+
+  &.acc {
+    .ipt_field {
+      color: var(--change400);
+    }
+  }
+
+  &.delete {
+    .ipt_field {
+      color: var(--delete400);
+    }
+  }
+
+  &.cancel {
+    .ipt_field {
+      color: var(--cancel400);
+    }
+  }
+
+  &.ready {
+    .ipt_field {
+      color: var(--isc-ready);
+    }
+  }
+
+  &.running {
+    .ipt_field {
+      color: var(--isc-running);
+    }
+  }
+
+  &.stopped {
+    .ipt_field {
+      color: var(--isc-stopped);
+    }
+  }
+
+  &.fail {
+    .ipt_field {
+      color: var(--isc-fail);
+    }
+  }
+
+  &.copying {
+    .ipt_field {
+      color: var(--isc-copying);
+    }
+  }
+
+  &.waiting {
+    .ipt_field {
+      color: var(--isc-waiting);
+    }
+  }
+
+  &.onhold {
+    .ipt_field {
+      color: var(--isc-onhold);
+    }
+  }
+
+  &.black {
+    .ipt_field {
+      color: var(--typo900);
+    }
+  }
+
+  &.blue {
+    .ipt_field {
+      color: var(--blue100);
+      &200 {
+        color: var(--blue200);
+      }
+      &300 {
+        color: var(--blue300);
+      }
+      &400 {
+        color: var(--blue400);
+      }
+    }
+  }
+}
+
+//검색 인풋
+.ico_search {
+  background: url('data:image/svg+xml,<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16 16L12.3891 12.3891M12.3891 12.3891C13.3844 11.3938 14 10.0188 14 8.5C14 5.46243 11.5376 3 8.5 3C5.46243 3 3 5.46243 3 8.5C3 11.5376 5.46243 14 8.5 14C10.0188 14 11.3938 13.3844 12.3891 12.3891Z" stroke="%23354165" stroke-width="1.5" stroke-linecap="round"/></svg>')
+    no-repeat;
+  background-size: contain;
+  width: 20px;
+  height: 20px;
+  margin-left: 16px;
+  display: inline-flex;
+}
+
+.ico_search_btn {
+  padding: 0 12px 0 0;
+  // padding-right: 16px;
+}
+
+.ico_clear_btn {
+  width: 16px;
+  height: 16px;
+  background-color: #c6cdda;
+  border-radius: 50%;
+  margin-right: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn_search {
+  padding: 10px 20px;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  display: inline-flex;
+  background-color: var(--bg);
+}
+
+// 비밀번호 인풋
+.btn_password {
+  padding: 10px 16px;
+}
+
+// 인풋 하단 설명글 <InputDec/>
+.ipt_dec {
+  width: 100%;
+  margin-top: 6px;
+  @include cap;
+  color: var(--typo500);
+  position: relative;
+  display: inline-flex;
+  text-align: center;
+  white-space: pre-line;
+  align-items: flex-start;
+
+  &.error {
+    color: var(--error);
+    text-align: left;
+    &:before {
+      flex: 0 0 16px;
+      width: 16px;
+      height: 16px;
+      border: 1px solid var(--error);
+      border-radius: 50%;
+      font-size: 10px;
+      font-weight: 700;
+      margin-right: 8px;
+      content: '!';
+      display: inline-flex;
+      vertical-align: middle;
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  &.success {
+    color: var(--success);
+    text-align: left;
+    &:before {
+      flex: 0 0 16px;
+      width: 16px;
+      height: 16px;
+      border: 1px solid var(--success);
+      border-radius: 50%;
+      font-size: 10px;
+      font-weight: 700;
+      margin-right: 8px;
+      display: inline-flex;
+      vertical-align: middle;
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+      background: url('data:image/svg+xml,<svg width="8" height="6" viewBox="0 0 8 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 2.83333L3.52632 5L7 1" stroke="%2300B29B" stroke-linecap="round" stroke-linejoin="round"/></svg>')
+        no-repeat center center;
+      content: '';
+    }
+  }
+}
+
+// 인풋 라벨 <InputLabel/>
+.ipt_label {
+  display: inline-flex;
+  width: 100%;
+  text-align: left;
+  align-items: center;
+  justify-content: flex-start;
+  span {
+    @include body3(var(--typo900));
+    // margin-bottom: 6px;
+    &.light {
+      font-size: 1.2rem;
+      line-height: 2rem;
+      color: var(--navy200);
+      margin-bottom: 0;
+      & + .ico_required {
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-left: 4px;
+        color: var(--error);
+      }
+    }
+    &.navy600 {
+      color: var(--navy600);
+    }
+  }
+  .ico_required {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-left: 4px;
+    color: var(--error);
+  }
+}
+
+// 파일 인풋 <FileInput/>
+.file_ipt {
+  border: 1px solid #dcdcdc;
+  border-radius: 4px;
+  width: 100%;
+  overflow: hidden;
+  padding: 10px 16px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  cursor: pointer;
+  &:hover {
+    border-color: var(--blue400);
+  }
+
+  label {
+    width: 100%;
+    font-size: 1.2rem;
+    color: var(--navy100);
+    cursor: pointer;
+    .filename {
+      color: var(--typo900);
+    }
+  }
+
+  button {
+    width: 16px;
+    height: 16px;
+    font-size: 0;
+    cursor: pointer;
+  }
+  input {
+    position: absolute;
+    left: -9999em;
+  }
+}

@@ -1,0 +1,104 @@
+// 컬러 변수 명 규칙은 global > color.scss 를 따랐습니다.
+
+:root {
+  // 컬러 시스템 규정 : primary(blue)
+  --blue500: #0028e1;
+  --blue400: #3357ff;
+  --blue300: #6f78ff;
+  --blue200: #9d9ffe;
+  --blue100: #c6c5fe;
+  --blue50: #e9e8ff;
+  --blue10: #f2f2ff;
+  // 컬러 시스템 규정 : primary-dark(navy)
+  --navy800: #354165;
+  --navy600: #44547e;
+  --navy400: #657496;
+  --navy300: #808da8;
+  --navy200: #a2adc1;
+  --navy100: #c6cdda;
+  --navy50: #e9ebf0;
+
+  // 버튼 규정의 컬러
+  --blue400-hover: #0028e1;
+  --blue400-active: #001b98;
+  --blue50-hover: #d8d8ff;
+  --blue50-active: #c6c5fe;
+
+  // 배경 컬러 규정
+  --bg: #f1f4f7;
+  // --bg200: #dfe7ef; - 바뀌기 전
+  --bg200: #e3ebf2;
+
+  //화이트 배경컬러... 규정
+  --bg-f: #fff;
+
+  // 테이블 컬러 규정 : secondary
+  --second50: #f4f8fc; // 100이 두개여서 디자인 순서 그대로 사용 (아직도 그대로여서 그대로 사용)
+  --second100: #fafbfe;
+  --second200: #8a9dbe;
+
+  // 케이스별 컬러 규정 (notification)
+  --success: #00b29b;
+  --error: #f03863;
+  --fail: #ff5934;
+  --warning: #fcb03e;
+  --noti: #ff0000;
+
+  // 상태별 컬러 규정
+  --done: #46a4f9;
+  --ongoing: #30ad73;
+  --pause: #ffc453;
+
+  // 타이포 컬러 규정
+  --typo900: #1a1f23;
+  --typo800: #3a4044;
+  --typo700: #595f63;
+  --typo600: #6d7277;
+  --typo500: #959ba0;
+  --typo200: #dae1e5;
+  // 타이포 컬러 : gray scale 추가 관리
+  --typo0: #000;
+  --typo83: #838383;
+
+  //네비게이션 배경색
+  --nav-bg: #f8f9fb;
+
+  /*
+  * isc
+  */
+
+  //table
+  --isc-saved: #01bd90;
+  --isc-unsaved: #96bc00;
+  --isc-auto-input: #22bdff;
+
+  //status
+  --isc-ready: #40b4f7;
+  --isc-running: #33b979;
+  --isc-stopped: #ffc453;
+  --isc-done: #3b79f2;
+  --isc-fail: #fc773e;
+  --isc-error: #f03863;
+  --isc-copying: #a969db;
+  --isc-waiting: #697f98;
+  --isc-onhold: #98b9cb;
+
+  //process
+  --planning: #c754d1;
+  --ordering: #38aac2;
+  --prototype: #8d60cb;
+  --validation: #33b979;
+  --followup: #ee8050;
+
+  //action
+  --delete400: #eb5757;
+  --delete100: #ffecec;
+  --acc400: #2f80ed;
+  --acc100: #e8f0ff;
+  --change400: #27ae60;
+  --change100: #ddf4de;
+  --cancel400: #f2994a;
+  --cancel100: #ffeddd;
+  //Essential Seq Design400 = Copying(--isc-copying) 중복 컬러로 정의하지않음
+  --copying100: #f5e8ff;
+}

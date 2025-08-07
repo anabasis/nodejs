@@ -1,0 +1,82 @@
+@import '../common/variables';
+
+.tooltip {
+  display: inline-flex;
+  margin: 0 6px;
+  * {
+    font-family: 'Pretendard';
+  }
+  .popper {
+    &[data-popper-placement*='top'] {
+      .label_tooltip_con {
+        margin-bottom: 10px;
+      }
+    }
+    &[data-popper-placement*='bottom'] {
+      .label_tooltip_con {
+        margin-top: 10px;
+      }
+    }
+    &[data-popper-placement*='left'] {
+      .label_tooltip_con {
+        margin-right: 10px;
+      }
+    }
+    &[data-popper-placement*='right'] {
+      .label_tooltip_con {
+        margin-left: 10px;
+      }
+    }
+  }
+  button {
+    line-height: 1;
+  }
+}
+
+//arrow
+.arrow {
+  color: var(--typo800) !important;
+  font-size: 1.2rem;
+}
+
+//hover 컨텐츠
+.hover_content {
+  min-width: 200px;
+  max-width: 400px;
+  padding: 10px 14px;
+  background-color: var(--typo800) !important;
+  @include cap(var(--bg-f));
+  // 클래스가 없을때로 조건 변경
+  *:not([class]) {
+    @include cap(var(--bg-f));
+    white-space: pre-line;
+  }
+}
+
+// 클릭 컨텐츠
+.click_content {
+  min-width: 340px;
+  max-width: 500px !important;
+  background-color: var(--bg-f) !important;
+  padding: 14px 16px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+  p {
+    padding-top: 10px;
+    @include body2(var(--typo500));
+  }
+}
+//클릭 타이틀
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--navy100);
+
+  h4 {
+    @include body3(var(--typo800));
+  }
+  .close {
+    padding: 0;
+  }
+}

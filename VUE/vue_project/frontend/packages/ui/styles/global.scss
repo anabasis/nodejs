@@ -1,0 +1,254 @@
+@import './common/palette';
+@import './common/scrollbar';
+@import './common/variables';
+
+// 글로벌 scss import
+@import './global/_align'; //정렬
+@import './global/_typography'; //타이포
+@import './global/_color'; //배경 글자 등등 모든 색
+@import './global/_button'; //버튼 (임시)
+@import './global/_table'; //테이블
+@import './global/_border'; //선
+@import './global/_spacing'; // margin, padding
+@import './global/_position'; // postion, 위치값
+@import './global/_grid'; // layout 그리드 시스템 정의
+@import './global/_radius'; // border-radius
+@import './global/_editor'; //에디터
+@import './global/_datepicker'; // 데이트피커
+@import './global/_util'; //유틸
+@import './global/_etc'; //기타
+
+//초기셋
+hr {
+  display: block;
+  width: 100%;
+  height: 1px;
+  background-color: var(--navy100);
+  border-top: 0;
+  border-style: hidden;
+  opacity: 0.5;
+}
+
+//숨겨야하는 글자들
+.blind {
+  display: none;
+}
+
+//인풋용 숨기는 글자 (width 체크용이라 display none 안함)
+.text_blind {
+  position: absolute;
+  white-space: nowrap;
+  top: -999999em;
+  left: -999999em;
+}
+
+//contentbox 안의 라인박스 구성
+.linecont {
+  border: 1px solid var(--navy100);
+  border-radius: 4px;
+  padding: 24px;
+  overflow-x: auto;
+  &.blue {
+    background-color: var(--bg);
+  }
+  & + .linecont {
+    margin-top: 20px;
+  }
+}
+
+// 컨텐츠 하단 영역 ( 하단 버튼 )
+.cont_bottom_box {
+  width: 100%;
+  margin-top: auto;
+  .align {
+    padding-top: 30px;
+    margin-top: 60px;
+    border-top: 1px solid var(--navy100);
+  }
+}
+
+// 컨텐츠 + 컨텐츠 구분
+article {
+  & + article {
+    margin-top: 60px;
+  }
+}
+
+.sticky_wrap {
+  .align {
+    width: 100%;
+    gap: 25px;
+    &.gap_0 {
+      gap: 0;
+    }
+  }
+  .lft {
+    min-width: 0; // 동적사이즈 작업해야할때 이것이 필요!!!!!!
+    flex: 1;
+  }
+  .rgt {
+    // overflow: hidden;
+  }
+}
+div.page_title {
+  padding-right: 24px;
+  h1 {
+    min-width: 0; // 동적사이즈 작업해야할때 이것이 필요!!!!!!
+    // flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+.page_title {
+  // margin-top: 10px;
+  // margin-bottom: 10px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+//border
+.bt {
+  border-top: 1px solid var(--bg200);
+}
+.br {
+  border-right: 1px solid var(--bg200);
+}
+.bl {
+  border-left: 1px solid var(--bg200);
+}
+.bb {
+  border-bottom: 1px solid var(--bg200);
+}
+.tr_nodata {
+  border: none !important;
+  &:hover {
+    background-color: transparent !important;
+    td {
+      background-color: transparent !important;
+    }
+  }
+  td {
+    border: none !important;
+  }
+}
+
+//overflow
+.ovf_a {
+  overflow: auto;
+}
+.ovf_h {
+  overflow: hidden;
+}
+.ovf_s {
+  overflow: scroll;
+}
+.ovf_v {
+  overflow: visible;
+}
+
+// 레이아웃 민 컨텐츠
+.flex_wrapper {
+  width: 100%;
+  display: flex;
+  min-height: calc(100vh - 94px);
+}
+
+// 커서
+.cursor_p {
+  cursor: pointer;
+}
+
+.cursor_d {
+  cursor: default;
+}
+
+//노이미지 :: 기본은 Lg
+.no_image {
+  display: inline-block;
+  width: 104px;
+  height: 104px;
+  padding: 22px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  background-color: var(--navy50);
+  &::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: no-repeat center
+      url('data:image/svg+xml,<svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="Group 26086431" opacity="0.5"><path id="Vector" d="M30 0C13.4589 0 0 13.4556 0 30C0 46.5444 13.4589 60 30 60C46.5411 60 60 46.5411 60 30C60 13.4589 46.5411 0 30 0ZM30 54.0637C16.7323 54.0637 5.93628 43.2677 5.93628 29.9966C5.93628 16.7255 16.7289 5.93292 30 5.93292C43.2711 5.93292 54.0671 16.7289 54.0671 30C54.0671 43.2711 43.2677 54.0671 30 54.0671V54.0637Z" fill="%23A2ADC1"/><path id="Vector_2" d="M43.1579 23.413C38.7878 28.7356 35.8834 29.5774 33.9818 29.5774C33.0293 29.5774 32.3317 29.2923 31.9024 29.0441C31.7012 28.9267 31.5201 28.7825 31.3524 28.6215C31.1445 28.4169 30.9634 28.1855 30.8258 27.934C30.5743 27.4745 30.3161 26.7635 30.3429 25.8077C30.3932 23.9262 31.2719 21.0586 36.4972 16.7624C37.6576 15.8166 38.2579 15.015 38.221 13.5125C38.1976 12.6137 37.7347 11.7954 36.9801 11.2655C36.4267 10.8932 35.7795 10.6953 35.112 10.6953C33.8745 10.6953 32.6034 11.3493 31.3323 12.6338C26.6067 17.3493 24.9801 22.0916 26.6101 26.3778C26.6336 26.4382 26.6201 26.5086 26.5732 26.5556C26.5262 26.6025 26.4558 26.6159 26.3954 26.5925C25.3189 26.1799 24.2121 25.9687 23.0986 25.9687C19.7448 25.9687 16.1327 27.8099 12.6481 31.2945C9.77051 34.1688 10.7666 36.2381 11.3267 36.9927C11.8264 37.6836 12.7319 38.1229 13.6878 38.1129C15.2775 38.0961 15.9181 37.536 16.7733 36.4896C21.1467 31.1637 24.1517 30.2247 26.0466 30.2247C26.9488 30.2247 27.6263 30.4796 28.0656 30.721C28.3138 30.8585 28.5419 31.0363 28.7398 31.2409C28.884 31.3884 29.0114 31.5494 29.1187 31.7238C29.3938 32.1665 29.7224 32.9278 29.699 33.9877C29.6587 35.8692 28.6861 38.8406 23.4407 43.147C22.0556 44.2806 21.747 45.1425 21.7571 46.209C21.7638 47.1179 22.173 47.9832 22.9007 48.5835C23.4977 49.0665 24.1551 49.3113 24.8594 49.3113C26.0265 49.3113 27.2574 48.6472 28.6224 47.2822C33.3379 42.5567 34.9578 37.8043 33.3144 33.5215C33.2909 33.4578 33.3043 33.3873 33.3513 33.3404C33.3982 33.2934 33.4687 33.2766 33.5324 33.3035C34.6224 33.7227 35.7325 33.934 36.8393 33.934C40.2367 33.934 43.7515 32.1397 47.2931 28.6014C49.4329 26.455 49.8588 24.6506 48.628 22.9267C48.088 22.1587 47.2294 21.7629 46.2803 21.716C44.9019 21.6523 44.0634 22.323 43.1579 23.4197V23.413Z" fill="%23C6CDDA"/></g></svg>');
+    background-size: 100% 100%;
+  }
+  &.blue {
+    background-color: var(--blue50);
+    &::after {
+      background: no-repeat center
+        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 34 34" fill="none"><g opacity="0.5"><path d="M16.9976 0.84375C8.09086 0.84375 0.84375 8.08905 0.84375 16.9976C0.84375 25.9061 8.09086 33.1514 16.9976 33.1514C25.9043 33.1514 33.1514 25.9043 33.1514 16.9976C33.1514 8.09086 25.9043 0.84375 16.9976 0.84375ZM16.9976 29.955C9.85342 29.955 4.04021 24.1418 4.04021 16.9958C4.04021 9.84981 9.85162 4.0384 16.9976 4.0384C24.1436 4.0384 29.9568 9.85162 29.9568 16.9976C29.9568 24.1436 24.1418 29.9568 16.9976 29.9568V29.955Z" fill="%239D9FFE"/><path d="M24.0814 13.4496C21.7283 16.3155 20.1644 16.7688 19.1404 16.7688C18.6276 16.7688 18.2519 16.6153 18.0208 16.4817C17.9124 16.4185 17.8149 16.3408 17.7246 16.2541C17.6126 16.144 17.5151 16.0194 17.4411 15.8839C17.3056 15.6365 17.1666 15.2537 17.181 14.739C17.2081 13.7259 17.6813 12.1818 20.4949 9.86845C21.1197 9.35918 21.443 8.92757 21.4231 8.11853C21.4105 7.63454 21.1613 7.1939 20.7549 6.90857C20.4569 6.70811 20.1084 6.60156 19.749 6.60156C19.0827 6.60156 18.3982 6.95371 17.7138 7.64538C15.1692 10.1845 14.2934 12.738 15.1711 15.046C15.1837 15.0785 15.1765 15.1164 15.1512 15.1417C15.1259 15.167 15.088 15.1742 15.0555 15.1616C14.4758 14.9394 13.8798 14.8257 13.2803 14.8257C11.4744 14.8257 9.5294 15.8171 7.65306 17.6934C6.10359 19.2411 6.63994 20.3554 6.94153 20.7617C7.21061 21.1337 7.69821 21.3703 8.21289 21.3649C9.06889 21.3558 9.41382 21.0542 9.87433 20.4908C12.2292 17.623 13.8473 17.1174 14.8677 17.1174C15.3535 17.1174 15.7182 17.2546 15.9548 17.3846C16.0885 17.4587 16.2113 17.5544 16.3178 17.6646C16.3955 17.744 16.4641 17.8307 16.5219 17.9246C16.67 18.163 16.8469 18.5729 16.8343 19.1436C16.8126 20.1567 16.2889 21.7567 13.4645 24.0755C12.7186 24.6859 12.5525 25.15 12.5579 25.7243C12.5615 26.2137 12.7818 26.6796 13.1737 27.0029C13.4952 27.263 13.8491 27.3948 14.2284 27.3948C14.8568 27.3948 15.5196 27.0372 16.2546 26.3022C18.7937 23.7577 19.666 21.1987 18.7811 18.8926C18.7684 18.8583 18.7756 18.8203 18.8009 18.7951C18.8262 18.7698 18.8641 18.7607 18.8984 18.7752C19.4854 19.0009 20.0831 19.1147 20.6791 19.1147C22.5085 19.1147 24.401 18.1485 26.3081 16.2433C27.4603 15.0875 27.6896 14.1159 27.0268 13.1877C26.7361 12.7742 26.2738 12.5611 25.7627 12.5358C25.0205 12.5015 24.569 12.8626 24.0814 13.4532V13.4496Z" fill="%23C6C5FE"/></g></svg>');
+    }
+  }
+  &.md {
+    width: 56px;
+    height: 56px;
+    padding: 12px;
+  }
+  &.sm {
+    width: 36px;
+    height: 36px;
+    padding: 7px;
+  }
+  &.xs {
+    width: 20px;
+    height: 20px;
+    padding: 4px;
+  }
+  &.square {
+    width: 80px;
+    height: 80px;
+    padding: 13px;
+    border-radius: 16px;
+    &.md {
+      width: 46px;
+      height: 46px;
+      padding: 9px;
+      border-radius: 8px;
+    }
+    &.sm {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      padding: 7px;
+    }
+    &.xs {
+      width: 20px;
+      height: 20px;
+      padding: 4px;
+      border-radius: 8px;
+    }
+  }
+}
+
+.w_auto {
+  width: auto;
+}
+
+.hidden {
+  display: none;
+}
+
+// 툴팁 내 불렛 텍스트
+.dot {
+  list-style: disc;
+  list-style-position: outside;
+  &::marker {
+    font-size: 1rem !important;
+  }
+}
+
+// pre white-space override 용
+.white_space_pre {
+  white-space: pre !important;
+}

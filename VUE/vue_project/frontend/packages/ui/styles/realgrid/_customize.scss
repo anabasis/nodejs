@@ -1,0 +1,296 @@
+/* RealGrid custom styles */
+@import '../common/variables';
+
+/* General styles */
+.alternate-row {
+  background: #fff;
+}
+
+#actions {
+  height: 50px;
+}
+
+#realgrid {
+  width: 100%;
+  height: 450px;
+}
+
+.right-column {
+  text-align: right;
+}
+
+.left-column {
+  text-align: left;
+}
+
+.product-background {
+  background: #f1f4f7;
+}
+
+.header-background {
+  background: #f4f8fc;
+}
+
+.column-borderRight {
+  border-right: 0px solid rgba(255, 0, 0, 0.1) !important;
+}
+
+.checked-background {
+  background: #fafbfe !important;
+}
+
+/* Sorting icons */
+.rg-header-sort-none,
+.rg-header-sort-descending,
+.rg-header-sort-ascending {
+  cursor: pointer;
+}
+
+.rg-header-sort-none {
+  background-image: url('data:image/svg+xml,<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 6L5.83205 4.24808C5.43623 3.65434 4.56377 3.65434 4.16795 4.24808L3 6" stroke="%238A9DBE" stroke-width="1.2" stroke-linecap="round"/><path d="M5 4V11" stroke="%238A9DBE" stroke-width="1.2" stroke-linecap="round"/><path d="M9 10L10.1679 11.7519C10.5638 12.3457 11.4362 12.3457 11.8321 11.7519L13 10" stroke="%238A9DBE" stroke-width="1.2" stroke-linecap="round"/><path d="M11 12V5" stroke="%238A9DBE" stroke-width="1.2" stroke-linecap="round"/></svg>');
+}
+
+.rg-header-sort-descending {
+  background-image: url('data:image/svg+xml,<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 9L7.29289 11.2929C7.68342 11.6834 8.31658 11.6834 8.70711 11.2929L11 9" stroke="%238A9DBE" stroke-width="1.5" stroke-linecap="round"/><path d="M8 11L8 4" stroke="%238A9DBE" stroke-width="1.5" stroke-linecap="round"/></svg>');
+}
+
+.rg-header-sort-ascending {
+  background-image: url('data:image/svg+xml,<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11 7L8.70711 4.70711C8.31658 4.31658 7.68342 4.31658 7.29289 4.70711L5 7" stroke="%238A9DBE" stroke-width="1.5" stroke-linecap="round"/><path d="M8 5L8 12" stroke="%238A9DBE" stroke-width="1.5" stroke-linecap="round"/></svg>');
+}
+
+/* Filtering */
+.rg-header-filtering {
+  cursor: pointer;
+  background-image: url('data:image/svg+xml,<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(%23clip0_101_1029)"><path d="M3.78316 2.5C2.64227 2.5 2.07092 3.93595 2.87764 4.77577L6.07912 8.10855L6.07912 10.832C6.07912 11.2516 6.26889 11.6467 6.59135 11.8984L8.38418 13.2982C9.01734 13.7926 9.92089 13.3223 9.92089 12.4983L9.92088 8.10855L13.1224 4.77576C13.9291 3.93595 13.3577 2.5 12.2168 2.5L3.78316 2.5Z" fill="%238A9DBE"/></g><defs><clipPath id="clip0_101_1029"><rect width="16" height="16" fill="white"/></clipPath></defs></svg>');
+}
+
+.rg-header-filtering.filter-activated {
+  background-image: url('data:image/svg+xml,<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(%23clip0_115_1241)"><path d="M3.78316 2.5C2.64227 2.5 2.07092 3.93595 2.87764 4.77577L6.07912 8.10855L6.07912 10.832C6.07912 11.2516 6.26889 11.6467 6.59135 11.8984L8.38418 13.2982C9.01734 13.7926 9.92089 13.3223 9.92089 12.4983L9.92088 8.10855L13.1224 4.77576C13.9291 3.93595 13.3577 2.5 12.2168 2.5L3.78316 2.5Z" fill="%23657496"/></g><defs><clipPath id="clip0_115_1241"><rect width="16" height="16" fill="white"/></clipPath></defs></svg>');
+}
+
+/* Dropdown */
+.rg-button-list {
+  cursor: pointer;
+  background-position: center left -3px;
+  background-image: url('data:image/svg+xml,<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 8L10 13L15 8" stroke="%23354165" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+}
+
+.rg-button-list:hover {
+  background-position: center left -3px;
+  background-image: url('data:image/svg+xml,<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 8L10 13L15 8" stroke="%23354165" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+}
+
+.rg-button-list:hover:active {
+  background-position: center left -3px;
+  background-image: url('data:image/svg+xml,<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 8L10 13L15 8" stroke="%23354165" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+  background-position: center left -3px;
+  background-image: url('data:image/svg+xml,<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 8L10 13L15 8" stroke="%23354165" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+}
+
+/* Focus and hover states */
+.rg-header-focus {
+  background-color: #f4f8fc;
+}
+
+// td.rg-data-cell.rg-data-readonly-cell:hover {
+//   background-color: var(--second100);
+// }
+
+// .rg-header .rg-table tr td:hover {
+//   background-color: transparent;
+// }
+
+/* Dropdown and input styles */
+.rg-dropdownlist {
+  margin-top: 6px;
+  min-height: auto;
+  border-radius: 4px;
+  border: 1px solid var(--navy100, #c6cdda);
+  background: #fff;
+  padding: 10px 8px;
+}
+
+.rg-table td input[type='text'] {
+  padding: 0 0px 0 6px;
+  box-sizing: border-box;
+  border-radius: 3px;
+  border: 1px solid var(--navy100);
+  background: #fff;
+}
+
+.rg-table td input[type='text']:focus {
+  outline: none;
+}
+
+.rg-table td input[type='text']:focus-within {
+  border: 1px solid var(--blue400);
+}
+
+.rg-table td input[type='text']:disabled {
+  background: var(--bg);
+}
+
+.rg-dropdown-select {
+  color: #44547e;
+}
+
+/* Filter styles */
+.rg-filter-header {
+  padding: 0px;
+  position: relative;
+  flex-wrap: wrap;
+}
+
+.rg-filter-reset {
+  border: 1px solid var(--navy100);
+  border-radius: 3px;
+  position: absolute;
+  right: 0px;
+  top: -2px;
+  font-size: 0;
+  width: 16px;
+  height: 16px;
+  background: no-repeat center center
+    url('data:image/svg+xml,<svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16 11.1635C16 14.4969 13.3137 17.1992 10 17.1992C6.68629 17.1992 4 14.4969 4 11.1635C4 7.83007 6.68629 5.12779 10 5.12779C12.1376 5.12779 14.0142 6.25231 15.0769 7.94537M15.0769 7.94537V4.19922M15.0769 7.94537H11.3529" stroke="%23354165" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+  background-size: 80%;
+}
+
+.rg-filter-header::before {
+  content: 'Filter';
+  display: block;
+  font-weight: 500;
+  padding-bottom: 6px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid #c6cdda;
+}
+
+.rg-filter-searchbox {
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 3px;
+  border: 1px solid var(--navy100, #c6cdda);
+  background: #fff;
+  padding: 2px;
+  display: flex;
+
+  input {
+    border: none;
+    flex: 1;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &::after {
+    display: block;
+    width: 20px;
+    height: 23px;
+    content: '';
+    background: center no-repeat
+      url('data:image/svg+xml,<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.625 15.625L12.9105 12.9105M12.9105 12.9105C13.8154 12.0057 14.375 10.7557 14.375 9.375C14.375 6.61358 12.1364 4.375 9.375 4.375C6.61358 4.375 4.375 6.61358 4.375 9.375C4.375 12.1364 6.61358 14.375 9.375 14.375C10.7557 14.375 12.0057 13.8154 12.9105 12.9105Z" stroke="%23354165" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+  }
+}
+.rg-filter-list-viewport {
+  padding: 4px;
+  border-radius: 4px;
+  border-color: #c6cdda;
+  margin-top: 4px;
+  border: none;
+}
+
+.rg-filter-item {
+  display: flex;
+  align-items: center;
+}
+
+.rg-filter-item .rg-filter-text {
+  margin-left: 4px;
+  display: inline-block;
+  align-items: center;
+}
+
+.rg-filter-item:hover {
+  background-color: transparent;
+}
+
+/* Cell styles */
+.rg-header-cell,
+.rg-data-cell {
+  text-align: left;
+}
+
+.rg-head-cell,
+.rg-rowindicator-head {
+  @include capH(#8a9dbe);
+  font-weight: 600;
+}
+.rg-data-cell {
+  //@include body2;
+  font-size: 1.2rem;
+}
+
+.rg-header-renderer,
+.rg-renderer {
+  // padding: 12px 6px;
+  max-height: inherit !important;
+}
+
+.rg-checkbar-head,
+.rg-check-renderer {
+  text-align: center;
+  padding-left: 0px;
+}
+
+/* Additional styles */
+.rg-filter-select-all {
+  display: none;
+}
+
+.rg-head-cell {
+  background-color: var(--second50);
+}
+
+//그리드 렌더러 일립시스 ::  공통 사용시 요상한 이슈있음
+
+.rg_ellipsis {
+  &_1 {
+    div {
+      width: 100%;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      padding-right: 8px;
+    }
+  }
+
+  &_2 {
+    div {
+      overflow: hidden;
+      display: -webkit-box !important;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      white-space: normal;
+    }
+  }
+
+  &_3 {
+    div {
+      overflow: hidden;
+      display: -webkit-box !important;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      white-space: normal;
+    }
+  }
+
+  &_4 {
+    div {
+      overflow: hidden;
+      display: -webkit-box !important;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+      white-space: normal;
+    }
+  }
+}

@@ -1,0 +1,272 @@
+@import '../common/variables';
+
+// 상태 버튼
+.status_btn {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--navy100);
+  padding: 0 8px;
+  height: 32px;
+  border-radius: 6px;
+  min-width: 90px;
+  transition: all 0.2s;
+  position: relative;
+  * {
+    font-family: 'Pretendard';
+  }
+
+  .status_ico {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+  }
+
+  .status_txt {
+    margin-left: 6px;
+    @include body2(var(--typo900));
+    line-height: 1; //버튼inner라 정렬이 안맞아서 추가
+  }
+
+  &:hover {
+    background-color: var(--blue10);
+  }
+
+  &:active {
+    border-color: var(--blue400);
+  }
+
+  &:disabled {
+    background-color: var(--navy50);
+
+    .status_txt {
+      color: var(--typo500);
+    }
+  }
+}
+
+.bullet {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  //background-color: var(--pause);
+  background-color: var(--error); //스타일 가이드에 없는 컬러값..추후 수정 예정
+  border: 2px solid #fff;
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+}
+
+.host_set_wrap {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  * {
+    font-family: 'Pretendard';
+  }
+
+  .datafield {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    padding: 0 12px;
+    border: 1px solid var(--navy100);
+    border-right: 0;
+  }
+
+  .data_value {
+    @include body2(var(--navy800));
+  }
+
+  .placeholder {
+    @include body2(var(--navy200));
+  }
+
+  .host_btn {
+    @include body2(#fff);
+    padding: 0 12px;
+    height: 36px;
+    border: 1px solid var(--typo800);
+    border-left: 0;
+    background-color: var(--typo800);
+    color: #fff;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+
+    &:disabled {
+      background-color: var(--typo500);
+      color: var(--typo200);
+      border-color: var(--typo500);
+    }
+  }
+}
+
+.round_btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  border: 1px solid var(--navy50);
+  min-height: 24px;
+  padding: 2px 8px;
+  border-radius: 12px;
+  * {
+    font-family: 'Pretendard';
+  }
+
+  .btn_txt {
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--navy400);
+  }
+
+  .icon {
+    margin-right: 4px;
+  }
+
+  &:hover {
+    background-color: var(--blue10);
+    border-color: var(--blue400);
+  }
+
+  &:disabled {
+    background-color: var(--navy50);
+    border-color: var(--navy50);
+    color: var(--typo200);
+  }
+
+  &.icon_position {
+    &_left {
+      flex-direction: initial;
+    }
+
+    &_right {
+      flex-direction: row-reverse;
+
+      .icon {
+        margin-left: 4px;
+        margin-right: 0;
+      }
+    }
+  }
+
+  &.secondary {
+    background-color: #e9e8ff;
+
+    .btn_txt {
+      @include cap(#354165);
+    }
+  }
+}
+
+.accordion_btn {
+  padding: 4px 10px;
+  border-color: #a2adc1;
+  border-radius: 14px;
+  * {
+    font-family: 'Pretendard';
+  }
+
+  .icon {
+    transform: rotate(90deg);
+  }
+
+  .btn_txt {
+    @include body2(#1a1f23);
+  }
+
+  &.expanded {
+    .icon {
+      transform: rotate(-90deg);
+    }
+  }
+}
+
+.multi_util_btn {
+  border: 1px solid var(--navy100);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  height: 56px;
+  width: 300px;
+  flex-basis: auto;
+  max-width: calc(20% - 10px);
+  overflow: hidden;
+  transition: all 0.2s;
+  * {
+    font-family: 'Pretendard';
+  }
+
+  .ico_check {
+    width: 12px;
+    height: 12px;
+    display: inline-block;
+    margin-right: 4px;
+    font-size: 0;
+    background: url('data:image/svg+xml,<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="6" cy="6" r="6" fill="%23354165"/><path d="M4 6L5.5 7.5L8 4.5" stroke="white" stroke-linecap="round" stroke-linejoin="round"/></svg>')
+      no-repeat center center;
+    background-size: contain;
+  }
+
+  .left {
+    width: 80px;
+    height: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-right: 1px solid var(--navy100);
+    @include body3(var(--navy800));
+    transition: all 0.2s;
+    &:hover {
+      cursor: pointer !important;
+    }
+  }
+
+  .right {
+    width: 100%;
+    padding: 10px 12px;
+
+    p {
+      @include cap(var(--navy400));
+    }
+  }
+
+  &.selected {
+    .left {
+      background-color: var(--navy800);
+    }
+
+    .ico_check {
+      background: url('data:image/svg+xml,<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="6" cy="6" r="6" fill="white"/><path d="M4 6L5.5 7.5L8 4.5" stroke="%23354165" stroke-linecap="round" stroke-linejoin="round"/></svg>')
+        no-repeat center center;
+    }
+
+    span {
+      color: #fff;
+    }
+
+    &.checked {
+      .left {
+        color: #fff;
+      }
+    }
+
+    &.error {
+      .left {
+        background-color: var(--error);
+        color: #fff;
+      }
+    }
+  }
+
+  &.error {
+    border-color: var(--error);
+
+    .left {
+      color: var(--error);
+      border-right: 1px solid var(--error);
+    }
+  }
+}

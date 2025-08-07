@@ -1,0 +1,62 @@
+/* 수평 스크롤 트랙 스타일 */
+.rg-scrolltrack {
+  // background: #f8f9fa; /* 원본 */
+  // border: 1px solid #cdd2d9; /* 원본 */
+}
+
+/* 스크롤 엣지 스타일 */
+.rg-scrolledge {
+  // background: #eaecef;
+  // border: 1px solid #cdd2d9;
+}
+
+/* 수평 스크롤바 스타일 */
+.rg-hscrollbar {
+  .rg-scrollthumb {
+    border-radius: 10px;
+    width: 8px;
+    border: 2.5px solid #fff;
+    background-color: #e8ebef;
+  }
+
+  .rg-scroll-left {
+    box-sizing: border-box;
+    background: #fff $rg-scroll-left no-repeat 50% 50%;
+    border: 1px solid var(--bg);
+
+    &:hover {
+      background-color: #e3e5e8;
+      border: 1px solid #abb0ba;
+    }
+  }
+
+  .rg-scroll-right {
+    box-sizing: border-box;
+    background: #fff $rg-scroll-right no-repeat 50% 50%;
+    border: 1px solid var(--bg);
+    &:hover {
+      background-color: #e3e5e8;
+      border: 1px solid #abb0ba;
+    }
+  }
+}
+
+/* 수직 스크롤바 스타일 */
+.rg-vscrollbar {
+  .rg-scrollthumb {
+    border-radius: 10px;
+    width: 8px;
+    border: 2.5px solid #fff;
+    background-color: #e8ebef;
+  }
+
+  .rg-scroll-up {
+    box-sizing: border-box;
+    background: $rg-scroll-up no-repeat 50% 50%;
+  }
+
+  .rg-scroll-down {
+    box-sizing: border-box;
+    background: $rg-scroll-down no-repeat 50% 50%;
+  }
+}

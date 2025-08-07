@@ -1,0 +1,106 @@
+//해당 파일은 margin, padding spacing 정의 내용을 담고 있습니다.
+//spacing은 1px 단위로 정의합니다.
+//spacing은 0px ~ 200px까지 정의되어 있습니다.
+
+//글로벌 우선 순위 문제로 !important를 사용합니다.
+
+@for $i from 0 through 200 {
+  // 2px 단위로 증가 -> 1px 단위로 증가..
+  $value: $i;
+  $vi: #{$value}px !important;
+  .m {
+    &l_#{$value} {
+      margin-left: $vi;
+    }
+    &r_#{$value} {
+      margin-right: $vi;
+    }
+    &t_#{$value} {
+      margin-top: $vi;
+    }
+    &b_#{$value} {
+      margin-bottom: $vi;
+    }
+    &tb_#{$value} {
+      margin-top: $vi;
+      margin-bottom: $vi;
+    }
+    &lr_#{$value} {
+      margin-left: $vi;
+      margin-right: $vi;
+    }
+    // margin 전체 정의 추가
+    &g_#{$value} {
+      margin: $vi;
+    }
+  }
+  // 마이너스값 추가
+  .m {
+    &l_m#{$value} {
+      margin-left: -#{$value}px;
+    }
+    &r_m#{$value} {
+      margin-right: -#{$value}px;
+    }
+    &t_m#{$value} {
+      margin-top: -#{$value}px;
+    }
+    &b_m#{$value} {
+      margin-bottom: -#{$value}px;
+    }
+  }
+  .p {
+    &l_#{$value} {
+      padding-left: $vi;
+    }
+    &r_#{$value} {
+      padding-right: $vi;
+    }
+    &t_#{$value} {
+      padding-top: $vi;
+    }
+    &b_#{$value} {
+      padding-bottom: $vi;
+    }
+    &tb_#{$value} {
+      padding-top: $vi;
+      padding-bottom: $vi;
+    }
+    &lr_#{$value} {
+      padding-left: $vi;
+      padding-right: $vi;
+    }
+    // padding 전체 정의 추가
+    &d_#{$value} {
+      padding: $vi;
+    }
+  }
+
+  //갭추가
+  .gap {
+    &_#{$value} {
+      gap: $vi;
+    }
+  }
+}
+
+.m0 {
+  margin: 0 !important;
+}
+.m {
+  &_auto {
+    margin: auto !important;
+  }
+  &l_auto {
+    margin-left: auto !important;
+  }
+  &r_auto {
+    margin-right: auto !important;
+  }
+  &t_auto {
+    margin-top: auto !important;
+  }
+  &b_auto {
+    margin-bottom: auto !important;
+  }
+}

@@ -1,0 +1,224 @@
+/*
+* 공통 컬러에 관련한 클래스를 규정합니다
+* Primary Color Palette 가 2가지 버전인 관계로
+* blue, navy 로 class 구분합니다.
+*/
+
+@mixin applyStyles($property, $value) {
+  #{$property}: $value !important;
+}
+
+$colors: (
+  blue: (
+    400: var(--blue400),
+    300: var(--blue300),
+    200: var(--blue200),
+    100: var(--blue100),
+    50: var(--blue50),
+    10: var(--blue10),
+  ),
+  navy: (
+    800: var(--navy800),
+    600: var(--navy600),
+    400: var(--navy400),
+    300: var(--navy300),
+    200: var(--navy200),
+    100: var(--navy100),
+    50: var(--navy50),
+  ),
+  second: (
+    50: var(--second50),
+    100: var(--second100),
+    200: var(--second200),
+  ),
+  typo: (
+    900: var(--typo900),
+    800: var(--typo800),
+    700: var(--typo700),
+    600: var(--typo600),
+    500: var(--typo500),
+    200: var(--typo200),
+    0: var(--typo0),
+    83: var(--typo83),
+  ),
+  bg: (
+    base: var(--bg),
+    200: var(--bg200),
+  ),
+  delete: (
+    400: var(--delete400),
+    100: var(--delete100),
+  ),
+  acc: (
+    400: var(--acc400),
+    100: var(--acc100),
+  ),
+  taxon: (
+    400: var(--acc400),
+    100: var(--acc100),
+  ),
+  change: (
+    400: var(--change400),
+    100: var(--change100),
+  ),
+  cancel: (
+    400: var(--cancel400),
+    100: var(--cancel100),
+  ),
+  restore: (
+    400: var(--cancel400),
+    100: var(--cancel100),
+  ),
+  copying: (
+    400: var(--isc-copying),
+    100: var(--copying100),
+    base: var(--isc-copying),
+  ),
+
+  error: (
+    base: var(--error),
+  ),
+  success: (
+    base: var(--success),
+  ),
+  fail: (
+    base: var(--fail),
+  ),
+  warning: (
+    base: var(--warning),
+  ),
+  noti: (
+    base: var(--noti),
+  ),
+  done: (
+    base: var(--done),
+  ),
+  responsecomplete: (
+    base: var(--done),
+  ),
+  submitted: (
+    base: var(--done),
+  ),
+  ongoing: (
+    base: var(--ongoing),
+  ),
+  assigned: (
+    base: var(--ongoing),
+  ),
+  pause: (
+    base: var(--pause),
+  ),
+  wait: (
+    base: var(--pause),
+  ),
+  waiting: (
+    base: var(--isc-waiting),
+  ),
+  ready: (
+    base: var(--isc-ready),
+  ),
+  running: (
+    base: var(--isc-running),
+  ),
+  changes: (
+    base: var(--isc-running),
+  ),
+  stopped: (
+    base: var(--isc-stopped),
+  ),
+  save: (
+    base: var(--isc-saved),
+  ),
+  unsaved: (
+    base: var(--isc-unsaved),
+  ),
+  auto: (
+    base: var(--isc-auto-input),
+  ),
+  planning: (
+    base: var(--planning),
+  ),
+  ordering: (
+    base: var(--ordering),
+  ),
+  oligodesign: (
+    base: var(--ordering),
+  ),
+  prototype: (
+    base: var(--prototype),
+  ),
+  feasibility: (
+    base: var(--prototype),
+  ),
+  validation: (
+    base: var(--validation),
+  ),
+  verification: (
+    base: var(--validation),
+  ),
+  followup: (
+    base: var(--followup),
+  ),
+  onhold: (
+    base: var(--isc-onhold),
+  ),
+  white: (
+    base: var(--bg-f),
+  ),
+  isc: (
+    _waiting: var(--isc-waiting),
+    _ready: var(--isc-ready),
+    _running: var(--isc-running),
+    _fail: var(--isc-fail),
+    _done: var(--isc-done),
+    _error: var(--isc-error),
+    _stopped: var(--isc-stopped),
+    _saved: var(--isc-saved),
+    _unsaved: var(--isc-unsaved),
+    _auto: var(--isc-auto-input),
+    _onhold: var(--isc-onhold),
+    _copying: var(--isc-copying),
+    _success: var(--success),
+  ),
+);
+
+@each $color, $shades in $colors {
+  @each $shade, $value in $shades {
+    $class-name: if($shade == 'base', #{$color}, #{$color}#{$shade});
+    .#{$class-name} {
+      @include applyStyles('color', if($shade != 'base', $value, map-get($shades, 'base')));
+    }
+    .bg_#{$class-name} {
+      @include applyStyles('background-color', if($shade != 'base', $value, map-get($shades, 'base')));
+    }
+  }
+}
+
+// isc : pairwise range
+.range {
+  &_1 {
+    color: #fff;
+    background-color: var(--blue400);
+  }
+  &_2 {
+    color: #fff;
+    background-color: var(--blue300);
+  }
+  &_3 {
+    color: var(--typo900);
+    background-color: var(--blue200);
+  }
+  &_4 {
+    color: var(--typo900);
+    background-color: var(--blue100);
+  }
+  &_5 {
+    color: var(--typo900);
+    background-color: var(--blue50);
+  }
+}
+
+// //project 프로세스 예외 컬러 :: 신은주 과장님 규정 네이밍
+.disabledProcess {
+  color: var(--navy200) !important;
+}

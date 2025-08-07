@@ -1,0 +1,248 @@
+.b {
+  &_solid {
+    border: 1px solid;
+    @for $i from 2 through 10 {
+      &#{$i} {
+        border: #{$i}+ 'px' solid;
+      }
+    }
+  }
+  &_dashed {
+    border: 1px dashed;
+    @for $i from 2 through 10 {
+      &#{$i} {
+        border: #{$i}+ 'px' dashed;
+      }
+    }
+  }
+  &_dotted {
+    border: 1px dotted;
+    @for $i from 2 through 10 {
+      &#{$i} {
+        border: #{$i}+ 'px' dotted;
+      }
+    }
+  }
+  &_none {
+    border: none !important;
+  }
+}
+
+.bc {
+  &_blue {
+    &400 {
+      border-color: var(--blue400) !important;
+    }
+    &300 {
+      border-color: var(--blue300) !important;
+    }
+    &200 {
+      border-color: var(--blue200) !important;
+    }
+    &100 {
+      border-color: var(--blue100) !important;
+    }
+    &50 {
+      border-color: var(--blue50) !important;
+    }
+    &10 {
+      border-color: var(--blue10) !important;
+    }
+  }
+
+  &_navy {
+    &800 {
+      border-color: var(--navy800);
+    }
+    &600 {
+      border-color: var(--navy600);
+    }
+    &400 {
+      border-color: var(--navy400);
+    }
+    &300 {
+      border-color: var(--navy300);
+    }
+    &200 {
+      border-color: var(--navy200);
+    }
+    &100 {
+      border-color: var(--navy100);
+    }
+    &50 {
+      border-color: var(--navy50);
+    }
+  }
+
+  &_bg {
+    border-color: var(--bg);
+    &200 {
+      border-color: var(--bg200);
+    }
+  }
+
+  // secondary color
+  &_second {
+    &50 {
+      border-color: var(--second50);
+    }
+    &100 {
+      border-color: var(--second100);
+    }
+    &200 {
+      border-color: var(--second200);
+    }
+  }
+
+  // typography color
+  &_typo {
+    &900 {
+      border-color: var(--typo900);
+    }
+    &800 {
+      border-color: var(--typo800);
+    }
+    &700 {
+      border-color: var(--typo700);
+    }
+    &600 {
+      border-color: var(--typo600);
+    }
+    &500 {
+      border-color: var(--typo500);
+    }
+    &200 {
+      border-color: var(--typo200);
+    }
+    &0 {
+      border-color: var(--typo0);
+    }
+    &83 {
+      border-color: var(--typo83);
+    }
+  }
+
+  // case color - notification
+  &_error {
+    border-color: var(--error);
+  }
+  &_success {
+    border-color: var(--success);
+  }
+  &_fail {
+    border-color: var(--fail);
+  }
+  &_warning {
+    border-color: var(--warning);
+  }
+  &_noti {
+    border-color: var(--noti);
+  }
+
+  // case color - status
+  &_done {
+    border-color: var(--done);
+  }
+  &_ongoing {
+    border-color: var(--ongoing);
+  }
+  &_pause {
+    border-color: var(--pause);
+  }
+
+  //isc
+  &_ready {
+    border-color: var(--isc-ready);
+  }
+  &_running {
+    border-color: var(--isc-running);
+  }
+  &_stopped {
+    border-color: var(--isc-stopped);
+  }
+  &_fail {
+    border-color: var(--isc-fail);
+  }
+  &_copying {
+    border-color: var(--isc-copying);
+  }
+  &_waiting {
+    border-color: var(--isc-waiting);
+  }
+  &_onhold {
+    border-color: var(--isc-onhold);
+  }
+  &_white {
+    border-color: var(--bg-f);
+  }
+
+  //action
+  &_delete {
+    &400 {
+      border-color: var(--delete400);
+    }
+    &100 {
+      border-color: var(--delete100);
+    }
+  }
+  &_acc {
+    &400 {
+      border-color: var(--acc400);
+    }
+    &100 {
+      border-color: var(--acc100);
+    }
+  }
+  &_change {
+    &400 {
+      border-color: var(--change400);
+    }
+    &100 {
+      border-color: var(--change100);
+    }
+  }
+  &_cancel {
+    &400 {
+      border-color: var(--cancel400);
+    }
+    &100 {
+      border-color: var(--cancel100);
+    }
+  }
+  &_copying {
+    &400 {
+      border-color: var(--isc-copying);
+    }
+    &100 {
+      border-color: var(--copying100);
+    }
+  }
+
+  //process
+  &_planning {
+    border-color: var(--planning);
+  }
+  &_ordering {
+    border-color: var(--ordering);
+  }
+  &_prototype {
+    border-color: var(--prototype);
+  }
+  &_validation {
+    border-color: var(--validation);
+  }
+  &_followup {
+    border-color: var(--followup);
+  }
+
+  //table
+  &_save {
+    border-color: var(--isc-saved);
+  }
+  &_unsaved {
+    border-color: var(--isc-unsaved);
+  }
+  &_auto {
+    border-color: var(--isc-auto-input);
+  }
+}

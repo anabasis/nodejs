@@ -1,0 +1,146 @@
+@import '../../common/variables';
+
+.desc_list {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 10px;
+
+  &:not(:last-child) {
+    margin-right: 30px;
+  }
+
+  @include body3;
+
+  dt {
+    margin-right: 10px;
+    @include title2(var(--navy800));
+  }
+
+  dd {
+    @include title3(var(--navy800));
+  }
+
+  //& + .desc_list {
+  //  margin-left: 30px;
+  //}
+
+  &.sm {
+    &:not(:last-child) {
+      margin-right: 20px;
+    }
+
+    dt {
+      margin-right: 6px;
+      @include capH(var(--typo800));
+    }
+
+    dd {
+      @include cap(var(--typo700));
+    }
+  }
+
+  &.invalid {
+    dd {
+      color: #e1315a;
+    }
+  }
+}
+
+.boxlink_list {
+  li {
+    border: 1px solid var(--navy100);
+    border-radius: 8px;
+    padding: 18px 24px;
+    width: 610px;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    @include title1;
+    color: var(--typography-color-90);
+
+    &.active {
+      border: 2px solid var(--blue400);
+    }
+
+    & + li {
+      margin-top: 10px;
+    }
+
+    p {
+      @include title1;
+      color: var(--typography-color-90);
+    }
+
+    span {
+      @include cap;
+      color: var(--typo500);
+    }
+  }
+
+  // box align
+  &.top {
+    li {
+      align-items: flex-start;
+    }
+  }
+
+  &.bottom {
+    li {
+      align-items: flex-end;
+    }
+  }
+
+  &.left {
+    li {
+      justify-content: flex-start;
+    }
+  }
+
+  &.right {
+    li {
+      justify-content: flex-end;
+    }
+  }
+}
+
+.sub_category_list {
+  display: block;
+
+  &.ellipsis {
+    width: 100%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  li {
+    position: relative;
+    display: inline;
+    margin-right: 8px;
+    @include cap(#959ba0);
+
+    .bar {
+      display: inline-block;
+      width: 1px;
+      height: 12px;
+      margin-left: 8px;
+      background-color: #c6cdda;
+      vertical-align: middle;
+    }
+    //&:not(:last-child) {
+    //  &:after {
+    //    position: absolute;
+    //    top: 50%;
+    //    right: 0;
+    //    content: '';
+    //    display: inline-block;
+    //    width: 1px;
+    //    height: 12px;
+    //    background-color: #c6cdda;
+    //    transform: translateY(-50%);
+    //  }
+    //}
+  }
+}

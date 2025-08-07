@@ -1,0 +1,1528 @@
+// 여기 임폴트는 키클락 환경 키클락.scss에 복사해서 넣을 필요없음 이미 환경 구성 해둠
+@import '../common/palette';
+@import '../common/scrollbar';
+@import '../common/variables';
+@import '../mui/popup.module';
+
+// 키클락 모달, 알럿 팝업에서 사용되는 모듈.scss -> 글로벌 사용 scss
+// 이곳은 모듈.scss를 글로벌하게 사용할수 있도록 모듈에 사용되는거 복사해서 아래에 추가 해주시면 되며
+// 여기에 추가한 후 이상이 없으면 키클락 환경 구성되어있는 키클락.scss로 옴기시면 됩니다. 그리고 빌드후 css 전달하면 되욥
+
+.dialog {
+  // position: relative;
+  &.sm {
+    .dialog_box {
+      min-width: 570px;
+    }
+  }
+  &.md {
+    .dialog_box {
+      min-width: 700px;
+    }
+  }
+  &_box {
+    width: auto;
+    min-width: 460px; // xs:: default
+    border-radius: 16px;
+    padding: 50px;
+  }
+  &_close {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    padding: 4px;
+  }
+  &_icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 24px;
+  }
+  h2 {
+    padding: 0;
+    @include h3(var(--typo900));
+    text-align: center;
+    margin-bottom: 12px;
+    white-space: pre-line;
+  }
+  &_cont {
+    padding: 0 0;
+    overflow: unset;
+  }
+  p {
+    &.text_title {
+      text-align: center;
+      @include body2(var(--typo500));
+    }
+  }
+  // 글로벌 scss 로 변경
+  // &_btn_box {
+  //   display: flex;
+  //   justify-content: center;
+  //   padding: 0;
+  //   margin-top: 30px;
+  // }
+}
+.modal {
+  // position: relative;
+  &_box {
+    width: auto;
+    min-width: 770px; // default :: lg
+    border-radius: 16px;
+  }
+  &.xs {
+    .modal_box {
+      min-width: 460px;
+    }
+  }
+  &.sm {
+    .modal_box {
+      min-width: 570px;
+    }
+  }
+  // uhee:: 디자인상 md 사이즈는 dialog 에 포함되었으나..
+  // modal ui 와 목적이 맞아서 modal 에 포함시킴
+  &.md {
+    .modal_box {
+      min-width: 700px;
+    }
+    .modal_cont {
+      padding: 50px;
+    }
+    h2 {
+      padding: 50px 0 20px;
+      margin: 0 50px;
+      & + .modal_cont {
+        padding-top: 10px;
+      }
+    }
+  }
+  // &.lg {
+  //   .modal_box {
+  //     min-width: 770px;
+  //   }
+  // }
+  &.xl {
+    .modal_box {
+      min-width: 1100px;
+    }
+  }
+  &_back {
+    padding: 0;
+    margin-right: 6px;
+    svg {
+      transform: rotate(180deg);
+    }
+  }
+  &_close {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    // padding: 4px;
+  }
+  &_icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 24px;
+  }
+  h2 {
+    padding: 40px 0 20px;
+    margin: 0 40px;
+    font-family: 'Pretendard';
+    font-weight: 600;
+    font-size: 2.8rem;
+    line-height: 3.2rem;
+    letter-spacing: -0.8px;
+    text-align: left;
+    color: var(--typo900);
+    & + .modal_cont {
+      padding-top: 10px;
+    }
+    &.line {
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--navy100);
+      & + .modal_cont {
+        padding-top: 30px;
+      }
+    }
+    .text_title {
+      display: block;
+      margin-top: 10px;
+      font-size: 1.5rem;
+      font-weight: 400;
+      line-height: 2rem;
+      letter-spacing: -0.4px;
+      color: var(--typo500);
+    }
+  }
+  &_cont {
+    padding: 40px;
+    overflow: unset;
+    max-height: calc(100vh - 170px);
+    overflow-y: auto;
+    &.preview {
+      background-color: var(--bg);
+    }
+  }
+  // global 로 변경
+  // &_btn_box {
+  //   display: flex;
+  //   justify-content: center;
+  //   padding: 0;
+  //   margin-top: 30px;
+  //   button {
+  //     flex: 1;
+  //     margin: 0;
+  //     height: 50px;
+
+  //   }
+  // }
+}
+
+.step {
+  flex: 1;
+  position: relative;
+  dl {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    dt {
+      font-family: 'Pretendard';
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 2px solid var(--navy100);
+      font-size: 2.2rem;
+      font-weight: 600;
+      line-height: 2.8rem;
+      color: var(--navy100);
+    }
+    dd {
+      .title {
+        font-family: 'Pretendard';
+        font-size: 1.5rem;
+        line-height: 2rem;
+        color: var(--navy200);
+        font-weight: 600;
+        white-space: -0.4px;
+        margin-top: 8px;
+      }
+    }
+  }
+  &.vertical {
+    dl {
+      justify-content: flex-start;
+      flex-direction: row;
+      dt {
+        width: 28px;
+        height: 28px;
+        background-color: var(--navy50);
+        border: 0;
+        color: var(--navy200);
+        font-size: 1.4rem;
+        img {
+          width: 14px;
+          height: 10px;
+        }
+      }
+      dd {
+        .title {
+          font-family: 'Pretendard';
+          font-size: 1.4rem;
+          line-height: 1.8rem;
+          color: var(--navy800);
+          font-weight: 600;
+          white-space: -0.4px;
+          margin-top: 0;
+          margin-left: 10px;
+        }
+      }
+    }
+    &.primary {
+      &.completed {
+        dl {
+          dt {
+            background-color: var(--blue300);
+          }
+          dd {
+            .title {
+              color: var(--navy800);
+            }
+          }
+        }
+      }
+      &.active {
+        dl {
+          dt {
+            color: #fff;
+            background-color: var(--blue300);
+          }
+          dd {
+            .title {
+              color: var(--navy800);
+            }
+          }
+        }
+      }
+    }
+  }
+  &.completed {
+    dt {
+      border: 0;
+      text-indent: -999rem;
+    }
+  }
+  &.primary {
+    &.completed {
+      &::after {
+        background-color: var(--blue300);
+      }
+      dl {
+        dt {
+          background-color: var(--blue300);
+        }
+        dd {
+          .title {
+            color: var(--navy800);
+          }
+        }
+      }
+    }
+    &.active {
+      dl {
+        dt {
+          color: var(--blue300);
+          border: 2px solid var(--blue300);
+        }
+        dd {
+          .title {
+            color: var(--navy800);
+          }
+        }
+      }
+    }
+  }
+  &.secondary {
+    &.completed {
+      &::after {
+        background-color: var(--success);
+      }
+      dl {
+        dt {
+          background-color: var(--success);
+        }
+        dd {
+          .title {
+            color: var(--navy800);
+          }
+        }
+      }
+    }
+    &.active {
+      dl {
+        dt {
+          color: var(--success);
+          border: 2px solid var(--success);
+        }
+        dd {
+          .title {
+            color: var(--navy800);
+          }
+        }
+      }
+    }
+  }
+}
+
+input {
+  &.ipt_field {
+    width: 100%;
+    border-radius: 4px;
+    padding: 10px 16px;
+    @include cap;
+    border: 1px solid var(--navy100);
+    &::placeholder {
+      color: var(--navy100);
+    }
+    &:focus {
+      color: var(--typo900);
+      border: 1px solid var(--blue400);
+      outline: none;
+      caret-color: var(--blue400);
+    }
+    &:disabled {
+      background-color: #f5f5f5;
+      color: #999;
+    }
+    &.error {
+      border: 1px solid var(--error);
+      color: var(--error);
+      caret-color: var(--error);
+    }
+
+    &.pure_input {
+      padding-left: 12px;
+      padding-right: 12px;
+      border: 0;
+      background-color: transparent;
+    }
+
+    // 사이즈 규정 임시
+
+    &.xlg {
+      width: 400px;
+    }
+    &.lg {
+      width: 368px;
+    }
+    &.md {
+      //width: 200px;
+      width: 168px; // 울고싶다.. 사이즈 규정 필요..
+    }
+    &.sm {
+      width: 100px;
+    }
+    &.xs {
+      height: 28px;
+      padding: 0 8px;
+    }
+
+    // isc 상태별 컬러 정의
+    // &.normal {
+    //   color: var(--typo200);
+    // }
+    &.done {
+      color: var(--isc-done);
+    }
+    &.ongoing {
+      color: var(--ongoing);
+    }
+    &.pause {
+      color: var(--pause);
+    }
+    // &.error {
+    //   color: var(--error);
+    // }
+    &.change {
+      color: var(--change400);
+    }
+    &.acc {
+      color: var(--change400);
+    }
+    &.delete {
+      color: var(--delete400);
+    }
+    &.cancel {
+      color: var(--cancel400);
+    }
+    &.ready {
+      color: var(--isc-ready);
+    }
+    &.running {
+      color: var(--isc-running);
+    }
+    &.stopped {
+      color: var(--isc-stopped);
+    }
+    &.fail {
+      color: var(--isc-fail);
+    }
+    &.copying {
+      color: var(--isc-copying);
+    }
+    &.waiting {
+      color: var(--isc-waiting);
+    }
+    &.onhold {
+      color: var(--isc-onhold);
+    }
+    &.black {
+      color: var(--typo900);
+    }
+    &.blue {
+      color: var(--blue100);
+      &200 {
+        color: var(--blue200);
+      }
+      &300 {
+        color: var(--blue300);
+      }
+      &400 {
+        color: var(--blue400);
+      }
+    }
+  }
+}
+
+.ipt_box {
+  &_inner {
+    &.full {
+      width: 100%;
+    }
+  }
+  .ipt_box_inner {
+    display: flex;
+    button {
+      display: inline-flex;
+      flex-shrink: 0;
+      margin: 0;
+      height: 38px;
+      margin-left: 8px;
+    }
+    & + button {
+      margin-left: 8px;
+    }
+    &.flex {
+      flex: 1;
+    }
+  }
+  &.inline {
+    display: inline-flex;
+    align-items: center;
+    vertical-align: middle;
+    justify-content: center;
+    & + .ipt_box {
+      margin-left: 20px;
+    }
+    .ipt_label {
+      margin-right: 10px;
+      margin-bottom: 0;
+      width: auto;
+      span {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+// type, sign input 요소
+.multi_ipt {
+  position: relative;
+  display: inline-flex;
+  justify-items: center;
+  align-items: center;
+  border-radius: 4px;
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid var(--navy100);
+  &.error {
+    border: 1px solid var(--error);
+    .ipt_field {
+      border: none;
+      color: var(--error);
+      caret-color: var(--error);
+    }
+    &:focus-within {
+      border: 1px solid var(--error);
+    }
+  }
+
+  // &.change400 {
+  //   .ipt_field {
+  //     color: var(--change400);
+  //     caret-color: var(--change400);
+  //   }
+  // }
+
+  &.disabled {
+    background-color: #f5f5f5;
+    color: #999;
+  }
+
+  &:focus-within {
+    border: 1px solid var(--blue400);
+    .multi_ipt_inner {
+      border-right: 1px solid var(--blue400);
+    }
+  }
+
+  &_inner {
+    border-right: 1px solid var(--navy100);
+  }
+
+  .ipt_field {
+    padding: 10px 16px 10px 16px;
+    border: none;
+    display: inline-flex;
+    flex: 1;
+    &:focus {
+      border: none;
+    }
+  }
+
+  .count {
+    font-size: 12px;
+    padding-right: 16px;
+  }
+
+  .ipt_mark {
+    font-size: 12px;
+    padding-right: 16px;
+  }
+
+  .ipt_util {
+    padding: 0 16px 0 0;
+  }
+
+  //size 임시
+  &.xlg {
+    width: 400px;
+  }
+  &.lg {
+    width: 368px;
+  }
+  &.md {
+    //width: 200px;
+    width: 168px; // 울고싶다
+  }
+  &.sm {
+    width: 100px;
+  }
+  &.xs {
+    .ipt_field {
+      height: 28px;
+      padding: 0 8px;
+    }
+  }
+
+  &.search_combo {
+    border: none;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    //width: 100%;
+  }
+
+  // sign input 에서 마크와 인풋 reverse
+  &.reverse {
+    flex-direction: row-reverse;
+
+    .ipt_util {
+      padding: 0 0 0 16px;
+    }
+  }
+
+  &.tr {
+    .ipt_field {
+      text-align: right;
+      &::placeholder {
+        //text-align: left;
+      }
+    }
+  }
+
+  &.no_line {
+    border: 0;
+    border-radius: 0;
+  }
+
+  // 상태별 컬러 규정
+  // &.normal {
+  //   .ipt_field {
+  //     color: var(--typo200);
+  //   }
+  // }
+
+  &.done {
+    .ipt_field {
+      color: var(--isc-done);
+    }
+  }
+
+  &.ongoing {
+    .ipt_field {
+      color: var(--ongoing);
+    }
+  }
+
+  &.pause {
+    .ipt_field {
+      color: var(--pause);
+    }
+  }
+
+  // &.error {
+  //   .ipt_field {
+  //     color: var(--error);
+  //   }
+  // }
+
+  &.change {
+    .ipt_field {
+      color: var(--change400);
+    }
+  }
+
+  &.acc {
+    .ipt_field {
+      color: var(--change400);
+    }
+  }
+
+  &.delete {
+    .ipt_field {
+      color: var(--delete400);
+    }
+  }
+
+  &.cancel {
+    .ipt_field {
+      color: var(--cancel400);
+    }
+  }
+
+  &.ready {
+    .ipt_field {
+      color: var(--isc-ready);
+    }
+  }
+
+  &.running {
+    .ipt_field {
+      color: var(--isc-running);
+    }
+  }
+
+  &.stopped {
+    .ipt_field {
+      color: var(--isc-stopped);
+    }
+  }
+
+  &.fail {
+    .ipt_field {
+      color: var(--isc-fail);
+    }
+  }
+
+  &.copying {
+    .ipt_field {
+      color: var(--isc-copying);
+    }
+  }
+
+  &.waiting {
+    .ipt_field {
+      color: var(--isc-waiting);
+    }
+  }
+
+  &.onhold {
+    .ipt_field {
+      color: var(--isc-onhold);
+    }
+  }
+
+  &.black {
+    .ipt_field {
+      color: var(--typo900);
+    }
+  }
+
+  &.blue {
+    .ipt_field {
+      color: var(--blue100);
+      &200 {
+        color: var(--blue200);
+      }
+      &300 {
+        color: var(--blue300);
+      }
+      &400 {
+        color: var(--blue400);
+      }
+    }
+  }
+}
+
+//검색 인풋
+.ico_search {
+  background: url('data:image/svg+xml,<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16 16L12.3891 12.3891M12.3891 12.3891C13.3844 11.3938 14 10.0188 14 8.5C14 5.46243 11.5376 3 8.5 3C5.46243 3 3 5.46243 3 8.5C3 11.5376 5.46243 14 8.5 14C10.0188 14 11.3938 13.3844 12.3891 12.3891Z" stroke="%23354165" stroke-width="1.5" stroke-linecap="round"/></svg>')
+    no-repeat;
+  background-size: contain;
+  width: 20px;
+  height: 20px;
+  margin-left: 16px;
+  display: inline-flex;
+}
+
+.ico_search_btn {
+  margin-right: 16px;
+}
+
+.ico_clear_btn {
+  width: 16px;
+  height: 16px;
+  background-color: #c6cdda;
+  border-radius: 50%;
+  margin-right: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn_search {
+  padding: 10px 20px;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  display: inline-flex;
+  background-color: var(--bg);
+}
+
+// 비밀번호 인풋
+.btn_password {
+  padding: 10px 16px;
+}
+
+// 인풋 하단 설명글 <InputDec/>
+.ipt_dec {
+  width: 100%;
+  margin-top: 6px;
+  @include cap;
+  color: var(--typo500);
+  position: relative;
+  display: inline-flex;
+  text-align: center;
+  align-items: center;
+  &.error {
+    color: var(--error);
+    text-align: left;
+    &:before {
+      flex: 0 0 16px;
+      width: 16px;
+      height: 16px;
+      border: 1px solid var(--error);
+      border-radius: 50%;
+      font-size: 10px;
+      font-weight: 700;
+      margin-right: 8px;
+      content: '!';
+      display: inline-flex;
+      vertical-align: middle;
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  &.success {
+    color: var(--success);
+    text-align: left;
+    &:before {
+      flex: 0 0 16px;
+      width: 16px;
+      height: 16px;
+      border: 1px solid var(--success);
+      border-radius: 50%;
+      font-size: 10px;
+      font-weight: 700;
+      margin-right: 8px;
+      display: inline-flex;
+      vertical-align: middle;
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+      background: url('data:image/svg+xml,<svg width="8" height="6" viewBox="0 0 8 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 2.83333L3.52632 5L7 1" stroke="%2300B29B" stroke-linecap="round" stroke-linejoin="round"/></svg>')
+        no-repeat center center;
+      content: '';
+    }
+  }
+}
+
+// 인풋 라벨 <InputLabel/>
+.ipt_label {
+  display: inline-flex;
+  width: 100%;
+  text-align: left;
+  align-items: center;
+  justify-content: flex-start;
+  span {
+    @include body3;
+    // margin-bottom: 6px;
+    &.light {
+      font-size: 1.2rem;
+      line-height: 2rem;
+      color: var(--typo500);
+      margin-bottom: 0;
+      & + .ico_required {
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-left: 4px;
+        color: var(--error);
+      }
+    }
+    &.navy600 {
+      color: var(--navy600);
+    }
+  }
+  .ico_required {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-left: 4px;
+    color: var(--error);
+  }
+}
+
+// 파일 인풋 <FileInput/>
+.file_ipt {
+  border: 1px solid #dcdcdc;
+  border-radius: 4px;
+  width: 100%;
+  overflow: hidden;
+  padding: 10px 16px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  cursor: pointer;
+  &:hover {
+    border-color: var(--blue400);
+  }
+
+  label {
+    width: 100%;
+    font-size: 1.2rem;
+    color: var(--navy100);
+    cursor: pointer;
+    .filename {
+      color: var(--typo900);
+    }
+  }
+
+  button {
+    width: 16px;
+    height: 16px;
+    font-size: 0;
+    cursor: pointer;
+  }
+  input {
+    position: absolute;
+    left: -9999em;
+  }
+}
+
+// 목록형 테이블
+* + .tbl {
+  margin-top: 30px;
+}
+
+.tbl {
+  flex: 1;
+  span.highlight {
+    display: inline-block;
+    background-color: var(--pause);
+  }
+  table {
+    width: 100%;
+  }
+
+  &.board {
+    // 임시로 지우지 않고 사이즈만 줄여두겠습니다.
+    // 현제 문제 : 팝업에서 해당 값때문에 팝업이 깨짐..
+    // 개발 요청 2가지 : 팝업이 깨져요 - 신은주 과장님, 테이블 minheight 잡아주세요. - 찬영님...
+    // min-height: calc(100vh - 500px);
+    min-height: calc(100vh - 720px);
+    position: relative;
+    overflow-y: auto;
+    thead {
+      background-color: var(--second50);
+      // &::before {
+      //   position: absolute;
+      //   display: block;
+      //   content: '';
+      //   height: 12px;
+      //   width: 100%;
+      //   top: -12px;
+      //   background-color: #fff;
+      // }
+      th {
+        padding: 12px 0px 12px 12px;
+        @include capH(#8a9dbe);
+        background-color: var(--second50);
+        &:first-child {
+          padding-left: 32px;
+        }
+      }
+    }
+
+    th,
+    td {
+      cursor: default;
+      // uhee:: table align global 로 제어
+      //text-align: left;
+      &:first-child {
+        padding-left: 32px;
+      }
+    }
+
+    .scroll_body {
+      overflow-y: scroll;
+    }
+
+    tbody {
+      width: 100%;
+
+      tr {
+        border-bottom: 1px solid #f1f4f7;
+
+        &:hover {
+          background-color: #fafbfe;
+        }
+        // &:has(td[rowspan]) {
+        //   & ~ tr {
+        //     td {
+        //       &:first-child {
+        //         padding-left: 12px;
+        //         &[rowspan] {
+        //           padding-left: 30px;
+        //         }
+        //       }
+        //     }
+        //   }
+        // }
+      }
+
+      td {
+        padding: 12px 6px 12px 12px;
+        color: #354165;
+        font-size: 1.4rem;
+        @include body2(var(--typo800));
+
+        &:first-child {
+          padding-left: 32px;
+        }
+      }
+    }
+  }
+
+  &.detail {
+    table {
+      max-width: 100%;
+      table-layout: fixed;
+    }
+    &.isc {
+      th {
+        @include body2(var(--typo600));
+      }
+    }
+    th {
+      //padding: 10px 30px 0 0;
+      padding: 10px 0; // uhee 디테일 전역으로 틀어져서 잠시 주석할게요
+      @include body3(var(--typo900));
+      & + td {
+        padding-right: 30px;
+      }
+    }
+
+    td {
+      padding: 10px 0 10px;
+      @include body2(var(--typo900));
+
+      &:last-child {
+        padding-right: 0;
+      }
+    }
+
+    &.sm {
+      th {
+        padding: 5px 0;
+      }
+      td {
+        padding: 5px 0 5px 0;
+      }
+    }
+  }
+  //모달안에서는 auto가 되어야합니다.
+  &.inner {
+    min-height: auto;
+    margin-top: 0;
+  }
+
+  // isc : request table
+  &.multi {
+    position: relative;
+    width: 100%;
+
+    table,
+    table * {
+      box-sizing: border-box;
+    }
+
+    table {
+      height: 1%;
+      table-layout: fixed;
+    }
+
+    tr {
+      height: 100%;
+    }
+
+    td {
+      height: 100%;
+      padding: 6px 0 0;
+    }
+
+    thead {
+      //position: sticky;
+      //top: 0;
+      //z-index: 1;
+
+      th {
+        & > div {
+          display: flex;
+          align-items: center;
+          min-height: 40px;
+          padding: 0 12px;
+          background-color: var(--second50);
+          @include capH(var(--typo-navy200));
+        }
+
+        &:first-child {
+          border-radius: 6px 0 0 6px;
+        }
+
+        &:last-child {
+          border-radius: 0 6px 6px 0;
+        }
+      }
+    }
+
+    tbody {
+      td {
+        & > div {
+          display: flex;
+          align-items: center;
+          height: 100%;
+          min-height: 66px;
+          padding: 16px 15px;
+          border-top: 1px solid #e3ebf2;
+          border-bottom: 1px solid #e3ebf2;
+          background-color: var(--bg-f);
+          @include body2(var(--typo900));
+        }
+
+        &:first-child > div {
+          border-left: 1px solid #e3ebf2;
+          border-radius: 6px 0 0 6px;
+        }
+
+        &:last-child > div {
+          border-right: 1px solid #e3ebf2;
+          border-radius: 0 6px 6px 0;
+        }
+
+        &.td_detail {
+          display: none;
+          padding-top: 0;
+
+          .inner {
+            padding: 6px;
+            border: 1px solid #e3ebf2;
+            border-top: 0;
+            border-radius: 0 0 6px 6px;
+            background-color: var(--bg);
+
+            thead {
+              position: static;
+
+              th {
+                & > div {
+                  min-height: 34px;
+                  background-color: #e3ebf2;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .expanded {
+        td {
+          &:first-child > div {
+            border-bottom-left-radius: 0;
+          }
+
+          &:last-child > div {
+            border-bottom-right-radius: 0;
+          }
+        }
+
+        & + tr > td.td_detail {
+          display: table-cell;
+        }
+      }
+
+      .group {
+        td {
+          & > div {
+            border-radius: 0;
+            border-color: #e3ebf2;
+          }
+        }
+
+        & + .group td {
+          padding-top: 0;
+
+          & > div {
+            border-top: 0;
+          }
+        }
+      }
+    }
+
+    .wrap_id {
+      min-width: 100px;
+    }
+  }
+
+  // isc : create table
+  &.taxon {
+    position: relative;
+    width: 100%;
+    //height: 396px;
+    border: 1px solid #c6cdda;
+    //border: 1px solid #e3ebf2;
+    border-radius: 4px;
+    //background: var(--bg);
+    //overflow-y: auto;
+
+    table {
+      table-layout: fixed;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    thead {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+
+      th {
+        background-color: #f4f8fc;
+        @include capH(var(--navy200));
+
+        & > div {
+          display: flex;
+          min-height: 40px;
+          padding: 5px 12px;
+
+          &.full {
+            padding: 0;
+          }
+        }
+      }
+      tr {
+        & + tr {
+          border-top: 1px solid var(--bg200);
+        }
+      }
+    }
+
+    tbody {
+      td {
+        border: 1px solid #e3ebf2;
+
+        & > div {
+          display: flex;
+          align-items: center;
+          min-height: 40px;
+          padding: 6px;
+          color: #5f6d7e;
+          font-size: 1.2rem;
+        }
+
+        &:first-child {
+          border-left: 0;
+        }
+
+        &:last-child {
+          border-right: 0;
+        }
+
+        &.checked {
+          &,
+          & ~ td {
+            background-color: var(--second100);
+          }
+        }
+      }
+
+      tr:hover {
+        td {
+          background-color: var(--second100);
+        }
+      }
+    }
+
+    &.multiplex {
+      tbody {
+        td {
+          & > div {
+            min-height: 64px;
+          }
+        }
+
+        tr:hover {
+          td {
+            background-color: transparent;
+          }
+        }
+        tr {
+          td:hover {
+            background-color: var(--second100);
+          }
+        }
+      }
+    }
+  }
+
+  &.reverse {
+    .classify_name {
+      th {
+        background-color: var(--bg-f);
+      }
+    }
+  }
+
+  &.no_border {
+    border: 0;
+    border-radius: 0;
+    table {
+      border-radius: 0;
+    }
+  }
+
+  &.analyte {
+    thead {
+      th {
+        border-bottom: 1px solid #e3ebf2;
+        background-color: var(--second50);
+
+        & > div {
+          display: flex;
+          align-items: center;
+          min-height: 40px;
+          padding: 0 12px;
+          @include capH(var(--typo-navy200));
+        }
+      }
+    }
+
+    tbody {
+      td {
+        padding: 8px 40px;
+
+        &:first-child {
+          padding-top: 16px;
+        }
+      }
+    }
+
+    .analyte {
+      &_box {
+        padding: 20px 30px;
+        border-radius: 6px;
+        border: 1px solid #e3ebf2;
+        background: #fff;
+
+        .row {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          border: 1px solid red;
+        }
+
+        .col {
+          @include body2(var(--typo800));
+        }
+      }
+    }
+
+    .change_brief {
+      border-radius: 6px;
+      border: 1px solid #e3ebf2;
+    }
+  }
+  // isc : 어널라이트 히스토리 런 table
+  &.history {
+    position: relative;
+    width: 100%;
+    table,
+    table * {
+      box-sizing: border-box;
+    }
+    table {
+      height: 1%;
+      table-layout: fixed;
+    }
+    tr {
+      height: 100%;
+    }
+    th:first-child,
+    td:first-child {
+      > div {
+        padding-left: 30px !important;
+      }
+    }
+
+    thead {
+      //position: sticky;
+      //top: 0;
+      //z-index: 1;
+
+      th {
+        & > div {
+          display: flex;
+          align-items: center;
+          min-height: 40px;
+          padding: 0 12px;
+          background-color: var(--second50);
+          @include capH(#8a9dbe);
+        }
+
+        &:first-child {
+          border-radius: 6px 0 0 6px;
+        }
+
+        &:last-child {
+          border-radius: 0 6px 6px 0;
+        }
+      }
+    }
+
+    tbody {
+      td {
+        > div {
+          display: flex;
+          align-items: center;
+          height: 100%;
+          min-height: 66px;
+          padding: 16px 15px;
+          background-color: #fff;
+          @include body2(var(--typo900));
+        }
+      }
+      tr {
+        td {
+          > div {
+            border-top: 1px solid #e3ebf2;
+          }
+          &:first-child {
+            > div {
+              border-left: 1px solid #e3ebf2;
+              border-top-left-radius: 6px;
+            }
+          }
+          &:last-child {
+            > div {
+              border-right: 1px solid #e3ebf2;
+              border-top-right-radius: 6px;
+            }
+          }
+        }
+        &:first-child {
+          td {
+            padding-top: 6px;
+          }
+        }
+        &:nth-child(2n) {
+          td {
+            padding-bottom: 6px;
+            > div {
+              border-width: 0 1px 1px;
+              border-style: solid;
+              border-color: #e3ebf2;
+              border-radius: 0 0 6px 6px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// table 에 drag된 analyte item
+.analyte_item {
+  border: 1px solid var(--bg200);
+  padding: 6px 12px;
+  height: 50px;
+  border-radius: 4px;
+  width: 124px;
+  position: relative;
+  background-color: #fff;
+
+  & + .analyte_item {
+    margin-left: 6px;
+  }
+
+  .top_info {
+    margin-bottom: 4px;
+    span {
+      //display: inline-block;
+      @include body4(var(--typo500));
+      & + span {
+        padding-left: 4px;
+        margin-left: 4px;
+        border-left: 1px solid var(--bg200);
+      }
+    }
+  }
+
+  .btm_info {
+    white-space: nowrap;
+    max-width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    @include capH(var(--typo900));
+  }
+
+  &:hover {
+    border-color: var(--blue400);
+  }
+
+  &.draggable {
+    border-color: var(--blue400);
+    @include shadow(0, 2px, 8px, rgba(0, 0, 0, 0.1));
+  }
+
+  .bth_delete {
+    background-color: var(--navy100);
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 6px;
+    right: 10px;
+    &:hover {
+      background-color: var(--navy200);
+    }
+  }
+
+  .plus_ico {
+    width: 12px;
+    height: 12px;
+    background-color: var(--blue400);
+    border: 1px solid #fff;
+    border-radius: 50%;
+
+    position: absolute;
+    left: -6px;
+    bottom: 6px;
+    font-size: 1.4rem;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

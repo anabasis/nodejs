@@ -1,0 +1,100 @@
+@import '../../common/variables';
+
+.autocomplete {
+  position: relative;
+  max-width: 500px;
+  height: 36px;
+
+  // input 사이즈 기준과 맞춤
+  &.lg {
+    max-width: 368px;
+  }
+  &.md {
+    //width: 200px;
+    max-width: 168px;
+  }
+  &.sm {
+    max-width: 100px;
+  }
+  &.full {
+    max-width: 100%;
+  }
+}
+
+.renderer {
+  height: 100%;
+  width: 100%;
+  padding: 0 10px 0px 40px;
+  display: inline-flex;
+  border-radius: 4px;
+  border: 1px solid var(--navy100);
+  overflow: hidden;
+  background: var(--bg-f)
+    url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M12.5 12.5L10.3284 10.3284M10.3284 10.3284C11.0523 9.60457 11.5 8.60457 11.5 7.5C11.5 5.29086 9.70914 3.5 7.5 3.5C5.29086 3.5 3.5 5.29086 3.5 7.5C3.5 9.70914 5.29086 11.5 7.5 11.5C8.60457 11.5 9.60457 11.0523 10.3284 10.3284Z" stroke="%23657496" stroke-linecap="round" stroke-linejoin="round"/></svg>')
+    no-repeat center left 16px;
+  &:focus-within {
+    border: 1px solid var(--blue400);
+  }
+  input {
+    flex: 1;
+    padding: 10px 3px;
+    border: none;
+    @include cap(--typo900);
+    caret-color: var(--blue400);
+    &:focus {
+      outline: none;
+    }
+
+    &::placeholder {
+      color: var(--navy200);
+    }
+  }
+}
+.options {
+  margin-top: 6px;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid var(--navy100);
+  background: #fff;
+  width: 100%;
+  position: absolute;
+  z-index: 100;
+  top: 40px;
+  max-height: 220px;
+  overflow-y: auto;
+
+  li {
+    padding: 6px 8px;
+    border-radius: 4px;
+    @include cap(--typo900);
+    &:hover {
+      background-color: var(--bg);
+      cursor: pointer;
+    }
+    &.selected {
+      color: var(--blue400);
+      font-weight: 600;
+    }
+  }
+}
+
+.optionISC {
+  margin-top: 1px;
+}
+
+.arrow {
+  display: block;
+  position: relative;
+  width: 16px;
+  height: 36px;
+  // background-color: aqua;
+  .ico_angle {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 16px;
+    top: 8px;
+  }
+}

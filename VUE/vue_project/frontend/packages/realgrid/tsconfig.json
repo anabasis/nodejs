@@ -1,0 +1,11 @@
+{
+  "extends": "./../tsconfig/react-library.json",
+  "include": [".", "realgrid.d.ts", "next-env.d.ts"],
+  "exclude": ["dist", "build", "node_modules"],
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@ui/*": ["./*"]
+    }
+  }
+}

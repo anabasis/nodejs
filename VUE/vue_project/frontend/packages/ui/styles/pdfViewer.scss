@@ -1,0 +1,23 @@
+#pdfWrap {
+  .react-pdf__Document {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 20px 0;
+    background-color: var(--bg);
+  }
+  .page {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: var(--bg-f);
+    padding: 10px;
+  }
+}
+
+@media print {
+  #pdfWrap {
+    display: none;
+  }
+}

@@ -1,0 +1,126 @@
+// 공통 타이틀 및 텍스트에 대한 스타일을 정의합니다.
+
+//페이지 내 컨텐츠 타이틀 스타일
+.cont_title_box {
+  margin-bottom: 30px; //전체적으로 20으로 줄여달라는 qa 요청이 반복되어 이페트있을시 수정 -> 11/22 원복 이랬다 저랬다~
+  * {
+    & + .body2 {
+      margin-top: 10px;
+    }
+  }
+  .title1 {
+    @include title1;
+    color: var(--typo900);
+    // & + .body2 {
+    //   margin-bottom: 10px;
+    // }
+  }
+  .body2 {
+    @include body2;
+    color: var(--typo500);
+  }
+}
+
+.required {
+  &:after {
+    display: inline-flex;
+    color: var(--error);
+    margin-left: 4px;
+    content: '*';
+  }
+}
+
+.headline1 {
+  @include h1;
+}
+
+.headline2 {
+  @include h2;
+}
+
+.headline3 {
+  @include h3;
+}
+
+.headline4 {
+  @include h4;
+}
+
+.headline5 {
+  @include h5;
+}
+
+.title1 {
+  @include title1;
+}
+
+.title2 {
+  @include title2;
+}
+
+.title3 {
+  @include title3;
+}
+
+.body1 {
+  @include body1;
+}
+
+.body2 {
+  @include body2;
+}
+
+.body3 {
+  @include body3;
+}
+
+.body4 {
+  @include body4;
+}
+
+.caption {
+  @include cap;
+}
+
+.capH {
+  @include capH;
+  color: var(--blue500);
+}
+
+//타이포규정 예외 font-weight 정의시 사용
+.bold {
+  &800 {
+    font-weight: 800;
+  }
+  &700 {
+    font-weight: 700;
+  }
+  &600 {
+    font-weight: 600;
+  }
+  &500 {
+    font-weight: 500;
+  }
+  &400 {
+    font-weight: 400;
+  }
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+// word break
+.word {
+  &_ka {
+    word-break: keep-all;
+  }
+  &_ba {
+    word-break: break-all;
+  }
+  &_bw {
+    word-break: break-word;
+  }
+}
+
+

@@ -1,0 +1,58 @@
+@import '../common/variables';
+.more {
+  width: 30px;
+  height: 30px;
+  &_list {
+    margin-top: 10px;
+    &_paper {
+      box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.1);
+    }
+    ul {
+      padding: 10px 0;
+      border-radius: 8px;
+    }
+    &_item {
+      min-width: 150px;
+      font-family: 'Pretendard' !important;
+      padding: 8px 20px;
+      font-size: 1.4rem;
+      font-weight: 400;
+      line-height: 1.8rem;
+      letter-spacing: -0.1px;
+      span {
+        display: none;
+      }
+      &:hover {
+        background-color: var(--blue10);
+      }
+      &:active {
+        color: var(--blue400);
+        font-weight: 600;
+        background-color: var(--blue10);
+      }
+    }
+
+    // 플랫폼 버튼 클릭시 노출되는 컨텍스트 메뉴 스타일 (셀렉이랑 동일)
+    &.dropdown {
+      ul {
+        padding: 10px 12px 10px 12px;
+      }
+      .more_list_paper {
+        box-shadow: none;
+        border: 1px solid var(--navy100);
+      }
+      .more_list_item {
+        border-radius: 4px;
+        padding: 8px 8px;
+        @include cap(var(--typo900));
+        &:hover {
+          background-color: var(--bg);
+        }
+      }
+    }
+  }
+}
+
+.rotate {
+  transform: rotate(90deg);
+}

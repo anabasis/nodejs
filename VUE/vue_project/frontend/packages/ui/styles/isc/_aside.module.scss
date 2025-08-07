@@ -1,0 +1,22 @@
+.side_popup {
+  position: relative;
+  padding: 40px 30px;
+  height: 100%;
+  overflow: auto;
+}
+
+.sticky_wrap {
+  position: sticky;
+  padding-top: 40px;
+  top: 0;
+  z-index: 20;
+  background-color: #fff;
+  padding-bottom: 30px;
+}
+
+.close_btn {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 30;
+}

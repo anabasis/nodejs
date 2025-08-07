@@ -1,0 +1,496 @@
+@import '../common/variables';
+.button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Pretendard';
+  border: 0;
+  margin: 0;
+  text-transform: none;
+  line-height: 1 !important;
+  letter-spacing: -0.1px;
+  box-shadow: none;
+  border-radius: 8px;
+  padding: 10px;
+  box-sizing: border-box;
+  position: relative;
+  & + & {
+    margin-left: 10px;
+  }
+  &:hover {
+    box-shadow: none !important;
+  }
+  &:disabled {
+    cursor: not-allowed;
+  }
+  .bullet {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    background-color: var(--error);
+    // background-color: #fcb03e;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    width: 12px;
+    height: 12px;
+  }
+  .ico {
+    &.right {
+      margin-left: 4px;
+    }
+    &.left {
+      margin-right: 4px;
+    }
+  }
+}
+
+//size
+//icon type일때만 사용
+.xsmall {
+  min-width: 32px;
+  padding: 6px;
+  font-size: 0;
+  .ico {
+    &.right {
+      margin-left: 0px;
+    }
+    &.left {
+      margin-right: 0px;
+    }
+  }
+}
+.small {
+  min-width: 56px;
+  font-size: 1.2rem;
+  font-weight: 400;
+  height: 32px;
+}
+
+.medium {
+  min-width: 98px;
+  height: 36px;
+  font-size: 1.4rem;
+  font-weight: 400;
+  letter-spacing: -0.1px;
+}
+.large {
+  height: 40px;
+  min-width: 100px;
+  padding: 10px 20px;
+  font-size: 1.5rem;
+  font-weight: 500;
+  .ico {
+    // width: 2rem;
+  }
+
+  &:disabled {
+    font-size: 1.5rem !important;
+    font-weight: 500;
+  }
+}
+.xlarge {
+  height: 50px;
+  min-width: 160px;
+  padding: 13px 20px;
+  font-size: 1.8rem !important;
+  font-weight: 600;
+  .ico {
+    // width: 1.8rem;
+  }
+  &.outlined {
+    &.gray {
+      @include body1(var(--typo900));
+    }
+  }
+
+  &:disabled {
+    font-size: 1.8rem !important;
+    font-weight: 600;
+  }
+}
+.hero {
+  height: 50px;
+  min-width: 300px;
+  padding: 13px 20px;
+  font-size: 1.8rem !important;
+  font-weight: 600;
+  .ico {
+    width: 2rem;
+  }
+  &:disabled {
+    font-size: 1.8rem !important;
+    font-weight: 600;
+  }
+}
+.full {
+  width: 100%;
+  padding: 13px 20px;
+  font-size: 1.8rem !important;
+  font-weight: 600;
+}
+
+// solid 버튼 색상 정의
+.contained {
+  &.primary {
+    background-color: var(--blue400);
+    color: #fff;
+
+    &:hover {
+      background-color: var(--blue400-hover);
+    }
+
+    &.active {
+      background-color: var(--blue400-active);
+    }
+
+    &:disabled {
+      background-color: var(--navy100);
+
+      &:hover {
+        background-color: var(--navy100);
+      }
+    }
+  }
+
+  &.secondary {
+    background-color: var(--blue50);
+    color: var(--blue400);
+
+    &:hover {
+      background-color: var(--blue100);
+    }
+
+    &:disabled {
+      background-color: var(--navy50);
+      color: var(--navy200);
+
+      &:hover {
+        background-color: var(--navy50);
+      }
+    }
+
+    &.active {
+      background-color: var(--blue400-active);
+    }
+  }
+  //Filled/Medium
+  &.black {
+    background-color: var(--typo800);
+    color: #fff;
+    border-radius: 4px;
+    padding: 10px 14px;
+    min-width: auto;
+
+    &:hover {
+      background-color: var(--typo800);
+    }
+
+    &:disabled {
+      background-color: var(--typo500);
+      color: var(--typo200);
+
+      &:hover {
+        background-color: var(--typo500);
+      }
+    }
+    &.medium {
+      height: 36px;
+      min-width: 64px;
+      font-size: 1.2rem !important;
+      font-weight: 400;
+      letter-spacing: -0.1px;
+    }
+    &.classify {
+      min-width: 140px !important;
+      font-size: 1.2rem !important;
+      font-weight: 400;
+      min-height: 36px;
+      letter-spacing: -0.1px;
+    }
+  }
+
+  &.gray {
+    color: #fff;
+    background-color: var(--navy100);
+  }
+
+  &.error {
+    background-color: var(--error), 50%;
+    color: var(--error);
+    background: #fdf5f7;
+  }
+
+  &.white {
+    background-color: #fff;
+  }
+
+  &.skyblue {
+    width: 36px;
+    height: 36px;
+    background-color: var(--second50);
+    color: var(--navy400);
+
+    &:disabled {
+      background-color: var(--second100);
+
+      &:hover {
+        background-color: var(--second100);
+      }
+    }
+  }
+}
+
+//선
+.outlined {
+  &.primary {
+    border: 1px solid var(--blue400);
+    color: var(--blue400);
+    background-color: #fff;
+
+    &:hover {
+      background-color: var(--blue10);
+    }
+
+    &:disabled {
+      border-color: var(--blue100);
+      color: var(--blue100);
+
+      &:hover {
+        background-color: var(--blue100);
+        color: var(--blue100);
+      }
+    }
+
+    &.active {
+      background-color: var(--blue50);
+    }
+  }
+
+  &.secondary,
+  &.black {
+    height: 36px;
+    min-width: 64px;
+    font-size: 12px !important;
+    font-weight: 400;
+    letter-spacing: -0.1px;
+    border: 1px solid var(--navy300);
+    color: var(--navy800);
+    background-color: #fff;
+    border-radius: 4px;
+    &.medium {
+      padding: 10px 14px;
+      height: 36px;
+      min-width: 64px;
+      font-size: 12px !important;
+      font-weight: 400;
+      letter-spacing: -0.1px;
+    }
+    &:hover {
+      background-color: var(--blue10);
+    }
+
+    &:disabled {
+      border: 1px solid var(--navy50);
+      color: var(--navy200);
+
+      &:hover {
+        background-color: var(--bg-f);
+      }
+    }
+    &.active {
+      background-color: var(--blue50);
+    }
+  }
+  &.gray {
+    color: var(--typo900);
+    background-color: var(--bg-f);
+    border: 1px solid var(--navy100);
+    &:hover {
+      background-color: var(--blue10);
+    }
+    &:disabled {
+      border-color: var(--navy50);
+      color: var(--typo200);
+      &:hover {
+        border-color: var(--navy50);
+        color: var(--typo200);
+        background-color: #fff;
+      }
+    }
+    &.active {
+      border: 1px solid var(--blue400);
+    }
+  }
+
+  // &.black {
+  //   border: 1px solid var(--navy300);
+  //   color: var(--navy800);
+  //   background-color: #fff;
+  //   border-radius: 4px;
+  //   font-size: 1.2rem !important;
+  //   &:hover {
+  //     background-color: var(--blue10);
+  //   }
+
+  //   &:disabled {
+  //     border-color: var(--navy50);
+  //     color: var(--navy200);
+
+  //     &:hover {
+  //       background-color: transparent;
+  //       border-color: var(--navy50);
+  //       color: var(--navy200);
+  //     }
+  //   }
+
+  //   &.medium {
+  //     min-width: 64px !important;
+  //   }
+
+  //   &.etc {
+  //     padding: 8px 12px 8px 9px;
+  //     border: 1px solid var(--navy100);
+  //     @include body2;
+
+  //     &:hover {
+  //       background-color: var(--blue10) !important;
+  //     }
+
+  //     &:disabled {
+  //       border: 1px solid var(--navy100);
+  //       background-color: var(--navy50);
+  //       color: var(--typo500);
+
+  //       &:hover {
+  //         border: 1px solid var(--navy100);
+  //         background-color: var(--navy50);
+  //         color: var(--typo500);
+  //       }
+  //     }
+  //   }
+  // }
+
+  &.error {
+    color: var(--error);
+    border: 1px solid var(--error);
+  }
+
+  &.white {
+    border: 1px solid #fff;
+    color: #fff;
+  }
+}
+
+//배경 선 없음
+.text {
+  min-width: auto;
+  padding: 4px 0;
+  @include body3;
+  color: var(--navy800);
+  &:disabled {
+    svg {
+      opacity: 0.5;
+    }
+  }
+  &:hover {
+    background-color: transparent;
+    color: var(--blue400);
+  }
+  &.secondary {
+    color: var(--navy400);
+    &:hover {
+      background-color: transparent;
+      color: var(--blue400);
+    }
+  }
+  //size
+  &.large {
+    @include body3;
+    height: 20px;
+    //color
+    &.black {
+      @include body3(var(--navy800));
+
+      &:hover,
+      &:active {
+        color: var(--blue400);
+      }
+    }
+  }
+  &.small {
+    @include cap;
+    height: 16px;
+    //color
+    &.black {
+      @include cap(var(--navy800));
+      &:hover,
+      &:active {
+        color: var(--blue400);
+      }
+    }
+  }
+  &:disabled {
+    opacity: 0.4;
+  }
+}
+
+//기타:: [시작]
+// search 영역 reset btn
+.reset_btn {
+  flex: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 4px;
+}
+
+//노티피케이션
+.unread {
+  position: relative;
+  &::before {
+    content: '';
+    position: absolute;
+    right: -6px;
+    top: -6px;
+    display: block;
+    width: 12px;
+    border: 2px solid var(--bg-f);
+    height: 12px;
+    border-radius: 50%;
+    background-color: var(--fail);
+  }
+}
+
+//로딩
+.loading {
+  position: relative;
+  overflow: hidden;
+  &:disabled {
+    &.contained {
+      &.primary {
+        .ico_loading {
+          background-color: var(--blue400);
+        }
+      }
+      &.secondary {
+        .ico_loading {
+          background-color: var(--blue50);
+        }
+      }
+      &.black {
+        .ico_loading {
+          background-color: var(--typo800);
+        }
+      }
+    }
+  }
+
+  .ico_loading {
+    position: absolute;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
+}

@@ -1,0 +1,206 @@
+// Renderer Styles
+.rg-renderer {
+  border: none;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  padding: 0 12px;
+  text-overflow: ellipsis;
+}
+
+// Bar Renderer Styles
+.rg-bar-renderer,
+.rg-bar-renderer-bar,
+.rg-bar-renderer-bar-right,
+.rg-bar-renderer-bar-top,
+.rg-bar-renderer-bar-bottom {
+  background: #44547e;
+}
+
+// Image Renderer Styles
+.rg-image-renderer {
+  text-overflow: ellipsis;
+}
+
+// Icon and Check Renderer Styles
+.rg-icon-renderer,
+.rg-check-renderer,
+.rg-check-renderer-checked,
+.rg-check-renderer-unchecked,
+.rg-check-renderer-intermediate {
+  position: relative;
+}
+
+.rg-check-renderer-checked,
+.rg-check-renderer-unchecked,
+.rg-check-renderer-intermediate {
+  width: 16px;
+  height: 16px;
+  border: none;
+  background-size: 16px;
+  vertical-align: middle;
+
+  &.disabled {
+    background: no-repeat center;
+  }
+}
+
+.rg-check-renderer-checked {
+  background: $rg-check-renderer-checked no-repeat center;
+}
+
+.rg-check-renderer-unchecked {
+  background: $rg-check-renderer-unchecked no-repeat center;
+}
+
+.rg-check-renderer-intermediate {
+  background: $rg-check-renderer-intermediate no-repeat center;
+
+  &.disabled {
+    background: $rg-check-renderer-intermediate-disabled no-repeat center;
+  }
+}
+
+// Button Renderer Styles
+.rg-button-renderer,
+.rg-button-renderer-button {
+  position: relative;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  text-align: center;
+  vertical-align: middle;
+  width: 80%;
+  color: #000000;
+  border: 1px solid #a8aeb7;
+  border-radius: 3px;
+  font-size: 12px;
+  background: linear-gradient(to bottom, white, #eaecef);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='white', endColorstr='#EAECEF', GradientType=0);
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#FFEAECEF', EndColorStr='#FFFFFFFF')";
+
+  &:hover {
+    color: #b65111;
+    border: 1px solid #b65111;
+    background: linear-gradient(to bottom, #edeff1, white);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#edeff1', endColorstr='white', GradientType=0);
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#FFFFFFFF', EndColorStr='#FFEDEFF1')";
+  }
+}
+
+// Link Renderer Styles
+.rg-link-renderer {
+  position: relative;
+  text-decoration: underline;
+}
+
+// Shape Renderer Styles
+.rg-shape-renderer,
+.rg-shape-renderer-shape {
+  position: static;
+  fill: #44547e;
+}
+
+// Signal Bar Renderer Styles
+.rg-signalbar-renderer,
+.rg-signalbar-renderer-bar,
+.rg-signalbar-renderer-inactive {
+  position: relative;
+  width: 100%;
+  height: 90%;
+}
+
+.rg-signalbar-renderer-bar {
+  fill: #9add1d;
+}
+
+.rg-signalbar-renderer-inactive {
+  fill: #cdd2d9;
+}
+
+// Sparkline Renderer Styles
+.rg-sparkline-renderer,
+.rg-sparkline-renderer-chart,
+.rg-sparkline-renderer-last,
+.rg-sparkline-renderer-high,
+.rg-sparkline-renderer-low {
+  position: relative;
+  width: 100%;
+  height: 90%;
+}
+
+.rg-sparkline-renderer-chart {
+  stroke: #b6bbc3;
+}
+
+.rg-sparkline-renderer-last,
+.rg-sparkline-renderer-high,
+.rg-sparkline-renderer-low {
+  fill: #b6bbc3;
+}
+
+// Sparkcolumn Renderer Styles
+.rg-sparkcolumn-renderer,
+.rg-sparkcolumn-renderer-chart,
+.rg-sparkcolumn-renderer-last,
+.rg-sparkcolumn-renderer-high,
+.rg-sparkcolumn-renderer-low {
+  position: relative;
+  width: 100%;
+  height: 90%;
+}
+
+.rg-sparkcolumn-renderer-chart,
+.rg-sparkcolumn-renderer-last {
+  fill: #b6bbc3;
+}
+
+.rg-sparkcolumn-renderer-high,
+.rg-sparkcolumn-renderer-low {
+  fill: #44547e;
+}
+
+// Sparkwinloss Renderer Styles
+.rg-sparkwinloss-renderer,
+.rg-sparkwinloss-renderer-chart,
+.rg-sparkwinloss-renderer-below {
+  position: relative;
+  width: 100%;
+  height: 90%;
+}
+
+.rg-sparkwinloss-renderer-chart {
+  fill: #b6bbc3;
+}
+
+.rg-sparkwinloss-renderer-below {
+  fill: #44547e;
+}
+
+// Code39 Renderer Styles
+.rg-code39-renderer,
+.rg-code39-renderer-bar {
+  position: relative;
+  width: 100%;
+  height: 90%;
+  left: 0px;
+  top: 5%;
+}
+
+.rg-code39-renderer-bar {
+  fill: #2c3e50;
+}
+
+// Code128 Renderer Styles
+.rg-code128-renderer,
+.rg-code128-renderer-bar {
+  position: relative;
+  width: 100%;
+  height: 90%;
+  left: 0px;
+  top: 5%;
+}
+
+.rg-code128-renderer-bar {
+  fill: #417505;
+}

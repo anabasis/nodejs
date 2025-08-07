@@ -1,0 +1,163 @@
+@import './_variables.scss';
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  min-height: 74px;
+  justify-content: flex-end;
+  padding: 20px 24px 24px 74px;
+  align-items: center;
+  background-color: var(--bg);
+  .toggle_btn {
+    display: none;
+  }
+  &.preview {
+    position: absolute;
+    right: 20px;
+    top: 134px;
+  }
+}
+
+.wrapper {
+  padding: 0 20px 20px;
+  width: 540px;
+  &.noti {
+    width: 380px;
+    box-sizing: border-box;
+    background-color: #fff;
+    border-radius: 16px;
+    min-height: 200px;
+    padding-right: 10px;
+  }
+}
+
+//검색
+
+.search_ipt {
+  display: flex;
+  font-size: 12px;
+  justify-items: center;
+  align-items: center;
+  border-radius: 4px;
+  width: 100%;
+  background-color: #fff;
+  padding: 18px 20px;
+  border-radius: 16px;
+  box-shadow: 0px 4px 20px 0px rgba(53, 65, 101, 0.1);
+  .ico {
+    display: inline-flex;
+    background: url('data:image/svg+xml,<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16 16L12.3891 12.3891M12.3891 12.3891C13.3844 11.3938 14 10.0188 14 8.5C14 5.46243 11.5376 3 8.5 3C5.46243 3 3 5.46243 3 8.5C3 11.5376 5.46243 14 8.5 14C10.0188 14 11.3938 13.3844 12.3891 12.3891Z" stroke="%23354165" stroke-width="1.5" stroke-linecap="round"/></svg>')
+      no-repeat;
+    background-size: contain;
+    width: 20px;
+    height: 20px;
+  }
+  input {
+    flex: 1;
+    font-size: 1.5rem;
+    border: none;
+    padding-left: 8px;
+    &:focus {
+      outline: none;
+    }
+    &::placeholder {
+      @include body1(var(--navy200));
+    }
+  }
+}
+
+//결과
+
+.result_wrap {
+  background-color: #fff;
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0px 4px 20px 0px rgba(53, 65, 101, 0.1);
+  margin-top: 10px;
+  .contents {
+    & + .contents {
+      margin-top: 20px;
+    }
+  }
+  .wrap_header {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+  }
+  .item {
+    padding: 9px 10px;
+    @include body2(var(--typo500));
+    border-radius: 4px;
+    &:hover {
+      cursor: pointer;
+      background-color: var(--second50);
+    }
+    .highlight {
+      color: var(--typo900);
+    }
+  }
+}
+
+//알람
+
+.noti {
+  max-height: 80vh;
+  overflow-y: auto;
+  .contents {
+    + .contents {
+      margin-top: 20px;
+    }
+  }
+  .cont_header {
+    border-bottom: 1px solid #ddd;
+    padding: 30px 0 10px 0;
+    position: sticky;
+    background-color: #fff;
+    top: 0;
+  }
+  .noti_ls {
+    .noti_items {
+      padding: 20px 20px;
+      border-radius: 8px;
+
+      &.unread {
+        position: relative;
+        &::before {
+          content: '';
+          position: absolute;
+          left: 10px;
+          top: 15px;
+          display: block;
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background-color: #e1315a;
+        }
+      }
+      &:hover {
+        cursor: pointer;
+        background-color: var(--second100);
+      }
+    }
+  }
+}
+
+.nodata {
+  text-align: center;
+  padding: 40px 0 20px;
+  p {
+    color: var(--navy200);
+  }
+}
+
+@media screen and (max-width: 1279px) {
+  .header {
+    .logo {
+      display: none;
+    }
+    .toggle_btn {
+      display: block;
+    }
+  }
+}

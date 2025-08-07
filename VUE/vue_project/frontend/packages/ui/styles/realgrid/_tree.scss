@@ -1,0 +1,58 @@
+.rg-tree-expanded {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: none;
+  background: $rg-tree-collapsed no-repeat center;
+  vertical-align: middle;
+
+  &.square {
+    background: $rg-tree-collapsed-square no-repeat center;
+  }
+}
+
+.rg-tree-collapsed {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: none;
+  background: $rg-tree-expanded no-repeat center;
+  vertical-align: middle;
+
+  &.square {
+    background: $rg-tree-expanded-square no-repeat center;
+  }
+}
+
+.rg-tree-leaf {
+  display: inline-block;
+  width: 16px;
+  height: 1px;
+}
+
+.rg-tree-line {
+  display: inline-block;
+  background-color: #d2d5da;
+}
+
+.rg-tree-renderer {
+  padding-left: 0 !important;
+  text-align: left !important;
+}
+
+.rg-tree-checkbox,
+.rg-tree-radio {
+  vertical-align: middle;
+  margin-left: 2px;
+  margin-right: 2px;
+  margin-top: 0 !important;
+  padding: 0;
+}
+
+.rg-tree-icon {
+  display: none !important;
+  vertical-align: middle;
+  margin-left: 2px;
+  margin-right: 6px;
+  width: 16px;
+}

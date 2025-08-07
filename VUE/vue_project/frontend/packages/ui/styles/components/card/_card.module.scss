@@ -1,0 +1,233 @@
+@import '../../common/variables';
+
+.card {
+  display: inline-flex;
+  min-width: 190px;
+  align-items: center;
+  border: 1px solid var(--navy50);
+  border-radius: 8px;
+  padding: 12px;
+  background-color: #fff;
+
+  & + .card {
+    margin-left: 20px;
+  }
+
+  &.file {
+    + .file {
+      margin-left: 10px;
+    }
+  }
+
+  p {
+    flex: 1;
+    max-width: 100%;
+    //margin-right: 10px;
+    .name {
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      max-width: 190px;
+      display: inline-block;
+    }
+  }
+
+  em {
+    display: block;
+    margin-top: 2px;
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--typo500);
+  }
+
+  .upload_ico {
+    width: 30px;
+    height: 30px;
+    margin-right: 8px;
+  }
+
+  &:hover {
+    background-color: var(--blue10);
+  }
+
+  &.edit {
+    padding: 6px;
+    padding-right: 10px;
+    border-radius: 4px;
+
+    p {
+      font-family: 'Pretendard';
+      font-weight: 400;
+      font-size: 1.2rem;
+      color: var(--typo900);
+    }
+
+    .upload_ico {
+      width: 20px;
+      height: 20px;
+      margin-right: 8px;
+    }
+  }
+
+  &.plus {
+    justify-content: center;
+
+    &.large {
+      border: 2px dashed var(--navy100);
+      border-radius: 16px;
+      min-width: 235px;
+      height: 250px;
+    }
+
+    &.small {
+      border: 1px dashed var(--navy100);
+      min-width: 60px;
+      height: 60px;
+      border-radius: 4px;
+    }
+  }
+
+  &.basic {
+    flex-direction: column;
+    align-content: flex-start;
+    justify-content: flex-start;
+    border: 0;
+    border-radius: 16px;
+    width: 235px;
+    height: 250px;
+    padding: 24px;
+    background-color: var(--second100);
+    cursor: pointer;
+
+    & + .card {
+      margin-left: 0;
+    }
+
+    &.edit {
+      background-color: var(--blue10);
+      cursor: default;
+    }
+
+    &:hover {
+      background-color: var(--blue10);
+      .bg_icon_box {
+        background-color: var(--blue50);
+      }
+    }
+
+    > div {
+      width: 100%;
+    }
+
+    .basic_title {
+      width: 100%;
+      margin-top: 10px;
+
+      p {
+        @include h4;
+      }
+
+      input {
+        width: 100%;
+      }
+    }
+
+    .basic_bottom {
+      p {
+        margin-top: 40px;
+        @include body2(var(--typo500));
+      }
+
+      textarea {
+        // margin-top: 10px;
+        // width: 100%;
+        // height: 85px;
+        // border-radius: 4px;
+        // padding: 10px 16px;
+        // @include cap;
+        // border: 1px solid var(--navy100);
+
+        // &::placeholder {
+        //   color: var(--navy100);
+        // }
+
+        // &:focus {
+        //   color: var(--typo900);
+        //   border: 1px solid var(--blue400);
+        //   outline: none;
+        //   caret-color: var(--blue400);
+        // }
+
+        // &:disabled {
+        //   background-color: #f5f5f5;
+        //   color: #999;
+        // }
+
+        // &.error {
+        //   border: 1px solid var(--error);
+        //   color: var(--error);
+        //   caret-color: var(--error);
+        // }
+      }
+    }
+  }
+
+  &.project {
+    flex-direction: column;
+    align-content: space-between;
+    justify-content: space-between;
+    border: 0;
+    border-radius: 8px;
+    width: 100%;
+    min-width: 150px;
+    height: 240px;
+    padding: 20px;
+    cursor: default;
+    background-color: var(--second100);
+    border: 1px solid var(--bg200);
+
+    &.ongoing {
+      background-color: var(--blue10);
+      border: 1px solid var(--blue100);
+    }
+
+    &.pause {
+      background-color: var(--delete100);
+      border: 1px solid rgba(240, 56, 99, 0.5);
+    }
+
+    & + .card {
+      margin-left: 10px;
+    }
+
+    h2 {
+      @include h4;
+      margin-bottom: 10px;
+    }
+
+    p {
+      @include body2(var(--navy400));
+    }
+
+    .project_bottom {
+      p {
+        @include body2(var(--navy800));
+      }
+    }
+
+    > div {
+      width: 100%;
+    }
+  }
+
+  &.horizon {
+    display: flex;
+
+    .file_name {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-right: 20px;
+    }
+  }
+}

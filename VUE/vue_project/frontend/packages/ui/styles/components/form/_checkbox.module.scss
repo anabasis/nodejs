@@ -1,0 +1,416 @@
+@import '../../common/variables';
+$chkbox-icon: 16px; //default
+$chkbox-fontsize: 14px; //default
+$chkbox-md-icon: 18px;
+$chkbox-md-fontsize: 15px;
+$chkbox-xs-icon: 12px; //최소 추가 :: 김수연
+
+.chkbox {
+  position: relative;
+
+  .chkbox_input {
+    position: absolute;
+    //padding: 10px;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    &:checked {
+      & + .chkbox_label {
+        &:before {
+          background: url('data:image/svg+xml,<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 2C0 0.89543 0.895431 0 2 0H16C17.1046 0 18 0.895431 18 2V16C18 17.1046 17.1046 18 16 18H2C0.89543 18 0 17.1046 0 16V2Z" fill="%233357FF"/><path fill-rule="evenodd" clip-rule="evenodd" d="M14.7091 5.70718L7.00203 13.4143L2.79492 9.20718L4.20914 7.79297L7.00203 10.5859L13.2949 4.29297L14.7091 5.70718Z" fill="white"/></svg>')
+            no-repeat center center;
+          background-size: contain;
+        }
+      }
+      &:disabled {
+        & + .chkbox_label {
+          &:before {
+            background: url('data:image/svg+xml,<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 2C0 0.89543 0.895431 0 2 0H16C17.1046 0 18 0.895431 18 2V16C18 17.1046 17.1046 18 16 18H2C0.89543 18 0 17.1046 0 16V2Z" fill="%23C6C5FE"/><path fill-rule="evenodd" clip-rule="evenodd" d="M14.7091 5.70718L7.00203 13.4143L2.79492 9.20718L4.20914 7.79297L7.00203 10.5859L13.2949 4.29297L14.7091 5.70718Z" fill="white"/></svg>')
+              no-repeat center center;
+            background-size: contain;
+          }
+        }
+      }
+    }
+    &:disabled {
+      & + .chkbox_label {
+        color: #999;
+        &:before {
+          background: url('data:image/svg+xml,<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.899902 2.70002C0.899902 1.70591 1.70579 0.900024 2.6999 0.900024H15.2999C16.294 0.900024 17.0999 1.70591 17.0999 2.70002V15.3C17.0999 16.2941 16.294 17.1 15.2999 17.1H2.6999C1.70579 17.1 0.899902 16.2941 0.899902 15.3V2.70002Z" fill="white"/><path fill-rule="evenodd" clip-rule="evenodd" d="M0 2.7C0 1.20883 1.20883 0 2.7 0H15.3C16.7912 0 18 1.20883 18 2.7V15.3C18 16.7912 16.7912 18 15.3 18H2.7C1.20883 18 0 16.7912 0 15.3V2.7ZM2.7 1.8C2.20294 1.8 1.8 2.20294 1.8 2.7V15.3C1.8 15.7971 2.20294 16.2 2.7 16.2H15.3C15.7971 16.2 16.2 15.7971 16.2 15.3V2.7C16.2 2.20294 15.7971 1.8 15.3 1.8H2.7Z" fill="%23C6CDDA"/></svg>')
+            no-repeat center center;
+          background-size: contain;
+        }
+      }
+    }
+  }
+  .chkbox_label {
+    margin: 0;
+    justify-content: center;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    @include body2(var(--typo900));
+    //font-size: $chkbox-fontsize;
+    // color: #000;
+    // font-weight: 600;
+
+    &:before {
+      content: '';
+      display: inline-flex;
+      justify-content: center;
+      margin: 4px;
+      width: $chkbox-icon;
+      height: $chkbox-icon;
+      background: url('data:image/svg+xml,<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.899902 2.70002C0.899902 1.70591 1.70579 0.900024 2.6999 0.900024H15.2999C16.294 0.900024 17.0999 1.70591 17.0999 2.70002V15.3C17.0999 16.2941 16.294 17.1 15.2999 17.1H2.6999C1.70579 17.1 0.899902 16.2941 0.899902 15.3V2.70002Z" fill="white"/><path fill-rule="evenodd" clip-rule="evenodd" d="M0 2.7C0 1.20883 1.20883 0 2.7 0H15.3C16.7912 0 18 1.20883 18 2.7V15.3C18 16.7912 16.7912 18 15.3 18H2.7C1.20883 18 0 16.7912 0 15.3V2.7ZM2.7 1.8C2.20294 1.8 1.8 2.20294 1.8 2.7V15.3C1.8 15.7971 2.20294 16.2 2.7 16.2H15.3C15.7971 16.2 16.2 15.7971 16.2 15.3V2.7C16.2 2.20294 15.7971 1.8 15.3 1.8H2.7Z" fill="%23354165"/></svg>')
+        no-repeat center center;
+      background-size: contain;
+    }
+    &.label_hide {
+      font-size: 0 !important;
+    }
+  }
+  &.xs {
+    &:before {
+      width: $chkbox-xs-icon;
+      height: $chkbox-xs-icon;
+    }
+  }
+  &.md,
+  &.lg {
+    .chkbox_label {
+      font-size: $chkbox-md-fontsize;
+      &:before {
+        margin: 9px;
+      }
+    }
+  }
+
+  &.filter {
+    .chkbox_label {
+      margin-left: 32px;
+      text-indent: 8px;
+      &::before {
+        margin-left: -28px;
+      }
+    }
+    &.range_1 {
+      .chkbox_label {
+        color: #fff;
+        background-color: var(--blue400);
+      }
+    }
+    &.range_2 {
+      .chkbox_label {
+        color: #fff;
+        background-color: var(--blue300);
+      }
+    }
+    &.range_3 {
+      .chkbox_label {
+        color: var(--typo900);
+        background-color: var(--blue200);
+      }
+    }
+    &.range_4 {
+      .chkbox_label {
+        color: var(--typo900);
+        background-color: var(--blue100);
+      }
+    }
+    &.range_5 {
+      .chkbox_label {
+        color: var(--typo900);
+        background-color: var(--blue50);
+      }
+    }
+  }
+
+  // 기존 radio type="check"
+  &.round {
+    .chkbox_input {
+      &:checked {
+        & + .chkbox_label {
+          &:before {
+            background: url('data:image/svg+xml,<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="12" fill="%233357FF"/><path d="M7 11.75L11.2105 15L17 9" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>')
+              no-repeat center center;
+            width: 24px;
+            height: 24px;
+          }
+        }
+      }
+    }
+
+    .chkbox_label {
+      @include body1(var(--typo800));
+      &:before {
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="11.25" stroke="%238A9DBE" stroke-width="1.5"/><path d="M11 15.75L15.2105 19L21 13" stroke="%238A9DBE" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>')
+          no-repeat center center;
+        width: 24px;
+        height: 24px;
+        margin-right: 10px;
+      }
+    }
+  }
+
+  //isc 컬러 추가
+  &.done {
+    .chkbox_label {
+      color: var(--done);
+    }
+  }
+  &.ongoing {
+    .chkbox_label {
+      color: var(--ongoing);
+    }
+  }
+  &.pause {
+    .chkbox_label {
+      color: var(--pause);
+    }
+  }
+  &.error {
+    .chkbox_label {
+      color: var(--error);
+    }
+  }
+  &.change {
+    .chkbox_label {
+      color: var(--change400);
+    }
+  }
+  &.acc {
+    .chkbox_label {
+      color: var(--acc400);
+    }
+  }
+  &.delete {
+    .chkbox_label {
+      color: var(--delete400);
+    }
+  }
+  &.cancel {
+    .chkbox_label {
+      color: var(--cancel400);
+    }
+  }
+  &.ready {
+    .chkbox_label {
+      color: var(--isc-ready);
+    }
+  }
+  &.running {
+    .chkbox_label {
+      color: var(--isc-running);
+    }
+  }
+  &.stopped {
+    .chkbox_label {
+      color: var(--isc-stopped);
+    }
+  }
+  &.fail {
+    .chkbox_label {
+      color: var(--isc-fail);
+    }
+  }
+  &.copying {
+    .chkbox_label {
+      color: var(--isc-copying);
+    }
+  }
+  &.waiting {
+    .chkbox_label {
+      color: var(--isc-waiting);
+    }
+  }
+  &.onhold {
+    .chkbox_label {
+      color: var(--isc-onhold);
+    }
+  }
+  &.black {
+    .chkbox_label {
+      color: var(--typo900);
+    }
+  }
+  &.blue {
+    .chkbox_label {
+      color: var(--blue400);
+    }
+    &200 {
+      .chkbox_label {
+        color: var(--blue200);
+      }
+    }
+    &300 {
+      .chkbox_label {
+        color: var(--blue300);
+      }
+    }
+  }
+}
+
+//스위치 토글
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  margin: 0 5px;
+
+  input[type='checkbox'] + .toggleSwitch,
+  .toggleSwitch {
+    width: 44px;
+    height: 24px;
+    display: block;
+    position: relative;
+    border-radius: 12px;
+    border: 1px solid var(--navy100);
+    background-color: #fff;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    background-color: var(--navy100);
+    .toggleButton {
+      /* 버튼은 토글보다 작아야함  */
+      width: 18px;
+      height: 18px;
+      box-shadow: 0px 0px 2px 0px rgba(0 0 0 / 8%);
+      position: absolute;
+      top: 50%;
+      left: 3px;
+      transform: translateY(-50%);
+      border-radius: 50%;
+      transition: all 0.2s ease-in-out;
+      background: #fff;
+    }
+
+    & + .toggleText {
+      margin: 0 10px;
+      @include body1(var(--typo900));
+    }
+  }
+  input[type='checkbox']:checked + .toggleSwitch,
+  .toggleSwitch.checked {
+    border-color: var(--navy800);
+    background: var(--navy800);
+    .toggleButton {
+      left: auto;
+      right: 3px;
+    }
+
+    & + .toggleText {
+      @include body1(var(--navy800));
+    }
+  }
+
+  input[type='checkbox']:disabled + .toggleSwitch,
+  .toggleSwitch.disabled {
+    background-color: var(--navy50);
+    border: 1px solid var(--navy50);
+    & + .toggleText {
+      color: var(--navy200);
+    }
+  }
+  input[type='checkbox'] {
+    width: 0;
+    height: 0;
+    opacity: 0;
+    position: absolute;
+    left: -9999em;
+  }
+
+  &.primary {
+    input[type='checkbox']:checked + .toggleSwitch,
+    .toggleSwitch.checked {
+      border-color: var(--blue400);
+      background: var(--blue400);
+      .toggleButton {
+        left: auto;
+        right: 3px;
+      }
+
+      & + .toggleText {
+        @include body1(var(--blue400));
+      }
+    }
+
+    input[type='checkbox']:checked:disabled + .toggleSwitch,
+    .toggleSwitch.disabled {
+      background-color: var(--blue100);
+      border: 1px solid var(--blue100);
+
+      & + .toggleText {
+        color: var(--blue100);
+      }
+    }
+  }
+
+  &.reverse {
+    flex-direction: row-reverse;
+  }
+}
+
+//버튼 토글
+.txt_toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  input[type='checkbox'] {
+    display: none;
+  }
+  input[type='checkbox'] + .toggleButton,
+  .toggleButton {
+    display: inline-block;
+    padding: 10px 12px;
+    border-radius: 4px;
+    border: 1px solid var(--navy300);
+    @include cap(--typo800);
+  }
+  input[type='checkbox']:checked + .toggleButton {
+    border-color: var(--blue400);
+    background-color: var(--blue50);
+    color: var(--blue400);
+  }
+  input[type='checkbox']:disabled + .toggleButton {
+    border-color: var(--navy50);
+    background-color: var(--bg-f);
+    color: var(--navy200);
+  }
+
+  input[type='checkbox']:checked:disabled + .toggleButton {
+    border-color: var(--blue100);
+    background-color: var(--blue10);
+    color: var(--blue100);
+  }
+
+  //isc round type
+  &.round {
+    //margin: 10px 0 10px 10px; //margin 글로벌로 제어 :: uhee
+    vertical-align: middle;
+    input[type='checkbox'] + .toggleButton,
+    .toggleButton {
+      padding: 8px 10px;
+      height: 32px;
+      border-radius: 15px;
+      border: 1px solid var(--navy200);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #fff;
+      @include cap(--navy200);
+    }
+
+    input[type='checkbox']:checked + .toggleButton {
+      border-color: var(--blue400);
+      &:before {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 20px;
+        height: 20px;
+        background: url('data:image/svg+xml,<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 9.75L8.78947 13L14 7" stroke="%233357FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>')
+          no-repeat center center;
+        background-size: contain;
+        content: '';
+      }
+    }
+  }
+}

@@ -1,0 +1,37 @@
+::-webkit-scrollbar-track {
+  border-radius: 10px; // Overflow hidden 없고 container에 radius가 있을 경우 대비
+  background-color: #fff;
+}
+
+::-webkit-scrollbar {
+  width: 13px;
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  // width: 6px;
+  border: 3px solid #fff;
+  background-color: #d7dce4;
+  opacity: 0.5;
+}
+
+//가로스크롤
+::-webkit-scrollbar:horizontal {
+  height: 12px;
+}
+
+// 바디 배경 다르므로 따로 설정
+
+body::-webkit-scrollbar-track,
+.scroll_container::-webkit-scrollbar-track {
+  background-color: var(--bg);
+}
+body::-webkit-scrollbar-thumb,
+.scroll_container::-webkit-scrollbar-thumb {
+  border-color: var(--bg);
+}
+body::-webkit-scrollbar,
+.scroll_container::-webkit-scrollbar {
+  background-color: var(--bg);
+}

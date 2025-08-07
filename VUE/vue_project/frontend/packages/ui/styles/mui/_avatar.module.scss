@@ -1,0 +1,39 @@
+.avatar_group {
+  // margin-right: 8px;
+  &.xsmall {
+    div {
+      width: 18px;
+      height: 18px;
+    }
+  }
+  &.small {
+    div {
+      width: 24px;
+      height: 24px;
+    }
+  }
+  &.medium {
+    div {
+      width: 36px;
+      height: 36px;
+    }
+  }
+}
+
+.avatar {
+  &.rounded {
+    border-radius: 8px;
+  }
+  &.mask {
+    position: relative;
+    &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 100%;
+      background-color: var(--navy100);
+      z-index: 2;
+      height: 100%;
+    }
+  }
+}

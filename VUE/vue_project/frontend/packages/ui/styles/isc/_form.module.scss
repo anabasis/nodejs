@@ -1,0 +1,32 @@
+.multi_search {
+  border: 1px solid var(--navy100);
+  display: inline-flex;
+  border-radius: 4px;
+  min-width: 400px;
+  &:focus-within,
+  &:hover {
+    border: 1px solid var(--blue400);
+  }
+
+  .ipt_box_inner {
+    display: none;
+  }
+
+  &.half {
+    .form {
+      width: 50%;
+      & + .form {
+        width: 50%;
+      }
+    }
+  }
+
+  .form {
+    width: 30%;
+    & + .form {
+      width: 70%;
+      width: calc(100% - 100px);
+      border-left: 1px solid var(--navy100);
+    }
+  }
+}

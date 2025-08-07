@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>문의하기 등록 시</title>
+</head>
+<body style="margin: 0; padding: 0; background-color: #ffffff; width: 100%">
+<!-- 바깥 영역(배경) -->
+<table
+        border="0"
+        cellpadding="0"
+        cellspacing="0"
+        style="
+        margin: 0 auto;
+        background-color: #ffffff;
+        border-collapse: separate;
+        border-style: hidden;
+        mso-table-lspace: 0pt;
+        mso-table-rspace: 0pt;
+      ">
+    <tbody>
+    <tr>
+        <td align="center">
+            <!-- 컨텐츠 영역(600px - 800px) -->
+            <table
+                cellpadding="0"
+                cellspacing="0"
+                width="600"
+                style="margin: 10px auto;padding: 0;border-spacing: 0;background-color: #F4F8FC;">
+                <tr>
+                    <td
+                        width="490"
+                        height="80"
+                        style="font-size: 0; line-height: 0; padding: 0 35px">
+                        <img
+                            src="http://www.bo.allaboutsooyeon.com/assets/images/seegeneLogo.svg"
+                            alt="Seegene"
+                            loading="lazy"
+                            width="240"
+                            height="28" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <table
+                                cellpadding="0"
+                                cellspacing="0"
+                                width="530"
+                                style="margin: 0 auto;padding: 0;border-spacing: 0;background-color: #ffffff;">
+                            <tr>
+                                <td
+                                    width="410"
+                                    height="auto"
+                                    style="font-size: 0; padding: 40px 37px 0">
+
+                                    <h5 style="color: #1A1F23;font-size: 22px;line-height: 28px;text-align: left;font-weight: 600;margin: 0;" th:text="${title}">
+<!--                                   문의가 등록되었습니다.-->
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td
+                                    width="410"
+                                    height="auto"
+                                    style="font-size: 0; padding: 13px 37px 25px">
+                        <span
+                                style="display: block;color: #959BA0;font-size: 15px;line-height: 20px;text-align: left;font-weight: 500;margin: 0;">
+                          SG OneSystem에서 문의가 등록되었습니다. <br />
+                          문의 등록자의 이메일 계정으로 문의에 대한 답변을 전송해주세요.
+                        </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td
+                                        width="410"
+                                        height="auto"
+                                        style="font-size: 0; padding: 0 37px 34px">
+                                    <table
+                                            cellpadding="0"
+                                            cellspacing="0"
+                                            style="padding: 0;border-spacing: 0;">
+                                        <tr>
+                                            <th style="width: 100px;vertical-align: top;padding: 5px 0 0;color: #1A1F23;font-size: 14px;line-height: 18px;text-align: left;font-weight: 600;margin: 0;">
+                                                등록일자
+                                            </th>
+                                            <td style="padding: 5px 0 0; color: #1A1F23; font-size: 14px;line-height: 18px;text-align: left;font-weight: 400;margin: 0;">
+                                                <div th:text="${regDate}"></div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td
+                                        width="450"
+                                        height="auto"
+                                        style="font-size: 0; padding: 0 37px 52px">
+                                    <div
+                                            style="
+                            width: 400px;
+                            background-color: #F4F8FC;
+                            padding: 30px;
+                            border-radius: 8px;
+                          ">
+                                        <table
+                                                cellpadding="0"
+                                                cellspacing="0"
+                                                width="380"
+                                                style="
+                              margin: 0 auto;
+                              padding: 0;
+                              border-spacing: 0;
+                            ">
+                                            <tr>
+                                                <th
+                                                        style="
+                                  width: 100px;
+                                  vertical-align: top;
+                                  padding: 5px 0 0;
+                                  color: #808DA8;
+                                  font-size: 14px;
+                                  line-height: 18px;
+                                  text-align: left;
+                                  font-weight: 400;
+                                  margin: 0;
+                            ">Account Type       </th>
+                                                <td
+                                                        style="
+                                  padding: 5px 0 0;
+                                  color: #44547E;
+                                  font-size: 15px;
+                                  line-height: 20px;
+                                  text-align: left;
+                                  font-weight: 500;
+                                  margin: 0;
+                                ">
+                                                    <div th:text="${accountType}"></div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th
+                                                        style="
+                                  width: 100px;
+                                  vertical-align: top;
+                                  padding: 20px 0 0;
+                                  color: #808DA8;
+                                  font-size: 14px;
+                                  line-height: 18px;
+                                  text-align: left;
+                                  font-weight: 400;
+                                  margin: 0;
+                                ">Inquire Type
+
+                                                </th>
+                                                <td
+                                                        style="
+                                  padding: 20px 0 0;
+                                  color: #44547E;
+                                  font-size: 15px;
+                                  line-height: 20px;
+                                  text-align: left;
+                                  font-weight: 500;
+                                  margin: 0;
+                                ">
+                                                    <div th:text="${inquiryType}"></div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th
+                                                        style="
+                                  width: 100px;
+                                  vertical-align: top;
+                                  padding: 20px 0 0;
+                                  color: #808DA8;
+                                  font-size: 14px;
+                                  line-height: 18px;
+                                  text-align: left;
+                                  font-weight: 400;
+                                  margin: 0;
+                                ">
+                                                    Subject
+                                                </th>
+                                                <td style="padding: 20px 0 0;color: #44547E;font-size: 15px;line-height: 20px;text-align: left;font-weight: 500;margin: 0;"> <div th:text="${inquiryTitle}"></div></td>
+                                    </tr>
+                                            <tr>
+                                                <th
+                                                        colspan="2"
+                                                        style="
+                                  padding: 20px 0 0;
+                                  color: #808DA8;
+                                  font-size: 14px;
+                                  line-height: 18px;
+                                  text-align: left;
+                                  font-weight: 400;
+                                  margin: 0;
+                                ">
+                                                    Content
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <td
+                                                        colspan="2"
+                                                        style="
+                                  padding: 20px 0 0;
+                                  color: #44547E;
+                                  font-size: 15px;
+                                  line-height: 20px;
+                                  text-align: left;
+                                  font-weight: 500;
+                                  margin: 0;
+                                "><div th:text="${inquiryContent}"></div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th
+                                                        style="
+                                  width: 100px;
+                                  vertical-align: top;
+                                  padding: 20px 0 0;
+                                  color: #808DA8;
+                                  font-size: 14px;
+                                  line-height: 18px;
+                                  text-align: left;
+                                  font-weight: 400;
+                                  margin: 0;
+                                ">
+                                                    E-mail
+                                                </th>
+                                                <td
+                                                        style="
+                                  padding: 20px 0 0;
+                                  color: #44547E;
+                                  font-size: 15px;
+                                  line-height: 20px;
+                                  text-align: left;
+                                  font-weight: 500;
+                                  margin: 0;
+                                ">
+                                                    <div th:text="${emailId}"></div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td
+                            width="490"
+                            height="auto"
+                            style="font-size: 0; padding: 33px 35px 0; text-align: right;">
+                        <img
+                                src="./fotlogo.svg"
+                                alt="Seegene"
+                                loading="lazy"
+                                width="78"
+                                height="18" />
+                    </td>
+                </tr>
+                <tr>
+                    <td
+                            width="490"
+                            height="auto"
+                            style="font-size: 0; padding: 10px 35px 0; text-align: right;">
+                        <p
+                                style="display: inline-block;
+                    color: #959BA0;
+                    text-decoration: none;
+                    font-size: 12px;
+                    line-height: 16px;
+                    text-align: left;
+                    font-weight: 400;
+                    margin: 0;">
+                            Terms of Service
+                        </p>
+                        <p
+                                style="display: inline-block;
+                    color: #959BA0;
+                    font-size: 14px;
+                    line-height: 16px;
+                    text-align: left;
+                    font-weight: 500;
+                    margin: 0 5px;">
+                            ·
+                        </p>
+                        <p
+                                style="display: inline-block;
+                    color: #959BA0;
+                    text-decoration: none;
+                    font-size: 12px;
+                    line-height: 16px;
+                    text-align: left;
+                    font-weight: 400;
+                    margin: 0;">
+                            Privacy Policy
+                        </p>
+                        <p
+                                style="display: inline-block;
+                    color: #959BA0;
+                    font-size: 14px;
+                    line-height: 16px;
+                    text-align: left;
+                    font-weight: 500;
+                    margin: 0 5px;">
+                            ·
+                        </p>
+                        <p
+                                style="display: inline-block;
+                    color: #959BA0;
+                    text-decoration: none;
+                    font-size: 12px;
+                    line-height: 16px;
+                    text-align: left;
+                    font-weight: 400;
+                    margin: 0;">
+                            Information Confidential Agreement
+                        </p>
+                        <p
+                                style="display: inline-block;
+                    color: #959BA0;
+                    font-size: 14px;
+                    line-height: 16px;
+                    text-align: left;
+                    font-weight: 500;
+                    margin: 0 5px;">
+                            ·
+                        </p>
+                        <p
+                                style="display: inline-block;
+                    color: #959BA0;
+                    text-decoration: none;
+                    font-size: 12px;
+                    line-height: 16px;
+                    text-align: left;
+                    font-weight: 400;
+                    margin: 0;">
+                            Cookies
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td
+                            width="490"
+                            height="auto"
+                            style="font-size: 0; padding: 4px 35px 23px; text-align: right;">
+                        <p
+                                style="display: inline-block;
+                    color: #959BA0;
+                    font-size: 12px;
+                    line-height: 16px;
+                    text-align: left;
+                    font-weight: 400;
+                    margin: 0;">
+                            License © 2023 Seegene Inc. All rights reserved.
+                        </p>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
+

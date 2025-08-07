@@ -1,0 +1,52 @@
+//position 정의
+.ps {
+  &_ab {
+    position: absolute;
+  }
+  &_re {
+    position: relative;
+  }
+  &_fx {
+    position: fixed;
+  }
+  &_st {
+    position: sticky;
+  }
+}
+
+//위치값 정의
+
+@for $i from 0 through 100 {
+  // 0px 단위로 증가
+  $value: $i;
+  .top_#{$value} {
+    top: #{$value}px;
+  }
+  .btm_#{$value} {
+    bottom: #{$value}px;
+  }
+  .rgt_#{$value} {
+    right: #{$value}px;
+  }
+  .lft_#{$value} {
+    left: #{$value}px;
+  }
+  //마이너스값
+  .top_m#{$value} {
+    top: -#{$value}px;
+  }
+  .btm_m#{$value} {
+    bottom: -#{$value}px;
+  }
+  .rgt_m#{$value} {
+    right: -#{$value}px;
+  }
+  .lft_m#{$value} {
+    left: -#{$value}px;
+  }
+
+  //z-index 정의
+  .zidx#{$value} {
+    z-index: #{$value};
+  }
+}

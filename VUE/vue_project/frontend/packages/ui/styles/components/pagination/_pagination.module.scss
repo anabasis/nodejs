@@ -1,0 +1,42 @@
+@import '../../common/variables';
+.pagination_wrap {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .pagination {
+    margin: 0 10px;
+    display: flex;
+    align-items: center;
+    li {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      @include body1(var(--navy400));
+      &.active {
+        color: var(--blue400);
+        background-color: var(--blue50);
+      }
+    }
+  }
+  .prev,
+  .next {
+    width: 40px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    height: 40px;
+    border-radius: 8px;
+  }
+  .prev,
+  .start {
+    svg {
+      transform: rotate(180deg);
+    }
+  }
+}

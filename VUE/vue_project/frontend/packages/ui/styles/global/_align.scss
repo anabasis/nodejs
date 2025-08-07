@@ -1,0 +1,187 @@
+// 요소간 정렬, 간격 등의 스타일을 정의합니다.
+
+.align {
+  display: flex;
+  align-items: center; // 세로정렬(default)
+  justify-content: space-between; // 좌우정렬(default)
+  width: 100%;
+  &:has(.item) {
+    &:not(.wrapper) {
+      gap: 20px; //item 간 기본 간격 (간격 변경은 .gap_{number}로 사용})
+    }
+
+    @for $i from 0 through 40 {
+      // 2px 단위로 증가
+      $value: $i * 2;
+      &.gap_#{$value} {
+        gap: #{$value}px;
+      }
+    }
+  }
+
+  // align 내 wrap
+  &.wrap {
+    flex-wrap: wrap;
+  }
+
+  &.inline {
+    display: inline-flex;
+  }
+
+  //align 내 컨텐츠         사이즈가 다를 때 사용
+  .stretch {
+    align-items: stretch;
+  }
+
+  // align 내 위 아래 정렬이 필요할 때 사용
+  &.column {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+  }
+
+  // 아이템 가로 정렬 :: start / center / end
+  &.center {
+    justify-content: center;
+  }
+  &.start {
+    justify-content: flex-start;
+  }
+  &.end {
+    justify-content: flex-end;
+  }
+  &.between {
+    justify-content: space-between;
+  }
+
+  // 아이템 세로 정렬 :: bottom / top
+  &.bottom {
+    align-items: flex-end;
+  }
+  &.top {
+    align-items: flex-start;
+  }
+  &.v_center {
+    align-items: center;
+  }
+
+  // 아이템 간격
+  .item {
+    text-align: center;
+    align-items: center;
+    display: inline-flex;
+
+    // 아이템 간격 기본 마진 20px (gap으로 변경)
+    // & + .item {
+    //   margin-left: 10px;
+    // }
+  }
+
+  // align 영역 내 좌우정렬 (좌우 정렬 아닐땐 사용하지 않음)
+  .lft {
+    display: flex;
+    align-items: center;
+  }
+  .rgt {
+    display: flex;
+    align-items: center;
+  }
+
+  // 좌우정렬 비율에 따른 class
+  &.flex2_1 {
+    .lft {
+      flex: 2;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .rgt {
+      //margin-left: 30px;
+      flex: 1;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+  &.flex1_2 {
+    .lft {
+      flex-direction: column;
+      align-items: flex-start;
+      flex: 1;
+    }
+    .rgt {
+      //margin-left: 30px;
+      flex-direction: column;
+      align-items: flex-start;
+      flex: 2;
+    }
+  }
+}
+
+// 프로젝트, 대시보드 레이아웃에서 사용
+.content_left {
+  width: calc(100% - 310px);
+  flex: 1;
+  height: auto;
+}
+
+.content_right {
+  position: relative;
+  width: 280px;
+  margin-left: 20px;
+  flex-shrink: 0;
+  height: auto;
+  //background-color: #fff;
+}
+
+// (더미) 대시보드 작업 시 사용
+.dashboard_content {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 30px 24px;
+  width: 100%;
+  display: block;
+}
+
+// 데이터 스토리지 align.. (스펙아웃으로 사용은 안함)
+.datastorage {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.zd {
+  &1 {
+    flex: 1;
+    width: 100%;
+    max-width: 50%;
+    min-width: 50%;
+  }
+}
+
+//예외케이스 폴딩 버튼과 함께 있을때....
+.folding ~ .rgt {
+  padding-right: 50px;
+}
+
+//텍스트 align.
+.tc {
+  text-align: center;
+}
+.tl {
+  text-align: left;
+}
+.tr {
+  text-align: right;
+}
+.tj {
+  text-align: justify;
+}
+
+@media screen and (max-width: 1439px) {
+  .content_left {
+    width: 100%;
+  }
+  .content_right {
+    display: none;
+  }
+}

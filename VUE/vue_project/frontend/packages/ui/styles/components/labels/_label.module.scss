@@ -1,0 +1,422 @@
+@import '../../common/variables';
+
+.badge {
+  @include capH;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 1 !important;
+  * {
+    font-family: 'Pretendard';
+  }
+  + .badge {
+    margin-left: 6px;
+  }
+  //사이즈
+  &.sm {
+    padding: 4px 11px;
+  }
+  &.md {
+    padding: 6px 12px;
+    @include body1;
+  }
+  //타입
+  &.line {
+    //색상
+    border: 1px solid var(--blue200);
+    color: var(--blue300);
+    &.magenta {
+      border: 1px solid #ce8ee4;
+      color: #c060e2;
+    }
+    &.blue {
+      border: 1px solid var(--blue200);
+      color: var(--blue300);
+    }
+    &.navy {
+      &100 {
+        border: 1px solid var(--navy100);
+        color: var(--navy300);
+      }
+    }
+    &.gray {
+      border: 1px solid var(--typo200);
+      color: var(--typo500);
+    }
+  }
+  &.solid {
+    &.blue {
+      background-color: var(--blue50);
+      color: var(--blue400);
+      &300 {
+        background-color: var(--blue300);
+        color: var(--bg-f);
+      }
+    }
+    &.navy {
+      background-color: var(--navy200);
+      color: var(--bg-f);
+      &50 {
+        background-color: var(--navy50);
+        color: var(--navy800);
+      }
+    }
+    //상태별 컬러값
+    &.normal,
+    &.nor {
+      background-color: var(--typo200);
+      color: var(--typo900);
+    }
+
+    &.delete {
+      background-color: var(--delete100);
+      color: var(--delete400);
+    }
+    &.change {
+      background-color: var(--change100);
+      color: var(--change400);
+    }
+    &.acc {
+      background-color: var(--acc100);
+      color: var(--acc400);
+    }
+    &.cancel,
+    &.restore {
+      background-color: var(--cancel100);
+      color: var(--cancel400);
+    }
+
+    &.copying {
+      background-color: var(--copying100);
+      color: var(--copying400);
+    }
+
+    // 투명 배경일때...
+    &.clear {
+      &_delete {
+        color: var(--delete400);
+      }
+
+      &_acc {
+        color: var(--acc400);
+      }
+
+      &_cancel,
+      &_restore {
+        color: var(--cancel400);
+      }
+
+      &_change {
+        color: var(--change400);
+      }
+
+      &_copying {
+        color: var(--copying400);
+      }
+    }
+
+    //프로젝트 카드
+    &.pj_pause {
+      background-color: var(--delete400);
+      color: #fff;
+    }
+    &.pj_done {
+      background-color: var(--navy200);
+      color: var(--bg-f);
+    }
+    &.pj_ongoing {
+      background-color: var(--blue300);
+      color: var(--bg-f);
+    }
+  }
+
+  //스타일
+  &.square {
+    border-radius: 4px;
+  }
+  &.round {
+    border-radius: 100px;
+    //기본과 Ods 구분
+    &.solid {
+      &.blue {
+        color: var(--navy800);
+      }
+    }
+  }
+
+  &.count {
+    padding: 2px 7px !important;
+    border-radius: 100px;
+    min-width: 24px;
+    height: 24px;
+    box-sizing: border-box;
+    .md {
+      @include body1(var(--blue400));
+    }
+    &.sm {
+      @include capH(var(--blue400));
+    }
+  }
+  //ods 스타일
+  &.ods {
+    border: none;
+    width: 50px;
+    border-radius: 100px;
+    padding: 4px 0px;
+    //기본과 구분자를 위해 color inner
+    &.blue {
+      color: var(--bg-f);
+      background-color: var(--blue100);
+      &200 {
+        color: var(--bg-f);
+        background-color: var(--blue200);
+      }
+      &300 {
+        color: var(--bg-f);
+        background-color: var(--blue300);
+      }
+      &400 {
+        color: var(--bg-f);
+        background-color: var(--blue400);
+      }
+    }
+    &.thin {
+      width: 80px;
+      padding: 1px 0px;
+    }
+  }
+
+  &.disabled {
+    opacity: 0.5;
+  }
+}
+
+//칩
+.chip {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 6px 12px;
+  background-color: var(--blue50);
+  border-radius: 99px;
+  //margin-bottom: 10px;
+  //margin-right: 6px;
+  @include body2(var(--typo900));
+  * {
+    font-family: 'Pretendard';
+  }
+  a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    @include body2(var(--typo900));
+  }
+  .bold {
+    @include body3(var(--typo900));
+    padding-right: 4px;
+  }
+  .action {
+    margin-left: 6px;
+  }
+  // 사이즈 2개
+  &.sm {
+    padding: 4px 12px;
+    @include cap(var(--typo800));
+    a {
+      @include cap(var(--typo800));
+    }
+    .bold {
+      @include capH(var(--typo900));
+    }
+  }
+}
+
+//status label
+.label {
+  display: inline-flex;
+  align-items: center;
+  * {
+    font-family: 'Pretendard';
+  }
+  i {
+    margin-right: 6px;
+    display: block;
+    //상태 색상 정의
+    &.normal,
+    &.nor {
+      background-color: var(--typo200);
+    }
+    &.done,
+    &.complete,
+    &.completed,
+    &.responsecomplete,
+    &.submitted,
+    &.requestgranted {
+      background-color: var(--isc-done);
+    }
+    &.ongoing,
+    &.assigned {
+      background-color: var(--ongoing);
+    }
+    &.pause,
+    &.wait,
+    &.waitforresponse {
+      background-color: var(--pause);
+    }
+    &.error,
+    &.abort,
+    &.aborted,
+    &.requestdenied {
+      background-color: var(--error);
+    }
+
+    &.change,
+    &.acc {
+      background-color: var(--change400);
+    }
+    &.delete {
+      background-color: var(--delete400);
+    }
+    &.cancel,
+    &.restore {
+      background-color: var(--cancel400);
+    }
+    &.ready {
+      background-color: var(--isc-ready);
+    }
+    &.running,
+    &.changes {
+      background-color: var(--isc-running);
+    }
+    &.stopped,
+    &.standby,
+    &.pasuse,
+    &.waitforresponse {
+      background-color: var(--isc-stopped);
+    }
+    &.accid,
+    &.taxonid {
+      background-color: var(--acc400);
+    }
+    &.followup {
+      background-color: var(--followup);
+    }
+    &.fail {
+      background-color: var(--isc-fail);
+    }
+    &.ordering,
+    &.oligodesign {
+      background-color: var(--ordering);
+    }
+    &.essentialseqdesign,
+    &.copying {
+      background-color: var(--isc-copying);
+    }
+    &.waiting {
+      background-color: var(--isc-waiting);
+    }
+    &.onhold {
+      background-color: var(--isc-onhold);
+    }
+    &.black {
+      background-color: var(--typo900);
+    }
+    &.blue {
+      background-color: var(--blue100);
+      &100 {
+        background-color: var(--blue100);
+      }
+      &200 {
+        background-color: var(--blue200);
+      }
+      &300 {
+        background-color: var(--blue300);
+      }
+      &400 {
+        background-color: var(--blue400);
+      }
+    }
+    &.navy {
+      &100 {
+        background-color: var(--navy100);
+      }
+      &200 {
+        background-color: var(--navy200);
+      }
+      &300 {
+        background-color: var(--navy300);
+      }
+      &400 {
+        background-color: var(--navy400);
+      }
+      &600 {
+        background-color: var(--navy600);
+      }
+      &800 {
+        background-color: var(--navy800);
+      }
+    }
+  }
+  //타입
+  &.square {
+    // @include body4(var(--typo800));
+    i {
+      width: 12px;
+      height: 12px;
+      border-radius: 2px;
+    }
+  }
+  &.circle {
+    @include body2(var(--typo900));
+    i {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+  }
+}
+
+//드래그칩!!!!!!
+.drag_chip {
+  display: inline-flex;
+  background-color: var(--navy800);
+  color: var(--bg-f);
+  padding: 10px 16px;
+  border-radius: 8px;
+  align-items: center;
+  @include title1(var(--bg-f));
+  * {
+    font-family: 'Pretendard';
+  }
+  .move {
+    font-size: 0;
+    display: block;
+    cursor: move;
+    width: 20px;
+    height: 20px;
+    margin-right: 6px;
+    background: no-repeat left center
+      url('data:image/svg+xml,<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><ellipse cx="6.8" cy="4.78261" rx="0.8" ry="0.782609" fill="%23C6CDDA" stroke="%23C6CDDA" stroke-width="1.5"/><ellipse cx="13.2004" cy="4.78261" rx="0.8" ry="0.782609" fill="%23C6CDDA" stroke="%23C6CDDA" stroke-width="1.5"/><ellipse cx="6.8" cy="10.0014" rx="0.8" ry="0.782609" fill="%23C6CDDA" stroke="%23C6CDDA" stroke-width="1.5"/><ellipse cx="13.2004" cy="10.0014" rx="0.8" ry="0.782609" fill="%23C6CDDA" stroke="%23C6CDDA" stroke-width="1.5"/><ellipse cx="6.8" cy="15.2201" rx="0.8" ry="0.782609" fill="%23C6CDDA" stroke="%23C6CDDA" stroke-width="1.5"/><path d="M14.0004 15.2201C14.0004 15.6523 13.6422 16.0027 13.2004 16.0027C12.7586 16.0027 12.4004 15.6523 12.4004 15.2201C12.4004 14.7879 12.7586 14.4375 13.2004 14.4375C13.6422 14.4375 14.0004 14.7879 14.0004 15.2201Z" fill="%23C6CDDA" stroke="%23C6CDDA" stroke-width="1.5"/></svg>');
+  }
+  .name {
+    // BUG 23890
+    max-width: 431px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .delete_btn {
+    margin-left: 10px;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background-color: var(--navy400);
+  }
+
+  &.drag {
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+    .delete_btn {
+      opacity: 0.7;
+    }
+  }
+}

@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>마이페이지_탈퇴 인증코드</title>
+</head>
+<body style="margin: 0; padding: 0; background-color: #ffffff; width: 100%">
+<!-- 바깥 영역(배경) -->
+<table
+        border="0"
+        cellpadding="0"
+        cellspacing="0"
+        style="
+        margin: 0 auto;
+        background-color: #ffffff;
+        border-collapse: separate;
+        border-style: hidden;
+        mso-table-lspace: 0pt;
+        mso-table-rspace: 0pt;
+      "
+>
+    <tbody>
+    <tr>
+        <td align="center">
+            <!-- 컨텐츠 영역(600px - 800px) -->
+            <table
+                    cellpadding="0"
+                    cellspacing="0"
+                    width="600"
+                    style="
+                margin: 10px auto;
+                padding: 0;
+                border-spacing: 0;
+                background-color: #F4F8FC;
+              "
+            >
+                <tr>
+                    <td
+                            width="490"
+                            height="80"
+                            style="font-size: 0; line-height: 0; padding: 0 35px"
+                    >
+                        <img
+                                src="https://www.bo.allaboutsooyeon.com/assets/images/seegeneLogo.svg"
+                                alt="Seegene"
+                                loading="lazy"
+                                width="240"
+                                height="28"
+                        />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <table
+                                cellpadding="0"
+                                cellspacing="0"
+                                width="530"
+                                style="
+                    margin: 0 auto;
+                    padding: 0;
+                    border-spacing: 0;
+                    background-color: #ffffff;
+                  ">
+                            <tr>
+                                <td
+                                        width="410"
+                                        height="auto"
+                                        style="font-size: 0; padding: 40px 37px 0"
+                                >
+                                    <h5
+                                            style="
+                            color: #1A1F23;
+                            font-size: 22px;
+                            line-height: 28px;
+                            text-align: left;
+                            font-weight: 600;
+                            margin: 0;
+                          "
+                                    >
+                                        탈퇴를 위한 인증코드 안내
+                                    </h5>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td
+                                        width="410"
+                                        height="auto"
+                                        style="font-size: 0; padding: 13px 37px 40px"
+                                >
+                        <span
+                                style="
+                            display: block;
+                            color: #959BA0;
+                            font-size: 15px;
+                            line-height: 20px;
+                            text-align: left;
+                            font-weight: 500;
+                            margin: 0;
+                          "
+                        >
+                          안녕하세요, <span th:text="${userName}"></span>님! <br />
+                          회원 탈퇴를 위한 인증코드를 안내드립니다.
+                        </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td
+                                        width="450"
+                                        height="auto"
+                                        style="font-size: 0; padding: 0 37px"
+                                >
+                                    <div
+                                            style="
+                            width: 400px;
+                            background-color: #F4F8FC;
+                            padding: 30px;
+                            border-radius: 8px;
+                          "
+                                    >
+                                        <h6
+                                                style="
+                              color: #1A1F23;
+                              font-size: 14px;
+                              line-height: 18px;
+                              text-align: center;
+                              font-weight: 600;
+                              margin: 0;
+                            "
+                                        >
+                                            인증코드
+                                        </h6>
+                                        <div
+                                                style="
+                              display: block;
+                              color: #1A1F23;
+                              font-size: 32px;
+                              line-height: 40px;
+                              text-align: center;
+                              font-weight: 800;
+                              padding-top: 5px;
+                              margin: 0;
+                            "
+                                        >
+                                            <div th:text="${authKey}" style="display: block;color: #1A1F23;font-size: 32px;line-height: 40px;text-align: center;font-weight: 800;padding-top: 5px;margin: 0;"/>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td
+                                        width="410"
+                                        height="auto"
+                                        style="font-size: 0; padding: 65px 37px 19px"
+                                >
+                                    <div
+                                            style="
+                            display: block;
+                            padding: 5px 0 0;
+                            color: #959BA0;
+                            font-size: 14px;
+                            line-height: 18px;
+                            text-align: left;
+                            font-weight: 400;
+                            margin: 0;
+                          "
+                                    >
+                                        아래 링크로 이동해서 인증코드를 입력하세요. <br>
+                                        인증코드는 3분 뒤에 만료됩니다.
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td
+                                        width="550"
+                                        height="120"
+                                        style="font-size: 0; padding: 0 37px; text-align: center;"
+                                >
+                                    <a
+                                            href="#"
+                                            style="
+                            display: inline-block;
+                            min-width: 166px;
+                            background-color: #3357FF;
+                            margin: 0 auto;
+                            font-size: 18px;
+                            line-height: 24px;
+                            text-decoration: none;
+                            color: #ffffff;
+                            text-align: center;
+                            padding: 13px 20px;
+                            margin: 0 auto;
+                            border-radius: 8px;
+                            box-sizing: border-box;
+                          "
+                                    >OneSystem 이동</a
+                                    >
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td
+                            width="490"
+                            height="auto"
+                            style="font-size: 0; padding: 33px 35px 0; text-align: right;"
+                    >
+                        <img
+                                src="https://www.bo.allaboutsooyeon.com/assets/images/fotlogo.svg"
+                                alt="Seegene"
+                                loading="lazy"
+                                width="78"
+                                height="18"
+                        />
+                    </td>
+                </tr>
+                <tr>
+                    <td
+                            width="490"
+                            height="auto"
+                            style="font-size: 0; padding: 10px 35px 0; text-align: right;"
+                    >
+                        <p
+                                style="display: inline-block;
+                    color: #959BA0;
+                    text-decoration: none;
+                    font-size: 12px;
+                    line-height: 16px;
+                    text-align: left;
+                    font-weight: 400;
+                    margin: 0;">
+                            Terms of Service
+                        </p>
+                        <p
+                                style="display: inline-block;
+                    color: #959BA0;
+                    font-size: 14px;
+                    line-height: 16px;
+                    text-align: left;
+                    font-weight: 500;
+                    margin: 0 5px;">
+                            ·
+                        </p>
+                        <p
+                                style="display: inline-block;
+                    color: #959BA0;
+                    text-decoration: none;
+                    font-size: 12px;
+                    line-height: 16px;
+                    text-align: left;
+                    font-weight: 400;
+                    margin: 0;">
+                            Privacy Policy
+                        </p>
+                        <p
+                                style="display: inline-block;
+                    color: #959BA0;
+                    font-size: 14px;
+                    line-height: 16px;
+                    text-align: left;
+                    font-weight: 500;
+                    margin: 0 5px;">
+                            ·
+                        </p>
+                        <p
+                                style="display: inline-block;
+                    color: #959BA0;
+                    text-decoration: none;
+                    font-size: 12px;
+                    line-height: 16px;
+                    text-align: left;
+                    font-weight: 400;
+                    margin: 0;">
+                            Information Confidential Agreement
+                        </p>
+                        <p
+                                style="display: inline-block;
+                    color: #959BA0;
+                    font-size: 14px;
+                    line-height: 16px;
+                    text-align: left;
+                    font-weight: 500;
+                    margin: 0 5px;">
+                            ·
+                        </p>
+                        <p
+                                style="display: inline-block;
+                    color: #959BA0;
+                    text-decoration: none;
+                    font-size: 12px;
+                    line-height: 16px;
+                    text-align: left;
+                    font-weight: 400;
+                    margin: 0;">
+                            Cookies
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td
+                            width="490"
+                            height="auto"
+                            style="font-size: 0; padding: 4px 35px 23px; text-align: right;"
+                    >
+                        <p
+                                style="display: inline-block;
+                    color: #959BA0;
+                    font-size: 12px;
+                    line-height: 16px;
+                    text-align: left;
+                    font-weight: 400;
+                    margin: 0;">
+                            License © 2023 Seegene Inc. All rights reserved.
+                        </p>
+                    </td>
+                </tr>
+
+
+
+            </table>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
