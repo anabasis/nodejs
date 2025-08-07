@@ -81,8 +81,8 @@
 // const clientParams = {
 //   region: 'ap-northeast-2',
 //   credentials: {
-//     accessKeyId: 'AKIAYZHMKCJY6RMBYDP5',
-//     secretAccessKey: '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',
+//     accessKeyId: 'AWS accessKeyId',
+//     secretAccessKey: 'AWS secretAccessKey',
 //   },
 //   useAccelerateEndpoint: true,
 // }
